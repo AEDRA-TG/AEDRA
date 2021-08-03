@@ -8,6 +8,7 @@ public class ThemeController : MonoBehaviour
     public List<Color> colors;
     public delegate void ChangeColorDelegate();
     public static ChangeColorDelegate changeColorDelegate;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,8 +47,10 @@ public class ThemeController : MonoBehaviour
     }
 
     private void persistPrefabs(){
-        GameObject largeButtonPrefab = Resources.Load("Prefabs/BackgroundTextButtonColorPrefab") as GameObject;
+        GameObject largeButtonPrefab = Resources.Load("Prefabs/LargeButton") as GameObject;
         largeButtonPrefab.GetComponent<Image>().color = Constants.globalColor;
+        GameObject roundedButtonPrefab = Resources.Load("Prefabs/RoundButton") as GameObject;
+        roundedButtonPrefab.GetComponent<Image>().color = Constants.globalColor;
     }
 
 }

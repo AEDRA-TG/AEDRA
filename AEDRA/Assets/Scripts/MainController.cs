@@ -7,8 +7,6 @@ public class MainController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameObject acceptButton = GameObject.Find("StartButton");
-        acceptButton.GetComponent<Image>().color = Constants.globalColor;
     }
 
     // Update is called once per frame
@@ -22,5 +20,9 @@ public class MainController : MonoBehaviour
         GameObject themeChooser = Instantiate(themeChooserPrefab, new Vector3(0,0,0), Quaternion.identity);
         themeChooser.name = "ThemeChooser";
         themeChooser.transform.parent = GameObject.Find("MainLayout").transform;
+    }
+
+    void Awake(){
+        DontDestroyOnLoad(gameObject);
     }
 }

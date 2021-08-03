@@ -10,4 +10,5 @@ public class Constants : MonoBehaviour
         // TODO: LOAD COLOR FROM FILE
         globalColor = new Color(0f, 0.5921569f, 1f, 0.7058824f);
     }
+
 }
