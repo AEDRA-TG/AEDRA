@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Constants : MonoBehaviour
 {
-    public static Color globalColor;
+    public static Color GlobalColor;
 
     void Start(){
         // TODO: LOAD COLOR FROM FILE
-        globalColor = new Color(0f, 0.5921569f, 1f, 0.7058824f);
+        GlobalColor = new Color(0f, 0.5921569f, 1f, 0.7058824f);
     }
 
 }

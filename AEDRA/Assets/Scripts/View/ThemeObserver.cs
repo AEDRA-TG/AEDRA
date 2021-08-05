@@ -18,7 +18,7 @@ public class ThemeObserver : MonoBehaviour
     }
 
     private void ChangeColor(){
-        GetComponent<Image>().color = Constants.globalColor;
+        GetComponent<Image>().color = Constants.GlobalColor;
     }
 
     private void OnEnable(){

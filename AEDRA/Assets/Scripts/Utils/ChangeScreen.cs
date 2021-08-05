@@ -17,7 +17,7 @@ public class ChangeScreen : MonoBehaviour
         
     }
 
-    public void changeScreen(int nextPage){
+    public void ChangeScene(int nextPage){
         SceneManager.LoadScene(nextPage);
     }
 }

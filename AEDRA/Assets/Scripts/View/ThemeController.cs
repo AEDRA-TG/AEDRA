@@ -19,7 +19,7 @@ public class ThemeController : MonoBehaviour
         colors.Add(new Color(0.1372549f, 0.9098039f, 0.6666667f, 0.7058824f));
         GameObject acceptButton = GameObject.Find("AcceptButton");
         acceptButton = acceptButton.transform.GetChild(0).gameObject;
-        acceptButton.GetComponent<Image>().color = Constants.globalColor;
+        acceptButton.GetComponent<Image>().color = Constants.GlobalColor;
     }
 
     // Update is called once per frame
@@ -28,29 +28,29 @@ public class ThemeController : MonoBehaviour
         
     }
 
-    public void changeColor(int idColor){
+    public void ChangeColor(int idColor){
         GameObject acceptButton = GameObject.Find("AcceptButton");
         acceptButton = acceptButton.transform.GetChild(0).gameObject;
         acceptButton.GetComponent<Image>().color = colors[idColor];
-        Constants.globalColor = colors[idColor];
+        Constants.GlobalColor = colors[idColor];
     }
 
-    public void changeGlobalColor(){
+    public void ChangeGlobalColor(){
         changeColorDelegate?.Invoke();
-        persistPrefabs();
-        closeThemeChooser();
+        PersistPrefabs();
+        CloseThemeChooser();
     }
 
-    public void closeThemeChooser(){
+    public void CloseThemeChooser(){
         GameObject themeChooser = GameObject.Find("ThemeChooser");
         Destroy(themeChooser);
     }
 
-    private void persistPrefabs(){
+    private void PersistPrefabs(){
         GameObject largeButtonPrefab = Resources.Load("Prefabs/LargeButton") as GameObject;
-        largeButtonPrefab.GetComponent<Image>().color = Constants.globalColor;
+        largeButtonPrefab.GetComponent<Image>().color = Constants.GlobalColor;
         GameObject roundedButtonPrefab = Resources.Load("Prefabs/RoundButton") as GameObject;
-        roundedButtonPrefab.GetComponent<Image>().color = Constants.globalColor;
+        roundedButtonPrefab.GetComponent<Image>().color = Constants.GlobalColor;
     }
 
 }

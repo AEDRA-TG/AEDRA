@@ -386,6 +386,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3870918948452163794, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3953196626536793542, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
       propertyPath: m_Name
       value: RoundButton
@@ -656,7 +660,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1641872749}
         m_TargetAssemblyTypeName: ChangeScreen, Assembly-CSharp
-        m_MethodName: changeScreen
+        m_MethodName: ChangeScene
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1042,7 +1046,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1317642334}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1641872749}
+        m_TargetAssemblyTypeName: ChangeScreen, Assembly-CSharp
+        m_MethodName: ChangeScene
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1650426500
 GameObject:
   m_ObjectHideFlags: 0
@@ -1126,7 +1142,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1641872749}
         m_TargetAssemblyTypeName: ChangeScreen, Assembly-CSharp
-        m_MethodName: changeScreen
+        m_MethodName: ChangeScene
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1495,7 +1511,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1641872747}
         m_TargetAssemblyTypeName: MainController, Assembly-CSharp
-        m_MethodName: openThemeChooser
+        m_MethodName: OpenThemeChooser
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

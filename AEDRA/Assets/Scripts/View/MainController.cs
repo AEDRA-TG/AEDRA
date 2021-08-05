@@ -15,14 +15,16 @@ public class MainController : MonoBehaviour
         
     }
 
-    public void openThemeChooser(){
+    public void OpenThemeChooser(){
         GameObject themeChooserPrefab = Resources.Load("Prefabs/ThemeChooser") as GameObject;
         GameObject themeChooser = Instantiate(themeChooserPrefab, new Vector3(0,0,0), Quaternion.identity);
         themeChooser.name = "ThemeChooser";
         themeChooser.transform.parent = GameObject.Find("MainLayout").transform;
     }
 
+/*
     void Awake(){
         DontDestroyOnLoad(gameObject);
     }
+    */
 }
