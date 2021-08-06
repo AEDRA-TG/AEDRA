@@ -3,49 +3,67 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Class to manage the colors of the aplication
+/// </summary>
 public class ThemeController : MonoBehaviour
 {
-    public List<Color> colors;
+    /// <summary>
+    /// List of the possible colors that the user can use
+    /// </summary>
+    private List<Color> _colors;
+    /// <summary>
+    /// Delegete for the observer that change the color of the buttons
+    /// </summary>
     public delegate void ChangeColorDelegate();
     public static ChangeColorDelegate changeColorDelegate;
 
-    // Start is called before the first frame update
     void Start()
     {
-        colors = new List<Color>();
-        colors.Add(new Color(0.4156863f, 0.07450981f, 0.8313726f, 0.7058824f));
-        colors.Add(new Color(0f, 0.5921569f, 1f, 0.7058824f));
-        colors.Add(new Color(0.509804f, 0.509804f, 0.509804f, 0.7058824f));
-        colors.Add(new Color(0.1372549f, 0.9098039f, 0.6666667f, 0.7058824f));
+        _colors = new List<Color>();
+        _colors.Add(new Color(0.4156863f, 0.07450981f, 0.8313726f, 0.7058824f));
+        _colors.Add(new Color(0f, 0.5921569f, 1f, 0.7058824f));
+        _colors.Add(new Color(0.509804f, 0.509804f, 0.509804f, 0.7058824f));
+        _colors.Add(new Color(0.1372549f, 0.9098039f, 0.6666667f, 0.7058824f));
         GameObject acceptButton = GameObject.Find("AcceptButton");
         acceptButton = acceptButton.transform.GetChild(0).gameObject;
         acceptButton.GetComponent<Image>().color = Constants.GlobalColor;
     }
 
-    // Update is called once per frame
     void Update()
     {
         
     }
 
+    /// <summary>
+    /// Method to change the accept button to show an user color preview
+    /// </summary>
+    /// <param name="idColor">Index of the selected color by the user</param>
     public void ChangeColor(int idColor){
         GameObject acceptButton = GameObject.Find("AcceptButton");
         acceptButton = acceptButton.transform.GetChild(0).gameObject;
-        acceptButton.GetComponent<Image>().color = colors[idColor];
-        Constants.GlobalColor = colors[idColor];
+        acceptButton.GetComponent<Image>().color = _colors[idColor];
+        Constants.GlobalColor = _colors[idColor];
     }
 
+    /// <summary>
+    /// Method to notify the observers and call the persist method color
+    /// </summary>
     public void ChangeGlobalColor(){
         changeColorDelegate?.Invoke();
         PersistPrefabs();
         CloseThemeChooser();
     }
-
+    /// <summary>
+    /// Method to close the theme chooser
+    /// </summary>
     public void CloseThemeChooser(){
         GameObject themeChooser = GameObject.Find("ThemeChooser");
         Destroy(themeChooser);
     }
-
+    /// <summary>
+    /// Method to persist the selected color in all buttons prefabs
+    /// </summary>
     private void PersistPrefabs(){
         GameObject largeButtonPrefab = Resources.Load(Constants.PathLargeButton) as GameObject;
         largeButtonPrefab.GetComponent<Image>().color = Constants.GlobalColor;

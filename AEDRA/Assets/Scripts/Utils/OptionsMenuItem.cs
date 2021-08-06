@@ -1,22 +1,23 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Class of the item that could be animated
+/// </summary>
 public class OptionsMenuItem : MonoBehaviour
 {
-    [HideInInspector] private Image Img {get; set;}
-    //TODO
+    /// <summary>
+    /// Image or background of the item
+    /// </summary>
+    [HideInInspector] private Image Img;
+    /// <summary>
+    /// Tranform property of the item
+    /// </summary>
     [HideInInspector] private Transform Trans;
 
-    private OptionsMenu _optionsMenu;
-    private int _index;
-
-    //TODO
     void Awake() {
         Img = GetComponent<Image>();
         Trans = transform;
-
-        _optionsMenu = GameObject.Find("Options").GetComponent<OptionsMenu>();
-        _index = Trans.GetSiblingIndex();
     }
 
     //GETTERS Y SETTERS
