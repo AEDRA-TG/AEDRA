@@ -47,9 +47,9 @@ public class ThemeController : MonoBehaviour
     }
 
     private void PersistPrefabs(){
-        GameObject largeButtonPrefab = Resources.Load("Prefabs/LargeButton") as GameObject;
+        GameObject largeButtonPrefab = Resources.Load(Constants.PathLargeButton) as GameObject;
         largeButtonPrefab.GetComponent<Image>().color = Constants.GlobalColor;
-        GameObject roundedButtonPrefab = Resources.Load("Prefabs/RoundButton") as GameObject;
+        GameObject roundedButtonPrefab = Resources.Load(Constants.PathRoundButton) as GameObject;
         roundedButtonPrefab.GetComponent<Image>().color = Constants.GlobalColor;
     }
 

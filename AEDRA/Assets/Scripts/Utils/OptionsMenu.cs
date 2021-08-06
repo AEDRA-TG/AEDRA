@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using System.Collections.Generic;
+using System.Threading;
 
 public class OptionsMenu : MonoBehaviour
 {
@@ -23,10 +25,42 @@ public class OptionsMenu : MonoBehaviour
     private Vector2 _hamburgerButtonPosition;
     private int _itemsCount;
     private Vector2[] _itemsPositions;
+    private Stack<string> _loadedPrefabs;
+    private string actualPrefabName;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start(){
+        _loadedPrefabs = new Stack<string>();
+        actualPrefabName = "";
+        LoadPrefab(Constants.PathMainTreeOptions, "MainTreeOptions", "ProjectionLayout");
+    }
+    public void LoadPrefab(string prefabPath, string instanceName, string parent){
+        DestroyActualPrefabInstance();
+        GameObject firstPrefab = Resources.Load(prefabPath) as GameObject;
+        GameObject firstPrefabInstantiate = Instantiate(firstPrefab, new Vector3(0,0,0), Quaternion.identity);
+        firstPrefabInstantiate.name = instanceName;
+        actualPrefabName = instanceName;
+        firstPrefabInstantiate.transform.parent = GameObject.Find(parent).transform;
+        firstPrefabInstantiate.transform.SetAsFirstSibling();
+        _loadedPrefabs.Push(prefabPath);
+        InitializeComponents();
+    }
+
+    public void ShowTittle(string tittle){
+        GameObject textTittle = GameObject.Find("CurrentActionTitle");
+        textTittle.GetComponent<Text>().text = tittle;
+        textTittle.GetComponent<Text>().DOFade(1f, 2).From(0f).OnComplete(()=>{textTittle.GetComponent<Text>().DOFade(0f, 4).From(1f);});
+
+    }
+    private void DestroyActualPrefabInstance(){
+        if(!actualPrefabName.Equals("")){
+            GameObject prefab = GameObject.Find(actualPrefabName);
+            //Destroy(prefab);
+            prefab.SetActive(false);
+        }
+        
+    }
+    private void InitializeComponents(){
         GameObject itemsInScene = GameObject.Find("Options");
         _itemsCount = itemsInScene.transform.childCount;
         _optionItems = new OptionsMenuItem[_itemsCount];
@@ -38,13 +72,11 @@ public class OptionsMenu : MonoBehaviour
         }
         //inflate hamburger menu
         _hamburgerButton = GameObject.Find("HamburgerMenu").GetComponentInChildren<Button>();
-        _hamburgerButton.onClick.AddListener(ToggleMenu);
         _hamburgerButton.transform.SetAsLastSibling();
         //save position of hamburguer position
         _hamburgerButtonPosition = _hamburgerButton.transform.position;
         ResetPositions();
     }
-
     //
     private void ResetPositions()
     {
@@ -54,51 +86,33 @@ public class OptionsMenu : MonoBehaviour
         }
     }
 
-    private void ToggleMenu()
+    public void ToggleMenu()
     {
         if (!_isExpanded)
         {
             for (int i = 0; i < _itemsCount; i++)
             {
-                ExpandOrCallapse(_optionItems[i], _itemsPositions[i], ExpandDuration, ExpandFadeDuration, ExpandEase, 0.7f);
+                ExpandOrCollapse(_optionItems[i], _itemsPositions[i], ExpandDuration, ExpandFadeDuration, ExpandEase, 0.7f);
             }
         }
         else
         {
             for (int i = 0; i < _itemsCount; i++)
             {
-                ExpandOrCallapse(_optionItems[i], _hamburgerButtonPosition, CollapseDuration, CollapseFadeDuration, CollapseEase, 0.0f);
+                ExpandOrCollapse(_optionItems[i], _hamburgerButtonPosition, CollapseDuration, CollapseFadeDuration, CollapseEase, 0.0f);
             }
         }
         _isExpanded = !_isExpanded;
     }
 
-    private void ExpandOrCallapse(OptionsMenuItem item, Vector2 position, float duration, 
-        float fadeDuration, Ease easeAnimation, float fadePosition){
+    private void ExpandOrCollapse(OptionsMenuItem item, Vector2 position, float duration, 
+        float fadeDuration, Ease easeAnimation, float fadeOpacity){
         item.GetTransform().DOMove(position, duration).SetEase(easeAnimation);
-        item.GetImage().DOFade(fadePosition, fadeDuration).From(0f);
+        item.GetImage().DOFade(fadeOpacity, fadeDuration).From(0f);
     }
 
     private void OnDestroy()
     {
         _hamburgerButton.onClick.RemoveListener(ToggleMenu);
-    }
-
-    public void OnItemClick(int index)
-    {
-        switch (index)
-        {
-            case 0:
-                //Utils.sendToast("Añadir nodo");
-
-                break;
-            case 1:
-                //Utils.sendToast("Eliminar nodo");
-                break;
-
-            case 2:
-                //Utils.sendToast("Recorrer ED");
-                break;
-        }
     }
 }
