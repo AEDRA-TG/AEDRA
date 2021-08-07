@@ -269,7 +269,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7191148567485590226}
         m_TargetAssemblyTypeName: ThemeController, Assembly-CSharp
-        m_MethodName: changeColor
+        m_MethodName: ChangeColor
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -480,7 +480,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7191148567485590226}
         m_TargetAssemblyTypeName: ThemeController, Assembly-CSharp
-        m_MethodName: changeColor
+        m_MethodName: ChangeColor
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -648,7 +648,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7191148567485590226}
         m_TargetAssemblyTypeName: ThemeController, Assembly-CSharp
-        m_MethodName: changeGlobalColor
+        m_MethodName: ChangeGlobalColor
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -780,7 +780,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7191148567485590226}
         m_TargetAssemblyTypeName: ThemeController, Assembly-CSharp
-        m_MethodName: changeColor
+        m_MethodName: ChangeColor
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -912,7 +912,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7191148567485590226}
         m_TargetAssemblyTypeName: ThemeController, Assembly-CSharp
-        m_MethodName: changeColor
+        m_MethodName: ChangeColor
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -3,21 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ChangeScreen : MonoBehaviour
+namespace Controller
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// Class for load scenes
+    /// </summary>
+    public class ChangeScreen : MonoBehaviour
     {
-        
-    }
+        public void Start()
+        {
+        }
 
-    public void changeScreen(int nextPage){
-        SceneManager.LoadScene(nextPage);
+        public void Update()
+        {
+        }
+
+        /// <summary>
+        /// Method to change the actual scene for other with the especified index
+        /// </summary>
+        /// <param name="nextPage">Index of the scene to load in unity</param>
+        public void ChangeScene(int nextPage)
+        {
+            SceneManager.LoadScene(nextPage);
+        }
     }
 }

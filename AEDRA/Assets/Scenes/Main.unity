@@ -302,6 +302,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1644884800}
     m_Modifications:
+    - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1641872749}
+    - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ChangeScreen, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3571018381400711219, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -385,6 +417,10 @@ PrefabInstance:
     - target: {fileID: 3571018381400711219, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3870918948452163794, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3953196626536793542, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
       propertyPath: m_Name
@@ -656,7 +692,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1641872749}
         m_TargetAssemblyTypeName: ChangeScreen, Assembly-CSharp
-        m_MethodName: changeScreen
+        m_MethodName: ChangeScene
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1042,7 +1078,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1317642334}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1641872749}
+        m_TargetAssemblyTypeName: ChangeScreen, Assembly-CSharp
+        m_MethodName: ChangeScene
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1650426500
 GameObject:
   m_ObjectHideFlags: 0
@@ -1126,7 +1174,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1641872749}
         m_TargetAssemblyTypeName: ChangeScreen, Assembly-CSharp
-        m_MethodName: changeScreen
+        m_MethodName: ChangeScene
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1495,7 +1543,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1641872747}
         m_TargetAssemblyTypeName: MainController, Assembly-CSharp
-        m_MethodName: openThemeChooser
+        m_MethodName: OnClikOpenThemeChooser
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
