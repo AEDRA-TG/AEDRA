@@ -12,8 +12,8 @@ namespace View.GUI
             Graph.OnAddNodeEvent += UpdateUI;
         }
 
-        private void UpdateUI(){
-            Debug.Log("Algo");
+        private void UpdateUI(object element){
+            Debug.Log(element);
         }
     }
 }

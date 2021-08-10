@@ -10,6 +10,8 @@ dotnet_diagnostic.IDE0044.severity = none
 dotnet_diagnostic.RCS1036.severity = none
 # This rule is for action event
 dotnet_diagnostic.RCS1158.severity = none
+# This rule is for Singleton pattern
+dotnet_diagnostic.RCS1171.severity = none
 # Prevent analyzers from running in these directories
 [Assets/Plugins/**.cs]
 generated_code = true
