@@ -10,5 +10,9 @@ namespace View.GUI
             _dto = dto;
             //TODO: update object properties
         }
+
+        public void Move(Vector3 coordinates){
+            gameObject.transform.localPosition = coordinates;
+        }
     }
 }

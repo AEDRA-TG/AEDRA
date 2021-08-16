@@ -28,7 +28,7 @@ namespace Controller
         /// Method to execute any command
         /// </summary>
         /// <param name="command">Command to executed</param>
-        public void Invoke(ICommand command){
+        public void Invoke(Command command){
             command.Execute();
         }
     }

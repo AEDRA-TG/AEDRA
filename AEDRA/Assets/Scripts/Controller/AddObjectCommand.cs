@@ -9,7 +9,7 @@ namespace Controller
     /// <summary>
     /// Class to manage the add object command
     /// </summary>
-    public class AddObjectCommand : ICommand
+    public class AddObjectCommand : Command
     {
         /// <summary>
         /// TODOOOOO
@@ -39,10 +39,11 @@ namespace Controller
         /// <summary>
         /// Method to delegate the add operation to the business logic
         /// </summary>
-        public void Execute()
+        public override void Execute()
         {
             // TODO Load from repository
             this._dataStructure.AddElement(_element);
+            Notify(OperationEnum.AddObject);
         }
     }
 }
