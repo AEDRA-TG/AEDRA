@@ -1,14 +1,22 @@
 using System;
+using Model.SideCar;
+using Utils.Enums;
 
-namespace Model.Graph
+namespace Model.GraphModel
 {
     /// <summary>
     /// Class to manage any node of a graph
     /// </summary>
     public class GraphNode
     {
-        public Object Value { get; set; }
+        //TODO: Set Id automatically
         public int Id { get; set; }
+        //TODO: define how to have generic values
+        public object Value { get; set; }
 
+        public GraphNode(int id, object value){
+            Value = value;
+            Id = id;
+        }
     }
 }

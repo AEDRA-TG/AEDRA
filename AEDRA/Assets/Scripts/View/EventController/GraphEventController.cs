@@ -1,6 +1,6 @@
 using UnityEngine;
 using Controller;
-using Model.Graph;
+using Model.GraphModel;
 
 namespace View.EventController
 {
@@ -12,8 +12,8 @@ namespace View.EventController
         /// <summary>
         /// Method to detect when the user taps on add node button
         /// </summary>
-        public void OnTouchAddNode(){
-            AddObjectCommand addCommand = new AddObjectCommand(new Graph(), "Nuevo nodo");
+        public void OnTouchAddNode(int data){
+            AddObjectCommand addCommand = new AddObjectCommand(data);
             CommandController.GetInstance().Invoke(addCommand);
         }
     }
