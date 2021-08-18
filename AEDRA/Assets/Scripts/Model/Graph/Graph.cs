@@ -3,7 +3,8 @@ using System.Collections;
 using System;
 using Utils.Enums;
 using Model.Common;
-using Model.SideCar.Converters;
+using SideCar.Converters;
+using SideCar.DTOs;
 
 namespace Model.GraphModel
 {
@@ -40,17 +41,23 @@ namespace Model.GraphModel
             AdjacentMtx.Add(id, new Dictionary<int, object>());
             // Notify to subscribers 
             GraphNodeConverter converter = new GraphNodeConverter();
-            Notify(converter.ToDto(node));
+            base.Notify(converter.ToDto(node));
         }
 
         /// <summary>
         /// Method to remove a node of the graph
         /// </summary>
         /// <param name="element"> Node that will be removed</param>
-
-        public override void DeleteElement(object element)
+        public override void DeleteElement(DataStructureElementDTO element)
         {
-            throw new NotImplementedException();
+            GraphNode nodeToDelete = null;
+            foreach(GraphNode node in this.Nodes){
+                if(node.Id == element.Id){
+                    nodeToDelete = node;
+                }
+            }
+            this.Nodes.Remove(nodeToDelete);
+            base.Notify(element);
         }
 
         /// <summary>

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Model.Common;
-using Model.SideCar.DTOs;
+using SideCar.DTOs;
 using UnityEngine;
 using Utils;
 using Utils.Enums;
@@ -61,6 +61,14 @@ namespace View.GUI
                 ProjectedObjects.Add(obj.GetComponentInChildren<ProjectedObject>());
             }
             return obj.GetComponentInChildren<ProjectedObject>();
+        }
+
+        public void DeleteObject(DataStructureElementDTO dto){
+            /// Obtener projected object
+            /// Eliminar el po
+            /// Eliminar en la lista y en unity
+            /// //ProjectedObject projectedObject = this.ProjectedObjects();
+            //Destroy();
         }
     }
 }

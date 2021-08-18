@@ -1,10 +1,10 @@
 
 using System.Collections.Generic;
 using Model.GraphModel;
-using Model.SideCar.DTOs;
+using SideCar.DTOs;
 using Repository;
 
-namespace Model.SideCar.Converters
+namespace SideCar.Converters
 {
     public class GraphNodeConverter : AbstractConverter<GraphNode, GraphNodeDTO>
     {

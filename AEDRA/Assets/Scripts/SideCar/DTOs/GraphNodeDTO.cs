@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Utils.Enums;
 
-namespace Model.SideCar.DTOs
+namespace SideCar.DTOs
 {
     public class GraphNodeDTO : DataStructureElementDTO
     {

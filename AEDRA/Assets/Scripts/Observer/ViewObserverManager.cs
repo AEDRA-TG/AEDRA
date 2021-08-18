@@ -1,7 +1,7 @@
-using System.Collections.Generic;
+
 using Controller;
 using Model.Common;
-using Model.SideCar.DTOs;
+using SideCar.DTOs;
 using UnityEngine;
 using Utils.Enums;
 using View.GUI;

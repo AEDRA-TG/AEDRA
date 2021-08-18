@@ -1,5 +1,5 @@
 using System;
-using Model.SideCar.DTOs;
+using SideCar.DTOs;
 
 namespace Model.Common
 {
@@ -23,7 +23,7 @@ namespace Model.Common
         /// Method to remove an element of a data structure
         /// </summary>
         /// <param name="element"> Element that will be removed of the data structure </param>
-        public abstract void DeleteElement(object element);
+        public abstract void DeleteElement(DataStructureElementDTO element);
 
         /// <summary>
         /// Method to do traversal through a data structure

@@ -11,10 +11,6 @@ namespace Controller
     /// </summary>
     public class AddObjectCommand : Command
     {
-        /// <summary>
-        /// TODOOOOO
-        /// </summary>
-        public static event Action<OperationEnum> OperationNotifier;
 
         /// <summary>
         /// Data structure that will receive the new element
