@@ -9,6 +9,7 @@ namespace Controller
     /// <summary>
     /// Principal scene controller to manage the events
     /// </summary>
+    //TODO: Devolver ticket
     public class MainController : MonoBehaviour
     {
         public void Start()

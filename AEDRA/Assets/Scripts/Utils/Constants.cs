@@ -14,31 +14,15 @@ namespace Utils
         /// Global color of all buttons in the app
         /// </summary>
         public static Color GlobalColor;
-        /// <summary>
-        /// Path of the hamburger button prefab
-        /// </summary>
         public const string PathHamburgerPrefab = "Prefabs/HamburgerMenu";
-        /// <summary>
-        /// Path of the large button with text prefab
-        /// </summary>
         public const string PathLargeButton = "Prefabs/LargeButton";
-        /// <summary>
-        /// Path of the main tree options prefab
-        /// </summary>
+        //TODO: MAAAAL
         public const string PathMainTreeOptions = "Prefabs/MainTreeOptions";
-        /// <summary>
-        /// Path of the round button prefab
-        /// </summary>
         public const string PathRoundButton = "Prefabs/RoundButton";
-        /// <summary>
-        /// Path of the theme chooser prefab
-        /// </summary>
         public const string PathThemeChooser = "Prefabs/ThemeChooser";
-        /// <summary>
-        /// Path of the tree traversal options
-        /// </summary>
         public const string PathTraversalOptions = "Prefabs/TreeTraversalOptions";
-
+        public const string PathGraphMainMenu = "Prefabs/GraphMainMenu";
+        public const string PathGraphNode = "Prefabs/GraphNode";
 
         public void Start()
         {
