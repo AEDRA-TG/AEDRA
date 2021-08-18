@@ -78,7 +78,7 @@ namespace View
         {
             _loadedPrefabs = new Stack<string>();
             actualPrefabName = "";
-            LoadPrefab(Constants.PathMainTreeOptions, "MainTreeOptions", "ProjectionLayout");
+            LoadPrefab(Constants.PathGraphMainMenu, "GraphMainMenu", "ProjectionLayout");
         }
         /// <summary>
         /// Method to load a prefab and assign his parent and instance name
@@ -86,6 +86,7 @@ namespace View
         /// <param name="prefabPath">The text that indicates the prefabs path</param>
         /// <param name="instanceName">The name that instance prefab will have</param>
         /// <param name="parent">The parent of the prefab name</param>
+        //TODO: change parent for unityParent
         public void LoadPrefab(string prefabPath, string instanceName, string parent)
         {
             DestroyActualPrefabInstance();

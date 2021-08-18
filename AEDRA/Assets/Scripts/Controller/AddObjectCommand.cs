@@ -1,18 +1,25 @@
 using System;
-using System.Collections.Generic;
-using Model;
+
+using Model.Common;
+using Repository;
+using Utils.Enums;
 
 namespace Controller
 {
     /// <summary>
     /// Class to manage the add object command
     /// </summary>
-    public class AddObjectCommand : ICommand
+    public class AddObjectCommand : Command
     {
+        /// <summary>
+        /// TODOOOOO
+        /// </summary>
+        public static event Action<OperationEnum> OperationNotifier;
+
         /// <summary>
         /// Data structure that will receive the new element
         /// </summary>
-        private IDataStructure _dataStructure;
+        private DataStructure _dataStructure;
 
         /// <summary>
         /// Element that will be added on the data structure
@@ -24,18 +31,19 @@ namespace Controller
         /// </summary>
         /// <param name="dataStructure"> Instance of the data structure that will receive the new element </param>
         /// <param name="element"> Instance of the element to add on the data structure </param>
-        public AddObjectCommand(IDataStructure dataStructure, object element){
-            this._dataStructure = dataStructure;
+        public AddObjectCommand(object element){
+            this._dataStructure = new GraphRepository().Load();
             this._element = element;
         }
 
         /// <summary>
         /// Method to delegate the add operation to the business logic
         /// </summary>
-        public void Execute()
+        public override void Execute()
         {
             // TODO Load from repository
             this._dataStructure.AddElement(_element);
+            Notify(OperationEnum.AddObject);
         }
     }
 }
