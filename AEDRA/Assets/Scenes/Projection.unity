@@ -232,7 +232,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2482960348888554365, guid: 19efcd3c359b8904d8bc91be5edb909a, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2482960348888554365, guid: 19efcd3c359b8904d8bc91be5edb909a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -305,7 +305,7 @@ GameObject:
   - component: {fileID: 141379202}
   - component: {fileID: 141379201}
   m_Layer: 0
-  m_Name: ImageTarget
+  m_Name: StructureProjection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -5,6 +5,7 @@ using Utils.Enums;
 using Model.Common;
 using SideCar.Converters;
 using SideCar.DTOs;
+using UnityEngine;
 
 namespace Model.GraphModel
 {
@@ -57,6 +58,7 @@ namespace Model.GraphModel
                 }
             }
             this.Nodes.Remove(nodeToDelete);
+            element.Operation = AnimationEnum.DeleteAnimation;
             base.Notify(element);
         }
 

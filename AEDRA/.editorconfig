@@ -17,3 +17,5 @@ dotnet_diagnostic.IDE0090.severity = none
 # Prevent analyzers from running in these directories
 [Assets/Plugins/**.cs]
 generated_code = true
+[Assets/Editor/**.cs]
+generated_code = true

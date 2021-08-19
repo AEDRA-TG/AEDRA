@@ -4,7 +4,7 @@ namespace Utils.Enums
     {
         AddObject,
         DeleteObject,
-        PaintObject,
-        ConnectObjects
+        ConnectObjects,
+        TraversalObjects
     }
 }

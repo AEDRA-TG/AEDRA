@@ -58,19 +58,24 @@ namespace View.GUI
             {
                 GameObject prefab = Resources.Load(prefabPath) as GameObject;
                 //TODO: Review who should make this call
-                obj = Instantiate(prefab, new Vector3(0,0,0), Quaternion.identity);
+                obj = Instantiate(prefab, new Vector3(0,0,0), Quaternion.identity, GameObject.Find(Constants.ObjectsParentName).transform);
                 obj.name = Id;
                 ProjectedObjects.Add(obj.GetComponentInChildren<ProjectedObject>());
             }
             return obj.GetComponentInChildren<ProjectedObject>();
         }
 
-        public void DeleteObject(DataStructureElementDTO dto){
-            /// Obtener projected object
-            /// Eliminar el po
-            /// Eliminar en la lista y en unity
-            /// //ProjectedObject projectedObject = this.ProjectedObjects();
-            //Destroy();
+        public void DeleteObject(List<ProjectedObject> objectsToBeDeleted){
+            foreach (ProjectedObject dto in objectsToBeDeleted)
+            {
+                DeleteObject(dto);
+            }
+        }
+
+        public void DeleteObject(ProjectedObject objectToBeDeleted){
+            Debug.Log("A MIMIR");
+            this.ProjectedObjects.Remove(objectToBeDeleted);
+            Destroy(objectToBeDeleted.transform.parent.gameObject);
         }
     }
 }
