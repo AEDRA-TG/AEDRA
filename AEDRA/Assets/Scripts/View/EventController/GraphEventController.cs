@@ -1,6 +1,7 @@
 using UnityEngine;
 using Controller;
 using Model.GraphModel;
+using Utils.Enums;
 
 namespace View.EventController
 {
@@ -9,11 +10,14 @@ namespace View.EventController
     /// </summary>
     public class GraphEventController : MonoBehaviour
     {
+        
+        private CommandController controller = CommandController.GetInstance();
         /// <summary>
         /// Method to detect when the user taps on add node button
         /// </summary>
         public void OnTouchAddNode(int data){
-            AddObjectCommand addCommand = new AddObjectCommand(data);
+            AddObjectCommand addCommand = (AddObjectCommand)controller.commands[CommandEnum.AddElement];
+            addCommand.Element = data;
             CommandController.GetInstance().Invoke(addCommand);
         }
     }

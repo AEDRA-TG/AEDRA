@@ -24,16 +24,15 @@ namespace Controller
         /// <summary>
         /// Element that will be added on the data structure
         /// </summary>
-        private object _element;
+        public object Element {get; set;}
 
         /// <summary>
         /// Method to create a new Add Object command
         /// </summary>
         /// <param name="dataStructure"> Instance of the data structure that will receive the new element </param>
         /// <param name="element"> Instance of the element to add on the data structure </param>
-        public AddObjectCommand(object element){
+        public AddObjectCommand(){
             this._dataStructure = new GraphRepository().Load();
-            this._element = element;
         }
 
         /// <summary>
@@ -42,8 +41,8 @@ namespace Controller
         public override void Execute()
         {
             // TODO Load from repository
-            this._dataStructure.AddElement(_element);
-            Notify(OperationEnum.AddObject);
+            this._dataStructure.AddElement(Element);
+            base.Notify(OperationEnum.AddObject);
         }
     }
 }
