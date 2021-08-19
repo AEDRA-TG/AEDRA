@@ -1,6 +1,7 @@
 using UnityEngine;
 using Controller;
 using Model.GraphModel;
+using SideCar.DTOs;
 
 namespace View.EventController
 {
@@ -13,8 +14,21 @@ namespace View.EventController
         /// Method to detect when the user taps on add node button
         /// </summary>
         public void OnTouchAddNode(int data){
-            AddObjectCommand addCommand = new AddObjectCommand(data);
+            AddElementCommand addCommand = new AddElementCommand(data);
             CommandController.GetInstance().Invoke(addCommand);
         }
+
+        /// <summary>
+        /// Method to detect when the user taps on delete node button
+        /// </summary>
+        public void OnTouchDeleteNode(int id){
+            // TODO: Get selected object
+            // Convert selected object to DTO
+            GraphNodeDTO nodeDTO = new GraphNodeDTO(id, 0, null);
+            DeleteElementCommand deleteCommand = new DeleteElementCommand(nodeDTO);
+            CommandController.GetInstance().Invoke(deleteCommand);
+        }
+
+
     }
 }

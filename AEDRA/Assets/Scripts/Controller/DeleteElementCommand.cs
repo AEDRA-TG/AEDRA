@@ -6,7 +6,7 @@ using SideCar.DTOs;
 
 namespace Controller
 {
-    public class DeleteObjectCommand : Command
+    public class DeleteElementCommand : Command
     {
         /// <summary>
         /// Data structure that will receive the new element
@@ -18,14 +18,14 @@ namespace Controller
         /// </summary>
         private DataStructureElementDTO _element;
 
-        public DeleteObjectCommand(DataStructureElementDTO element){
+        public DeleteElementCommand(DataStructureElementDTO element){
             this._dataStructure = new GraphRepository().Load();
             this._element = element;
         }
         public override void Execute()
         {
             this._dataStructure.DeleteElement(this._element);
-            base.Notify(OperationEnum.RemoveObject);
+            base.Notify(OperationEnum.DeleteObject);
         }
     }
 }

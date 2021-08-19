@@ -3,7 +3,7 @@ namespace Utils.Enums
     public enum OperationEnum
     {
         AddObject,
-        RemoveObject,
+        DeleteObject,
         PaintObject,
         ConnectObjects
     }

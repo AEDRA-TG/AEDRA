@@ -33,6 +33,7 @@ namespace View.GUI
             _animations = new Dictionary<OperationEnum, IAnimationStrategy>
             {
                 { OperationEnum.AddObject, new AddNodeAnimation() },
+                { OperationEnum.DeleteObject, new DeleteNodeAnimation()}
             };
         }
         public void AddDto(DataStructureElementDTO dto)
@@ -48,6 +49,7 @@ namespace View.GUI
             DTOs.Clear();
         }
 
+        // TODO: El nombre del metodo no explica mucho
         public ProjectedObject MapProjectedObject(string Id, string prefabPath)
         {
             //TODO: no me gusta esto, att: Santamaria 

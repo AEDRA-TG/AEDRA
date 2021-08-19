@@ -9,7 +9,7 @@ namespace Controller
     /// <summary>
     /// Class to manage the add object command
     /// </summary>
-    public class AddObjectCommand : Command
+    public class AddElementCommand : Command
     {
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Controller
         /// </summary>
         /// <param name="dataStructure"> Instance of the data structure that will receive the new element </param>
         /// <param name="element"> Instance of the element to add on the data structure </param>
-        public AddObjectCommand(object element){
+        public AddElementCommand(object element){
             this._dataStructure = new GraphRepository().Load();
             this._element = element;
         }
