@@ -352,7 +352,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1861677754}
+  - {fileID: 1694171440}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1078,7 +1078,7 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!21 &1861677754
+--- !u!21 &1694171440
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
@@ -1087,7 +1087,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: 'GrafoMaterial
 
-    -4006'
+    17096'
   m_Shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 5

@@ -30,6 +30,12 @@ namespace Model.Common
         /// </summary>
         /// <param name="traversalName"> Name of the traversal that will be executed on the data structure</param>
         public abstract void DoTraversal(string traversalName);
+        /// <summary>
+        /// Method to do connect two elements in a data structure
+        /// </summary>
+        /// <param name="element"> Edge that will be created in the data structure</param>
+        public abstract void ConnectElements(DataStructureElementDTO edgeDTO);
+
 
         public void Notify(DataStructureElementDTO element){
             UpdateElement?.Invoke(element);
