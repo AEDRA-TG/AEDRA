@@ -41,6 +41,7 @@ namespace View.GUI
         {
             DTOs.Add(dto);
             string id = "Node_" + dto.Id;
+            //TODO: do not hard code the prefab
             ProjectedObject obj = MapProjectedObject(id, Constants.PathGraphNode);
             obj.SetDTO(dto);
         }
@@ -57,10 +58,12 @@ namespace View.GUI
             GameObject obj = GameObject.Find(Id);
             if (obj == null)
             {
+                //creates object
                 GameObject prefab = Resources.Load(prefabPath) as GameObject;
                 //TODO: Review who should make this call
                 obj = Instantiate(prefab, new Vector3(0,0,0), Quaternion.identity, GameObject.Find(Constants.ObjectsParentName).transform);
                 obj.name = Id;
+                //adds object to list
                 ProjectedObjects.Add(obj.GetComponentInChildren<ProjectedObject>());
             }
             return obj.GetComponentInChildren<ProjectedObject>();

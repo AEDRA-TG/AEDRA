@@ -2,6 +2,7 @@ using UnityEngine;
 using Controller;
 using Model.GraphModel;
 using SideCar.DTOs;
+using Utils.Enums;
 
 namespace View.EventController
 {
