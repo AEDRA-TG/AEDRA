@@ -40,7 +40,7 @@ namespace Model.GraphModel
             AdjacentMtx.Add(id, new Dictionary<int, object>());
             // Notify to subscribers 
             GraphNodeConverter converter = new GraphNodeConverter();
-            Notify(converter.ToDto(node));
+            base.Notify(converter.ToDto(node));
         }
 
         /// <summary>
