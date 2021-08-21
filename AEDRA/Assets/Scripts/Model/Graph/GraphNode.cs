@@ -1,5 +1,5 @@
 using System;
-using Model.SideCar;
+using SideCar;
 using Utils.Enums;
 
 namespace Model.GraphModel

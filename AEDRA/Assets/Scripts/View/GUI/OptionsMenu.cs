@@ -78,7 +78,7 @@ namespace View
         {
             _loadedPrefabs = new Stack<string>();
             actualPrefabName = "";
-            LoadPrefab(Constants.PathGraphMainMenu, "GraphMainMenu", "ProjectionLayout");
+            LoadPrefab(Constants.PathGraphNodeSelectionMenu, "GraphNodeSelectionMenu", "ProjectionLayout");
         }
         /// <summary>
         /// Method to load a prefab and assign his parent and instance name

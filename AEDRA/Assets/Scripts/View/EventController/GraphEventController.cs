@@ -1,6 +1,7 @@
 using UnityEngine;
 using Controller;
 using Model.GraphModel;
+using SideCar.DTOs;
 using Utils.Enums;
 
 namespace View.EventController
@@ -10,15 +11,36 @@ namespace View.EventController
     /// </summary>
     public class GraphEventController : MonoBehaviour
     {
-        
-        private CommandController controller = CommandController.GetInstance();
+
+        // TODO : BORRAR
+        [SerializeField] private int id1;
+        [SerializeField] private int id2;
+
         /// <summary>
         /// Method to detect when the user taps on add node button
         /// </summary>
         public void OnTouchAddNode(int data){
-            AddObjectCommand addCommand = (AddObjectCommand)controller.commands[CommandEnum.AddElement];
-            addCommand.Element = data;
+            AddElementCommand addCommand = new AddElementCommand(data);
             CommandController.GetInstance().Invoke(addCommand);
         }
+
+        /// <summary>
+        /// Method to detect when the user taps on delete node button
+        /// </summary>
+        public void OnTouchDeleteNode(int id){
+            // TODO: Get selected object
+            // Convert selected object to DTO
+            GraphNodeDTO nodeDTO = new GraphNodeDTO(id, 0, null);
+            DeleteElementCommand deleteCommand = new DeleteElementCommand(nodeDTO);
+            CommandController.GetInstance().Invoke(deleteCommand);
+        }
+
+        public void OnTouchConnectNodes(){
+            GraphEdgeDTO edgeDTO = new GraphEdgeDTO(id1, 0, id2);
+            ConnectElementsCommand connectCommand = new ConnectElementsCommand(edgeDTO);
+            CommandController.GetInstance().Invoke(connectCommand);
+        }
+
+
     }
 }

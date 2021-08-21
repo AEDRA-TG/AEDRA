@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Model.SideCar.Converters
+namespace SideCar.Converters
 {
     public abstract class AbstractConverter<E,D>
     {

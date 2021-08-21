@@ -3,8 +3,8 @@ namespace Utils.Enums
     public enum OperationEnum
     {
         AddObject,
-        RemoveObject,
-        PaintObject,
-        ConnectObjects
+        DeleteObject,
+        ConnectObjects,
+        TraversalObjects
     }
 }

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Model.Common;
-using Model.SideCar.DTOs;
+using SideCar.DTOs;
 using UnityEngine;
 using Utils;
 using Utils.Enums;
@@ -33,6 +33,8 @@ namespace View.GUI
             _animations = new Dictionary<OperationEnum, IAnimationStrategy>
             {
                 { OperationEnum.AddObject, new AddNodeAnimation() },
+                { OperationEnum.DeleteObject, new DeleteNodeAnimation()},
+                { OperationEnum.ConnectObjects, new ConnectNodesAnimation()}
             };
         }
         public void AddDto(DataStructureElementDTO dto)
@@ -49,6 +51,7 @@ namespace View.GUI
             DTOs.Clear();
         }
 
+        // TODO: El nombre del metodo no explica mucho
         public ProjectedObject MapProjectedObject(string Id, string prefabPath)
         {
             //TODO: no me gusta esto, att: Santamaria 
@@ -58,12 +61,25 @@ namespace View.GUI
                 //creates object
                 GameObject prefab = Resources.Load(prefabPath) as GameObject;
                 //TODO: Review who should make this call
-                obj = Instantiate(prefab, new Vector3(0,0,0), Quaternion.identity);
+                obj = Instantiate(prefab, new Vector3(0,0,0), Quaternion.identity, GameObject.Find(Constants.ObjectsParentName).transform);
                 obj.name = Id;
                 //adds object to list
                 ProjectedObjects.Add(obj.GetComponentInChildren<ProjectedObject>());
             }
             return obj.GetComponentInChildren<ProjectedObject>();
+        }
+
+        public void DeleteObject(List<ProjectedObject> objectsToBeDeleted){
+            foreach (ProjectedObject dto in objectsToBeDeleted)
+            {
+                DeleteObject(dto);
+            }
+        }
+
+        public void DeleteObject(ProjectedObject objectToBeDeleted){
+            Debug.Log("A MIMIR");
+            this.ProjectedObjects.Remove(objectToBeDeleted);
+            Destroy(objectToBeDeleted.transform.parent.gameObject);
         }
     }
 }

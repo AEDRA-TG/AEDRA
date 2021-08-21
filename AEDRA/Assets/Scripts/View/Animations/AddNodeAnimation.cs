@@ -1,4 +1,4 @@
-using Model.SideCar.DTOs;
+using SideCar.DTOs;
 using UnityEngine;
 using View.GUI;
 

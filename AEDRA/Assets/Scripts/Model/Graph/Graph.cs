@@ -3,7 +3,9 @@ using System.Collections;
 using System;
 using Utils.Enums;
 using Model.Common;
-using Model.SideCar.Converters;
+using SideCar.Converters;
+using SideCar.DTOs;
+using UnityEngine;
 
 namespace Model.GraphModel
 {
@@ -47,10 +49,17 @@ namespace Model.GraphModel
         /// Method to remove a node of the graph
         /// </summary>
         /// <param name="element"> Node that will be removed</param>
-
-        public override void DeleteElement(object element)
+        public override void DeleteElement(DataStructureElementDTO element)
         {
-            throw new NotImplementedException();
+            GraphNode nodeToDelete = null;
+            foreach(GraphNode node in this.Nodes){
+                if(node.Id == element.Id){
+                    nodeToDelete = node;
+                }
+            }
+            this.Nodes.Remove(nodeToDelete);
+            element.Operation = AnimationEnum.DeleteAnimation;
+            base.Notify(element);
         }
 
         /// <summary>
@@ -62,6 +71,18 @@ namespace Model.GraphModel
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Method to connect two nodes bidirectionally
+        /// </summary>
+        /// <param name="element"></param>
+        public override void ConnectElements(DataStructureElementDTO graphEdgeDTO)
+        {
+            GraphEdgeDTO edgeDTO = (GraphEdgeDTO) graphEdgeDTO;
+            AdjacentMtx[edgeDTO.Id].Add(edgeDTO.IdEndNode, edgeDTO.Value);
+            AdjacentMtx[edgeDTO.IdEndNode].Add(edgeDTO.Id, edgeDTO.Value);
+            edgeDTO.Operation = AnimationEnum.CreateAnimation;
+            base.Notify(edgeDTO);
+        }
         public List<int> GetNeighbors(int node){
             List<int> neighbors = new List<int>();
             foreach (int neighbor in AdjacentMtx[node].Keys)

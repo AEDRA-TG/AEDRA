@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Utils {
-    public class Utils
+    public class Utilities
     {
         public void ChangeMenu(){
         }
