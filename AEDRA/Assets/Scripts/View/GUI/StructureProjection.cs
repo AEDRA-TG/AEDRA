@@ -33,7 +33,8 @@ namespace View.GUI
             _animations = new Dictionary<OperationEnum, IAnimationStrategy>
             {
                 { OperationEnum.AddObject, new AddNodeAnimation() },
-                { OperationEnum.DeleteObject, new DeleteNodeAnimation()}
+                { OperationEnum.DeleteObject, new DeleteNodeAnimation()},
+                { OperationEnum.ConnectObjects, new ConnectNodesAnimation()}
             };
         }
         public void AddDto(DataStructureElementDTO dto)

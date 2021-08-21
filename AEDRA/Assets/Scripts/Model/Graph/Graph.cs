@@ -71,6 +71,18 @@ namespace Model.GraphModel
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Method to connect two nodes bidirectionally
+        /// </summary>
+        /// <param name="element"></param>
+        public override void ConnectElements(DataStructureElementDTO graphEdgeDTO)
+        {
+            GraphEdgeDTO edgeDTO = (GraphEdgeDTO) graphEdgeDTO;
+            AdjacentMtx[edgeDTO.Id].Add(edgeDTO.IdEndNode, edgeDTO.Value);
+            AdjacentMtx[edgeDTO.IdEndNode].Add(edgeDTO.Id, edgeDTO.Value);
+            edgeDTO.Operation = AnimationEnum.CreateAnimation;
+            base.Notify(edgeDTO);
+        }
         public List<int> GetNeighbors(int node){
             List<int> neighbors = new List<int>();
             foreach (int neighbor in AdjacentMtx[node].Keys)

@@ -56,6 +56,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 668012fa7fe203141a3b039bcf511991, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  node1: 0
+  node2: 0
 --- !u!114 &2445510592691903244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,8 +200,48 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 9163274989460323816}
+    - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 9163274989460323816}
+    - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnTouchConnectNodes
+      objectReference: {fileID: 0}
+    - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: OnTouchAddNode
+      objectReference: {fileID: 0}
+    - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: View.EventController.GraphEventController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: View.EventController.GraphEventController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3131914329587762830, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
       propertyPath: m_Text

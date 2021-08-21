@@ -10,6 +10,11 @@ namespace View.EventController
     /// </summary>
     public class GraphEventController : MonoBehaviour
     {
+
+        // TODO : BORRAR
+        [SerializeField] private int id1;
+        [SerializeField] private int id2;
+
         /// <summary>
         /// Method to detect when the user taps on add node button
         /// </summary>
@@ -27,6 +32,12 @@ namespace View.EventController
             GraphNodeDTO nodeDTO = new GraphNodeDTO(id, 0, null);
             DeleteElementCommand deleteCommand = new DeleteElementCommand(nodeDTO);
             CommandController.GetInstance().Invoke(deleteCommand);
+        }
+
+        public void OnTouchConnectNodes(){
+            GraphEdgeDTO edgeDTO = new GraphEdgeDTO(id1, 0, id2);
+            ConnectElementsCommand connectCommand = new ConnectElementsCommand(edgeDTO);
+            CommandController.GetInstance().Invoke(connectCommand);
         }
 
 
