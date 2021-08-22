@@ -16,9 +16,9 @@ namespace Controller
         /// <summary>
         /// Elements that will be connected on the data structure
         /// </summary>
-        private DataStructureElementDTO _edgeDTO;
+        private ElementDTO _edgeDTO;
 
-        public ConnectElementsCommand(DataStructureElementDTO edgeDTO){
+        public ConnectElementsCommand(ElementDTO edgeDTO){
             this._dataStructure = new GraphRepository().Load();
             this._edgeDTO = edgeDTO;
         }

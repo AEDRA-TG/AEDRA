@@ -2,6 +2,7 @@ using System;
 
 using Model.Common;
 using Repository;
+using SideCar.DTOs;
 using Utils.Enums;
 
 namespace Controller
@@ -20,15 +21,16 @@ namespace Controller
         /// <summary>
         /// Element that will be added on the data structure
         /// </summary>
-        public object Element {get; set;}
+        private ElementDTO _element;
 
         /// <summary>
         /// Method to create a new Add Object command
         /// </summary>
         /// <param name="dataStructure"> Instance of the data structure that will receive the new element </param>
         /// <param name="element"> Instance of the element to add on the data structure </param>
-        public AddElementCommand(object element){
+        public AddElementCommand(ElementDTO element){
             this._dataStructure = new GraphRepository().Load();
+            this._element = element;
         }
 
         /// <summary>
@@ -37,7 +39,7 @@ namespace Controller
         public override void Execute()
         {
             // TODO Load from repository
-            this._dataStructure.AddElement(Element);
+            this._dataStructure.AddElement(_element);
             base.Notify(OperationEnum.AddObject);
         }
     }

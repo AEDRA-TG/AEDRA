@@ -26,7 +26,7 @@ namespace Observer
         /// Method to update the projection on UI
         /// </summary>
         /// <param name="element">Element that will be updated on UI</param>
-        private void UpdateUI(DataStructureElementDTO dto){
+        private void UpdateUI(ElementDTO dto){
             StructureProjection projection = GameObject.FindObjectOfType<StructureProjection>();
             projection.AddDto(dto);
         }

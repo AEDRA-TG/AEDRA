@@ -11,19 +11,19 @@ namespace Model.Common
         /// <summary>
         /// TODOOOOO
         /// </summary>
-        public static event Action<DataStructureElementDTO> UpdateElement;
+        public static event Action<ElementDTO> UpdateElement;
 
         /// <summary>
         /// Method to Add an element to a data structure
         /// </summary>
         /// <param name="element"> Element to add to the data structure </param>
-        public abstract void AddElement(object element);
+        public abstract void AddElement(ElementDTO element);
 
         /// <summary>
         /// Method to remove an element of a data structure
         /// </summary>
         /// <param name="element"> Element that will be removed of the data structure </param>
-        public abstract void DeleteElement(DataStructureElementDTO element);
+        public abstract void DeleteElement(ElementDTO element);
 
         /// <summary>
         /// Method to do traversal through a data structure
@@ -34,10 +34,10 @@ namespace Model.Common
         /// Method to do connect two elements in a data structure
         /// </summary>
         /// <param name="element"> Edge that will be created in the data structure</param>
-        public abstract void ConnectElements(DataStructureElementDTO edgeDTO);
+        public abstract void ConnectElements(ElementDTO edgeDTO);
 
 
-        public void Notify(DataStructureElementDTO element){
+        public void Notify(ElementDTO element){
             UpdateElement?.Invoke(element);
         }
     }

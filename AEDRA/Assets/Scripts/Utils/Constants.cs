@@ -26,6 +26,9 @@ namespace Utils
         public const string PathGraphNodeSelectionMenu = "Prefabs/GraphNodeSelectionMenu";
         public const string ObjectsParentName = "StructureProjection";
 
+        public const string PrefabPath = "Prefabs/";
+        public const string GraphNodeSelectionMenu = "GraphNodeSelectionMenu";
+
 
 
         public void Start()

@@ -12,16 +12,14 @@ namespace Controller
         /// Property used to store the command controller instance
         /// </summary>
         private static CommandController _commandController;
-        public Dictionary<CommandEnum, Command> commands;
 
         /// <summary>
         /// Method to apply the Singleton pattern
         /// </summary>
         /// <returns> Command controller instance </returns>
         public CommandController(){
-            commands.Add(CommandEnum.AddElement, new AddObjectCommand());
+
         }
-        
         public static CommandController GetInstance(){
             if(_commandController == null){
                 _commandController = new CommandController();

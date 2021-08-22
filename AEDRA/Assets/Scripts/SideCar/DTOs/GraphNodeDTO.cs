@@ -3,12 +3,13 @@ using Utils.Enums;
 
 namespace SideCar.DTOs
 {
-    public class GraphNodeDTO : DataStructureElementDTO
+    public class GraphNodeDTO : ElementDTO
     {
         public List<int> Neighbors {get; set;}
 
         public GraphNodeDTO(int idNode, object value, List<int> neighbors):base(idNode, value){
             Neighbors = neighbors;
+            base.Name = "GraphNode";
         }
     }
 }

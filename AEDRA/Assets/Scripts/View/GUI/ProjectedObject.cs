@@ -11,7 +11,7 @@ namespace View.GUI
     {
         public Dictionary<AnimationEnum, Func<Tween>> Animations{get; set;}
 
-        private DataStructureElementDTO _dto;
+        private ElementDTO _dto;
 
         public void Awake(){
             Animations = new Dictionary<AnimationEnum, Func<Tween>> {
@@ -22,7 +22,8 @@ namespace View.GUI
         }
 
         private Tween CreateAnimation(){
-            return null;
+            //TODO: TIME SHOULD BE A CONSTANT
+            return gameObject.transform.DOScale(1,3);
         }
 
         private Tween DeleteAnimation(){
@@ -30,9 +31,10 @@ namespace View.GUI
         }
 
         private Tween PaintAnimation(){
-            return null;
+            MeshRenderer mesh = gameObject.GetComponentInChildren<MeshRenderer>();
+            return mesh.material.DOColor(Color.red,3);
         }
-        public void SetDTO(DataStructureElementDTO dto){
+        public void SetDTO(ElementDTO dto){
             _dto = dto;
             //TODO: update object properties
         }

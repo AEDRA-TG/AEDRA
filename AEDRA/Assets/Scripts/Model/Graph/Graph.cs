@@ -24,39 +24,37 @@ namespace Model.GraphModel
         /// </summary>
         public Dictionary<int, Dictionary<int, object>> AdjacentMtx { get; set; }
 
+        private GraphNodeConverter _nodeConverter;
+
         public Graph(){
             Nodes = new List<GraphNode>();
             AdjacentMtx = new Dictionary<int, Dictionary<int, object>>();
+            _nodeConverter = new GraphNodeConverter();
         }
 
         /// <summary>
         /// Method to add a node on the graph
         /// </summary>
         /// <param name="element"> Node that will be added to the graph </param>
-        public override void AddElement(object element)
+        public override void AddElement(ElementDTO element)
         {
             //TODO: change ID generation(see also how to remove Ids without clash)
-            int id = Nodes.Count;
-            GraphNode node = new GraphNode(id, element);
+            GraphNode node = _nodeConverter.ToEntity((GraphNodeDTO)element);
+            node.Id = Nodes.Count;
             Nodes.Add(node);
-            AdjacentMtx.Add(id, new Dictionary<int, object>());
+            AdjacentMtx.Add(node.Id, new Dictionary<int, object>());
+            element.Operation = AnimationEnum.CreateAnimation;
             // Notify to subscribers 
-            GraphNodeConverter converter = new GraphNodeConverter();
-            base.Notify(converter.ToDto(node));
+            base.Notify(element);
         }
 
         /// <summary>
         /// Method to remove a node of the graph
         /// </summary>
         /// <param name="element"> Node that will be removed</param>
-        public override void DeleteElement(DataStructureElementDTO element)
+        public override void DeleteElement(ElementDTO element)
         {
-            GraphNode nodeToDelete = null;
-            foreach(GraphNode node in this.Nodes){
-                if(node.Id == element.Id){
-                    nodeToDelete = node;
-                }
-            }
+            GraphNode nodeToDelete = _nodeConverter.ToEntity((GraphNodeDTO)element);
             this.Nodes.Remove(nodeToDelete);
             element.Operation = AnimationEnum.DeleteAnimation;
             base.Notify(element);
@@ -75,7 +73,7 @@ namespace Model.GraphModel
         /// Method to connect two nodes bidirectionally
         /// </summary>
         /// <param name="element"></param>
-        public override void ConnectElements(DataStructureElementDTO graphEdgeDTO)
+        public override void ConnectElements(ElementDTO graphEdgeDTO)
         {
             GraphEdgeDTO edgeDTO = (GraphEdgeDTO) graphEdgeDTO;
             AdjacentMtx[edgeDTO.Id].Add(edgeDTO.IdEndNode, edgeDTO.Value);

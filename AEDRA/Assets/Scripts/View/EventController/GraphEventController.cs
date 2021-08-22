@@ -13,21 +13,25 @@ namespace View.EventController
     {
 
         // TODO : BORRAR
-        [SerializeField] private int id1;
+        [SerializeField] private int id;
         [SerializeField] private int id2;
 
         /// <summary>
         /// Method to detect when the user taps on add node button
         /// </summary>
-        public void OnTouchAddNode(int data){
-            AddElementCommand addCommand = new AddElementCommand(data);
+        public void OnTouchAddNode()
+        {
+            //TODO: Obtener el dto de los datos de la pantalla
+            GraphNodeDTO nodeDTO = new GraphNodeDTO(id, 0, null);
+            AddElementCommand addCommand = new AddElementCommand(nodeDTO);
             CommandController.GetInstance().Invoke(addCommand);
         }
 
         /// <summary>
         /// Method to detect when the user taps on delete node button
         /// </summary>
-        public void OnTouchDeleteNode(int id){
+        public void OnTouchDeleteNode()
+        {
             // TODO: Get selected object
             // Convert selected object to DTO
             GraphNodeDTO nodeDTO = new GraphNodeDTO(id, 0, null);
@@ -35,12 +39,13 @@ namespace View.EventController
             CommandController.GetInstance().Invoke(deleteCommand);
         }
 
-        public void OnTouchConnectNodes(){
-            GraphEdgeDTO edgeDTO = new GraphEdgeDTO(id1, 0, id2);
+        public void OnTouchConnectNodes()
+        {
+            //TODO: fix element selection to obtain edge
+            int idEdge = new System.Random().Next(100);
+            GraphEdgeDTO edgeDTO = new GraphEdgeDTO(idEdge, id, 0, id2);
             ConnectElementsCommand connectCommand = new ConnectElementsCommand(edgeDTO);
             CommandController.GetInstance().Invoke(connectCommand);
         }
-
-
     }
 }
