@@ -7,7 +7,6 @@ namespace SideCar.DTOs
     {
         public int IdStartNode {set; get;}
         public int IdEndNode {set; get;}
-        //TODO: generate idEdge
         public GraphEdgeDTO(int idEdge, object value, int idStartNode, int idEndNode):base(idEdge, value){
             this.IdEndNode = idEndNode;
             this.IdStartNode = idStartNode;

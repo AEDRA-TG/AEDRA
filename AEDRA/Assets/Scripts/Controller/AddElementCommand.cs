@@ -33,7 +33,6 @@ namespace Controller
         }
         public override void Execute()
         {
-            // TODO Load from repository
             this._dataStructure.AddElement(_element);
             base.Notify(OperationEnum.AddObject);
         }

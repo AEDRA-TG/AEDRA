@@ -9,7 +9,6 @@ namespace Model.GraphModel
     /// </summary>
     public class GraphNode
     {
-        //TODO: Set Id automatically
         public int Id { get; set; }
         //TODO: define how to have generic values
         public object Value { get; set; }

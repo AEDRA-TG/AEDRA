@@ -1,7 +1,7 @@
 namespace Repository
 {
     public interface IDataStructureRepository<T>
-    {   
+    {
         /// <summary>
         /// Method to load a DataStructure instance from persistent storage
         /// </summary>

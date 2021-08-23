@@ -16,6 +16,7 @@ namespace Utils
         /// Global color of all buttons in the app
         /// </summary>
         public static Color GlobalColor = Utilities.LoadGlobalColor();
+        public const float AnimationTime = 3;
         public const string PathHamburgerPrefab = "Prefabs/HamburgerMenu";
         public const string PathLargeButton = "Prefabs/LargeButton";
         //TODO: MAAAAL

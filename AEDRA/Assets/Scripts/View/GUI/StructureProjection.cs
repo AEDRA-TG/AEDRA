@@ -40,7 +40,6 @@ namespace View.GUI
         public void AddDto(ElementDTO dto)
         {
             DTOs.Add(dto);
-            //TODO: do not hard code the prefab
             Debug.Log(dto.GetUnityId());
             GameObject obj = GameObject.Find(dto.GetUnityId());
             obj?.GetComponentInChildren<ProjectedObject>().SetDTO(dto);

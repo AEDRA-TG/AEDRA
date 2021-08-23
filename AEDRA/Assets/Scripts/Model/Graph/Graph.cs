@@ -56,7 +56,6 @@ namespace Model.GraphModel
         /// <param name="element"> Node that will be added to the graph </param>
         public override void AddElement(ElementDTO element)
         {
-            //TODO: change ID generation(see also how to remove Ids without clash)
             GraphNode node = _nodeConverter.ToEntity((GraphNodeDTO)element);
             node.Id = NodesId++;
             Nodes.Add(node);
