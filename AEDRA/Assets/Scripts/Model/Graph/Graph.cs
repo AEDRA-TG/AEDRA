@@ -7,6 +7,7 @@ using SideCar.Converters;
 using SideCar.DTOs;
 using UnityEngine;
 using Newtonsoft.Json;
+using Repository;
 
 namespace Model.GraphModel
 {
@@ -51,8 +52,9 @@ namespace Model.GraphModel
             node.Id = NodesId++;
             Nodes.Add(node);
             AdjacentMtx.Add(node.Id, new Dictionary<int, object>());
+            //return DTO updated
+            element = _nodeConverter.ToDto(node);
             element.Operation = AnimationEnum.CreateAnimation;
-            // Notify to subscribers 
             base.Notify(element);
         }
 

@@ -30,6 +30,6 @@ namespace Utils
         public const string PrefabPath = "Prefabs/";
         public const string GraphNodeSelectionMenu = "GraphNodeSelectionMenu";
         //
-        public const string GraphFile = "Files/Graph.json";
+        public const string GraphFile = "Assets/Files/Graph.json";
     }
 }

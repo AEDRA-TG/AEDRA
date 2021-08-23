@@ -11,8 +11,8 @@ namespace Repository
         {
             if (graph == null)
             {
-                graph = Utilities.DeserializeJSON<Graph>(Constants.GraphFile);
-                graph ??= new Graph();
+                //graph = Utilities.DeserializeJSON<Graph>(Constants.GraphFile);
+                graph = new Graph();
             }
             return graph;
         }

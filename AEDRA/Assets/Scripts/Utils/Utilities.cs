@@ -16,6 +16,7 @@ namespace Utils {
         public static void SerializeJSON<T>(string filename, T data){
             string json = JsonConvert.SerializeObject(data, Formatting.Indented);
             File.WriteAllText(filename,json);
+
         }
 
         public static JObject LoadJSONKey(string filename, string key){
