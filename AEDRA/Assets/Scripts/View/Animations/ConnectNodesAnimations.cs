@@ -7,6 +7,9 @@ using Utils.Enums;
 
 namespace View.Animations
 {
+    /// <summary>
+    /// Strategy that animates the operation of connecting to Nodes of a Datastructure
+    /// </summary>
     public class ConnectNodesAnimation : IAnimationStrategy
     {
         public void Animate()

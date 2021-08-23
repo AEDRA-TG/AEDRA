@@ -6,6 +6,9 @@ using View.GUI;
 
 namespace View.Animations
 {
+    /// <summary>
+    /// Strategy that animates the operation of adding a node to a datastructure
+    /// </summary>
     public class AddNodeAnimation : IAnimationStrategy
     {
         public void Animate()

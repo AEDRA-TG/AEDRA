@@ -12,21 +12,16 @@ namespace Controller
         /// Property used to store the command controller instance
         /// </summary>
         private static CommandController _commandController;
-
         /// <summary>
-        /// Method to apply the Singleton pattern
+        /// Singleton Method
         /// </summary>
-        /// <returns> Command controller instance </returns>
-        public CommandController(){
-
-        }
+        /// <returns>Unique instance of CommandController</returns>
         public static CommandController GetInstance(){
             if(_commandController == null){
                 _commandController = new CommandController();
             }
             return _commandController;
         }
-
         /// <summary>
         /// Method to execute any command
         /// </summary>

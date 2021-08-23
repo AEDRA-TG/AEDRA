@@ -7,6 +7,9 @@ using Utils.Enums;
 
 namespace View.Animations
 {
+    /// <summary>
+    /// Strategy that animates the operation of deleting a Node from a DataStructure
+    /// </summary>
     public class DeleteNodeAnimation : IAnimationStrategy
     {
         public void Animate()

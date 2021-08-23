@@ -22,7 +22,7 @@ namespace View.EventController
         public void OnTouchAddNode()
         {
             //TODO: Obtener el dto de los datos de la pantalla
-            GraphNodeDTO nodeDTO = new GraphNodeDTO(id, 0, null);
+            GraphNodeDTO nodeDTO = new GraphNodeDTO(0, 0, null);
             AddElementCommand addCommand = new AddElementCommand(nodeDTO);
             CommandController.GetInstance().Invoke(addCommand);
         }
@@ -39,6 +39,9 @@ namespace View.EventController
             CommandController.GetInstance().Invoke(deleteCommand);
         }
 
+        /// <summary>
+        /// Method to detect when the user taps the on connect node button
+        /// </summary>
         public void OnTouchConnectNodes()
         {
             //TODO: fix element selection to obtain edge

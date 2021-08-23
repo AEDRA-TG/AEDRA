@@ -9,7 +9,7 @@ namespace Model.Common
     public abstract class DataStructure
     {
         /// <summary>
-        /// TODOOOOO
+        /// Observer event to notify that an element of the datastructure has been updated
         /// </summary>
         public static event Action<ElementDTO> UpdateElement;
 
@@ -36,7 +36,10 @@ namespace Model.Common
         /// <param name="element"> Edge that will be created in the data structure</param>
         public abstract void ConnectElements(ElementDTO edgeDTO);
 
-
+        /// <summary>
+        /// Method to Notify observer that the specified operation has completed execution
+        /// </summary>
+        /// <param name="element"></param>
         public void Notify(ElementDTO element){
             UpdateElement?.Invoke(element);
         }

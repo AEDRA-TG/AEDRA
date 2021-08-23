@@ -17,7 +17,10 @@ namespace Controller
         /// Element that will be added on the data structure
         /// </summary>
         private ElementDTO _element;
-
+        /// <summary>
+        /// Command to delete and element
+        /// </summary>
+        /// <param name="element">DTO with information needed to delete the element</param>
         public DeleteElementCommand(ElementDTO element){
             this._dataStructure = new GraphRepository().Load();
             this._element = element;

@@ -26,16 +26,11 @@ namespace Controller
         /// <summary>
         /// Method to create a new Add Object command
         /// </summary>
-        /// <param name="dataStructure"> Instance of the data structure that will receive the new element </param>
         /// <param name="element"> Instance of the element to add on the data structure </param>
         public AddElementCommand(ElementDTO element){
             this._dataStructure = new GraphRepository().Load();
             this._element = element;
         }
-
-        /// <summary>
-        /// Method to delegate the add operation to the business logic
-        /// </summary>
         public override void Execute()
         {
             // TODO Load from repository
