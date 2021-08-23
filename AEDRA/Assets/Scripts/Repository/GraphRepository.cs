@@ -1,4 +1,5 @@
 using Model.GraphModel;
+using Utils;
 
 namespace Repository
 {
@@ -10,7 +11,8 @@ namespace Repository
         {
             if (graph == null)
             {
-                graph = new Graph();
+                graph = Utilities.DeserializeJSON<Graph>(Constants.GraphFile);
+                graph ??= new Graph();
             }
             return graph;
         }
@@ -21,7 +23,7 @@ namespace Repository
 
         public void Save(Graph data)
         {
-            graph = data;
+            Utilities.SerializeJSON<Graph>(Constants.GraphFile,data);
         }
     }
 }

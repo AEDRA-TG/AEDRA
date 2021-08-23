@@ -11,7 +11,7 @@ namespace Observer
     {
         public void Start()
         {
-
+            GetComponent<Image>().color = Constants.GlobalColor;
         }
 
         public void Update()

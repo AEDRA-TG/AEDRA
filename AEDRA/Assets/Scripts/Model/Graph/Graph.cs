@@ -6,6 +6,7 @@ using Model.Common;
 using SideCar.Converters;
 using SideCar.DTOs;
 using UnityEngine;
+using Newtonsoft.Json;
 
 namespace Model.GraphModel
 {
@@ -14,6 +15,11 @@ namespace Model.GraphModel
     /// </summary>
     public class Graph : DataStructure
     {
+        [JsonProperty]
+        public static int NodesId{get; set;}
+        [JsonProperty]
+        public static int EdgesId{get; set;}
+
         /// <summary>
         /// List to store nodes of the graph
         /// </summary>
@@ -27,6 +33,8 @@ namespace Model.GraphModel
         private GraphNodeConverter _nodeConverter;
 
         public Graph(){
+            NodesId = 0;
+            EdgesId = 0;
             Nodes = new List<GraphNode>();
             AdjacentMtx = new Dictionary<int, Dictionary<int, object>>();
             _nodeConverter = new GraphNodeConverter();
@@ -40,7 +48,7 @@ namespace Model.GraphModel
         {
             //TODO: change ID generation(see also how to remove Ids without clash)
             GraphNode node = _nodeConverter.ToEntity((GraphNodeDTO)element);
-            node.Id = Nodes.Count;
+            node.Id = NodesId++;
             Nodes.Add(node);
             AdjacentMtx.Add(node.Id, new Dictionary<int, object>());
             element.Operation = AnimationEnum.CreateAnimation;
@@ -76,6 +84,7 @@ namespace Model.GraphModel
         public override void ConnectElements(ElementDTO graphEdgeDTO)
         {
             GraphEdgeDTO edgeDTO = (GraphEdgeDTO) graphEdgeDTO;
+            edgeDTO.Id = EdgesId++;
             AdjacentMtx[edgeDTO.Id].Add(edgeDTO.IdEndNode, edgeDTO.Value);
             AdjacentMtx[edgeDTO.IdEndNode].Add(edgeDTO.Id, edgeDTO.Value);
             edgeDTO.Operation = AnimationEnum.CreateAnimation;
