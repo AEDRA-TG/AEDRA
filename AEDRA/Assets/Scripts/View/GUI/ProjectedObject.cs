@@ -52,5 +52,11 @@ namespace View.GUI
             return other != null &&
                 Dto.Id == other.Dto.Id;
         }
+
+        public override int GetHashCode()
+        {
+            //TODO: Look how to implement this method since library HashCode.Combine can't be used
+            throw new NotImplementedException();
+        }
     }
 }
