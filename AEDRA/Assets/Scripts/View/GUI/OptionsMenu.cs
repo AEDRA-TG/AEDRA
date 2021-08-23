@@ -85,16 +85,15 @@ namespace View
         /// </summary>
         /// <param name="prefabPath">The text that indicates the prefabs path</param>
         /// <param name="instanceName">The name that instance prefab will have</param>
-        /// <param name="parent">The parent of the prefab name</param>
-        //TODO: change parent for unityParent
-        public void LoadPrefab(string prefabPath, string instanceName, string parent)
+        /// <param name="unityParent">The parent in the unity tree of the prefab</param>
+        public void LoadPrefab(string prefabPath, string instanceName, string unityParent)
         {
             DestroyActualPrefabInstance();
             GameObject firstPrefab = Resources.Load(prefabPath) as GameObject;
             GameObject firstPrefabInstantiate = Instantiate(firstPrefab, new Vector3(0, 0, 0), Quaternion.identity);
             firstPrefabInstantiate.name = instanceName;
             actualPrefabName = instanceName;
-            firstPrefabInstantiate.transform.parent = GameObject.Find(parent).transform;
+            firstPrefabInstantiate.transform.parent = GameObject.Find(unityParent).transform;
             firstPrefabInstantiate.transform.SetAsFirstSibling();
             _loadedPrefabs.Push(prefabPath);
             InitializeComponents();

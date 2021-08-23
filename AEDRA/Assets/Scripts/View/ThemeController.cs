@@ -50,7 +50,7 @@ namespace Controller
             GameObject acceptButton = GameObject.Find("AcceptButton");
             acceptButton = acceptButton.transform.GetChild(0).gameObject;
             acceptButton.GetComponent<Image>().color = _colors[idColor];
-            Constants.GlobalColor = _colors[idColor];
+            Utilities.SaveGlobalColor(_colors[idColor]);
         }
 
         /// <summary>

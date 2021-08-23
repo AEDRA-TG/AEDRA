@@ -7,6 +7,9 @@ using Utils.Enums;
 
 namespace View.Animations
 {
+    /// <summary>
+    /// Strategy that animates the operation of connecting to Nodes of a Datastructure
+    /// </summary>
     public class ConnectNodesAnimation : IAnimationStrategy
     {
         public void Animate()
@@ -14,7 +17,7 @@ namespace View.Animations
             Sequence animationList = DOTween.Sequence();
             List<ProjectedObject> objectsToBeDeleted = new List<ProjectedObject>();
             StructureProjection structureProjection = GameObject.FindObjectOfType<StructureProjection>();
-            foreach (DataStructureElementDTO dto in structureProjection.DTOs){
+            foreach (ElementDTO dto in structureProjection.DTOs){
                 string unityId = "Node_" + dto.Id;
                 ProjectedObject projectedObject = GameObject.Find(unityId).GetComponentInChildren<ProjectedObject>();
                 if(dto.Operation == AnimationEnum.DeleteAnimation){

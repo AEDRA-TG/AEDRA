@@ -4,6 +4,7 @@ using DG.Tweening;
 using System.Collections.Generic;
 using System;
 using Utils.Enums;
+using Utils;
 
 namespace View.GUI
 {
@@ -11,7 +12,7 @@ namespace View.GUI
     {
         public Dictionary<AnimationEnum, Func<Tween>> Animations{get; set;}
 
-        private DataStructureElementDTO _dto;
+        public ElementDTO Dto{get; set;}
 
         public void Awake(){
             Animations = new Dictionary<AnimationEnum, Func<Tween>> {
@@ -22,18 +23,19 @@ namespace View.GUI
         }
 
         private Tween CreateAnimation(){
-            return null;
+            return gameObject.transform.DOScale(1,Constants.AnimationTime);
         }
 
         private Tween DeleteAnimation(){
-            return gameObject.transform.DOScale(new Vector3(0,0,0), 3);
+            return gameObject.transform.DOScale(new Vector3(0,0,0),Constants.AnimationTime);
         }
 
         private Tween PaintAnimation(){
-            return null;
+            MeshRenderer mesh = gameObject.GetComponentInChildren<MeshRenderer>();
+            return mesh.material.DOColor(Color.red,Constants.AnimationTime);
         }
-        public void SetDTO(DataStructureElementDTO dto){
-            _dto = dto;
+        public void SetDTO(ElementDTO dto){
+            Dto = dto;
             //TODO: update object properties
         }
 
@@ -41,6 +43,20 @@ namespace View.GUI
             gameObject.transform.localPosition = coordinates;
         }
 
-        // TODO hacer un comparador
+        public override bool Equals(object other)
+        {
+            return Equals(other as ProjectedObject);
+        }
+
+        public bool Equals(ProjectedObject other){
+            return other != null &&
+                Dto.Id == other.Dto.Id;
+        }
+
+        public override int GetHashCode()
+        {
+            //TODO: Look how to implement this method since library HashCode.Combine can't be used
+            throw new NotImplementedException();
+        }
     }
 }

@@ -22,12 +22,12 @@ namespace View.GUI
         /// Type of the structure projection
         /// </summary>
         public string Type { get; set; }
-        public List<DataStructureElementDTO> DTOs {get; set;}
+        public List<ElementDTO> DTOs {get; set;}
         public List<ProjectedObject> ProjectedObjects {get; set;}
         private Dictionary<OperationEnum, IAnimationStrategy> _animations;
         public void Awake()
         {
-            DTOs = new List<DataStructureElementDTO>();
+            DTOs = new List<ElementDTO>();
             //TODO: initialize already existing objects in list
             ProjectedObjects = new List<ProjectedObject>();
             _animations = new Dictionary<OperationEnum, IAnimationStrategy>
@@ -37,13 +37,12 @@ namespace View.GUI
                 { OperationEnum.ConnectObjects, new ConnectNodesAnimation()}
             };
         }
-        public void AddDto(DataStructureElementDTO dto)
+        public void AddDto(ElementDTO dto)
         {
             DTOs.Add(dto);
-            string id = "Node_" + dto.Id;
-            //TODO: do not hard code the prefab
-            ProjectedObject obj = MapProjectedObject(id, Constants.PathGraphNode);
-            obj.SetDTO(dto);
+            Debug.Log(dto.GetUnityId());
+            GameObject obj = GameObject.Find(dto.GetUnityId());
+            obj?.GetComponentInChildren<ProjectedObject>().SetDTO(dto);
         }
 
         public void Animate(OperationEnum operation){
@@ -51,22 +50,15 @@ namespace View.GUI
             DTOs.Clear();
         }
 
-        // TODO: El nombre del metodo no explica mucho
-        public ProjectedObject MapProjectedObject(string Id, string prefabPath)
-        {
-            //TODO: no me gusta esto, att: Santamaria 
-            GameObject obj = GameObject.Find(Id);
-            if (obj == null)
-            {
-                //creates object
-                GameObject prefab = Resources.Load(prefabPath) as GameObject;
-                //TODO: Review who should make this call
-                obj = Instantiate(prefab, new Vector3(0,0,0), Quaternion.identity, GameObject.Find(Constants.ObjectsParentName).transform);
-                obj.name = Id;
-                //adds object to list
-                ProjectedObjects.Add(obj.GetComponentInChildren<ProjectedObject>());
-            }
-            return obj.GetComponentInChildren<ProjectedObject>();
+        public ProjectedObject CreateObject(ElementDTO dto){
+            string prefabPath = Constants.PrefabPath + dto.Name;
+            GameObject prefab = Resources.Load(prefabPath) as GameObject;
+            prefab = Instantiate(prefab,new Vector3(0,0,0),Quaternion.identity,this.transform);
+            prefab.name = dto.GetUnityId();
+            ProjectedObject createdObject = prefab.GetComponentInChildren<ProjectedObject>();
+            createdObject.SetDTO(dto);
+            ProjectedObjects.Add(createdObject);
+            return createdObject;
         }
 
         public void DeleteObject(List<ProjectedObject> objectsToBeDeleted){
@@ -77,7 +69,6 @@ namespace View.GUI
         }
 
         public void DeleteObject(ProjectedObject objectToBeDeleted){
-            Debug.Log("A MIMIR");
             this.ProjectedObjects.Remove(objectToBeDeleted);
             Destroy(objectToBeDeleted.transform.parent.gameObject);
         }

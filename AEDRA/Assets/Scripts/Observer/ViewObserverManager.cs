@@ -25,12 +25,15 @@ namespace Observer
         /// <summary>
         /// Method to update the projection on UI
         /// </summary>
-        /// <param name="element">Element that will be updated on UI</param>
-        private void UpdateUI(DataStructureElementDTO dto){
+        /// <param name="dto">Element that will be updated on UI</param>
+        private void UpdateUI(ElementDTO dto){
             StructureProjection projection = GameObject.FindObjectOfType<StructureProjection>();
             projection.AddDto(dto);
         }
-
+        /// <summary>
+        /// Method to execute an animation
+        /// </summary>
+        /// <param name="operation">Animation type that will be executed</param>
         private void ExecuteAnimation(OperationEnum operation){
             StructureProjection projection = GameObject.FindObjectOfType<StructureProjection>();
             projection.Animate(operation);

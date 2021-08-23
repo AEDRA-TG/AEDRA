@@ -56,8 +56,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 668012fa7fe203141a3b039bcf511991, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  node1: 0
-  node2: 0
+  id: 19
+  id2: 0
 --- !u!114 &2445510592691903244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,7 +372,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -523,7 +523,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 namespace Utils
@@ -8,12 +10,13 @@ namespace Utils
     /// <summary>
     /// Class that contains the global constans and configuration atributes
     /// </summary>
-    public class Constants : MonoBehaviour
+    public static class Constants
     {
         /// <summary>
         /// Global color of all buttons in the app
         /// </summary>
-        public static Color GlobalColor;
+        public static Color GlobalColor = Utilities.LoadGlobalColor();
+        public const float AnimationTime = 3;
         public const string PathHamburgerPrefab = "Prefabs/HamburgerMenu";
         public const string PathLargeButton = "Prefabs/LargeButton";
         //TODO: MAAAAL
@@ -25,14 +28,9 @@ namespace Utils
         public const string PathGraphNode = "Prefabs/GraphNode";
         public const string PathGraphNodeSelectionMenu = "Prefabs/GraphNodeSelectionMenu";
         public const string ObjectsParentName = "StructureProjection";
-
-
-
-        public void Start()
-        {
-            // TODO: LOAD COLOR FROM FILE
-            GlobalColor = new Color(0f, 0.5921569f, 1f, 0.7058824f);
-        }
-
+        public const string PrefabPath = "Prefabs/";
+        public const string GraphNodeSelectionMenu = "GraphNodeSelectionMenu";
+        //
+        public const string GraphFile = "Assets/Files/Graph.json";
     }
 }

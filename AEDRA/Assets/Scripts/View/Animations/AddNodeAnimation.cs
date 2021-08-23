@@ -1,23 +1,29 @@
+using DG.Tweening;
 using SideCar.DTOs;
 using UnityEngine;
+using Utils.Enums;
 using View.GUI;
 
 namespace View.Animations
 {
+    /// <summary>
+    /// Strategy that animates the operation of adding a node to a datastructure
+    /// </summary>
     public class AddNodeAnimation : IAnimationStrategy
     {
         public void Animate()
         {
+            Sequence animationList = DOTween.Sequence();
             StructureProjection projection = GameObject.FindObjectOfType<StructureProjection>();
-            foreach (DataStructureElementDTO dto in projection.DTOs)
+            foreach (ElementDTO dto in projection.DTOs)
             {
-                System.Random rand = new System.Random();
-                //TODO: review how to calculate coordinates
-                Vector3 coordinates = new Vector3(rand.Next(20),rand.Next(20), rand.Next(20));
-                //TODO: fix Id concatenation
-                string id = "Node_" + dto.Id;
-                ProjectedObject obj = GameObject.Find(id).GetComponentInChildren<ProjectedObject>();
-                obj.Move(coordinates);
+                ProjectedObject projectedObject;
+                if(dto.Operation == AnimationEnum.CreateAnimation){
+                    projectedObject = projection.CreateObject(dto);
+                }else{
+                    projectedObject = GameObject.Find(dto.GetUnityId()).GetComponentInChildren<ProjectedObject>();
+                }
+                animationList.Append(projectedObject.Animations[dto.Operation]());
             }
         }
     }
