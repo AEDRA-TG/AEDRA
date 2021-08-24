@@ -45,8 +45,7 @@ namespace View.EventController
         public void OnTouchConnectNodes()
         {
             //TODO: fix element selection to obtain edge
-            int idEdge = new System.Random().Next(100);
-            GraphEdgeDTO edgeDTO = new GraphEdgeDTO(idEdge, id, 0, id2);
+            GraphEdgeDTO edgeDTO = new GraphEdgeDTO(0, 0, id, id2);
             ConnectElementsCommand connectCommand = new ConnectElementsCommand(edgeDTO);
             CommandController.GetInstance().Invoke(connectCommand);
         }

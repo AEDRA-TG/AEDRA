@@ -17,20 +17,25 @@ namespace Utils
         /// </summary>
         public static Color GlobalColor = Utilities.LoadGlobalColor();
         public const float AnimationTime = 3;
-        public const string PathHamburgerPrefab = "Prefabs/HamburgerMenu";
-        public const string PathLargeButton = "Prefabs/LargeButton";
-        //TODO: MAAAAL
+        public const string ObjectsParentName = "StructureProjection";
+        public const string PrefabPath = "Prefabs/";
+        public const string GraphFile = "Assets/Files/Graph.json";
+
+        #region UNITY NAMES
+        public const string NodeName = "Node_";
+        public const string EdgeName = "Edge_";
+        #endregion
+
+        #region BUTTONS PREFABS
         public const string PathMainTreeOptions = "Prefabs/MainTreeOptions";
         public const string PathRoundButton = "Prefabs/RoundButton";
         public const string PathThemeChooser = "Prefabs/ThemeChooser";
         public const string PathTraversalOptions = "Prefabs/TreeTraversalOptions";
         public const string PathGraphMainMenu = "Prefabs/GraphMainMenu";
-        public const string PathGraphNode = "Prefabs/GraphNode";
         public const string PathGraphNodeSelectionMenu = "Prefabs/GraphNodeSelectionMenu";
-        public const string ObjectsParentName = "StructureProjection";
-        public const string PrefabPath = "Prefabs/";
+        public const string PathHamburgerPrefab = "Prefabs/HamburgerMenu";
+        public const string PathLargeButton = "Prefabs/LargeButton";
         public const string GraphNodeSelectionMenu = "GraphNodeSelectionMenu";
-        //
-        public const string GraphFile = "Assets/Files/Graph.json";
+        #endregion
     }
 }

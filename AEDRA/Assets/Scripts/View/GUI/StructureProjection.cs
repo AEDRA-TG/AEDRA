@@ -5,6 +5,7 @@ using UnityEngine;
 using Utils;
 using Utils.Enums;
 using View.Animations;
+using View.GUI.ProjectedObjects;
 
 namespace View.GUI
 {
@@ -40,7 +41,6 @@ namespace View.GUI
         public void AddDto(ElementDTO dto)
         {
             DTOs.Add(dto);
-            Debug.Log(dto.GetUnityId());
             GameObject obj = GameObject.Find(dto.GetUnityId());
             obj?.GetComponentInChildren<ProjectedObject>().SetDTO(dto);
         }

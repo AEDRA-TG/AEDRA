@@ -1,13 +1,11 @@
 using System.Collections.Generic;
-using System.Collections;
 using System;
 using Utils.Enums;
 using Model.Common;
 using SideCar.Converters;
 using SideCar.DTOs;
-using UnityEngine;
 using Newtonsoft.Json;
-using Repository;
+using UnityEngine;
 
 namespace Model.GraphModel
 {
@@ -95,10 +93,18 @@ namespace Model.GraphModel
         {
             GraphEdgeDTO edgeDTO = (GraphEdgeDTO) graphEdgeDTO;
             edgeDTO.Id = EdgesId++;
-            AdjacentMtx[edgeDTO.Id].Add(edgeDTO.IdEndNode, edgeDTO.Value);
-            AdjacentMtx[edgeDTO.IdEndNode].Add(edgeDTO.Id, edgeDTO.Value);
-            edgeDTO.Operation = AnimationEnum.CreateAnimation;
-            base.Notify(edgeDTO);
+            // TODO: validar aristas
+            bool edgeStartToEnd = AdjacentMtx[edgeDTO.IdStartNode].ContainsKey(edgeDTO.IdEndNode);
+            bool edgeEndToStart = AdjacentMtx[edgeDTO.IdEndNode].ContainsKey(edgeDTO.IdStartNode);
+            if(!edgeStartToEnd && !edgeEndToStart){
+                AdjacentMtx[edgeDTO.Id].Add(edgeDTO.IdEndNode, edgeDTO.Value);
+                AdjacentMtx[edgeDTO.IdEndNode].Add(edgeDTO.Id, edgeDTO.Value);
+                edgeDTO.Operation = AnimationEnum.CreateAnimation;
+                base.Notify(edgeDTO);
+            }
+            else{
+                Debug.Log("Ya existe la arista");
+            }
         }
         /// <summary>
         /// Method to obtain list of neighbors of a given node
