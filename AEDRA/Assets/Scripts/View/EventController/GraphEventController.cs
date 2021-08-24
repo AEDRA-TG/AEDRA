@@ -3,6 +3,8 @@ using Controller;
 using Model.GraphModel;
 using SideCar.DTOs;
 using Utils.Enums;
+using View.GUI;
+using UnityEditor;
 
 namespace View.EventController
 {
@@ -49,6 +51,11 @@ namespace View.EventController
             GraphEdgeDTO edgeDTO = new GraphEdgeDTO(idEdge, id, 0, id2);
             ConnectElementsCommand connectCommand = new ConnectElementsCommand(edgeDTO);
             CommandController.GetInstance().Invoke(connectCommand);
+        }
+
+        public void OnTouchSavePrefab(){
+            GameObject obj = FindObjectOfType<StructureProjection>().gameObject;
+            PrefabUtility.SaveAsPrefabAsset(obj,"Assets/Files/GraphTest.prefab");
         }
     }
 }

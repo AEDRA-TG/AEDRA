@@ -1,29 +1,33 @@
+using Model.Common;
 using Model.GraphModel;
 using Utils;
 
 namespace Repository
 {
-    public class GraphRepository : IDataStructureRepository<Graph>
+    public class GraphRepository : IDataStructureRepository
     {
         private static Graph graph;
-
+        private string _filePath;
+        public GraphRepository(string structureName){
+            this._filePath = Constants.DataStructureFilePath + structureName + ".json";
+        }
         private Graph GetInstance()
         {
             if (graph == null)
             {
-                //graph = Utilities.DeserializeJSON<Graph>(Constants.GraphFile);
-                graph = new Graph();
+                graph = Utilities.DeserializeJSON<Graph>(_filePath);
+                graph ??= new Graph();
             }
             return graph;
         }
-        public Graph Load()
+        public DataStructure Load()
         {
             return GetInstance();
         }
 
-        public void Save(Graph data)
+        public void Save()
         {
-            Utilities.SerializeJSON<Graph>(Constants.GraphFile,data);
+            Utilities.SerializeJSON<Graph>(_filePath,graph);
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Model.GraphModel;
 using SideCar.DTOs;
 using Repository;
+using Controller;
 
 namespace SideCar.Converters
 {
@@ -16,7 +17,7 @@ namespace SideCar.Converters
 
         public override GraphNodeDTO ToDto(GraphNode entity)
         {
-            Graph graph = new GraphRepository().Load();
+            Graph graph = (Graph)CommandController.GetInstance().Repository.Load();
             List<int> neighborsIds = graph.GetNeighbors(entity.Id);
             GraphNodeDTO dto = new GraphNodeDTO(entity.Id, entity.Value,neighborsIds);
             return dto;

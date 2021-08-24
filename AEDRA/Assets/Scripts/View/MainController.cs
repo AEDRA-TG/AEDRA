@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Controller;
 using UnityEngine;
 using UnityEngine.UI;
 using Utils;
+using View.GUI;
 
-namespace Controller
+namespace View.EventController
 {
     /// <summary>
     /// Principal scene controller to manage the events
@@ -28,5 +30,6 @@ namespace Controller
             themeChooser.name = "ThemeChooser";
             themeChooser.transform.parent = GameObject.Find("MainLayout").transform;
         }
+
     }
 }

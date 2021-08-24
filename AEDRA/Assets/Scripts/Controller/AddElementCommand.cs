@@ -28,7 +28,7 @@ namespace Controller
         /// </summary>
         /// <param name="element"> Instance of the element to add on the data structure </param>
         public AddElementCommand(ElementDTO element){
-            this._dataStructure = new GraphRepository().Load();
+            this._dataStructure = CommandController.GetInstance().Repository.Load();
             this._element = element;
         }
         public override void Execute()

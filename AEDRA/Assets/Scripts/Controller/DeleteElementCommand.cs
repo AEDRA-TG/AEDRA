@@ -22,7 +22,7 @@ namespace Controller
         /// </summary>
         /// <param name="element">DTO with information needed to delete the element</param>
         public DeleteElementCommand(ElementDTO element){
-            this._dataStructure = new GraphRepository().Load();
+            this._dataStructure = CommandController.GetInstance().Repository.Load();
             this._element = element;
         }
         public override void Execute()

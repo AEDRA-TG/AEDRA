@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Model.Common;
 using SideCar.DTOs;
+using UnityEditor;
 using UnityEngine;
 using Utils;
 using Utils.Enums;
@@ -37,6 +38,7 @@ namespace View.GUI
                 { OperationEnum.ConnectObjects, new ConnectNodesAnimation()}
             };
         }
+
         public void AddDto(ElementDTO dto)
         {
             DTOs.Add(dto);

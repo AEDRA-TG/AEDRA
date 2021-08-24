@@ -14,6 +14,10 @@ namespace Model.Common
         public static event Action<ElementDTO> UpdateElement;
 
         /// <summary>
+        /// Method to create the datastructure
+        /// </summary>
+        //public abstract void CreateDataStructure();
+        /// <summary>
         /// Method to Add an element to a data structure
         /// </summary>
         /// <param name="element"> Element to add to the data structure </param>
