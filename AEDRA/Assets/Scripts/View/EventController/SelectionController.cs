@@ -8,7 +8,7 @@ namespace View.EventController
     public class SelectionController : MonoBehaviour
     {
         //NOTE: this can be changed for a string to improve flexibility
-        private Type _selectedType;
+        private Type _selectedType = null;
         private List<ProjectedObject> _selectedObjects;
         [SerializeField]
         private bool _monoSelection = false;
@@ -35,11 +35,11 @@ namespace View.EventController
 
 
         public void SelectObject(ProjectedObject obj){
-            if(_selectedObjects.Count == 0){
-                _selectedType = obj.GetType();
-            }
             if(_selectedType != obj.GetType() || _monoSelection){
                 DeselectAllObjects();
+            }
+            if(_selectedObjects.Count == 0){
+                _selectedType = obj.GetType();
             }
             _selectedObjects.Add(obj);
             obj.SetSelected(true);

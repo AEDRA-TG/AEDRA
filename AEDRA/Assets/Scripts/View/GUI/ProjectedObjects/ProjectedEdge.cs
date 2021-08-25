@@ -33,8 +33,8 @@ namespace View.GUI.ProjectedObjects
             float width = 0.2f;
             Vector3 offset = endPosition - startPosition;
             Vector3 scale = new Vector3(width, offset.magnitude / 2.0f, width);
-            gameObject.transform.localPosition = startPosition + (offset / 2.0f);
-            gameObject.transform.up = offset;
+            gameObject.transform.parent.localPosition = startPosition + (offset / 2.0f);
+            gameObject.transform.parent.up = offset;
             return scale;
         }
 

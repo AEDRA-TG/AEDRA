@@ -57,8 +57,8 @@ namespace View.EventController
             if (objs.Count == 2)
             {
                 if(objs[0].GetType() == typeof(ProjectedNode) && objs[1].GetType() == typeof(ProjectedNode)){
-                    Debug.Log(objs[0].Dto.Id+ "-" + objs[1].Dto.Id );
-                    GraphEdgeDTO edgeDTO = new GraphEdgeDTO(0, 0, 0, 1);
+                    //Debug.Log(objs[0].Dto.Id+ "-" + objs[1].Dto.Id );
+                    GraphEdgeDTO edgeDTO = new GraphEdgeDTO(0, 0, objs[0].Dto.Id, objs[1].Dto.Id);
                     ConnectElementsCommand connectCommand = new ConnectElementsCommand(edgeDTO);
                     CommandController.GetInstance().Invoke(connectCommand);
                 }
