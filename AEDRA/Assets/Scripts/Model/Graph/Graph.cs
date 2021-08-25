@@ -97,8 +97,8 @@ namespace Model.GraphModel
             bool edgeStartToEnd = AdjacentMtx[edgeDTO.IdStartNode].ContainsKey(edgeDTO.IdEndNode);
             bool edgeEndToStart = AdjacentMtx[edgeDTO.IdEndNode].ContainsKey(edgeDTO.IdStartNode);
             if(!edgeStartToEnd && !edgeEndToStart){
-                AdjacentMtx[edgeDTO.Id].Add(edgeDTO.IdEndNode, edgeDTO.Value);
-                AdjacentMtx[edgeDTO.IdEndNode].Add(edgeDTO.Id, edgeDTO.Value);
+                AdjacentMtx[edgeDTO.IdStartNode].Add(edgeDTO.IdEndNode, edgeDTO.Value);
+                AdjacentMtx[edgeDTO.IdEndNode].Add(edgeDTO.IdStartNode, edgeDTO.Value);
                 edgeDTO.Operation = AnimationEnum.CreateAnimation;
                 base.Notify(edgeDTO);
             }
