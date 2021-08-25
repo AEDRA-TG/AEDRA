@@ -9,50 +9,60 @@ namespace View.EventController
     {
         //NOTE: this can be changed for a string to improve flexibility
         private Type _selectedType;
-        public List<ProjectedObject> SelectedObjects{get; set;}
+        private List<ProjectedObject> _selectedObjects;
+        [SerializeField]
+        private bool _monoSelection = false;
 
         public void Awake(){
-            SelectedObjects = new List<ProjectedObject>();
+            _selectedObjects = new List<ProjectedObject>();
         }
         public void Update()
         {
-            ProjectedObject obj = GetSelectedObject();
+            ProjectedObject obj = GetRayCastedObject();
             if(obj?.IsSelectable() == true)
             {
                 if(obj.IsSelected()){
-                    Debug.Log("Deselect");
                     DeselectObject(obj);
                 }else{
-                    Debug.Log("Select");
                     SelectObject(obj);
                 }
             }
         }
 
+        public List<ProjectedObject> GetSelectedObjects(){
+            return _selectedObjects;
+        }
+
+
         public void SelectObject(ProjectedObject obj){
-            if(SelectedObjects.Count == 0){
+            if(_selectedObjects.Count == 0){
                 _selectedType = obj.GetType();
             }
-            if(_selectedType != obj.GetType()){
+            if(_selectedType != obj.GetType() || _monoSelection){
                 DeselectAllObjects();
             }
-            SelectedObjects.Add(obj);
+            _selectedObjects.Add(obj);
             obj.SetSelected(true);
         }
 
         public void DeselectAllObjects(){
-            foreach (ProjectedObject obj in SelectedObjects)
+            foreach (ProjectedObject obj in _selectedObjects)
             {
-                DeselectObject(obj);
+                obj.SetSelected(false);
             }
+            _selectedObjects.Clear();
         }
 
         public void DeselectObject(ProjectedObject obj){
-            SelectedObjects.Remove(obj);
             obj.SetSelected(false);
+            if(_monoSelection){
+                DeselectAllObjects();
+            }else{
+                _selectedObjects.Remove(obj);
+            }
         }
 
-        private ProjectedObject GetSelectedObject()
+        private ProjectedObject GetRayCastedObject()
         {
             Vector3? inputPosition = GetInputPosition();
             ProjectedObject selectedObject = null;
