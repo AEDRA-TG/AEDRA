@@ -38,5 +38,10 @@ namespace Observer
             StructureProjection projection = GameObject.FindObjectOfType<StructureProjection>();
             projection.Animate(operation);
         }
+
+        private void CreateNotification(string notificationText){
+            //StructureProjection projection = GameObject.FindObjectOfType<StructureProjection>();
+            //projection.ShowNotification(notificationText);
+        }
     }
 }

@@ -10,7 +10,19 @@ namespace SideCar.DTOs
         public GraphEdgeDTO(int idEdge, object value, int idStartNode, int idEndNode):base(idEdge, value){
             this.IdEndNode = idEndNode;
             this.IdStartNode = idStartNode;
-            base.Name = "GraphEdge";
+            base.Name = "Edge";
+        }
+
+        public override string GetUnityId(){
+            string compoundName;
+            if(IdStartNode < IdEndNode)
+            {
+                compoundName = base.Name+ "_" + IdStartNode + "_" + IdEndNode;
+            }
+            else{
+                compoundName = base.Name+ "_" + IdEndNode + "_" + IdStartNode;
+            }
+            return compoundName;
         }
     }
 }

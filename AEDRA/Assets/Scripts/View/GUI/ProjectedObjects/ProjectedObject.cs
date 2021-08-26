@@ -6,15 +6,15 @@ using System;
 using Utils.Enums;
 using Utils;
 
-namespace View.GUI
+namespace View.GUI.ProjectedObjects
 {
     public class ProjectedObject : MonoBehaviour
     {
         public Dictionary<AnimationEnum, Func<Tween>> Animations{get; set;}
-
         public ElementDTO Dto{get; set;}
-
-        public void Awake(){
+        public bool IsCreated {get; set;}
+        virtual public void Awake(){
+            IsCreated = false;
             Animations = new Dictionary<AnimationEnum, Func<Tween>> {
                 {AnimationEnum.CreateAnimation, CreateAnimation},
                 {AnimationEnum.DeleteAnimation, DeleteAnimation},
@@ -22,29 +22,27 @@ namespace View.GUI
             };
         }
 
-        private Tween CreateAnimation(){
-            return gameObject.transform.DOScale(1,Constants.AnimationTime);
+        virtual public Tween CreateAnimation(){
+            return null;
         }
 
-        private Tween DeleteAnimation(){
-            return gameObject.transform.DOScale(new Vector3(0,0,0),Constants.AnimationTime);
+        virtual public Tween DeleteAnimation(){
+            return null;
         }
 
-        private Tween PaintAnimation(){
-            MeshRenderer mesh = gameObject.GetComponentInChildren<MeshRenderer>();
-            return mesh.material.DOColor(Color.red,Constants.AnimationTime);
+        virtual public Tween PaintAnimation(){
+            return null;
         }
-        public void SetDTO(ElementDTO dto){
+
+        virtual public void Move(Vector3 coordinates){
+        }
+
+        virtual public void SetDTO(ElementDTO dto){
             Dto = dto;
             //TODO: update object properties
         }
 
-        public void Move(Vector3 coordinates){
-            gameObject.transform.localPosition = coordinates;
-        }
-
-        public override bool Equals(object other)
-        {
+        public override bool Equals(object other){
             return Equals(other as ProjectedObject);
         }
 
@@ -53,8 +51,7 @@ namespace View.GUI
                 Dto.Id == other.Dto.Id;
         }
 
-        public override int GetHashCode()
-        {
+        public override int GetHashCode(){
             //TODO: Look how to implement this method since library HashCode.Combine can't be used
             throw new NotImplementedException();
         }

@@ -4,6 +4,8 @@ using SideCar.DTOs;
 using System.Collections.Generic;
 using DG.Tweening;
 using Utils.Enums;
+using View.GUI.ProjectedObjects;
+using Utils;
 
 namespace View.Animations
 {
@@ -18,16 +20,19 @@ namespace View.Animations
             List<ProjectedObject> objectsToBeDeleted = new List<ProjectedObject>();
             StructureProjection structureProjection = GameObject.FindObjectOfType<StructureProjection>();
             foreach (ElementDTO dto in structureProjection.DTOs){
-                string unityId = "Node_" + dto.Id;
-                ProjectedObject projectedObject = GameObject.Find(unityId).GetComponentInChildren<ProjectedObject>();
+                
+                ProjectedObject projectedObject = GameObject.Find(dto.GetUnityId()).GetComponentInChildren<ProjectedObject>();
                 if(dto.Operation == AnimationEnum.DeleteAnimation){
                     objectsToBeDeleted.Add(projectedObject);
                 }
-                animationList.Append(projectedObject.Animations[dto.Operation]());
+                if(projectedObject as ProjectedEdge)
+                {
+                    animationList.Join(projectedObject.Animations[dto.Operation]());
+                }
+                else{
+                    animationList.Append(projectedObject.Animations[dto.Operation]());
+                }
             }
-            // Obtener las conexiones del objeto a eliminar
-            // Obtener las aristas de las conexiones
-            // Delegar al structure projection la eliminación
             animationList.OnComplete(() => structureProjection.DeleteObject(objectsToBeDeleted));
         }
     }
