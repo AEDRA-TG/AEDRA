@@ -34,6 +34,7 @@ namespace Model.Common
         /// Method to do connect two elements in a data structure
         /// </summary>
         /// <param name="element"> Edge that will be created in the data structure</param>
+        // TODO: Esto esta mal, este método no debería ir en la clase DataStructure
         public abstract void ConnectElements(ElementDTO edgeDTO);
 
         /// <summary>

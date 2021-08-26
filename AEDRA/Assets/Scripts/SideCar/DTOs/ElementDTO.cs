@@ -15,7 +15,7 @@ namespace SideCar.DTOs
             Value = value;
         }
 
-        public string GetUnityId(){
+        public virtual string GetUnityId(){
             return Name + "_" + Id;
         }
     }

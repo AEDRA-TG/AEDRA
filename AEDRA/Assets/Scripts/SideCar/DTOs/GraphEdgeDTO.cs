@@ -12,5 +12,17 @@ namespace SideCar.DTOs
             this.IdStartNode = idStartNode;
             base.Name = "Edge";
         }
+
+        public override string GetUnityId(){
+            string compoundName;
+            if(IdStartNode < IdEndNode)
+            {
+                compoundName = base.Name+ "_" + IdStartNode + "_" + IdEndNode;
+            }
+            else{
+                compoundName = base.Name+ "_" + IdEndNode + "_" + IdStartNode;
+            }
+            return compoundName;
+        }
     }
 }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using Utils.Enums;
 using View.GUI.ProjectedObjects;
+using Utils;
 
 namespace View.Animations
 {
@@ -22,6 +23,14 @@ namespace View.Animations
                 ProjectedObject projectedObject;
                 if(dto.Operation == AnimationEnum.CreateAnimation){
                     projectedObject = structureProjection.CreateObject(dto);
+                    GraphEdgeDTO edgeDTO = (GraphEdgeDTO)dto;
+                    ProjectedObject startNode = GameObject.Find(Constants.NodeName+edgeDTO.IdStartNode).GetComponentInChildren<ProjectedObject>();
+                    ProjectedObject endNode = GameObject.Find(Constants.NodeName+edgeDTO.IdEndNode).GetComponentInChildren<ProjectedObject>();
+                    GraphNodeDTO startNodeDTO =  (GraphNodeDTO)startNode.Dto;
+                    GraphNodeDTO endNodeDTO =  (GraphNodeDTO)startNode.Dto;
+                    //Hacer esto es innecesario, los DTOs deberían venir con sus vecinos desde el modelo, para eso existe la clase converter
+                    startNodeDTO.Neighbors.Add(edgeDTO.IdEndNode);
+                    endNodeDTO.Neighbors.Add(edgeDTO.IdStartNode);
                 }
                 else{
                     projectedObject = GameObject.Find(dto.GetUnityId()).GetComponentInChildren<ProjectedObject>();

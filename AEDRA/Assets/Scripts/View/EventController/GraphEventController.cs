@@ -25,7 +25,8 @@ namespace View.EventController
         public void OnTouchAddNode()
         {
             //TODO: Obtener el dto de los datos de la pantalla
-            GraphNodeDTO nodeDTO = new GraphNodeDTO(0, 0, null);
+            List<int> neighbors = new List<int>{};
+            GraphNodeDTO nodeDTO = new GraphNodeDTO(0, 0, neighbors);
             AddElementCommand addCommand = new AddElementCommand(nodeDTO);
             CommandController.GetInstance().Invoke(addCommand);
         }
@@ -57,7 +58,7 @@ namespace View.EventController
             if (objs.Count == 2)
             {
                 if(objs[0].GetType() == typeof(ProjectedNode) && objs[1].GetType() == typeof(ProjectedNode)){
-                    //Debug.Log(objs[0].Dto.Id+ "-" + objs[1].Dto.Id );
+                    Debug.Log(objs[0].Dto.Id+ "-" + objs[1].Dto.Id );
                     GraphEdgeDTO edgeDTO = new GraphEdgeDTO(0, 0, objs[0].Dto.Id, objs[1].Dto.Id);
                     ConnectElementsCommand connectCommand = new ConnectElementsCommand(edgeDTO);
                     CommandController.GetInstance().Invoke(connectCommand);

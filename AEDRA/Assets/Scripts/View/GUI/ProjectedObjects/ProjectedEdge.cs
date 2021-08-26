@@ -33,8 +33,8 @@ namespace View.GUI.ProjectedObjects
             float width = 0.2f;
             Vector3 offset = endPosition - startPosition;
             Vector3 scale = new Vector3(width, offset.magnitude / 2.0f, width);
-            gameObject.transform.parent.localPosition = startPosition + (offset / 2.0f);
-            gameObject.transform.parent.up = offset;
+            gameObject.transform.parent.transform.localPosition = startPosition + (offset / 2.0f);
+            gameObject.transform.parent.transform.up = offset;
             return scale;
         }
 
@@ -43,7 +43,7 @@ namespace View.GUI.ProjectedObjects
             return nodeFound.transform.localPosition;
         }
         public override Tween DeleteAnimation(){
-            return gameObject.transform.DOScale(new Vector3(0,0,0),Constants.AnimationTime);
+            return gameObject.transform.parent.transform.DOScale(new Vector3(0,0,0),Constants.AnimationTime);
         }
 
         public override Tween PaintAnimation(){
