@@ -19,7 +19,7 @@ namespace Controller
         {
             IDataStructureRepository repository =  RepositoryFactory.CreateRepository(_structureName);
             CommandController.GetInstance().Repository = repository;
-            repository.Load();
+            repository.Load().CreateDataStructure();
             Notify(OperationEnum.CreateDataStructure);
         }
     }

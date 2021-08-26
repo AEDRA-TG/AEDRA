@@ -16,7 +16,7 @@ namespace Model.Common
         /// <summary>
         /// Method to create the datastructure
         /// </summary>
-        //public abstract void CreateDataStructure();
+        public abstract void CreateDataStructure();
         /// <summary>
         /// Method to Add an element to a data structure
         /// </summary>

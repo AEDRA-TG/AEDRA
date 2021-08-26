@@ -15,6 +15,7 @@ namespace Observer
             // Projection subscribes to Update element event for updating UI
             DataStructure.UpdateElement += UpdateUI;
             Command.OperationCompleted += ExecuteAnimation;
+            Command.OperationCompleted += SaveDataStructure;
         }
 
         public void OnDisable(){
@@ -37,6 +38,11 @@ namespace Observer
         private void ExecuteAnimation(OperationEnum operation){
             StructureProjection projection = GameObject.FindObjectOfType<StructureProjection>();
             projection.Animate(operation);
+        }
+
+        private void SaveDataStructure(OperationEnum operation){
+            Command command = new SaveCommand();
+            CommandController.GetInstance().Invoke(command);
         }
     }
 }

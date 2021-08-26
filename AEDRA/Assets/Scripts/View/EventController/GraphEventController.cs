@@ -52,10 +52,5 @@ namespace View.EventController
             ConnectElementsCommand connectCommand = new ConnectElementsCommand(edgeDTO);
             CommandController.GetInstance().Invoke(connectCommand);
         }
-
-        public void OnTouchSavePrefab(){
-            GameObject obj = FindObjectOfType<StructureProjection>().gameObject;
-            PrefabUtility.SaveAsPrefabAsset(obj,"Assets/Files/GraphTest.prefab");
-        }
     }
 }

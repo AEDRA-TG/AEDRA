@@ -1,33 +1,48 @@
 {
-  "NodesId": 5,
+  "NodesId": 4,
   "EdgesId": 0,
   "Nodes": [
     {
       "Id": 0,
-      "Value": 0
+      "Value": 0,
+      "Coordinates": {
+        "X": 8.0,
+        "Y": 3.0,
+        "Z": 0.0
+      }
     },
     {
       "Id": 1,
-      "Value": 0
+      "Value": 0,
+      "Coordinates": {
+        "X": 2.0,
+        "Y": 2.0,
+        "Z": 0.0
+      }
     },
     {
       "Id": 2,
-      "Value": 0
+      "Value": 0,
+      "Coordinates": {
+        "X": 7.0,
+        "Y": 5.0,
+        "Z": 0.0
+      }
     },
     {
       "Id": 3,
-      "Value": 0
-    },
-    {
-      "Id": 4,
-      "Value": 0
+      "Value": 0,
+      "Coordinates": {
+        "X": 7.0,
+        "Y": 6.0,
+        "Z": 0.0
+      }
     }
   ],
   "AdjacentMtx": {
     "0": {},
     "1": {},
     "2": {},
-    "3": {},
-    "4": {}
+    "3": {}
   }
 }

@@ -8,6 +8,7 @@ using SideCar.DTOs;
 using UnityEngine;
 using Newtonsoft.Json;
 using Repository;
+using Utils;
 
 namespace Model.GraphModel
 {
@@ -61,6 +62,7 @@ namespace Model.GraphModel
             Nodes.Add(node);
             AdjacentMtx.Add(node.Id, new Dictionary<int, object>());
             //return DTO updated
+            node.Coordinates = Utilities.GenerateRandomPoint();
             element = _nodeConverter.ToDto(node);
             element.Operation = AnimationEnum.CreateAnimation;
             base.Notify(element);
@@ -112,6 +114,17 @@ namespace Model.GraphModel
                 neighbors.Add(neighbor);
             }
             return neighbors;
+        }
+
+        //TODO: rename method or create graph from this 
+        public override void CreateDataStructure()
+        {
+            foreach (GraphNode node in this.Nodes)
+            {
+                GraphNodeDTO dto = _nodeConverter.ToDto(node);
+                dto.Operation = AnimationEnum.CreateAnimation;
+                base.Notify(dto);
+            }
         }
     }
 }

@@ -32,5 +32,10 @@ namespace Utils
         public const string GraphNodeSelectionMenu = "GraphNodeSelectionMenu";
         //
         public const string DataStructureFilePath = "Assets/Files/";
+
+        public const int MaxWidth = 10;
+        public const int MaxHeight = 10;
+        public const int MaxDepth = 0;
+        
     }
 }

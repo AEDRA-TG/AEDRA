@@ -30,6 +30,6 @@ namespace View.EventController
             themeChooser.name = "ThemeChooser";
             themeChooser.transform.parent = GameObject.Find("MainLayout").transform;
         }
-
+        
     }
 }

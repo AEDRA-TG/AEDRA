@@ -6,6 +6,7 @@ using System.Threading;
 using Utils;
 using View.GUI;
 using Controller;
+using System.IO;
 
 namespace View
 {
@@ -81,8 +82,6 @@ namespace View
             _loadedPrefabs = new Stack<string>();
             actualPrefabName = "";
             LoadPrefab(Constants.PathGraphNodeSelectionMenu, "GraphNodeSelectionMenu", "ProjectionLayout");
-            //TODO: Delete this line
-            OnTargetDetected();
         }
         /// <summary>
         /// Method to load a prefab and assign his parent and instance name
@@ -196,15 +195,5 @@ namespace View
             item.GetImage().DOFade(fadeOpacity, fadeDuration).From(fromFadeOpacity);
         }
 
-        public void OnTargetDetected(){
-            StructureProjection projection = FindObjectOfType<StructureProjection>();
-            projection.Name = "Graph";
-            Command command = new LoadCommand(projection.Name);
-            CommandController.GetInstance().Invoke(command);
-        }
-
-        public void OnTargetLost(){
-
-        }
     }
 }

@@ -11,10 +11,11 @@ namespace View.GUI
     public class ProjectedObject : MonoBehaviour
     {
         public Dictionary<AnimationEnum, Func<Tween>> Animations{get; set;}
-
         public ElementDTO Dto{get; set;}
+        public float AnimationTime {get; set;}
 
         public void Awake(){
+            AnimationTime = Constants.AnimationTime;
             Animations = new Dictionary<AnimationEnum, Func<Tween>> {
                 {AnimationEnum.CreateAnimation, CreateAnimation},
                 {AnimationEnum.DeleteAnimation, DeleteAnimation},
@@ -22,25 +23,38 @@ namespace View.GUI
             };
         }
 
+        public void Update() {
+            if(Dto != null){
+                UpdateCoordinates();
+            }
+        }
+
         private Tween CreateAnimation(){
-            return gameObject.transform.DOScale(1,Constants.AnimationTime);
+            return gameObject.transform.DOScale(1,AnimationTime);
         }
 
         private Tween DeleteAnimation(){
-            return gameObject.transform.DOScale(new Vector3(0,0,0),Constants.AnimationTime);
+            return gameObject.transform.DOScale(new Vector3(0,0,0),AnimationTime);
         }
 
         private Tween PaintAnimation(){
             MeshRenderer mesh = gameObject.GetComponentInChildren<MeshRenderer>();
-            return mesh.material.DOColor(Color.red,Constants.AnimationTime);
+            return mesh.material.DOColor(Color.red,AnimationTime);
         }
         public void SetDTO(ElementDTO dto){
             Dto = dto;
-            //TODO: update object properties
+            //TODO: Fix this
+            Move(new Vector3(dto.Coordinates.X,dto.Coordinates.Y,dto.Coordinates.Z));
+        }
+
+        public void UpdateCoordinates(){
+            Vector3 point = this.gameObject.transform.localPosition;
+            Dto.Coordinates = new Point(point.x,point.y,point.z);
         }
 
         public void Move(Vector3 coordinates){
             gameObject.transform.localPosition = coordinates;
+            UpdateCoordinates();
         }
 
         public override bool Equals(object other)
