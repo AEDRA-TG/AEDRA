@@ -130,13 +130,18 @@ namespace Model.GraphModel
         public void DeleteEdges(int nodeId){
             if(AdjacentMtx.ContainsKey(nodeId))
             {
-                foreach (int key in AdjacentMtx[nodeId].Keys)
+                foreach (int key in AdjacentMtx.Keys)
                 {
-                    AdjacentMtx[key].Remove(nodeId);
+                    bool existsStartToEnd = AdjacentMtx[key].Remove(nodeId);
+                    bool existsEndToStart = AdjacentMtx[nodeId].Remove(key);
+                    if(existsStartToEnd || existsEndToStart){
+                       GraphEdgeDTO edgeDTO = new GraphEdgeDTO(0,0,key,nodeId);
+                       edgeDTO.Operation = AnimationEnum.DeleteAnimation;
+                       base.Notify(edgeDTO);
+                    }
                 }
-                // Deleting the edges from the node 
-                AdjacentMtx.Remove(nodeId);
             }
+            AdjacentMtx.Remove(nodeId);
         }
 
     }
