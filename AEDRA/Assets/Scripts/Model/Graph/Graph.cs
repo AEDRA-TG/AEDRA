@@ -71,6 +71,8 @@ namespace Model.GraphModel
         public override void DeleteElement(ElementDTO element)
         {
             GraphNode nodeToDelete = _nodeConverter.ToEntity((GraphNodeDTO)element);
+            // Deleting all edges
+            DeleteEdges(nodeToDelete.Id);
             this.Nodes.Remove(nodeToDelete);
             element.Operation = AnimationEnum.DeleteAnimation;
             base.Notify(element);
@@ -119,5 +121,23 @@ namespace Model.GraphModel
             }
             return neighbors;
         }
+
+        /// <summary>
+        /// Method to obtain list of neighbors of a given node
+        /// </summary>
+        /// <param name="nodeId">Id of node to search</param>
+        /// <returns>List of ids representing the neighbors of the node</returns>
+        public void DeleteEdges(int nodeId){
+            if(AdjacentMtx.ContainsKey(nodeId))
+            {
+                foreach (int key in AdjacentMtx[nodeId].Keys)
+                {
+                    AdjacentMtx[key].Remove(nodeId);
+                }
+                // Deleting the edges from the node 
+                AdjacentMtx.Remove(nodeId);
+            }
+        }
+
     }
 }

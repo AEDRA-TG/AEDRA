@@ -3,6 +3,7 @@ using Controller;
 using Model.GraphModel;
 using SideCar.DTOs;
 using Utils.Enums;
+using System.Collections.Generic;
 
 namespace View.EventController
 {
@@ -22,7 +23,8 @@ namespace View.EventController
         public void OnTouchAddNode()
         {
             //TODO: Obtener el dto de los datos de la pantalla
-            GraphNodeDTO nodeDTO = new GraphNodeDTO(0, 0, null);
+            List<int> neighbors = new List<int>{};
+            GraphNodeDTO nodeDTO = new GraphNodeDTO(0, 0, neighbors);
             AddElementCommand addCommand = new AddElementCommand(nodeDTO);
             CommandController.GetInstance().Invoke(addCommand);
         }
@@ -34,7 +36,11 @@ namespace View.EventController
         {
             // TODO: Get selected object
             // Convert selected object to DTO
-            GraphNodeDTO nodeDTO = new GraphNodeDTO(id, 0, null);
+
+            // Remove this when select objects funtionality is implemented
+            List<int> neighbors = new List<int>{ 1 , 2 };
+
+            GraphNodeDTO nodeDTO = new GraphNodeDTO(id, 0, neighbors);
             DeleteElementCommand deleteCommand = new DeleteElementCommand(nodeDTO);
             CommandController.GetInstance().Invoke(deleteCommand);
         }
