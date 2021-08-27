@@ -1,5 +1,6 @@
 using System;
 using SideCar.DTOs;
+using Utils.Enums;
 
 namespace Model.Common
 {
@@ -33,7 +34,8 @@ namespace Model.Common
         /// Method to do traversal through a data structure
         /// </summary>
         /// <param name="traversalName"> Name of the traversal that will be executed on the data structure</param>
-        public abstract void DoTraversal(string traversalName);
+        /// <param name="startNode">Element that contains the informatión about from  wich node the traversal will start</param>
+        public abstract void DoTraversal(TraversalEnum traversalName, ElementDTO startNode);
         /// <summary>
         /// Method to do connect two elements in a data structure
         /// </summary>

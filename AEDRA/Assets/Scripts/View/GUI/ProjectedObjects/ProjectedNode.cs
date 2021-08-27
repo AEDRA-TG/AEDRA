@@ -34,7 +34,7 @@ namespace View.GUI.ProjectedObjects
 
         public override Tween PaintAnimation(){
             MeshRenderer mesh = gameObject.GetComponentInChildren<MeshRenderer>();
-            return mesh.material.DOColor(Color.red,base.AnimationTime);
+            return mesh.material.DOColor(Color.cyan,base.AnimationTime).OnComplete( () => mesh.material.DOColor(Color.white, base.AnimationTime) );
         }
 
         public override void Move(Vector3 coordinates){

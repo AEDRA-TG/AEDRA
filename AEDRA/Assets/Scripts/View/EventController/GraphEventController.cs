@@ -4,6 +4,8 @@ using SideCar.DTOs;
 using View.GUI;
 using View.GUI.ProjectedObjects;
 using System.Collections.Generic;
+using Utils.Enums;
+using System;
 
 namespace View.EventController
 {
@@ -14,6 +16,7 @@ namespace View.EventController
     {
 
         private SelectionController _selectionController;
+        public static event Action<int> UpdateMenu;
 
         public void Awake()
         {
@@ -25,7 +28,7 @@ namespace View.EventController
         public void OnTouchAddNode()
         {
             //TODO: Obtener el dto de los datos de la pantalla
-            List<int> neighbors = new List<int>{};
+            List<int> neighbors = new List<int>();
             GraphNodeDTO nodeDTO = new GraphNodeDTO(0, 0, neighbors);
             AddElementCommand addCommand = new AddElementCommand(nodeDTO);
             CommandController.GetInstance().Invoke(addCommand);
@@ -63,6 +66,24 @@ namespace View.EventController
                     ConnectElementsCommand connectCommand = new ConnectElementsCommand(edgeDTO);
                     CommandController.GetInstance().Invoke(connectCommand);
                 }
+            }
+            else
+            {
+                Debug.Log("Numero de nodos seleccionados inválido");
+            }
+        }
+
+        public void ChangeToTraversalMenu(){
+            UpdateMenu?.Invoke(0);
+        }
+
+        public void DoTraversalBFS(){
+            List<ProjectedObject> objs = _selectionController.GetSelectedObjects();
+            if (objs.Count == 1 && objs[0].GetType() == typeof(ProjectedNode))
+            {
+                    GraphNodeDTO nodeDTO = (GraphNodeDTO)objs[0].Dto;
+                    DoTraversalCommand traversalCommand = new DoTraversalCommand(TraversalEnum.GraphBFS,nodeDTO);
+                    CommandController.GetInstance().Invoke(traversalCommand);
             }
             else
             {
