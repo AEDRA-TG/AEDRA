@@ -4,6 +4,7 @@ using SideCar.DTOs;
 using View.GUI;
 using View.GUI.ProjectedObjects;
 using System.Collections.Generic;
+using Utils.Enums;
 
 namespace View.EventController
 {
@@ -25,7 +26,7 @@ namespace View.EventController
         public void OnTouchAddNode()
         {
             //TODO: Obtener el dto de los datos de la pantalla
-            List<int> neighbors = new List<int>{};
+            List<int> neighbors = new List<int>();
             GraphNodeDTO nodeDTO = new GraphNodeDTO(0, 0, neighbors);
             AddElementCommand addCommand = new AddElementCommand(nodeDTO);
             CommandController.GetInstance().Invoke(addCommand);
@@ -75,7 +76,7 @@ namespace View.EventController
             if (objs.Count == 1 && objs[0].GetType() == typeof(ProjectedNode))
             {
                     GraphNodeDTO nodeDTO = (GraphNodeDTO)objs[0].Dto;
-                    DoTraversalCommand traversalCommand = new DoTraversalCommand("BFS",nodeDTO);
+                    DoTraversalCommand traversalCommand = new DoTraversalCommand(TraversalEnum.GraphBFS,nodeDTO);
                     CommandController.GetInstance().Invoke(traversalCommand);
             }
             else

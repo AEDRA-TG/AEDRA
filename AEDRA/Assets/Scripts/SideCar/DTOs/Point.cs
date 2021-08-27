@@ -5,7 +5,6 @@ namespace SideCar.DTOs
         public float X { get; set; }
         public float Y { get; set; }
         public float Z { get; set; }
-        
         public Point(float x, float y, float z)
         {
             this.X = x;

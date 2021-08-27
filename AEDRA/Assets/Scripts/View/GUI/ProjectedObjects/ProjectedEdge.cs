@@ -22,7 +22,6 @@ namespace View.GUI.ProjectedObjects
             }
         }
         public override Tween CreateAnimation(){
-            GraphEdgeDTO edgeDTO = (GraphEdgeDTO) base.Dto;
             return gameObject.transform.DOScale(UpdateEdge(),base.AnimationTime);
         }
 
@@ -31,7 +30,7 @@ namespace View.GUI.ProjectedObjects
             Vector3 startPosition = GetNodeCoordinates(edgeDTO.IdStartNode);
             Vector3 endPosition = GetNodeCoordinates(edgeDTO.IdEndNode);
 
-            float width = 0.2f;
+            const float width = 0.2f;
             Vector3 offset = endPosition - startPosition;
             Vector3 scale = new Vector3(width, offset.magnitude / 2.0f, width);
             gameObject.transform.parent.transform.localPosition = startPosition + (offset / 2.0f);
@@ -44,12 +43,12 @@ namespace View.GUI.ProjectedObjects
             return nodeFound.transform.localPosition;
         }
         public override Tween DeleteAnimation(){
-            return gameObject.transform.parent.transform.DOScale(new Vector3(0,0,0),Constants.AnimationTime);
+            return gameObject.transform.parent.transform.DOScale(new Vector3(0,0,0),base.AnimationTime);
         }
 
         public override Tween PaintAnimation(){
             MeshRenderer mesh = gameObject.GetComponentInChildren<MeshRenderer>();
-            return mesh.material.DOColor(Color.red,Constants.AnimationTime);
+            return mesh.material.DOColor(Color.cyan,base.AnimationTime).OnComplete( () => mesh.material.DOColor(Color.white, base.AnimationTime) );
         }
 
         public override void Move(Vector3 coordinates){

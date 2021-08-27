@@ -37,6 +37,7 @@ namespace View.GUI
                 { OperationEnum.AddObject, new AddNodeAnimation() },
                 { OperationEnum.DeleteObject, new DeleteNodeAnimation()},
                 { OperationEnum.ConnectObjects, new ConnectNodesAnimation()},
+                { OperationEnum.TraversalObjects, new TraversalAnimation() },
                 { OperationEnum.CreateDataStructure, new CreateDataStructureAnimation() }
             };
         }

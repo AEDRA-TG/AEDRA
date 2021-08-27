@@ -14,15 +14,14 @@ namespace SideCar.DTOs
         }
 
         public override string GetUnityId(){
-            string compoundName;
-            if(IdStartNode < IdEndNode)
+            if (IdStartNode < IdEndNode)
             {
-                compoundName = base.Name+ "_" + IdStartNode + "_" + IdEndNode;
+                return base.Name + "_" + IdStartNode + "_" + IdEndNode;
             }
-            else{
-                compoundName = base.Name+ "_" + IdEndNode + "_" + IdStartNode;
+            else
+            {
+                return base.Name + "_" + IdEndNode + "_" + IdStartNode;
             }
-            return compoundName;
         }
     }
 }

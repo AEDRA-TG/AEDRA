@@ -18,13 +18,13 @@ namespace Controller
         /// </summary>
         private ElementDTO _startNodeDTO;
 
-        private string _traversalName;
+        private TraversalEnum _traversalName;
 
         /// <summary>
         /// Command to connect two elements with an edge
         /// </summary>
         /// <param name="edgeDTO">EdgeDTO with the necesary information to connect the elements</param>
-        public DoTraversalCommand(string traversalName, ElementDTO startNodeDTO){
+        public DoTraversalCommand(TraversalEnum traversalName, ElementDTO startNodeDTO){
             this._dataStructure = CommandController.GetInstance().Repository.Load();
             this._traversalName = traversalName;
             this._startNodeDTO = startNodeDTO;
@@ -32,7 +32,7 @@ namespace Controller
         public override void Execute()
         {
             this._dataStructure.DoTraversal(this._traversalName, this._startNodeDTO);
-            //base.Notify(OperationEnum.TraversalObjects);
+            base.Notify(OperationEnum.TraversalObjects);
         }
     }
 }

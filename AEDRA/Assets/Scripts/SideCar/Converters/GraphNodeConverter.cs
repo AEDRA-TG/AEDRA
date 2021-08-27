@@ -19,8 +19,10 @@ namespace SideCar.Converters
         {
             Graph graph = (Graph)CommandController.GetInstance().Repository.Load();
             List<int> neighborsIds = graph.GetNeighbors(entity.Id);
-            GraphNodeDTO dto = new GraphNodeDTO(entity.Id, entity.Value,neighborsIds);
-            dto.Coordinates = entity.Coordinates;
+            GraphNodeDTO dto = new GraphNodeDTO(entity.Id, entity.Value, neighborsIds)
+            {
+                Coordinates = entity.Coordinates
+            };
             return dto;
         }
     }
