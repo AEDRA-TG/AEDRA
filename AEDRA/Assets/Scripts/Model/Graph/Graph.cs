@@ -9,6 +9,7 @@ using Repository;
 using Utils;
 using UnityEngine;
 using System.Linq;
+using System.Collections;
 
 namespace Model.GraphModel
 {
@@ -43,12 +44,17 @@ namespace Model.GraphModel
         /// </summary>
         private GraphNodeConverter _nodeConverter;
 
+        private Dictionary<string, Action<ElementDTO>> _traversals;
+
         public Graph(){
             NodesId = 0;
             EdgesId = 0;
             Nodes = new List<GraphNode>();
             AdjacentMtx = new Dictionary<int, Dictionary<int, object>>();
             _nodeConverter = new GraphNodeConverter();
+            _traversals = new Dictionary<string, Action<ElementDTO>>() {
+                {"BFS", BFSTraversal},
+            };
         }
 
         /// <summary>
@@ -84,9 +90,34 @@ namespace Model.GraphModel
         /// Method to do a traversal on the graph
         /// </summary>
         /// <param name="traversalName"> Name of the traversal to execute</param>
-        public override void DoTraversal(string traversalName)
+        public override void DoTraversal(string traversalName, ElementDTO startNode)
         {
-            throw new NotImplementedException();
+            this._traversals[traversalName](startNode);
+        }
+
+        private void BFSTraversal(ElementDTO startNode){
+            Dictionary<int, bool> visitedMap = InitializeVisiteMap();
+            Queue<int> q = new Queue<int>();
+            q.Enqueue(startNode.Id);
+            while(q.Count >0 ){
+                int n = q.Dequeue();
+                visitedMap[n] = true;
+                foreach (int key in AdjacentMtx[n].Keys)
+                {
+                    if(!visitedMap[key]){
+                        q.Enqueue(key);
+                    }
+                }
+            }
+        }
+
+        private Dictionary<int, bool> InitializeVisiteMap(){
+            Dictionary<int, bool> visitedMap = new Dictionary<int, bool>();
+            foreach (GraphNode node in Nodes)
+            {
+                visitedMap.Add(node.Id, false);
+            }
+            return visitedMap;
         }
 
         /// <summary>

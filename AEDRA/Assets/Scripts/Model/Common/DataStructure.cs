@@ -33,7 +33,7 @@ namespace Model.Common
         /// Method to do traversal through a data structure
         /// </summary>
         /// <param name="traversalName"> Name of the traversal that will be executed on the data structure</param>
-        public abstract void DoTraversal(string traversalName);
+        public abstract void DoTraversal(string traversalName, ElementDTO startNode);
         /// <summary>
         /// Method to do connect two elements in a data structure
         /// </summary>

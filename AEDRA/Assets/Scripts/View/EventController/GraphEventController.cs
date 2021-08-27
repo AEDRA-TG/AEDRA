@@ -69,5 +69,19 @@ namespace View.EventController
                 Debug.Log("Numero de nodos seleccionados inválido");
             }
         }
+
+        public void DoTraversalBFS(){
+            List<ProjectedObject> objs = _selectionController.GetSelectedObjects();
+            if (objs.Count == 1 && objs[0].GetType() == typeof(ProjectedNode))
+            {
+                    GraphNodeDTO nodeDTO = (GraphNodeDTO)objs[0].Dto;
+                    DoTraversalCommand traversalCommand = new DoTraversalCommand("BFS",nodeDTO);
+                    CommandController.GetInstance().Invoke(traversalCommand);
+            }
+            else
+            {
+                Debug.Log("Numero de nodos seleccionados inválido");
+            }
+        }
     }
 }
