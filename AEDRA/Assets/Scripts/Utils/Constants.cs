@@ -36,6 +36,11 @@ namespace Utils
         public const string PathHamburgerPrefab = "Prefabs/HamburgerMenu";
         public const string PathLargeButton = "Prefabs/LargeButton";
         public const string GraphNodeSelectionMenu = "GraphNodeSelectionMenu";
+        //
         #endregion
+        public const string DataStructureFilePath = "Assets/Files/";
+        public const int MaxWidth = 10;
+        public const int MaxHeight = 10;
+        public const int MaxDepth = 0;
     }
 }

@@ -1,7 +1,4 @@
-using System;
-using SideCar;
-using Utils.Enums;
-
+using SideCar.DTOs;
 namespace Model.GraphModel
 {
     /// <summary>
@@ -12,10 +9,11 @@ namespace Model.GraphModel
         public int Id { get; set; }
         //TODO: define how to have generic values
         public object Value { get; set; }
-
-        public GraphNode(int id, object value){
+        public Point Coordinates { get; set; }
+        public GraphNode(int id, object value, Point coordinates){
             Value = value;
             Id = id;
+            Coordinates = coordinates;
         }
     }
 }

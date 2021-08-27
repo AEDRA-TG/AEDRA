@@ -23,7 +23,7 @@ namespace Controller
         /// </summary>
         /// <param name="edgeDTO">EdgeDTO with the necesary information to connect the elements</param>
         public ConnectElementsCommand(ElementDTO edgeDTO){
-            this._dataStructure = new GraphRepository().Load();
+            this._dataStructure = CommandController.GetInstance().Repository.Load();
             this._edgeDTO = edgeDTO;
         }
         public override void Execute()

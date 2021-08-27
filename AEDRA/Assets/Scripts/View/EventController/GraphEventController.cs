@@ -1,7 +1,7 @@
 using UnityEngine;
 using Controller;
 using SideCar.DTOs;
-using Utils.Enums;
+using View.GUI;
 using View.GUI.ProjectedObjects;
 using System.Collections.Generic;
 

@@ -9,6 +9,8 @@ namespace SideCar.DTOs
         public object Value {get; set;}
         public string Name {get; set;}
 
+        public Point Coordinates {get; set;}
+
         public AnimationEnum Operation {get; set;}
         public ElementDTO(int id, object value){
             Id = id;

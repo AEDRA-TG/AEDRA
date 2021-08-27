@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Model.Common;
 using SideCar.DTOs;
+using UnityEditor;
 using UnityEngine;
 using Utils;
 using Utils.Enums;
@@ -35,9 +36,11 @@ namespace View.GUI
             {
                 { OperationEnum.AddObject, new AddNodeAnimation() },
                 { OperationEnum.DeleteObject, new DeleteNodeAnimation()},
-                { OperationEnum.ConnectObjects, new ConnectNodesAnimation()}
+                { OperationEnum.ConnectObjects, new ConnectNodesAnimation()},
+                { OperationEnum.CreateDataStructure, new CreateDataStructureAnimation() }
             };
         }
+
         public void AddDto(ElementDTO dto)
         {
             DTOs.Add(dto);

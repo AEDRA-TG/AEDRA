@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using SideCar.DTOs;
 using UnityEngine;
 
 namespace Utils {
@@ -15,8 +16,11 @@ namespace Utils {
         /// <typeparam name="T">Type of object to deserialize</typeparam>
         /// <returns>Instance of the deserialized object</returns>
         public static T DeserializeJSON<T>(string filename){
-            string json = File.ReadAllText(filename);
-            return JsonConvert.DeserializeObject<T>(json);
+            if(File.Exists(filename)){
+                string json = File.ReadAllText(filename);
+                return JsonConvert.DeserializeObject<T>(json);
+            }
+            return default;
         }
         /// <summary>
         /// Method to serialize a Object to a JSON file
@@ -74,6 +78,11 @@ namespace Utils {
             };
             SaveJSONKey("Assets/Files/Constants.json","globalColor",colorData);
             Constants.GlobalColor = color;
+        }
+
+        public static Point GenerateRandomPoint(){
+            System.Random rand = new System.Random();
+            return new Point(rand.Next(Constants.MaxWidth),rand.Next(Constants.MaxHeight),rand.Next(Constants.MaxDepth));
         }
     }
 }

@@ -4,6 +4,7 @@ namespace Utils.Enums
     {
         CreateAnimation,
         DeleteAnimation,
-        PaintAnimation
+        PaintAnimation,
+        UpdateAnimation
     }
 }

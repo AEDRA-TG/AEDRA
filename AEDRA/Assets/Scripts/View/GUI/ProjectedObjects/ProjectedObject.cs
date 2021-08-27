@@ -16,13 +16,16 @@ namespace View.GUI.ProjectedObjects
         public Dictionary<AnimationEnum, Func<Tween>> Animations { get; set; }
         public ElementDTO Dto { get; set; }
         public bool IsCreated { get; set; }
+        public float AnimationTime{get; set;}
         virtual public void Awake()
         {
+            AnimationTime = Constants.AnimationTime;
             IsCreated = false;
             Animations = new Dictionary<AnimationEnum, Func<Tween>> {
                 {AnimationEnum.CreateAnimation, CreateAnimation},
                 {AnimationEnum.DeleteAnimation, DeleteAnimation},
-                {AnimationEnum.PaintAnimation, PaintAnimation}
+                {AnimationEnum.PaintAnimation, PaintAnimation},
+                {AnimationEnum.UpdateAnimation, UpdateAnimation}
             };
         }
 
@@ -39,6 +42,11 @@ namespace View.GUI.ProjectedObjects
         virtual public Tween PaintAnimation()
         {
             return null;
+        }
+
+        virtual public Tween UpdateAnimation()
+        {
+            return default;
         }
 
         virtual public void Move(Vector3 coordinates)

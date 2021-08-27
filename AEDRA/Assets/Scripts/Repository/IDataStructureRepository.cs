@@ -1,16 +1,17 @@
+using Model.Common;
+
 namespace Repository
 {
-    public interface IDataStructureRepository<T>
+    public interface IDataStructureRepository
     {
         /// <summary>
         /// Method to load a DataStructure instance from persistent storage
         /// </summary>
         /// <returns></returns>
-        public T Load();
+        public DataStructure Load();
         /// <summary>
         /// Method to persist a Datastructure instance in memory
         /// </summary>
-        /// <param name="data"></param>
-        public void Save(T data);
+        public void Save();
     }
 }

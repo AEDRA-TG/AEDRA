@@ -9,6 +9,7 @@ namespace View.EventController
     /// <summary>
     /// Class for load scenes
     /// </summary>
+    /// TODO: BORRAR ESTA MARRANADA
     public class ChangeScreen : MonoBehaviour
     {
         public void Start()

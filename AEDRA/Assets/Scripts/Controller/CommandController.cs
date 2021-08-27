@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using Utils.Enums;
 using UnityEngine;
+using Repository;
+using Model.Common;
+
 namespace Controller
 {
     /// <summary>
@@ -12,6 +15,8 @@ namespace Controller
         /// Property used to store the command controller instance
         /// </summary>
         private static CommandController _commandController;
+        public IDataStructureRepository Repository {get; set;}
+
         /// <summary>
         /// Singleton Method
         /// </summary>

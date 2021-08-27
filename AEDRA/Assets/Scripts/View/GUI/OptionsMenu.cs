@@ -4,6 +4,9 @@ using DG.Tweening;
 using System.Collections.Generic;
 using System.Threading;
 using Utils;
+using View.GUI;
+using Controller;
+using System.IO;
 
 namespace View
 {
@@ -191,5 +194,6 @@ namespace View
             item.GetTransform().DOMove(position, duration).SetEase(easeAnimation);
             item.GetImage().DOFade(fadeOpacity, fadeDuration).From(fromFadeOpacity);
         }
+
     }
 }

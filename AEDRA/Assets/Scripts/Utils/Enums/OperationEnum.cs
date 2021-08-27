@@ -5,6 +5,7 @@ namespace Utils.Enums
         AddObject,
         DeleteObject,
         ConnectObjects,
-        TraversalObjects
+        TraversalObjects,
+        CreateDataStructure
     }
 }
