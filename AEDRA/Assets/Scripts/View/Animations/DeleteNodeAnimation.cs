@@ -20,7 +20,7 @@ namespace View.Animations
             List<ProjectedObject> objectsToBeDeleted = new List<ProjectedObject>();
             StructureProjection structureProjection = GameObject.FindObjectOfType<StructureProjection>();
             foreach (ElementDTO dto in structureProjection.DTOs){
-                
+
                 ProjectedObject projectedObject = GameObject.Find(dto.GetUnityId()).GetComponentInChildren<ProjectedObject>();
                 if(dto.Operation == AnimationEnum.DeleteAnimation){
                     objectsToBeDeleted.Add(projectedObject);
