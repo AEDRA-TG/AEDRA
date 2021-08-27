@@ -28,6 +28,7 @@ namespace View.Animations
                     ProjectedObject endNode = GameObject.Find(Constants.NodeName+edgeDTO.IdEndNode).GetComponentInChildren<ProjectedObject>();
                     GraphNodeDTO startNodeDTO =  (GraphNodeDTO)startNode.Dto;
                     GraphNodeDTO endNodeDTO =  (GraphNodeDTO)startNode.Dto;
+                    //Hacer esto es innecesario, los DTOs deberían venir con sus vecinos desde el modelo, para eso existe la clase converter
                     startNodeDTO.Neighbors.Add(edgeDTO.IdEndNode);
                     endNodeDTO.Neighbors.Add(edgeDTO.IdStartNode);
                 }

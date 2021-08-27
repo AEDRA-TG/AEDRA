@@ -10,10 +10,14 @@ namespace View.GUI.ProjectedObjects
 {
     public class ProjectedObject : MonoBehaviour
     {
-        public Dictionary<AnimationEnum, Func<Tween>> Animations{get; set;}
-        public ElementDTO Dto{get; set;}
-        public bool IsCreated {get; set;}
-        virtual public void Awake(){
+        [SerializeField]
+        private bool _selectable;
+        private bool _selected;
+        public Dictionary<AnimationEnum, Func<Tween>> Animations { get; set; }
+        public ElementDTO Dto { get; set; }
+        public bool IsCreated { get; set; }
+        virtual public void Awake()
+        {
             IsCreated = false;
             Animations = new Dictionary<AnimationEnum, Func<Tween>> {
                 {AnimationEnum.CreateAnimation, CreateAnimation},
@@ -22,38 +26,73 @@ namespace View.GUI.ProjectedObjects
             };
         }
 
-        virtual public Tween CreateAnimation(){
+        virtual public Tween CreateAnimation()
+        {
             return null;
         }
 
-        virtual public Tween DeleteAnimation(){
+        virtual public Tween DeleteAnimation()
+        {
             return null;
         }
 
-        virtual public Tween PaintAnimation(){
+        virtual public Tween PaintAnimation()
+        {
             return null;
         }
 
-        virtual public void Move(Vector3 coordinates){
+        virtual public void Move(Vector3 coordinates)
+        {
         }
 
-        virtual public void SetDTO(ElementDTO dto){
+        virtual public void SetDTO(ElementDTO dto)
+        {
             Dto = dto;
             //TODO: update object properties
         }
 
-        public override bool Equals(object other){
+        public override bool Equals(object other)
+        {
             return Equals(other as ProjectedObject);
         }
 
-        public bool Equals(ProjectedObject other){
+        public bool Equals(ProjectedObject other)
+        {
             return other != null &&
                 Dto.Id == other.Dto.Id;
         }
 
-        public override int GetHashCode(){
+        public override int GetHashCode()
+        {
             //TODO: Look how to implement this method since library HashCode.Combine can't be used
             throw new NotImplementedException();
+        }
+        public bool IsSelectable()
+        {
+            return _selectable;
+        }
+
+        public void SetSelectable(bool selectable)
+        {
+            this._selectable = selectable;
+        }
+        public bool IsSelected()
+        {
+            return _selected;
+        }
+
+        public void SetSelected(bool selected)
+        {
+            this._selected = selected;
+            MeshRenderer mesh = gameObject.GetComponentInChildren<MeshRenderer>();
+            if (_selected)
+            {
+                mesh.material.DOColor(Color.red, 0);
+            }
+            else
+            {
+                mesh.material.DOColor(Color.white, 0);
+            }
         }
     }
 }

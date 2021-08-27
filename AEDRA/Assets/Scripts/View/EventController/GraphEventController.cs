@@ -1,8 +1,8 @@
 using UnityEngine;
 using Controller;
-using Model.GraphModel;
 using SideCar.DTOs;
 using Utils.Enums;
+using View.GUI.ProjectedObjects;
 using System.Collections.Generic;
 
 namespace View.EventController
@@ -13,10 +13,12 @@ namespace View.EventController
     public class GraphEventController : MonoBehaviour
     {
 
-        // TODO : BORRAR
-        [SerializeField] private int id;
-        [SerializeField] private int id2;
+        private SelectionController _selectionController;
 
+        public void Awake()
+        {
+            _selectionController = FindObjectOfType<SelectionController>();
+        }
         /// <summary>
         /// Method to detect when the user taps on add node button
         /// </summary>
@@ -34,15 +36,17 @@ namespace View.EventController
         /// </summary>
         public void OnTouchDeleteNode()
         {
-            // TODO: Get selected object
-            // Convert selected object to DTO
-
-            // Remove this when select objects funtionality is implemented
-            List<int> neighbors = new List<int>{ 1 , 2 };
-
-            GraphNodeDTO nodeDTO = new GraphNodeDTO(id, 0, neighbors);
-            DeleteElementCommand deleteCommand = new DeleteElementCommand(nodeDTO);
-            CommandController.GetInstance().Invoke(deleteCommand);
+            List<ProjectedObject> objs = _selectionController.GetSelectedObjects();
+            if (objs.Count == 1 && objs[0].GetType() == typeof(ProjectedNode))
+            {
+                    GraphNodeDTO nodeDTO = (GraphNodeDTO)objs[0].Dto;
+                    DeleteElementCommand deleteCommand = new DeleteElementCommand(nodeDTO);
+                    CommandController.GetInstance().Invoke(deleteCommand);
+            }
+            else
+            {
+                Debug.Log("Numero de nodos seleccionados inválido");
+            }
         }
 
         /// <summary>
@@ -50,10 +54,20 @@ namespace View.EventController
         /// </summary>
         public void OnTouchConnectNodes()
         {
-            //TODO: fix element selection to obtain edge
-            GraphEdgeDTO edgeDTO = new GraphEdgeDTO(0, 0, id, id2);
-            ConnectElementsCommand connectCommand = new ConnectElementsCommand(edgeDTO);
-            CommandController.GetInstance().Invoke(connectCommand);
+            List<ProjectedObject> objs = _selectionController.GetSelectedObjects();
+            if (objs.Count == 2)
+            {
+                if(objs[0].GetType() == typeof(ProjectedNode) && objs[1].GetType() == typeof(ProjectedNode)){
+                    Debug.Log(objs[0].Dto.Id+ "-" + objs[1].Dto.Id );
+                    GraphEdgeDTO edgeDTO = new GraphEdgeDTO(0, 0, objs[0].Dto.Id, objs[1].Dto.Id);
+                    ConnectElementsCommand connectCommand = new ConnectElementsCommand(edgeDTO);
+                    CommandController.GetInstance().Invoke(connectCommand);
+                }
+            }
+            else
+            {
+                Debug.Log("Numero de nodos seleccionados inválido");
+            }
         }
     }
 }
