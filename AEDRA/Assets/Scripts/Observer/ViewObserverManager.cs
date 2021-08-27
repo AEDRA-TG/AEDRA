@@ -4,6 +4,7 @@ using Model.Common;
 using SideCar.DTOs;
 using UnityEngine;
 using Utils.Enums;
+using View.EventController;
 using View.GUI;
 
 namespace Observer
@@ -16,6 +17,7 @@ namespace Observer
             DataStructure.UpdateElement += UpdateUI;
             Command.OperationCompleted += ExecuteAnimation;
             Command.OperationCompleted += SaveDataStructure;
+            Command.OperationCompleted += CleanUserSelection;
         }
 
         public void OnDisable(){
@@ -45,6 +47,10 @@ namespace Observer
             CommandController.GetInstance().Invoke(command);
         }
 
+        private void CleanUserSelection(OperationEnum operation){
+            SelectionController selectionController = FindObjectOfType<SelectionController>();
+            selectionController.DeselectAllObjects();
+        }
         //TODO: Revisar de que forma manejar estos mensajes
         private void CreateNotification(string notificationText){
             //StructureProjection projection = GameObject.FindObjectOfType<StructureProjection>();

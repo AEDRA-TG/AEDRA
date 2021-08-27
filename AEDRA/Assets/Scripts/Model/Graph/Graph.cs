@@ -96,25 +96,27 @@ namespace Model.GraphModel
         }
 
         private void BFSTraversal(ElementDTO startNode){
-            Dictionary<GraphNode, bool> visitedMap = InitializeVisiteMap();
-            Queue<GraphNode> q = new Queue<GraphNode>();
-            q.Enqueue(_nodeConverter.ToEntity((GraphNodeDTO)startNode));
+            Dictionary<int, bool> visitedMap = InitializeVisiteMap();
+            // Item1 destino item2 origen
+            Queue<Tuple<int, int> > q = new Queue<Tuple<int, int> >();
+            q.Enqueue(new Tuple<int, int>(startNode.Id, startNode.Id));
             while(q.Count > 0){
-                GraphNode actualNode = q.Dequeue();
-                visitedMap[actualNode] = true;
-                GraphNodeDTO visitedDTO = _nodeConverter.ToDto(actualNode);
+                Tuple<int, int> actualNode = q.Dequeue();
+                visitedMap[actualNode.Item1] = true;
+                if(actualNode.Item1 != actualNode.Item2){
+                    GraphEdgeDTO graphEdgeDTO = new GraphEdgeDTO(0, AdjacentMtx[actualNode.Item2][actualNode.Item1], actualNode.Item1, actualNode.Item2){
+                        Operation = AnimationEnum.PaintAnimation
+                    };
+                    base.Notify(graphEdgeDTO);
+                }
+                GraphNodeDTO visitedDTO = _nodeConverter.ToDto(GetNodeById(actualNode.Item1));
                 visitedDTO.Operation = AnimationEnum.PaintAnimation;
                 base.Notify(visitedDTO);
-                foreach (int key in AdjacentMtx[actualNode.Id].Keys)
+                foreach (int key in AdjacentMtx[actualNode.Item1].Keys)
                 {
                     GraphNode neighboorNode = GetNodeById(key);
-                    if(!visitedMap[neighboorNode]){
-                        GraphEdgeDTO edgeDTO = new GraphEdgeDTO(0, AdjacentMtx[actualNode.Id][key], actualNode.Id, key)
-                        {
-                            Operation = AnimationEnum.PaintAnimation
-                        };
-                        //base.Notify(edgeDTO);
-                        q.Enqueue(neighboorNode);
+                    if(!visitedMap[neighboorNode.Id]){
+                        q.Enqueue(new Tuple<int, int>(neighboorNode.Id, actualNode.Item1));
                     }
                 }
             }
@@ -133,11 +135,11 @@ namespace Model.GraphModel
         /// Method to initialize the visited map for traversals
         /// </summary>
         /// <returns></returns>
-        private Dictionary<GraphNode, bool> InitializeVisiteMap(){
-            Dictionary<GraphNode, bool> visitedMap = new Dictionary<GraphNode, bool>();
+        private Dictionary<int, bool> InitializeVisiteMap(){
+            Dictionary<int, bool> visitedMap = new Dictionary<int, bool>();
             foreach (GraphNode node in Nodes)
             {
-                visitedMap.Add(node, false);
+                visitedMap.Add(node.Id, false);
             }
             return visitedMap;
         }
