@@ -13,6 +13,11 @@ namespace View.EventController
         [SerializeField]
         private bool _monoSelection = false;
 
+        /// <summary>
+        /// Observer event to notify selection objects
+        /// </summary>
+        public static event Action<List<ProjectedObject>> UpdateMenu;
+
         public void Awake(){
             _selectedObjects = new List<ProjectedObject>();
         }
@@ -26,6 +31,7 @@ namespace View.EventController
                 }else{
                     SelectObject(obj);
                 }
+                UpdateMenu?.Invoke(this._selectedObjects);
             }
         }
 
@@ -51,6 +57,7 @@ namespace View.EventController
                 obj.SetSelected(false);
             }
             _selectedObjects.Clear();
+            UpdateMenu?.Invoke(this._selectedObjects);
         }
 
         public void DeselectObject(ProjectedObject obj){

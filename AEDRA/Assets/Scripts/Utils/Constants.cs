@@ -27,7 +27,10 @@ namespace Utils
         #endregion
 
         #region BUTTONS PREFABS
+        
         public const string PathMainTreeOptions = "Prefabs/MainTreeOptions";
+        public const string GraphNodeMultiSelectionMenu = "GraphNodeMultiSelectionMenu";
+        public const string GraphTraversalMenu = "GraphTraversalMenu";
         public const string PathRoundButton = "Prefabs/RoundButton";
         public const string PathThemeChooser = "Prefabs/ThemeChooser";
         public const string PathTraversalOptions = "Prefabs/TreeTraversalOptions";
