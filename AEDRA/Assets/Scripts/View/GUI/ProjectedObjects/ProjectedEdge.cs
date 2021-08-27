@@ -22,7 +22,8 @@ namespace View.GUI.ProjectedObjects
             }
         }
         public override Tween CreateAnimation(){
-            return gameObject.transform.DOScale(UpdateEdge(),Constants.AnimationTime);
+            GraphEdgeDTO edgeDTO = (GraphEdgeDTO) base.Dto;
+            return gameObject.transform.DOScale(UpdateEdge(),base.AnimationTime);
         }
 
         private Vector3 UpdateEdge(){

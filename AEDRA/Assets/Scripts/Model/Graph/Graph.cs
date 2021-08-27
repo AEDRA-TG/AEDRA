@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using Repository;
 using Utils;
 using UnityEngine;
+using System.Linq;
 
 namespace Model.GraphModel
 {
@@ -73,10 +74,8 @@ namespace Model.GraphModel
         /// <param name="element"> Node that will be removed</param>
         public override void DeleteElement(ElementDTO element)
         {
-            GraphNode nodeToDelete = _nodeConverter.ToEntity((GraphNodeDTO)element);
-            // Deleting all edges
-            DeleteEdges(nodeToDelete.Id);
-            this.Nodes.Remove(nodeToDelete);
+            DeleteEdges(element.Id);
+            this.Nodes.Remove( Nodes.SingleOrDefault( n => n.Id == element.Id ) ); //TODO: Salvajada de Daniel
             element.Operation = AnimationEnum.DeleteAnimation;
             base.Notify(element);
         }
@@ -128,11 +127,25 @@ namespace Model.GraphModel
         //TODO: rename method or create graph from this 
         public override void CreateDataStructure()
         {
+            Dictionary<int,bool> visited = new Dictionary<int, bool>();
             foreach (GraphNode node in this.Nodes)
             {
                 GraphNodeDTO dto = _nodeConverter.ToDto(node);
                 dto.Operation = AnimationEnum.CreateAnimation;
+                visited.Add(node.Id,false);
                 base.Notify(dto);
+            }
+            foreach (GraphNode node in this.Nodes)
+            {
+                visited[node.Id] = true;
+                foreach (int key in this.AdjacentMtx[node.Id].Keys)
+                {
+                    if(!visited[key]){
+                        GraphEdgeDTO edgeDTO = new GraphEdgeDTO(0,AdjacentMtx[node.Id][key],node.Id,key);
+                        edgeDTO.Operation = AnimationEnum.CreateAnimation;
+                        base.Notify(edgeDTO);
+                    }
+                }
             }
         }
         /// <summary>
@@ -150,6 +163,8 @@ namespace Model.GraphModel
                     if(existsStartToEnd || existsEndToStart){
                        GraphEdgeDTO edgeDTO = new GraphEdgeDTO(0,0,key,nodeId);
                        edgeDTO.Operation = AnimationEnum.DeleteAnimation;
+                       NotifyNode(nodeId,AnimationEnum.UpdateAnimation);
+                       NotifyNode(key,AnimationEnum.UpdateAnimation);
                        base.Notify(edgeDTO);
                     }
                 }
@@ -157,5 +172,11 @@ namespace Model.GraphModel
             AdjacentMtx.Remove(nodeId);
         }
 
+        private void NotifyNode(int id, AnimationEnum operation){
+            GraphNode node = this.Nodes.Single( n => n.Id == id ); //TODO: Salvajada de Daniel
+            GraphNodeDTO dto = _nodeConverter.ToDto(node);
+            dto.Operation = operation;
+            base.Notify(dto);
+        }
     }
 }
