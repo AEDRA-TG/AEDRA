@@ -1,14 +1,13 @@
 using System.Collections.Generic;
-using System.Collections;
 using System;
 using Utils.Enums;
 using Model.Common;
 using SideCar.Converters;
 using SideCar.DTOs;
-using UnityEngine;
 using Newtonsoft.Json;
 using Repository;
 using Utils;
+using UnityEngine;
 
 namespace Model.GraphModel
 {
@@ -75,6 +74,8 @@ namespace Model.GraphModel
         public override void DeleteElement(ElementDTO element)
         {
             GraphNode nodeToDelete = _nodeConverter.ToEntity((GraphNodeDTO)element);
+            // Deleting all edges
+            DeleteEdges(nodeToDelete.Id);
             this.Nodes.Remove(nodeToDelete);
             element.Operation = AnimationEnum.DeleteAnimation;
             base.Notify(element);
@@ -97,10 +98,18 @@ namespace Model.GraphModel
         {
             GraphEdgeDTO edgeDTO = (GraphEdgeDTO) graphEdgeDTO;
             edgeDTO.Id = EdgesId++;
-            AdjacentMtx[edgeDTO.Id].Add(edgeDTO.IdEndNode, edgeDTO.Value);
-            AdjacentMtx[edgeDTO.IdEndNode].Add(edgeDTO.Id, edgeDTO.Value);
-            edgeDTO.Operation = AnimationEnum.CreateAnimation;
-            base.Notify(edgeDTO);
+            // TODO: validar aristas
+            bool edgeStartToEnd = AdjacentMtx[edgeDTO.IdStartNode].ContainsKey(edgeDTO.IdEndNode);
+            bool edgeEndToStart = AdjacentMtx[edgeDTO.IdEndNode].ContainsKey(edgeDTO.IdStartNode);
+            if(!edgeStartToEnd && !edgeEndToStart){
+                AdjacentMtx[edgeDTO.IdStartNode].Add(edgeDTO.IdEndNode, edgeDTO.Value);
+                AdjacentMtx[edgeDTO.IdEndNode].Add(edgeDTO.IdStartNode, edgeDTO.Value);
+                edgeDTO.Operation = AnimationEnum.CreateAnimation;
+                base.Notify(edgeDTO);
+            }
+            else{
+                Debug.Log("Ya existe la arista");
+            }
         }
         /// <summary>
         /// Method to obtain list of neighbors of a given node
@@ -126,5 +135,27 @@ namespace Model.GraphModel
                 base.Notify(dto);
             }
         }
+        /// <summary>
+        /// Method to obtain list of neighbors of a given node
+        /// </summary>
+        /// <param name="nodeId">Id of node to search</param>
+        /// <returns>List of ids representing the neighbors of the node</returns>
+        public void DeleteEdges(int nodeId){
+            if(AdjacentMtx.ContainsKey(nodeId))
+            {
+                foreach (int key in AdjacentMtx.Keys)
+                {
+                    bool existsStartToEnd = AdjacentMtx[key].Remove(nodeId);
+                    bool existsEndToStart = AdjacentMtx[nodeId].Remove(key);
+                    if(existsStartToEnd || existsEndToStart){
+                       GraphEdgeDTO edgeDTO = new GraphEdgeDTO(0,0,key,nodeId);
+                       edgeDTO.Operation = AnimationEnum.DeleteAnimation;
+                       base.Notify(edgeDTO);
+                    }
+                }
+            }
+            AdjacentMtx.Remove(nodeId);
+        }
+
     }
 }

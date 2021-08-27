@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8034108386485506009}
   m_Layer: 0
-  m_Name: GraphNode
+  m_Name: Node
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 1589404806317378383}
   - component: {fileID: 4680439785718111453}
   - component: {fileID: 514087265160402684}
-  - component: {fileID: 7533010042568090430}
+  - component: {fileID: 1503850187813525931}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -127,7 +127,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7533010042568090430
+--- !u!114 &1503850187813525931
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -136,6 +136,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8065205872749575856}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bf2ebd264beda548a69a888381d3926, type: 3}
+  m_Script: {fileID: 11500000, guid: 48497fc735db79c4eaff878ae72b9d64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _selectable: 1

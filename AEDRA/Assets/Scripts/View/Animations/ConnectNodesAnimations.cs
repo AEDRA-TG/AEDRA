@@ -4,6 +4,8 @@ using SideCar.DTOs;
 using System.Collections.Generic;
 using DG.Tweening;
 using Utils.Enums;
+using View.GUI.ProjectedObjects;
+using Utils;
 
 namespace View.Animations
 {
@@ -18,17 +20,23 @@ namespace View.Animations
             List<ProjectedObject> objectsToBeDeleted = new List<ProjectedObject>();
             StructureProjection structureProjection = GameObject.FindObjectOfType<StructureProjection>();
             foreach (ElementDTO dto in structureProjection.DTOs){
-                string unityId = "Node_" + dto.Id;
-                ProjectedObject projectedObject = GameObject.Find(unityId).GetComponentInChildren<ProjectedObject>();
-                if(dto.Operation == AnimationEnum.DeleteAnimation){
-                    objectsToBeDeleted.Add(projectedObject);
+                ProjectedObject projectedObject;
+                if(dto.Operation == AnimationEnum.CreateAnimation){
+                    projectedObject = structureProjection.CreateObject(dto);
+                    GraphEdgeDTO edgeDTO = (GraphEdgeDTO)dto;
+                    ProjectedObject startNode = GameObject.Find(Constants.NodeName+edgeDTO.IdStartNode).GetComponentInChildren<ProjectedObject>();
+                    ProjectedObject endNode = GameObject.Find(Constants.NodeName+edgeDTO.IdEndNode).GetComponentInChildren<ProjectedObject>();
+                    GraphNodeDTO startNodeDTO =  (GraphNodeDTO)startNode.Dto;
+                    GraphNodeDTO endNodeDTO =  (GraphNodeDTO)startNode.Dto;
+                    //Hacer esto es innecesario, los DTOs deberían venir con sus vecinos desde el modelo, para eso existe la clase converter
+                    startNodeDTO.Neighbors.Add(edgeDTO.IdEndNode);
+                    endNodeDTO.Neighbors.Add(edgeDTO.IdStartNode);
                 }
-                animationList.Append(projectedObject.Animations[dto.Operation]());
+                else{
+                    projectedObject = GameObject.Find(dto.GetUnityId()).GetComponentInChildren<ProjectedObject>();
+                }
+                animationList.Append(projectedObject.Animations[dto.Operation]()).OnComplete(()=> projectedObject.IsCreated = true);
             }
-            // Obtener las conexiones del objeto a eliminar
-            // Obtener las aristas de las conexiones
-            // Delegar al structure projection la eliminación
-            animationList.OnComplete(() => structureProjection.DeleteObject(objectsToBeDeleted));
         }
     }
 }

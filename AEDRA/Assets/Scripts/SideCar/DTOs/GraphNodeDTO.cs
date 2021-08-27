@@ -6,7 +6,7 @@ namespace SideCar.DTOs
         public List<int> Neighbors {get; set;}
         public GraphNodeDTO(int idNode, object value, List<int> neighbors):base(idNode, value){
             Neighbors = neighbors;
-            base.Name = "GraphNode";
+            base.Name = "Node";
         }
     }
 }

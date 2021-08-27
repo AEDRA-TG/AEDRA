@@ -44,5 +44,11 @@ namespace Observer
             Command command = new SaveCommand();
             CommandController.GetInstance().Invoke(command);
         }
+
+        //TODO: Revisar de que forma manejar estos mensajes
+        private void CreateNotification(string notificationText){
+            //StructureProjection projection = GameObject.FindObjectOfType<StructureProjection>();
+            //projection.ShowNotification(notificationText);
+        }
     }
 }
