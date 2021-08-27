@@ -7,6 +7,8 @@ using Utils;
 using View.GUI;
 using Controller;
 using System.IO;
+using View.EventController;
+using View.GUI.ProjectedObjects;
 
 namespace View
 {
@@ -77,12 +79,52 @@ namespace View
         /// The name of the prefab that is actually displayed in the screen
         /// </summary>
         private string actualPrefabName;
-        public void Start()
-        {
+
+        private void OnEnable() {
+            SelectionController.UpdateMenu += UpdateMenu;
+            GraphEventController.UpdateMenu += ChangeMenu;
+        }
+        private void OnDisable() {
+            SelectionController.UpdateMenu -= UpdateMenu;
+            GraphEventController.UpdateMenu -= ChangeMenu;
+        }
+
+        private void Awake(){
             _loadedPrefabs = new Stack<string>();
             actualPrefabName = "";
-            LoadPrefab(Constants.PathGraphNodeSelectionMenu, "GraphNodeSelectionMenu", "ProjectionLayout");
+            LoadPrefab(Constants.PathGraphMainMenu, "GraphMainMenu", "ProjectionLayout");
         }
+
+        public void Start()
+        {
+        }
+
+        private void UpdateMenu(List<ProjectedObject> selectedObjects){
+            if(_isExpanded){
+                ToggleMenu();
+            }
+            if(selectedObjects.Count == 1){
+                LoadPrefab(Constants.PrefabPath+Constants.GraphNodeSelectionMenu, "GraphNodeSelectionMenu", "ProjectionLayout");
+            }
+            else if(selectedObjects.Count > 1){
+                LoadPrefab(Constants.PrefabPath+Constants.GraphNodeMultiSelectionMenu, "GraphNodeSelectionMenu", "ProjectionLayout");
+            }
+            else{
+                LoadPrefab(Constants.PathGraphMainMenu, "GraphMainMenu", "ProjectionLayout");
+            }
+            ToggleMenu();
+        }
+
+        private void ChangeMenu(int id){
+            if(_isExpanded){
+                ToggleMenu();
+            }
+            if(id == 0){
+                LoadPrefab(Constants.PrefabPath+Constants.GraphTraversalMenu, "GraphTraversalMenu", "ProjectionLayout");
+            }
+            ToggleMenu();
+        }
+
         /// <summary>
         /// Method to load a prefab and assign his parent and instance name
         /// </summary>

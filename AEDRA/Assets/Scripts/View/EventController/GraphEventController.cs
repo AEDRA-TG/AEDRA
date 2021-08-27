@@ -5,6 +5,7 @@ using View.GUI;
 using View.GUI.ProjectedObjects;
 using System.Collections.Generic;
 using Utils.Enums;
+using System;
 
 namespace View.EventController
 {
@@ -15,6 +16,7 @@ namespace View.EventController
     {
 
         private SelectionController _selectionController;
+        public static event Action<int> UpdateMenu;
 
         public void Awake()
         {
@@ -69,6 +71,10 @@ namespace View.EventController
             {
                 Debug.Log("Numero de nodos seleccionados inválido");
             }
+        }
+
+        public void ChangeToTraversalMenu(){
+            UpdateMenu?.Invoke(0);
         }
 
         public void DoTraversalBFS(){
