@@ -95,6 +95,10 @@ namespace Model.GraphModel
             this._traversals[traversalName](startNode);
         }
 
+        /// <summary>
+        /// Method to perform a Breath First Search (BFS) traversal in the graph
+        /// </summary>
+        /// <param name="startNode">Node to start BFS</param>
         private void BFSTraversal(ElementDTO startNode){
             Dictionary<int, bool> visitedMap = InitializeVisiteMap();
             // Item1 destino item2 origen
@@ -122,6 +126,7 @@ namespace Model.GraphModel
             }
         }
 
+        //TODO: this method should be deleted
         private GraphNode GetNodeById(int id){
             foreach(GraphNode node in this.Nodes){
                 if(node.Id == id){
@@ -231,6 +236,7 @@ namespace Model.GraphModel
             AdjacentMtx.Remove(nodeId);
         }
 
+        //TODO: This method needs to take into account that a GraphNode may have been deleted
         private void NotifyNode(int id, AnimationEnum operation){
             GraphNode node = this.Nodes.Single( n => n.Id == id ); //TODO: Salvajada de Daniel
             GraphNodeDTO dto = _nodeConverter.ToDto(node);

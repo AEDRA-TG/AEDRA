@@ -73,6 +73,7 @@ namespace View.EventController
             }
         }
 
+        //TODO: review this method
         public void ChangeToTraversalMenu(){
             UpdateMenu?.Invoke(0);
         }

@@ -34,12 +34,15 @@ namespace View.EventController
                 UpdateMenu?.Invoke(this._selectedObjects);
             }
         }
-
+        
         public List<ProjectedObject> GetSelectedObjects(){
             return _selectedObjects;
         }
 
-
+        /// <summary>
+        /// Method to select one projected object
+        /// </summary>
+        /// <param name="obj"></param>
         public void SelectObject(ProjectedObject obj){
             if(_selectedType != obj.GetType() || _monoSelection){
                 DeselectAllObjects();
@@ -51,6 +54,9 @@ namespace View.EventController
             obj.SetSelected(true);
         }
 
+        /// <summary>
+        /// Method to deselect all projected objects previously selected
+        /// </summary>
         public void DeselectAllObjects(){
             foreach (ProjectedObject obj in _selectedObjects)
             {
@@ -60,6 +66,10 @@ namespace View.EventController
             UpdateMenu?.Invoke(this._selectedObjects);
         }
 
+        /// <summary>
+        /// Method to deselect one projected object
+        /// </summary>
+        /// <param name="obj"></param>
         public void DeselectObject(ProjectedObject obj){
             obj.SetSelected(false);
             if(_monoSelection){
@@ -69,6 +79,10 @@ namespace View.EventController
             }
         }
 
+        /// <summary>
+        /// Method to obtain the object selected by the user
+        /// </summary>
+        /// <returns></returns>
         private ProjectedObject GetRayCastedObject()
         {
             Vector3? inputPosition = GetInputPosition();
@@ -83,6 +97,10 @@ namespace View.EventController
             return selectedObject;
         }
 
+        /// <summary>
+        /// Method to obtain the coordinates that where the user touched on the screen
+        /// </summary>
+        /// <returns></returns>
         private Vector3? GetInputPosition()
         {
             Vector3? inputPosition = null;
