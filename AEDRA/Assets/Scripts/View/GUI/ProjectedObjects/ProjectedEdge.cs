@@ -22,7 +22,10 @@ namespace View.GUI.ProjectedObjects
             }
         }
         public override Tween CreateAnimation(){
-            return gameObject.transform.DOScale(UpdateEdge(),base.AnimationTime);
+            //TODO: make name of IsCreated more explitic (e.g: OnCreatedAnimationCompleted)
+            Tween tween = gameObject.transform.DOScale(UpdateEdge(),base.AnimationTime);
+            tween.OnComplete(()=> this.IsCreated = true);
+            return tween;
         }
 
         private Vector3 UpdateEdge(){

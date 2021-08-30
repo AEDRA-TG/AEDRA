@@ -30,7 +30,6 @@ namespace View.GUI
         public void Awake()
         {
             DTOs = new List<ElementDTO>();
-            //TODO: initialize already existing objects in list
             ProjectedObjects = new List<ProjectedObject>();
             _animations = new Dictionary<OperationEnum, IAnimationStrategy>
             {
@@ -48,7 +47,9 @@ namespace View.GUI
         /// <param name="dto"></param>
         public void AddDto(ElementDTO dto)
         {
-            DTOs.Add(dto);
+            if(dto.Operation != AnimationEnum.UpdateAnimation){
+                DTOs.Add(dto);
+            }
             GameObject obj = GameObject.Find(dto.GetUnityId());
             obj?.GetComponentInChildren<ProjectedObject>().SetDTO(dto);
         }

@@ -56,7 +56,6 @@ namespace View.GUI.ProjectedObjects
         virtual public void SetDTO(ElementDTO dto)
         {
             Dto = dto;
-            //TODO: update object properties
         }
 
         public override bool Equals(object other)
