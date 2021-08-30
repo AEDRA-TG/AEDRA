@@ -33,7 +33,7 @@ namespace Model.GraphModel
         /// <summary>
         /// List to store nodes of the graph
         /// </summary>
-        public List<GraphNode> Nodes {get; set;}
+        public Dictionary<int,GraphNode> Nodes {get; set;}
 
         /// <summary>
         /// Adjacent matrix of the graph
@@ -49,7 +49,7 @@ namespace Model.GraphModel
         public Graph(){
             NodesId = 0;
             EdgesId = 0;
-            Nodes = new List<GraphNode>();
+            Nodes = new Dictionary<int, GraphNode>();
             AdjacentMtx = new Dictionary<int, Dictionary<int, object>>();
             _nodeConverter = new GraphNodeConverter();
             _traversals = new Dictionary<TraversalEnum, Action<ElementDTO>>() {
@@ -65,7 +65,7 @@ namespace Model.GraphModel
         {
             GraphNode node = _nodeConverter.ToEntity((GraphNodeDTO)element);
             node.Id = NodesId++;
-            Nodes.Add(node);
+            Nodes.Add(node.Id,node);
             AdjacentMtx.Add(node.Id, new Dictionary<int, object>());
             //return DTO updated
             node.Coordinates = Utilities.GenerateRandomPoint();
@@ -81,7 +81,7 @@ namespace Model.GraphModel
         public override void DeleteElement(ElementDTO element)
         {
             DeleteEdges(element.Id);
-            this.Nodes.Remove( Nodes.SingleOrDefault( n => n.Id == element.Id ) ); //TODO: Salvajada de Daniel
+            this.Nodes.Remove( element.Id );
             element.Operation = AnimationEnum.DeleteAnimation;
             base.Notify(element);
         }
@@ -108,32 +108,17 @@ namespace Model.GraphModel
                 Tuple<int, int> actualNode = q.Dequeue();
                 visitedMap[actualNode.Item1] = true;
                 if(actualNode.Item1 != actualNode.Item2){
-                    GraphEdgeDTO graphEdgeDTO = new GraphEdgeDTO(0, AdjacentMtx[actualNode.Item2][actualNode.Item1], actualNode.Item1, actualNode.Item2){
-                        Operation = AnimationEnum.PaintAnimation
-                    };
-                    base.Notify(graphEdgeDTO);
+                    NotifyEdge(actualNode.Item2,actualNode.Item1,AnimationEnum.PaintAnimation);
                 }
-                GraphNodeDTO visitedDTO = _nodeConverter.ToDto(GetNodeById(actualNode.Item1));
-                visitedDTO.Operation = AnimationEnum.PaintAnimation;
-                base.Notify(visitedDTO);
+                NotifyNode(actualNode.Item1,AnimationEnum.PaintAnimation);
                 foreach (int key in AdjacentMtx[actualNode.Item1].Keys)
                 {
-                    GraphNode neighboorNode = GetNodeById(key);
+                    GraphNode neighboorNode = this.Nodes[key];
                     if(!visitedMap[neighboorNode.Id]){
                         q.Enqueue(new Tuple<int, int>(neighboorNode.Id, actualNode.Item1));
                     }
                 }
             }
-        }
-
-        //TODO: this method should be deleted
-        private GraphNode GetNodeById(int id){
-            foreach(GraphNode node in this.Nodes){
-                if(node.Id == id){
-                    return node;
-                }
-            }
-            return null;
         }
 
         /// <summary>
@@ -142,9 +127,9 @@ namespace Model.GraphModel
         /// <returns></returns>
         private Dictionary<int, bool> InitializeVisiteMap(){
             Dictionary<int, bool> visitedMap = new Dictionary<int, bool>();
-            foreach (GraphNode node in Nodes)
+            foreach (int id in Nodes.Keys)
             {
-                visitedMap.Add(node.Id, false);
+                visitedMap.Add(id, false);
             }
             return visitedMap;
         }
@@ -153,7 +138,7 @@ namespace Model.GraphModel
         /// Method to connect two nodes bidirectionally
         /// </summary>
         /// <param name="element"></param>
-        public override void ConnectElements(ElementDTO graphEdgeDTO)
+        public void ConnectElements(ElementDTO graphEdgeDTO)
         {
             GraphEdgeDTO edgeDTO = (GraphEdgeDTO) graphEdgeDTO;
             edgeDTO.Id = EdgesId++;
@@ -163,8 +148,7 @@ namespace Model.GraphModel
             if(!edgeStartToEnd && !edgeEndToStart){
                 AdjacentMtx[edgeDTO.IdStartNode].Add(edgeDTO.IdEndNode, edgeDTO.Value);
                 AdjacentMtx[edgeDTO.IdEndNode].Add(edgeDTO.IdStartNode, edgeDTO.Value);
-                edgeDTO.Operation = AnimationEnum.CreateAnimation;
-                base.Notify(edgeDTO);
+                NotifyEdge(edgeDTO.IdStartNode,edgeDTO.IdEndNode,AnimationEnum.CreateAnimation);
             }
             else{
                 Debug.Log("Ya existe la arista");
@@ -188,24 +172,18 @@ namespace Model.GraphModel
         public override void CreateDataStructure()
         {
             Dictionary<int,bool> visited = new Dictionary<int, bool>();
-            foreach (GraphNode node in this.Nodes)
+            foreach (GraphNode node in this.Nodes.Values)
             {
-                GraphNodeDTO dto = _nodeConverter.ToDto(node);
-                dto.Operation = AnimationEnum.CreateAnimation;
                 visited.Add(node.Id,false);
-                base.Notify(dto);
+                NotifyNode(node.Id, AnimationEnum.CreateAnimation);
             }
-            foreach (GraphNode node in this.Nodes)
+            foreach (GraphNode node in this.Nodes.Values)
             {
                 visited[node.Id] = true;
                 foreach (int key in this.AdjacentMtx[node.Id].Keys)
                 {
                     if(!visited[key]){
-                        GraphEdgeDTO edgeDTO = new GraphEdgeDTO(0, AdjacentMtx[node.Id][key], node.Id, key)
-                        {
-                            Operation = AnimationEnum.CreateAnimation
-                        };
-                        base.Notify(edgeDTO);
+                        NotifyEdge(node.Id, key,AnimationEnum.CreateAnimation);
                     }
                 }
             }
@@ -223,13 +201,8 @@ namespace Model.GraphModel
                     bool existsStartToEnd = AdjacentMtx[key].Remove(nodeId);
                     bool existsEndToStart = AdjacentMtx[nodeId].Remove(key);
                     if(existsStartToEnd || existsEndToStart){
-                        GraphEdgeDTO edgeDTO = new GraphEdgeDTO(0, 0, key, nodeId)
-                        {
-                            Operation = AnimationEnum.DeleteAnimation
-                        };
-                        NotifyNode(nodeId,AnimationEnum.UpdateAnimation);
-                       NotifyNode(key,AnimationEnum.UpdateAnimation);
-                       base.Notify(edgeDTO);
+                       //TODO: Revisar el warning de andres cuando se eliminan nodos
+                       NotifyEdge(key,nodeId,AnimationEnum.DeleteAnimation);
                     }
                 }
             }
@@ -238,10 +211,24 @@ namespace Model.GraphModel
 
         //TODO: This method needs to take into account that a GraphNode may have been deleted
         private void NotifyNode(int id, AnimationEnum operation){
-            GraphNode node = this.Nodes.Single( n => n.Id == id ); //TODO: Salvajada de Daniel
+            GraphNode node = this.Nodes[id];
             GraphNodeDTO dto = _nodeConverter.ToDto(node);
             dto.Operation = operation;
             base.Notify(dto);
+        }
+
+        private void NotifyEdge(int start, int end, AnimationEnum operation){
+            object value = null;
+            if(AdjacentMtx[start].ContainsKey(end)){
+                value = AdjacentMtx[start][end];
+            }
+            GraphEdgeDTO edge = new GraphEdgeDTO(0, value, start, end)
+            {
+                Operation = operation
+            };
+            NotifyNode(start, AnimationEnum.UpdateAnimation);
+            NotifyNode(end, AnimationEnum.UpdateAnimation);
+            base.Notify(edge);
         }
     }
 }

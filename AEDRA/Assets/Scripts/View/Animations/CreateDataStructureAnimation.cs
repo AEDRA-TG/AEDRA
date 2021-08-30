@@ -2,6 +2,7 @@ using DG.Tweening;
 using SideCar.DTOs;
 using UnityEngine;
 using Utils;
+using Utils.Enums;
 using View.GUI;
 using View.GUI.ProjectedObjects;
 
@@ -18,15 +19,15 @@ namespace View.Animations
             StructureProjection structureProjection = GameObject.FindObjectOfType<StructureProjection>();
             foreach (ElementDTO dto in structureProjection.DTOs)
             {
-                Debug.Log(dto.Id);
+                //TODO: check this logic
                 ProjectedObject obj = structureProjection.CreateObject(dto);
-                //TODO: delete this
                 if(obj.GetType() == typeof(ProjectedNode)){
                     Vector3 coordinates = new Vector3(dto.Coordinates.X, dto.Coordinates.Y, dto.Coordinates.Z);
                     obj.Move(coordinates);
                 }else{
                     obj.IsCreated = true;
                 }
+                //TODO: review how to change this value
                 obj.AnimationTime = 0;
                 animationList.Append(obj.Animations[dto.Operation]());
                 obj.AnimationTime = Constants.AnimationTime;
