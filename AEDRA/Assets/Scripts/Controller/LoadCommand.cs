@@ -10,6 +10,10 @@ namespace Controller
     {
         // Start is called before the first frame update
         private string _structureName;
+        /// <summary>
+        /// Command to load a DataStructure from persistent storage
+        /// </summary>
+        /// <param name="structureName"></param>
         public LoadCommand(string structureName)
         {
             this._structureName = structureName;

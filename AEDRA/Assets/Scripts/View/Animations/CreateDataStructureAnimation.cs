@@ -7,6 +7,9 @@ using View.GUI.ProjectedObjects;
 
 namespace View.Animations
 {
+    /// <summary>
+    /// Strategy responsible of creating a datastructure
+    /// </summary>
     internal class CreateDataStructureAnimation : IAnimationStrategy
     {
         public void Animate()

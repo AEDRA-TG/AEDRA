@@ -42,6 +42,10 @@ namespace View.GUI
             };
         }
 
+        /// <summary>
+        /// Method to link a DTO with the corresponding projected object
+        /// </summary>
+        /// <param name="dto"></param>
         public void AddDto(ElementDTO dto)
         {
             DTOs.Add(dto);
@@ -49,11 +53,20 @@ namespace View.GUI
             obj?.GetComponentInChildren<ProjectedObject>().SetDTO(dto);
         }
 
+        /// <summary>
+        /// Method to invoke an animation
+        /// </summary>
+        /// <param name="operation"></param>
         public void Animate(OperationEnum operation){
             _animations[operation].Animate();
             DTOs.Clear();
         }
 
+        /// <summary>
+        /// Method to instantiate a new GameObject
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         public ProjectedObject CreateObject(ElementDTO dto){
             string prefabPath = Constants.PrefabPath + dto.Name;
             GameObject prefab = Resources.Load(prefabPath) as GameObject;
@@ -65,6 +78,10 @@ namespace View.GUI
             return createdObject;
         }
 
+        /// <summary>
+        /// Method to delete a list of gameObjects
+        /// </summary>
+        /// <param name="objectsToBeDeleted"></param>
         public void DeleteObject(List<ProjectedObject> objectsToBeDeleted){
             foreach (ProjectedObject dto in objectsToBeDeleted)
             {
@@ -72,6 +89,10 @@ namespace View.GUI
             }
         }
 
+        /// <summary>
+        /// Method to delete a single GameObject
+        /// </summary>
+        /// <param name="objectToBeDeleted"></param>
         public void DeleteObject(ProjectedObject objectToBeDeleted){
             this.ProjectedObjects.Remove(objectToBeDeleted);
             Destroy(objectToBeDeleted.transform.parent.gameObject);

@@ -42,11 +42,19 @@ namespace Observer
             projection.Animate(operation);
         }
 
+        /// <summary>
+        /// Method to save each modification done to the DataStructure
+        /// </summary>
+        /// <param name="operation"></param>
         private void SaveDataStructure(OperationEnum operation){
             Command command = new SaveCommand();
             CommandController.GetInstance().Invoke(command);
         }
 
+        /// <summary>
+        /// Method to clean the previous user selection in screen
+        /// </summary>
+        /// <param name="operation"></param>
         private void CleanUserSelection(OperationEnum operation){
             SelectionController selectionController = FindObjectOfType<SelectionController>();
             selectionController.DeselectAllObjects();
