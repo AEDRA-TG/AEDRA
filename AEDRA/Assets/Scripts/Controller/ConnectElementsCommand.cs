@@ -3,6 +3,7 @@ using Model.Common;
 using Repository;
 using Utils.Enums;
 using SideCar.DTOs;
+using Model.GraphModel;
 
 namespace Controller
 {
@@ -28,8 +29,11 @@ namespace Controller
         }
         public override void Execute()
         {
-            this._dataStructure.ConnectElements(this._edgeDTO);
-            base.Notify(OperationEnum.ConnectObjects);
+            if(this._dataStructure is Graph graph)
+            {
+                graph.ConnectElements(this._edgeDTO);
+                base.Notify(OperationEnum.ConnectObjects);
+            }
         }
     }
 }
