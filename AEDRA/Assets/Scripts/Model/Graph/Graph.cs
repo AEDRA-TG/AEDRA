@@ -71,7 +71,7 @@ namespace Model.GraphModel
             node.Coordinates = Utilities.GenerateRandomPoint();
             element = _nodeConverter.ToDto(node);
             element.Operation = AnimationEnum.CreateAnimation;
-            base.Notify(element);
+            DataStructure.Notify(element);
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace Model.GraphModel
             DeleteEdges(element.Id);
             this.Nodes.Remove( element.Id );
             element.Operation = AnimationEnum.DeleteAnimation;
-            base.Notify(element);
+            DataStructure.Notify(element);
         }
 
         /// <summary>
@@ -214,7 +214,7 @@ namespace Model.GraphModel
             GraphNode node = this.Nodes[id];
             GraphNodeDTO dto = _nodeConverter.ToDto(node);
             dto.Operation = operation;
-            base.Notify(dto);
+            DataStructure.Notify(dto);
         }
 
         private void NotifyEdge(int start, int end, AnimationEnum operation){
@@ -228,7 +228,7 @@ namespace Model.GraphModel
             };
             NotifyNode(start, AnimationEnum.UpdateAnimation);
             NotifyNode(end, AnimationEnum.UpdateAnimation);
-            base.Notify(edge);
+            DataStructure.Notify(edge);
         }
     }
 }

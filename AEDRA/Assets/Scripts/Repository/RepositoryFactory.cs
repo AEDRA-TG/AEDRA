@@ -11,6 +11,7 @@ namespace Repository
             return dataStructureName switch
             {
                 "Graph" => new GraphRepository(dataStructureName),
+                "BinarySearchTree" => new BinarySearchTreeRepository(dataStructureName),
                 _ => null,
             };
         }

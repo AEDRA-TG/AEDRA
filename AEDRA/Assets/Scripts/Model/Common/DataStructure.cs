@@ -41,7 +41,7 @@ namespace Model.Common
         /// Method to Notify observer that the specified operation has completed execution
         /// </summary>
         /// <param name="element"></param>
-        public void Notify(ElementDTO element){
+        public static void Notify(ElementDTO element){
             UpdateElement?.Invoke(element);
         }
     }
