@@ -18,11 +18,12 @@ namespace View.GUI.ProjectedObjects
         public void Update()
         {
             if(base.Dto != null){
-                base.Dto.Coordinates.X = transform.parent.localPosition.x;
-                base.Dto.Coordinates.Y = transform.parent.localPosition.y;
-                base.Dto.Coordinates.Z = transform.parent.localPosition.z;
+                base.Dto.Coordinates.X = transform.localPosition.x;
+                base.Dto.Coordinates.Y = transform.localPosition.y;
+                base.Dto.Coordinates.Z = transform.localPosition.z;
             }
         }
+
 
         public override Tween CreateAnimation(){
             return gameObject.transform.DOScale(1,base.AnimationTime);
@@ -38,7 +39,7 @@ namespace View.GUI.ProjectedObjects
         }
 
         public override void Move(Vector3 coordinates){
-            gameObject.transform.parent.localPosition = coordinates;
+            gameObject.transform.localPosition = coordinates;
         }
 
         public static ProjectedNode FindById(int id){

@@ -45,5 +45,10 @@ namespace Utils
         public const int MaxWidth = 10;
         public const int MaxHeight = 10;
         public const int MaxDepth = 0;
+
+        #region Pyshics
+        public const float OjectPyshicsRepulsionDistance = 1.5f;
+        public const float ObjectPyshicsRepulsionForce = 2f;
+        #endregion
     }
 }
