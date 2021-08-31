@@ -10,6 +10,7 @@ using Utils;
 using UnityEngine;
 using System.Linq;
 using System.Collections;
+using Model.GraphModel.Traversals;
 
 namespace Model.GraphModel
 {
@@ -44,7 +45,7 @@ namespace Model.GraphModel
         /// </summary>
         private GraphNodeConverter _nodeConverter;
 
-        private Dictionary<TraversalEnum, Action<ElementDTO>> _traversals;
+        private Dictionary<TraversalEnum, ITraversalGraphStrategy> _traversals;
 
         public Graph(){
             NodesId = 0;
@@ -52,8 +53,8 @@ namespace Model.GraphModel
             Nodes = new Dictionary<int, GraphNode>();
             AdjacentMtx = new Dictionary<int, Dictionary<int, object>>();
             _nodeConverter = new GraphNodeConverter();
-            _traversals = new Dictionary<TraversalEnum, Action<ElementDTO>>() {
-                {TraversalEnum.GraphBFS, BFSTraversal},
+            _traversals = new Dictionary<TraversalEnum, ITraversalGraphStrategy>() {
+                {TraversalEnum.GraphBFS, new DFSTraversalStrategy() },
             };
         }
 
@@ -90,48 +91,9 @@ namespace Model.GraphModel
         /// Method to do a traversal on the graph
         /// </summary>
         /// <param name="traversalName"> Name of the traversal to execute</param>
-        public override void DoTraversal(TraversalEnum traversalName, ElementDTO startNode)
+        public override void DoTraversal(TraversalEnum traversalName, ElementDTO data = null)
         {
-            this._traversals[traversalName](startNode);
-        }
-
-        /// <summary>
-        /// Method to perform a Breath First Search (BFS) traversal in the graph
-        /// </summary>
-        /// <param name="startNode">Node to start BFS</param>
-        private void BFSTraversal(ElementDTO startNode){
-            Dictionary<int, bool> visitedMap = InitializeVisiteMap();
-            // Item1 destino item2 origen
-            Queue<Tuple<int, int> > q = new Queue<Tuple<int, int> >();
-            q.Enqueue(new Tuple<int, int>(startNode.Id, startNode.Id));
-            while(q.Count > 0){
-                Tuple<int, int> actualNode = q.Dequeue();
-                visitedMap[actualNode.Item1] = true;
-                if(actualNode.Item1 != actualNode.Item2){
-                    NotifyEdge(actualNode.Item2,actualNode.Item1,AnimationEnum.PaintAnimation);
-                }
-                NotifyNode(actualNode.Item1,AnimationEnum.PaintAnimation);
-                foreach (int key in AdjacentMtx[actualNode.Item1].Keys)
-                {
-                    GraphNode neighboorNode = this.Nodes[key];
-                    if(!visitedMap[neighboorNode.Id]){
-                        q.Enqueue(new Tuple<int, int>(neighboorNode.Id, actualNode.Item1));
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Method to initialize the visited map for traversals
-        /// </summary>
-        /// <returns></returns>
-        private Dictionary<int, bool> InitializeVisiteMap(){
-            Dictionary<int, bool> visitedMap = new Dictionary<int, bool>();
-            foreach (int id in Nodes.Keys)
-            {
-                visitedMap.Add(id, false);
-            }
-            return visitedMap;
+            this._traversals[traversalName].DoTraversal(this,data);
         }
 
         /// <summary>
@@ -210,14 +172,14 @@ namespace Model.GraphModel
         }
 
         //TODO: This method needs to take into account that a GraphNode may have been deleted
-        private void NotifyNode(int id, AnimationEnum operation){
+        public void NotifyNode(int id, AnimationEnum operation){
             GraphNode node = this.Nodes[id];
             GraphNodeDTO dto = _nodeConverter.ToDto(node);
             dto.Operation = operation;
             base.Notify(dto);
         }
 
-        private void NotifyEdge(int start, int end, AnimationEnum operation){
+        public void NotifyEdge(int start, int end, AnimationEnum operation){
             object value = null;
             if(AdjacentMtx[start].ContainsKey(end)){
                 value = AdjacentMtx[start][end];
