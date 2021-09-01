@@ -23,13 +23,13 @@ namespace View.GUI.ProjectedObjects
         protected ObjectPhysics _objectPhysics;
 
         virtual public void FixedUpdate() {
-            _objectPhysics.RepulseObject(this.gameObject);
+            _objectPhysics.RepulseObject();
         }
         #endregion
 
         virtual public void Awake()
         {
-            _objectPhysics = new ObjectPhysics();
+            _objectPhysics = new ObjectPhysics(this.gameObject);
             AnimationTime = Constants.AnimationTime;
             IsCreated = false;
             Animations = new Dictionary<AnimationEnum, Func<Tween>> {
