@@ -53,9 +53,13 @@ namespace Model.TreeModel
             if(value > this.Value){
                 if(this._rightChild != null){
                     if(value == this._rightChild.Value){
+                        NotifyEdge(this, this._rightChild, AnimationEnum.DeleteAnimation);
+                        NotifyNode(this, this._rightChild, AnimationEnum.DeleteAnimation);
                         this._rightChild = null;
                     }
                     else{
+                        NotifyEdge(this, this._rightChild, AnimationEnum.PaintAnimation);
+                        NotifyNode(this, this._rightChild, AnimationEnum.PaintAnimation);
                         this._rightChild.DeleteElement(value);
                     }
                 }
@@ -63,9 +67,13 @@ namespace Model.TreeModel
             else if(value < this.Value){
                 if(this._leftChild != null){
                     if(value == this._leftChild.Value){
+                        NotifyEdge(this, this._leftChild, AnimationEnum.DeleteAnimation);
+                        NotifyNode(this, this._leftChild, AnimationEnum.DeleteAnimation);
                         this._leftChild = null;
                     }
                     else{
+                        NotifyEdge(this, this._leftChild, AnimationEnum.PaintAnimation);
+                        NotifyNode(this, this._leftChild, AnimationEnum.PaintAnimation);
                         this._leftChild.DeleteElement(value);
                     }
                 }
