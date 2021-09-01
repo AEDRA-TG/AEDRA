@@ -92,7 +92,7 @@ namespace View
         private void Awake(){
             _loadedPrefabs = new Stack<string>();
             actualPrefabName = "";
-            LoadPrefab(Constants.PathGraphMainMenu, "GraphMainMenu", "ProjectionLayout");
+            LoadPrefab(Constants.PrefabPath + Constants.TreeMainMenu, "TreeMainMenu", "ProjectionLayout");
         }
 
         public void Start()
@@ -104,23 +104,26 @@ namespace View
                 ToggleMenu();
             }
             if(selectedObjects.Count == 1){
-                LoadPrefab(Constants.PrefabPath+Constants.GraphNodeSelectionMenu, "GraphNodeSelectionMenu", "ProjectionLayout");
+                //LoadPrefab(Constants.PrefabPath+Constants.GraphNodeSelectionMenu, "GraphNodeSelectionMenu", "ProjectionLayout");
             }
             else if(selectedObjects.Count > 1){
-                LoadPrefab(Constants.PrefabPath+Constants.GraphNodeMultiSelectionMenu, "GraphNodeSelectionMenu", "ProjectionLayout");
+                //LoadPrefab(Constants.PrefabPath+Constants.GraphNodeMultiSelectionMenu, "GraphNodeSelectionMenu", "ProjectionLayout");
             }
             else{
-                LoadPrefab(Constants.PathGraphMainMenu, "GraphMainMenu", "ProjectionLayout");
+                //LoadPrefab(Constants.PathGraphMainMenu, "GraphMainMenu", "ProjectionLayout");
             }
             ToggleMenu();
         }
 
-        private void ChangeMenu(int id){
+        public void ChangeMenu(int id){
             if(_isExpanded){
                 ToggleMenu();
             }
             if(id == 0){
                 LoadPrefab(Constants.PrefabPath+Constants.GraphTraversalMenu, "GraphTraversalMenu", "ProjectionLayout");
+            }
+            else if(id == 1){
+                LoadPrefab(Constants.PathTraversalOptions, "GraphTraversalMenu", "ProjectionLayout");
             }
             ToggleMenu();
         }

@@ -71,7 +71,7 @@ namespace Model.GraphModel
             node.Coordinates = Utilities.GenerateRandomPoint();
             element = _nodeConverter.ToDto(node);
             element.Operation = AnimationEnum.CreateAnimation;
-            base.Notify(element);
+            DataStructure.Notify(element);
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace Model.GraphModel
             DeleteEdges(element.Id);
             this.Nodes.Remove( element.Id );
             element.Operation = AnimationEnum.DeleteAnimation;
-            base.Notify(element);
+            DataStructure.Notify(element);
         }
 
         /// <summary>
@@ -138,9 +138,9 @@ namespace Model.GraphModel
         /// Method to connect two nodes bidirectionally
         /// </summary>
         /// <param name="element"></param>
-        public void ConnectElements(ElementDTO graphEdgeDTO)
+        public void ConnectElements(ElementDTO EdgeDTO)
         {
-            GraphEdgeDTO edgeDTO = (GraphEdgeDTO) graphEdgeDTO;
+            EdgeDTO edgeDTO = (EdgeDTO) EdgeDTO;
             edgeDTO.Id = EdgesId++;
             // TODO: validar aristas
             bool edgeStartToEnd = AdjacentMtx[edgeDTO.IdStartNode].ContainsKey(edgeDTO.IdEndNode);
@@ -214,7 +214,7 @@ namespace Model.GraphModel
             GraphNode node = this.Nodes[id];
             GraphNodeDTO dto = _nodeConverter.ToDto(node);
             dto.Operation = operation;
-            base.Notify(dto);
+            DataStructure.Notify(dto);
         }
 
         private void NotifyEdge(int start, int end, AnimationEnum operation){
@@ -222,13 +222,13 @@ namespace Model.GraphModel
             if(AdjacentMtx[start].ContainsKey(end)){
                 value = AdjacentMtx[start][end];
             }
-            GraphEdgeDTO edge = new GraphEdgeDTO(0, value, start, end)
+            EdgeDTO edge = new EdgeDTO(0, value, start, end)
             {
                 Operation = operation
             };
             NotifyNode(start, AnimationEnum.UpdateAnimation);
             NotifyNode(end, AnimationEnum.UpdateAnimation);
-            base.Notify(edge);
+            DataStructure.Notify(edge);
         }
     }
 }
