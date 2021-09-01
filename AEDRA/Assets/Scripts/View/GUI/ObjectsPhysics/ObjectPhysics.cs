@@ -28,6 +28,7 @@ namespace View.GUI.ObjectsPhysics
         }
 
         public void AddLeftImpulse(){
+            Debug.Log("Left");
             Vector3 impulseDirection = new Vector3(-5,0,0);
             Rigidbody rigidbody = _gameObject.GetComponent<Rigidbody>();
             rigidbody.AddForce(impulseDirection, ForceMode.Impulse);

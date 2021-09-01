@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using Utils;
+using SideCar.DTOs;
 
 namespace View.GUI.ProjectedObjects
 {
@@ -26,7 +27,13 @@ namespace View.GUI.ProjectedObjects
 
 
         public override Tween CreateAnimation(){
-            base._objectPhysics.AddLeftImpulse();
+            BinarySearchNodeDTO dto = (BinarySearchNodeDTO) base.Dto;
+            if(dto.IsLeft && dto.ParentId!=null){
+                base._objectPhysics.AddLeftImpulse();
+            }
+            else{
+
+            }
             return gameObject.transform.DOScale(1,base.AnimationTime);
         }
 
