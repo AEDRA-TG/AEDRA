@@ -23,7 +23,7 @@ namespace View.GUI.ProjectedObjects
         protected ObjectPhysics _objectPhysics;
 
         virtual public void FixedUpdate() {
-            //_objectPhysics.RepulseObject(this.gameObject);
+            _objectPhysics.RepulseObject(this.gameObject);
         }
         #endregion
 

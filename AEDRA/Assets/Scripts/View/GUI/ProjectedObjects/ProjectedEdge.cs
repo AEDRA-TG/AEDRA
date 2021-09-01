@@ -28,6 +28,9 @@ namespace View.GUI.ProjectedObjects
             return tween;
         }
 
+        public void OnCollisionEnter(Collision other) {
+            Physics.IgnoreCollision(this.gameObject.GetComponent<Collider>(), other.collider);
+        }
         private Vector3 UpdateEdge(){
             GraphEdgeDTO edgeDTO = (GraphEdgeDTO) base.Dto;
             Vector3 startPosition = GetNodeCoordinates(edgeDTO.IdStartNode);
