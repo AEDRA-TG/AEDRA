@@ -56,6 +56,10 @@ namespace View.GUI.ProjectedObjects
         virtual public void SetDTO(ElementDTO dto)
         {
             Dto = dto;
+            TextMesh text = gameObject.GetComponentInChildren<TextMesh>();
+            if(text != null){
+                text.text = dto.Value.ToString();
+            }
             //TODO: update object properties
         }
 
