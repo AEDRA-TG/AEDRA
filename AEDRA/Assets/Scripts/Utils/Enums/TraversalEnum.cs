@@ -2,6 +2,7 @@ namespace Utils.Enums
 {
     public enum TraversalEnum
     {
-        GraphBFS
+        GraphBFS,
+        GraphDFS
     }
 }

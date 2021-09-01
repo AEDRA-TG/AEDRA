@@ -32,7 +32,7 @@ namespace View.GUI.ProjectedObjects
             Physics.IgnoreCollision(this.gameObject.GetComponent<Collider>(), other.collider);
         }
         private Vector3 UpdateEdge(){
-            GraphEdgeDTO edgeDTO = (GraphEdgeDTO) base.Dto;
+            EdgeDTO edgeDTO = (EdgeDTO) base.Dto;
             Vector3 startPosition = GetNodeCoordinates(edgeDTO.IdStartNode);
             Vector3 endPosition = GetNodeCoordinates(edgeDTO.IdEndNode);
 

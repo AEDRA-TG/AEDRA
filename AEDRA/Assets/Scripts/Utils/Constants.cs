@@ -16,7 +16,7 @@ namespace Utils
         /// Global color of all buttons in the app
         /// </summary>
         public static Color GlobalColor = Utilities.LoadGlobalColor();
-        public const float AnimationTime = 3;
+        public const float AnimationTime = 1;
         public const string ObjectsParentName = "StructureProjection";
         public const string PrefabPath = "Prefabs/";
         public const string GraphFile = "Assets/Files/Graph.json";
@@ -39,6 +39,8 @@ namespace Utils
         public const string PathHamburgerPrefab = "Prefabs/HamburgerMenu";
         public const string PathLargeButton = "Prefabs/LargeButton";
         public const string GraphNodeSelectionMenu = "GraphNodeSelectionMenu";
+        public const string TreeMainMenu = "TreeMainMenu";
+
         //
         #endregion
         public const string DataStructureFilePath = "Assets/Files/";

@@ -62,7 +62,7 @@ namespace View.EventController
             {
                 if(objs[0].GetType() == typeof(ProjectedNode) && objs[1].GetType() == typeof(ProjectedNode)){
                     Debug.Log(objs[0].Dto.Id+ "-" + objs[1].Dto.Id );
-                    GraphEdgeDTO edgeDTO = new GraphEdgeDTO(0, 0, objs[0].Dto.Id, objs[1].Dto.Id);
+                    EdgeDTO edgeDTO = new EdgeDTO(0, 0, objs[0].Dto.Id, objs[1].Dto.Id);
                     ConnectElementsCommand connectCommand = new ConnectElementsCommand(edgeDTO);
                     CommandController.GetInstance().Invoke(connectCommand);
                 }
@@ -84,6 +84,20 @@ namespace View.EventController
             {
                     GraphNodeDTO nodeDTO = (GraphNodeDTO)objs[0].Dto;
                     DoTraversalCommand traversalCommand = new DoTraversalCommand(TraversalEnum.GraphBFS,nodeDTO);
+                    CommandController.GetInstance().Invoke(traversalCommand);
+            }
+            else
+            {
+                Debug.Log("Numero de nodos seleccionados inválido");
+            }
+        }
+
+        public void DoTraversalDFS(){
+            List<ProjectedObject> objs = _selectionController.GetSelectedObjects();
+            if (objs.Count == 1 && objs[0].GetType() == typeof(ProjectedNode))
+            {
+                    GraphNodeDTO nodeDTO = (GraphNodeDTO)objs[0].Dto;
+                    DoTraversalCommand traversalCommand = new DoTraversalCommand(TraversalEnum.GraphDFS,nodeDTO);
                     CommandController.GetInstance().Invoke(traversalCommand);
             }
             else
