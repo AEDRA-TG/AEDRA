@@ -34,8 +34,8 @@ namespace Model.Common
         /// Method to do traversal through a data structure
         /// </summary>
         /// <param name="traversalName"> Name of the traversal that will be executed on the data structure</param>
-        /// <param name="startNode">Element that contains the informatión about from  wich node the traversal will start</param>
-        public abstract void DoTraversal(TraversalEnum traversalName, ElementDTO startNode);
+        /// <param name="data">Optional parameter with the required data to execute the traversal</param>
+        public abstract void DoTraversal(TraversalEnum traversalName, ElementDTO data = null);
 
         /// <summary>
         /// Method to Notify observer that the specified operation has completed execution
