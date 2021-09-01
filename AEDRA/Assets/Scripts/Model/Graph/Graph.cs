@@ -54,7 +54,8 @@ namespace Model.GraphModel
             AdjacentMtx = new Dictionary<int, Dictionary<int, object>>();
             _nodeConverter = new GraphNodeConverter();
             _traversals = new Dictionary<TraversalEnum, ITraversalGraphStrategy>() {
-                {TraversalEnum.GraphBFS, new DFSTraversalStrategy() },
+                {TraversalEnum.GraphBFS, new BFSTraversalStrategy() },
+                {TraversalEnum.GraphDFS, new DFSTraversalStrategy() }
             };
         }
 
@@ -90,7 +91,8 @@ namespace Model.GraphModel
         /// <summary>
         /// Method to do a traversal on the graph
         /// </summary>
-        /// <param name="traversalName"> Name of the traversal to execute</param>
+        /// <param name="traversalName">Enum of the traversal to execute</param>
+        /// <param name="data">Optional parameter to pass the data to the traversal</param>
         public override void DoTraversal(TraversalEnum traversalName, ElementDTO data = null)
         {
             this._traversals[traversalName].DoTraversal(this,data);
