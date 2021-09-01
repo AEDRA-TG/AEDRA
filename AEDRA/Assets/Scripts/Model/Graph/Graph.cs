@@ -138,9 +138,9 @@ namespace Model.GraphModel
         /// Method to connect two nodes bidirectionally
         /// </summary>
         /// <param name="element"></param>
-        public void ConnectElements(ElementDTO graphEdgeDTO)
+        public void ConnectElements(ElementDTO EdgeDTO)
         {
-            GraphEdgeDTO edgeDTO = (GraphEdgeDTO) graphEdgeDTO;
+            EdgeDTO edgeDTO = (EdgeDTO) EdgeDTO;
             edgeDTO.Id = EdgesId++;
             // TODO: validar aristas
             bool edgeStartToEnd = AdjacentMtx[edgeDTO.IdStartNode].ContainsKey(edgeDTO.IdEndNode);
@@ -222,7 +222,7 @@ namespace Model.GraphModel
             if(AdjacentMtx[start].ContainsKey(end)){
                 value = AdjacentMtx[start][end];
             }
-            GraphEdgeDTO edge = new GraphEdgeDTO(0, value, start, end)
+            EdgeDTO edge = new EdgeDTO(0, value, start, end)
             {
                 Operation = operation
             };

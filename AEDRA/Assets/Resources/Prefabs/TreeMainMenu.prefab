@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef222be7e6ca99c44bab0e96b55d8192, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  value: 0
 --- !u!1 &2396175212678708896
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,18 +214,18 @@ PrefabInstance:
     - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6865072324970286570}
     - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnClickTreeTraversal
+      value: ChangeToTraversalMenu
       objectReference: {fileID: 0}
     - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: View.EventController.TreeEventsController, Assembly-CSharp
+      value: View.EventController.TreeEventController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName

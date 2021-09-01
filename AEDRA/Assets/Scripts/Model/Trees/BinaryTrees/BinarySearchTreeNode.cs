@@ -68,6 +68,14 @@ namespace Model.TreeModel
             }
         }
 
+        public void NotifyEdge(BinarySearchTreeNode parent, BinarySearchTreeNode node, AnimationEnum operation){
+            EdgeDTO dto = new EdgeDTO(0, node.Value, parent.Id, node.Id)
+            {
+                Operation = operation
+            };
+            DataStructure.Notify(dto);
+        }
+
         public void NotifyNode(BinarySearchTreeNode parent, BinarySearchTreeNode node, AnimationEnum operation){
             int? parentId = null;
             bool isLeft = false;

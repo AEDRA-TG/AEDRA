@@ -15,12 +15,6 @@ namespace View.EventController
     public class TreeEventController : MonoBehaviour
     {
         [SerializeField] public int value;
-        public void Start()
-        {
-        }
-        public void Update()
-        {
-        }
         /// <summary>
         /// Method that recive the click of the traversal button on options menu delegate prefabs change to OptionsMenu class
         /// </summary>
@@ -33,6 +27,12 @@ namespace View.EventController
             BinarySearchNodeDTO nodeDTO = new BinarySearchNodeDTO(0, this.value, null, true, null, null);
             AddElementCommand addCommand = new AddElementCommand(nodeDTO);
             CommandController.GetInstance().Invoke(addCommand);
+        }
+
+        //TODO this code is part of refactor (do not modify this logic plis, contact IT support if you have issues)
+        public void ChangeToTraversalMenu(){
+            OptionsMenu menu = FindObjectOfType<OptionsMenu>();
+            menu.ChangeMenu(1);
         }
     }
 }
