@@ -15,19 +15,21 @@ namespace Model.TreeModel
         }
         public override void CreateDataStructure()
         {
-            throw new System.NotImplementedException();
+            
         }
 
         public override void AddElement(ElementDTO element)
         {
-            if(this._root != null){
+            if(this._root != null && this._root.Value!=(int)element.Value){
+                this._root.NotifyNode(null, this._root, AnimationEnum.PaintAnimation);
                 this._root.AddElement(this._nodesCount, (int)element.Value);
+                this._nodesCount++;
             }
-            else{
+            else if(this._root == null){
                 this._root = new BinarySearchTreeNode(this._nodesCount, (int)element.Value);
                 this._root.NotifyNode(null, this._root, AnimationEnum.CreateAnimation);
+                this._nodesCount++;
             }
-            this._nodesCount++;
         }
 
         public override void DeleteElement(ElementDTO element)

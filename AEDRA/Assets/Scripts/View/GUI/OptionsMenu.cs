@@ -92,7 +92,7 @@ namespace View
         private void Awake(){
             _loadedPrefabs = new Stack<string>();
             actualPrefabName = "";
-            LoadPrefab(Constants.PathGraphMainMenu, "GraphMainMenu", "ProjectionLayout");
+            LoadPrefab(Constants.PrefabPath + Constants.TreeMainMenu, "TreeMainMenu", "ProjectionLayout");
         }
 
         public void Start()
@@ -110,7 +110,7 @@ namespace View
                 LoadPrefab(Constants.PrefabPath+Constants.GraphNodeMultiSelectionMenu, "GraphNodeSelectionMenu", "ProjectionLayout");
             }
             else{
-                LoadPrefab(Constants.PathGraphMainMenu, "GraphMainMenu", "ProjectionLayout");
+                //LoadPrefab(Constants.PathGraphMainMenu, "GraphMainMenu", "ProjectionLayout");
             }
             ToggleMenu();
         }

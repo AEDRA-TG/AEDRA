@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using View;
 using Utils;
+using SideCar.DTOs;
+using Controller;
 
 namespace View.EventController
 {
     /// <summary>
     /// Events controller that recives all the OnClick methods of the tree options
     /// </summary>
-    public class TreeEventsController : MonoBehaviour
+
+    public class TreeEventController : MonoBehaviour
     {
+        [SerializeField] public int value;
         public void Start()
         {
         }
@@ -24,13 +28,11 @@ namespace View.EventController
         /// <param name="instanceName">The name that instance prefab will have</param>
         /// <param name="parent">The parent of the prefab name</param>
 
-        public void OnClickTreeTraversal()
-        {
-            OptionsMenu optionsMenu = FindObjectOfType<OptionsMenu>();
-            optionsMenu.ToggleMenu();
-            optionsMenu.LoadPrefab(Constants.PathTraversalOptions, "TreeTraversalOptions", "ProjectionLayout");
-            optionsMenu.ShowTittle("Recorrer árbol");
-            optionsMenu.ToggleMenu();
+        public void OnTouchAddNode(){
+            //!!TODO: this could be another kind of tree node
+            BinarySearchNodeDTO nodeDTO = new BinarySearchNodeDTO(0, this.value, null, true, null, null);
+            AddElementCommand addCommand = new AddElementCommand(nodeDTO);
+            CommandController.GetInstance().Invoke(addCommand);
         }
     }
 }

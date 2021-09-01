@@ -2,6 +2,7 @@ using System.Collections;
 using Utils.Enums;
 using SideCar.DTOs;
 using Model.Common;
+using UnityEngine; // REMOVE THIS IMPORT
 
 namespace Model.TreeModel
 {
@@ -22,18 +23,25 @@ namespace Model.TreeModel
         }
 
         public void AddElement(int id, int value){
-            BinarySearchTreeNode child=null;
             if(value > this.Value){
-                child = this._rightChild;
+                if(this._rightChild!=null){
+                    NotifyNode(this, this._rightChild, AnimationEnum.PaintAnimation);
+                    this._rightChild.AddElement(id,value);
+                }
+                else{
+                    this._rightChild = new BinarySearchTreeNode(id, value);
+                    NotifyNode(this,this._rightChild, AnimationEnum.CreateAnimation);
+                }
             }
             else if(value < this.Value){
-                child = this._leftChild;
-            }
-            if(child == null){
-                child = new BinarySearchTreeNode(id, value);
-            }
-            else{
-                child.AddElement(id, value);
+                if(this._leftChild!=null){
+                    NotifyNode(this, this._leftChild, AnimationEnum.PaintAnimation);
+                    this._leftChild.AddElement(id,value);
+                }
+                else{
+                    this._leftChild = new BinarySearchTreeNode(id, value);
+                    NotifyNode(this,this._leftChild, AnimationEnum.CreateAnimation);
+                }
             }
         }
 
@@ -70,7 +78,8 @@ namespace Model.TreeModel
                 }
             }
             BinarySearchNodeDTO dto = new BinarySearchNodeDTO(node.Id, node.Value, parentId, isLeft, node._leftChild?.Id, node._rightChild?.Id){
-                Operation = operation
+                Operation = operation,
+                Coordinates = new Point(0,0,0)
             };
             DataStructure.Notify(dto);
         }
