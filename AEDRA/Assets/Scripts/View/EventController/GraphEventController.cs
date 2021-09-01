@@ -6,6 +6,8 @@ using View.GUI.ProjectedObjects;
 using System.Collections.Generic;
 using Utils.Enums;
 using System;
+using Utils;
+using UnityEngine.UI;
 
 namespace View.EventController
 {
@@ -27,9 +29,10 @@ namespace View.EventController
         /// </summary>
         public void OnTouchAddNode()
         {
+            string value = FindObjectOfType<InputField>().text;
             //TODO: Obtener el dto de los datos de la pantalla
             List<int> neighbors = new List<int>();
-            GraphNodeDTO nodeDTO = new GraphNodeDTO(0, 0, neighbors);
+            GraphNodeDTO nodeDTO = new GraphNodeDTO(0, value, neighbors);
             AddElementCommand addCommand = new AddElementCommand(nodeDTO);
             CommandController.GetInstance().Invoke(addCommand);
         }
@@ -89,6 +92,17 @@ namespace View.EventController
             else
             {
                 Debug.Log("Numero de nodos seleccionados inválido");
+            }
+        }
+
+        //TODO: Revisar paso de parametros, This method should not be here
+        public void ChangeMenu(int menu){
+            OptionsMenu optionsMenu = FindObjectOfType<OptionsMenu>();
+            //TODO: Refactor this code, pliiis
+            switch(menu) {
+                case 0:
+                    optionsMenu.LoadPrefab(Constants.PathAddElementInputMenu, "InputMenu", "ProjectionLayout");
+                    break;
             }
         }
     }

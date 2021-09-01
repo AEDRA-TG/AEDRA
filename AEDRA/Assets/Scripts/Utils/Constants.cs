@@ -36,6 +36,8 @@ namespace Utils
         public const string PathTraversalOptions = "Prefabs/TreeTraversalOptions";
         public const string PathGraphMainMenu = "Prefabs/GraphMainMenu";
         public const string PathGraphNodeSelectionMenu = "Prefabs/GraphNodeSelectionMenu";
+        
+        public const string PathAddElementInputMenu = "Prefabs/AddElementInputMenu";
         public const string PathHamburgerPrefab = "Prefabs/HamburgerMenu";
         public const string PathLargeButton = "Prefabs/LargeButton";
         public const string GraphNodeSelectionMenu = "GraphNodeSelectionMenu";

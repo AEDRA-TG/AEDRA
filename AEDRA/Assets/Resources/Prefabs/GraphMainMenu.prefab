@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8933958872978191501}
-  - component: {fileID: 2123795558469344627}
+  - component: {fileID: 5334151436077077455}
   m_Layer: 0
   m_Name: GraphMainMenu
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2123795558469344627
+--- !u!114 &5334151436077077455
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -169,19 +169,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2123795558469344627}
+      objectReference: {fileID: 5334151436077077455}
     - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnTouchAddNode
+      value: ChangeMenu
       objectReference: {fileID: 0}
     - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -189,7 +189,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 20
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
