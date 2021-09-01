@@ -25,22 +25,26 @@ namespace Model.TreeModel
         public void AddElement(int id, int value){
             if(value > this.Value){
                 if(this._rightChild!=null){
+                    NotifyEdge(this, this._rightChild, AnimationEnum.PaintAnimation);
                     NotifyNode(this, this._rightChild, AnimationEnum.PaintAnimation);
                     this._rightChild.AddElement(id,value);
                 }
                 else{
                     this._rightChild = new BinarySearchTreeNode(id, value);
                     NotifyNode(this,this._rightChild, AnimationEnum.CreateAnimation);
+                    NotifyEdge(this, this._rightChild, AnimationEnum.CreateAnimation);
                 }
             }
             else if(value < this.Value){
                 if(this._leftChild!=null){
+                    NotifyEdge(this, this._leftChild, AnimationEnum.PaintAnimation);
                     NotifyNode(this, this._leftChild, AnimationEnum.PaintAnimation);
                     this._leftChild.AddElement(id,value);
                 }
                 else{
                     this._leftChild = new BinarySearchTreeNode(id, value);
                     NotifyNode(this,this._leftChild, AnimationEnum.CreateAnimation);
+                    NotifyEdge(this, this._leftChild, AnimationEnum.CreateAnimation);
                 }
             }
         }
