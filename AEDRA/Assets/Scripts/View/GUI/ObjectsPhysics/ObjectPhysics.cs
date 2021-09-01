@@ -12,7 +12,6 @@ namespace View.GUI.ObjectsPhysics
             Collider[] collidersInScene = Physics.OverlapSphere(gameObject.transform.position, Constants.OjectPyshicsRepulsionDistance);
             foreach (Collider collider in collidersInScene)
             {
-                //Get the rigidbody asociated with the collider in the same gameobject
                 Rigidbody colliderRigidBody = collider.attachedRigidbody;
                 if (colliderRigidBody != null && colliderRigidBody != gameObject.GetComponent<Rigidbody>())
                 {

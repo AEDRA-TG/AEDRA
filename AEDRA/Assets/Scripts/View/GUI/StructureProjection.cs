@@ -96,7 +96,7 @@ namespace View.GUI
         /// <param name="objectToBeDeleted"></param>
         public void DeleteObject(ProjectedObject objectToBeDeleted){
             this.ProjectedObjects.Remove(objectToBeDeleted);
-            Destroy(objectToBeDeleted.transform.parent.gameObject);
+            Destroy(objectToBeDeleted.gameObject);
         }
     }
 }
