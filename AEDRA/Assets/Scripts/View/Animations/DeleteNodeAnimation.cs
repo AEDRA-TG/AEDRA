@@ -25,7 +25,7 @@ namespace View.Animations
                 if(dto.Operation == AnimationEnum.DeleteAnimation){
                     objectsToBeDeleted.Add(projectedObject);
                 }
-                if(projectedObject as ProjectedEdge)
+                if(projectedObject as ProjectedEdge && dto.Operation == AnimationEnum.DeleteAnimation)
                 {
                     animationList.Join(projectedObject.Animations[dto.Operation]());
                 }
