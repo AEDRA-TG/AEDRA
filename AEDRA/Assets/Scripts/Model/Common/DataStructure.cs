@@ -34,20 +34,14 @@ namespace Model.Common
         /// Method to do traversal through a data structure
         /// </summary>
         /// <param name="traversalName"> Name of the traversal that will be executed on the data structure</param>
-        /// <param name="startNode">Element that contains the informatión about from  wich node the traversal will start</param>
-        public abstract void DoTraversal(TraversalEnum traversalName, ElementDTO startNode);
-        /// <summary>
-        /// Method to do connect two elements in a data structure
-        /// </summary>
-        /// <param name="element"> Edge that will be created in the data structure</param>
-        // TODO: Esto esta mal, este método no debería ir en la clase DataStructure
-        public abstract void ConnectElements(ElementDTO edgeDTO);
+        /// <param name="data">Optional parameter with the required data to execute the traversal</param>
+        public abstract void DoTraversal(TraversalEnum traversalName, ElementDTO data = null);
 
         /// <summary>
         /// Method to Notify observer that the specified operation has completed execution
         /// </summary>
         /// <param name="element"></param>
-        public void Notify(ElementDTO element){
+        public static void Notify(ElementDTO element){
             UpdateElement?.Invoke(element);
         }
     }

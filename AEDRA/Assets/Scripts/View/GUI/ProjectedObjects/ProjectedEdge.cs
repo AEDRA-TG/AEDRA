@@ -22,11 +22,14 @@ namespace View.GUI.ProjectedObjects
             }
         }
         public override Tween CreateAnimation(){
-            return gameObject.transform.DOScale(UpdateEdge(),base.AnimationTime);
+            //TODO: make name of IsCreated more explitic (e.g: OnCreatedAnimationCompleted)
+            Tween tween = gameObject.transform.DOScale(UpdateEdge(),base.AnimationTime);
+            tween.OnComplete(()=> this.IsCreated = true);
+            return tween;
         }
 
         private Vector3 UpdateEdge(){
-            GraphEdgeDTO edgeDTO = (GraphEdgeDTO) base.Dto;
+            EdgeDTO edgeDTO = (EdgeDTO) base.Dto;
             Vector3 startPosition = GetNodeCoordinates(edgeDTO.IdStartNode);
             Vector3 endPosition = GetNodeCoordinates(edgeDTO.IdEndNode);
 

@@ -18,7 +18,7 @@ namespace View.EventController
         /// </summary>
         public void OnTargetDetected(){
             StructureProjection projection = GameObject.FindObjectOfType<StructureProjection>();
-            projection.Name = "Graph";
+            projection.Name = "BinarySearchTree";
             Command command = new LoadCommand(projection.Name);
             CommandController.GetInstance().Invoke(command);
         }
