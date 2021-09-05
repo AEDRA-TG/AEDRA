@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8933958872978191501}
+  - component: {fileID: 4339428023539272018}
   m_Layer: 0
   m_Name: TreeTraversalOptions
   m_TagString: Untagged
@@ -31,6 +32,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4339428023539272018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057850954522899364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef222be7e6ca99c44bab0e96b55d8192, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value: 0
 --- !u!1 &2396175212678708896
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,6 +190,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5363973221690197227}
     m_Modifications:
+    - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4339428023539272018}
+    - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnTouchPreOrderTraversal
+      objectReference: {fileID: 0}
+    - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: View.EventController.TreeEventController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3131914329587762830, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
       propertyPath: m_Text
       value: Pre
@@ -299,6 +329,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5363973221690197227}
     m_Modifications:
+    - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4339428023539272018}
+    - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnTouchPostOrderTraversal
+      objectReference: {fileID: 0}
+    - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: View.EventController.TreeEventController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3131914329587762830, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
       propertyPath: m_Text
       value: Pos
@@ -418,6 +464,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5363973221690197227}
     m_Modifications:
+    - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4339428023539272018}
+    - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnTouchInOrderTraversal
+      objectReference: {fileID: 0}
+    - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: View.EventController.TreeEventController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2731015000048538532, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3131914329587762830, guid: aa4e89bbfb0d06d458f98ede57bac298, type: 3}
       propertyPath: m_Text
       value: In

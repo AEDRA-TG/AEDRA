@@ -5,6 +5,7 @@ using View;
 using Utils;
 using SideCar.DTOs;
 using Controller;
+using Utils.Enums;
 
 namespace View.EventController
 {
@@ -40,6 +41,19 @@ namespace View.EventController
         public void ChangeToTraversalMenu(){
             OptionsMenu menu = FindObjectOfType<OptionsMenu>();
             menu.ChangeMenu(1);
+        }
+
+        public void OnTouchPreOrderTraversal(){
+            DoTraversalCommand traversalCommand = new DoTraversalCommand(TraversalEnum.TreePreOrder,null);
+            CommandController.GetInstance().Invoke(traversalCommand);
+        }
+        public void OnTouchInOrderTraversal(){
+            DoTraversalCommand traversalCommand = new DoTraversalCommand(TraversalEnum.TreeInOrder,null);
+            CommandController.GetInstance().Invoke(traversalCommand);
+        }
+        public void OnTouchPostOrderTraversal(){
+            DoTraversalCommand traversalCommand = new DoTraversalCommand(TraversalEnum.TreePostOrder,null);
+            CommandController.GetInstance().Invoke(traversalCommand);
         }
     }
 }

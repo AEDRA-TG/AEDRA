@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using Model.Common;
+using Model.TreeModel.BinaryTree.Traversals;
 using SideCar.DTOs;
 using Utils.Enums;
 
@@ -8,10 +10,16 @@ namespace Model.TreeModel
     {
         private BinarySearchTreeNode _root;
         private int _nodesCount;
+        private Dictionary<TraversalEnum, ITraversalTreeStrategy> _traversals;
 
         public BinarySearchTree(){
             this._nodesCount = 0;
             this._root = null;
+            _traversals = new Dictionary<TraversalEnum, ITraversalTreeStrategy>() {
+                {TraversalEnum.TreePreOrder, new PreOrderTraversalStrategy()},
+                {TraversalEnum.TreeInOrder, new InOrderTraversalStrategy()},
+                {TraversalEnum.TreePostOrder, new PostOrderTraversalStrategy()}
+            };
         }
         public override void CreateDataStructure()
         {
@@ -45,9 +53,13 @@ namespace Model.TreeModel
             }
         }
 
-        public override void DoTraversal(TraversalEnum traversalName, ElementDTO startNode)
+        /// <summary>
+        /// Method to do a traversal on the tree
+        /// </summary>
+        /// <param name="traversalName">Enum of the traversal to execute</param>
+        public override void DoTraversal(TraversalEnum traversalName, ElementDTO data = null)
         {
-            throw new System.NotImplementedException();
+            this._traversals[traversalName].DoTraversal(this);
         }
 
         public BinarySearchTreeNode GetRoot(){
