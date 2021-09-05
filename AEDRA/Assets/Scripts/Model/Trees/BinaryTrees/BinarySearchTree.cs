@@ -49,5 +49,9 @@ namespace Model.TreeModel
         {
             throw new System.NotImplementedException();
         }
+
+        public BinarySearchTreeNode GetRoot(){
+            return _root;
+        }
     }
 }

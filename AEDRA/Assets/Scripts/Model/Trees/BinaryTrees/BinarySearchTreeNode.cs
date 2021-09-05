@@ -10,8 +10,8 @@ namespace Model.TreeModel
     {
         public int Id{get;set;}
         public int Value {get; set;}
-        private BinarySearchTreeNode _leftChild;
-        private BinarySearchTreeNode _rightChild;
+        public BinarySearchTreeNode _leftChild {get; set;}
+        public BinarySearchTreeNode _rightChild {get; set;}
 
         public BinarySearchTreeNode(int id, int value){
             this.Id = id;
