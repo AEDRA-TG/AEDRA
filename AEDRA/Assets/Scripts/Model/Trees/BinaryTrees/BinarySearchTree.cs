@@ -15,7 +15,6 @@ namespace Model.TreeModel
         }
         public override void CreateDataStructure()
         {
-            
         }
 
         public override void AddElement(ElementDTO element)
@@ -36,9 +35,11 @@ namespace Model.TreeModel
         {
             if(this._root !=null){
                 if(this._root.IsLeaf() && this._root.Value == (int)element.Value){
+                    this._root.NotifyNode(null, this._root, AnimationEnum.DeleteAnimation);
                     this._root = null;
                 }
                 else{
+                    this._root.NotifyNode(null, this._root, AnimationEnum.PaintAnimation);
                     this._root.DeleteElement((int)element.Value);
                 }
             }
