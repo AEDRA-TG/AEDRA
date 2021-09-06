@@ -70,13 +70,13 @@ namespace View.GUI
         /// <returns></returns>
         public ProjectedObject CreateObject(ElementDTO dto){
             Vector3 position = new Vector3(0,0,0);
-            /*if(dto.GetType() == typeof(BinarySearchNodeDTO)){
+            if(dto.GetType() == typeof(BinarySearchNodeDTO)){
                 BinarySearchNodeDTO castDTO = dto as BinarySearchNodeDTO;
                 if(castDTO.ParentId != null){
                     GameObject parentObject = GameObject.Find(Constants.NodeName + castDTO.ParentId);
                     position = new Vector3(parentObject.transform.position.x, parentObject.transform.position.y - 3, parentObject.transform.position.z);
                 }
-            }*/
+            }
             string prefabPath = Constants.PrefabPath + dto.Name;
             GameObject prefab = Resources.Load(prefabPath) as GameObject;
             prefab = Instantiate(prefab,position,Quaternion.identity,this.transform);

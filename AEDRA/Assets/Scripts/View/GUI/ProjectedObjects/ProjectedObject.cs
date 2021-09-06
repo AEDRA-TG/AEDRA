@@ -24,6 +24,7 @@ namespace View.GUI.ProjectedObjects
 
         virtual public void FixedUpdate() {
             _objectPhysics.RepulseObject();
+            _objectPhysics.ParentPosition();
         }
         #endregion
 

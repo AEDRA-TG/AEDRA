@@ -27,13 +27,7 @@ namespace View.GUI.ProjectedObjects
 
 
         public override Tween CreateAnimation(){
-            BinarySearchNodeDTO dto = (BinarySearchNodeDTO) base.Dto;
-            if(dto.IsLeft && dto.ParentId!=null){
-                base._objectPhysics.AddLeftImpulse();
-            }
-            else{
-
-            }
+            base._objectPhysics.PositionObject();
             return gameObject.transform.DOScale(1,base.AnimationTime);
         }
 
