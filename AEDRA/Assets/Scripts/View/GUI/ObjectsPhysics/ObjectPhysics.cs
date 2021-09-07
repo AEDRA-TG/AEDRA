@@ -15,7 +15,7 @@ namespace View.GUI.ObjectsPhysics
 
         public void RepulseObject(){
             //Get the active colliders in scene
-            Collider[] collidersInScene = Physics.OverlapSphere(_gameObject.transform.position, Constants.OjectPyshicsRepulsionDistance);
+            Collider[] collidersInScene = Physics.OverlapSphere(_gameObject.transform.position, Constants.OjectPhysicsRepulsionDistance);
             foreach (Collider collider in collidersInScene)
             {
                 Rigidbody colliderRigidBody = collider.attachedRigidbody;
@@ -24,12 +24,12 @@ namespace View.GUI.ObjectsPhysics
                     Vector3 repulsionDirection;
                     if (_gameObject.GetComponent<ProjectedObject>().Dto is BinarySearchNodeDTO dto){
                         repulsionDirection = new Vector3(collider.transform.position.x - _gameObject.transform.position.x, 0, 0);
+                        colliderRigidBody.AddForce(repulsionDirection * Constants.ObjectPhysicsRepulsionForce * Constants.ObjectPhysicsRepulsionHorizontalDistance);
                     }
                     else{
                         repulsionDirection = collider.transform.position - _gameObject.transform.position;
+                        colliderRigidBody.AddForce(repulsionDirection * Constants.ObjectPhysicsRepulsionForce * Constants.OjectPhysicsRepulsionDistance);
                     }
-                    // apply normalized distance
-                    colliderRigidBody.AddForce(repulsionDirection * Constants.ObjectPyshicsRepulsionForce * Constants.OjectPyshicsRepulsionDistance);
                 }
             }
         }
@@ -43,7 +43,7 @@ namespace View.GUI.ObjectsPhysics
                         Vector3 distanceLeftToParent = leftChild.transform.position - _gameObject.transform.position;
                         Vector3 distanceRightToParent = rightChild.transform.position - _gameObject.transform.position;
                         if(Mathf.Abs(distanceRightToParent.x) < Mathf.Abs(distanceLeftToParent.x)){
-                            rightChild.GetComponent<Rigidbody>().AddForce(new Vector3(Mathf.Abs(distanceLeftToParent.x),0,0)*Constants.ObjectPyshicsRepulsionForce*Constants.OjectPyshicsRepulsionDistance);
+                            rightChild.GetComponent<Rigidbody>().AddForce(new Vector3(Mathf.Abs(distanceLeftToParent.x),0,0)*Constants.ObjectPhysicsRepulsionForce*Constants.OjectPhysicsRepulsionDistance);
                         }
                     }
                 }
@@ -51,32 +51,14 @@ namespace View.GUI.ObjectsPhysics
                     GameObject parentObject = GameObject.Find(Constants.NodeName + dto.ParentId);
                     _gameObject.transform.position =  new Vector3(_gameObject.transform.position.x,parentObject.transform.position.y-3,_gameObject.transform.position.z);
                     Vector3 distance = _gameObject.transform.position - parentObject.transform.position;
-                    if(Mathf.Abs(distance.x) < Constants.OjectPyshicsRepulsionDistance){
+                    if(Mathf.Abs(distance.x) < Constants.OjectPhysicsRepulsionDistance){
                         Rigidbody parentRigidBody = parentObject.GetComponent<Rigidbody>();
                         Vector3 impulseDirection = new Vector3(-1, 0, 0);
                         if(!dto.IsLeft){
-                            parentRigidBody.AddForce(impulseDirection*Constants.ObjectPyshicsRepulsionForce*Constants.OjectPyshicsRepulsionDistance);
+                            parentRigidBody.AddForce(impulseDirection*Constants.ObjectPhysicsRepulsionForce*Constants.OjectPhysicsRepulsionDistance);
                         }else{
                             _gameObject.GetComponent<Rigidbody>().AddForce(impulseDirection);
                         }
-                    }
-                }
-            }
-        }
-
-        public void AddImpulse(Vector3 impulseDirection){
-            Rigidbody rigidbody = _gameObject.GetComponent<Rigidbody>();
-            rigidbody.AddForce(impulseDirection, ForceMode.Impulse);
-        }
-
-        public void PositionObject(){
-            if (_gameObject.GetComponent<ProjectedObject>().Dto is BinarySearchNodeDTO dto){
-                if(dto.ParentId != null){
-                    if (dto.IsLeft){
-                        AddImpulse(new Vector3(-5,0,0));
-                    }
-                    else{
-                        AddImpulse(new Vector3(5,0,0));
                     }
                 }
             }

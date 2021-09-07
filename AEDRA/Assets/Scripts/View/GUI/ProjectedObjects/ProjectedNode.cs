@@ -27,7 +27,6 @@ namespace View.GUI.ProjectedObjects
 
 
         public override Tween CreateAnimation(){
-            base._objectPhysics.PositionObject();
             return gameObject.transform.DOScale(1,base.AnimationTime);
         }
 

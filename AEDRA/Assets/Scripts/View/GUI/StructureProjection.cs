@@ -69,14 +69,7 @@ namespace View.GUI
         /// <param name="dto"></param>
         /// <returns></returns>
         public ProjectedObject CreateObject(ElementDTO dto){
-            Vector3 position = new Vector3(0,0,0);
-            if(dto.GetType() == typeof(BinarySearchNodeDTO)){
-                BinarySearchNodeDTO castDTO = dto as BinarySearchNodeDTO;
-                if(castDTO.ParentId != null){
-                    GameObject parentObject = GameObject.Find(Constants.NodeName + castDTO.ParentId);
-                    position = new Vector3(parentObject.transform.position.x, parentObject.transform.position.y - 3, parentObject.transform.position.z);
-                }
-            }
+            Vector3 position = CalculatePosition(dto);
             string prefabPath = Constants.PrefabPath + dto.Name;
             GameObject prefab = Resources.Load(prefabPath) as GameObject;
             prefab = Instantiate(prefab,position,Quaternion.identity,this.transform);
@@ -105,6 +98,22 @@ namespace View.GUI
         public void DeleteObject(ProjectedObject objectToBeDeleted){
             this.ProjectedObjects.Remove(objectToBeDeleted);
             Destroy(objectToBeDeleted.gameObject);
+        }
+
+        public Vector3 CalculatePosition(ElementDTO dto){
+            Vector3 position = new Vector3(0,0,0);
+            if (dto is BinarySearchNodeDTO castDTO){
+                if(castDTO.ParentId != null){
+                    GameObject parentObject = GameObject.Find(Constants.NodeName + castDTO.ParentId);
+                    if(castDTO.IsLeft){
+                        position = new Vector3(parentObject.transform.position.x - Constants.HorizontalChildToParentDistance, parentObject.transform.position.y - Constants.VerticalNodeTreeDistance, parentObject.transform.position.z);
+                    }
+                    else{
+                        position = new Vector3(parentObject.transform.position.x + Constants.HorizontalChildToParentDistance, parentObject.transform.position.y - Constants.VerticalNodeTreeDistance, parentObject.transform.position.z);
+                    }
+                }
+            }
+            return position;
         }
     }
 }

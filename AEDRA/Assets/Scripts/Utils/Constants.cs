@@ -49,8 +49,11 @@ namespace Utils
         public const int MaxDepth = 0;
 
         #region Pyshics
-        public const float OjectPyshicsRepulsionDistance = 1f;
-        public const float ObjectPyshicsRepulsionForce = 2f;
+        public const float OjectPhysicsRepulsionDistance = 0.8f;
+        public const float ObjectPhysicsRepulsionForce = 5f;
+        public const float VerticalNodeTreeDistance = 2f;
+        public const float HorizontalChildToParentDistance = 1f;
+        public const float ObjectPhysicsRepulsionHorizontalDistance = 1.5f;
         #endregion
     }
 }
