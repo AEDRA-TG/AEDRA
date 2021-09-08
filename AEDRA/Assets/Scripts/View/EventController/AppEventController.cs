@@ -1,5 +1,7 @@
 using Controller;
 using UnityEngine;
+using Utils;
+using Utils.Enums;
 using View.GUI;
 
 namespace View.EventController
