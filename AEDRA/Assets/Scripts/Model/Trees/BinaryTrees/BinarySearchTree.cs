@@ -6,8 +6,8 @@ namespace Model.TreeModel
 {
     public class BinarySearchTree : DataStructure
     {
-        private BinarySearchTreeNode _root;
-        private int _nodesCount;
+        public BinarySearchTreeNode _root {get; set;}
+        public int _nodesCount {get; set;}
 
         public BinarySearchTree(){
             this._nodesCount = 0;
@@ -15,6 +15,24 @@ namespace Model.TreeModel
         }
         public override void CreateDataStructure()
         {
+            if(this._root != null){
+                CreateTree( this._root, null);
+            }
+        }
+
+        public void CreateTree(BinarySearchTreeNode node, BinarySearchTreeNode parent)
+        {
+            if(node==null)
+            {
+                return;
+            }
+            node.NotifyNode(parent, node, AnimationEnum.CreateAnimation);
+            if(parent!=null)
+            {
+                node.NotifyEdge(parent, node, AnimationEnum.CreateAnimation);
+            }
+            CreateTree(node._leftChild, node);
+            CreateTree(node._rightChild, node);
         }
 
         public override void AddElement(ElementDTO element)

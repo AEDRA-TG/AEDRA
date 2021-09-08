@@ -10,12 +10,14 @@ namespace Model.TreeModel
     {
         public int Id{get;set;}
         public int Value {get; set;}
-        private BinarySearchTreeNode _leftChild;
-        private BinarySearchTreeNode _rightChild;
+        public BinarySearchTreeNode _leftChild {get; set;}
+        public BinarySearchTreeNode _rightChild {get; set;}
+        public Point Coordinates {get; set;}
 
         public BinarySearchTreeNode(int id, int value){
             this.Id = id;
             this.Value = value;
+            this.Coordinates = new Point(0,0,0);
         }
 
         public bool IsLeaf(){
@@ -99,7 +101,7 @@ namespace Model.TreeModel
             }
             BinarySearchNodeDTO dto = new BinarySearchNodeDTO(node.Id, node.Value, parentId, isLeft, node._leftChild?.Id, node._rightChild?.Id){
                 Operation = operation,
-                Coordinates = new Point(0,0,0)
+                Coordinates = this.Coordinates
             };
             DataStructure.Notify(dto);
         }

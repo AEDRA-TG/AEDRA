@@ -16,7 +16,7 @@ namespace Observer
             // Projection subscribes to Update element event for updating UI
             DataStructure.UpdateElement += UpdateUI;
             Command.OperationCompleted += ExecuteAnimation;
-            //Command.OperationCompleted += SaveDataStructure;
+            Command.OperationCompleted += SaveDataStructure;
             //Command.OperationCompleted += CleanUserSelection;
         }
 
@@ -24,6 +24,7 @@ namespace Observer
             // Projection unsubscribes from Update Element event for updating UI
             DataStructure.UpdateElement -= UpdateUI;
             Command.OperationCompleted -= ExecuteAnimation;
+            Command.OperationCompleted -= SaveDataStructure;
         }
         /// <summary>
         /// Method to update the projection on UI

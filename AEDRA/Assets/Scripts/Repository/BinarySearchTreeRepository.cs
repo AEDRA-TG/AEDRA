@@ -1,5 +1,6 @@
 using Model.Common;
 using Model.TreeModel;
+using UnityEngine;
 using Utils;
 
 namespace Repository
@@ -15,8 +16,8 @@ namespace Repository
         {
             if (tree == null)
             {
-                //tree = Utilities.DeserializeJSON<BinarySearchTree>(_filePath);
-                tree = new BinarySearchTree();
+                tree = Utilities.DeserializeJSON<BinarySearchTree>(_filePath);
+                tree ??= new BinarySearchTree();
             }
             return tree;
         }
