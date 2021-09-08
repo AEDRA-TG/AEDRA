@@ -4,6 +4,10 @@ namespace Utils.Enums
     {
         AddElementInputMenu,
         RemoveElementInputMenu,
-        SearchElementInputMenu
+        SearchElementInputMenu,
+        MainMenu,
+        TraversalMenu,
+        NodeSelectionMenu,
+        NodeMultiselectionMenu
     }
 }

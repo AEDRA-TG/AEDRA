@@ -14,15 +14,21 @@ namespace View.EventController
     /// <summary>
     /// Class to manage events received from an action executed on a graph by the user
     /// </summary>
-    public class GraphEventController : MonoBehaviour
+    public class GraphEventController : AppEventController
     {
 
         private SelectionController _selectionController;
         public static event Action<int> UpdateMenu;
 
-        public void Awake()
-        {
+        public void Awake(){
             _selectionController = FindObjectOfType<SelectionController>();
+            base._menus = new Dictionary<MenuEnum, GameObject>(){
+                {MenuEnum.MainMenu, gameObject.transform.Find("MainMenu").gameObject},
+                {MenuEnum.TraversalMenu, gameObject.transform.Find("TraversalMenu").gameObject},
+                {MenuEnum.NodeSelectionMenu, gameObject.transform.Find("NodeSelectionMenu").gameObject},
+                {MenuEnum.NodeMultiselectionMenu, gameObject.transform.Find("NodeMultiselectionMenu").gameObject}
+            };
+            base._activeMenu = MenuEnum.MainMenu;
         }
         /// <summary>
         /// Method to detect when the user taps on add node button

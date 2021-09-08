@@ -5,6 +5,7 @@ using View;
 using Utils;
 using SideCar.DTOs;
 using Controller;
+using Utils.Enums;
 
 namespace View.EventController
 {
@@ -12,15 +13,20 @@ namespace View.EventController
     /// Events controller that recives all the OnClick methods of the tree options
     /// </summary>
 
-    public class TreeEventController : MonoBehaviour
+    public class TreeEventController : AppEventController
     {
         [SerializeField] public int value;
-        /// <summary>
-        /// Method that recive the click of the traversal button on options menu delegate prefabs change to OptionsMenu class
-        /// </summary>
-        /// <param name="prefabPath">The text that indicates the prefabs path</param>
-        /// <param name="instanceName">The name that instance prefab will have</param>
-        /// <param name="parent">The parent of the prefab name</param>
+
+        public void Awake(){
+            base._menus = new Dictionary<MenuEnum, GameObject>(){
+                {MenuEnum.MainMenu, gameObject.transform.Find("MainMenu").gameObject},
+                {MenuEnum.TraversalMenu, gameObject.transform.Find("TraversalMenu").gameObject},
+                {MenuEnum.AddElementInputMenu, gameObject.transform.Find("AddElementInputMenu").gameObject},
+                {MenuEnum.RemoveElementInputMenu, gameObject.transform.Find("RemoveElementInputMenu").gameObject},
+                {MenuEnum.SearchElementInputMenu, gameObject.transform.Find("SearchElementInputMenu").gameObject}
+            };
+            base._activeMenu = MenuEnum.MainMenu;
+        }
 
         public void OnTouchAddNode(){
             //!!TODO: this could be another kind of tree node
