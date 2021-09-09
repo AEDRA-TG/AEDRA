@@ -80,15 +80,6 @@ namespace View
         /// </summary>
         private string actualPrefabName;
 
-        private void OnEnable() {
-            SelectionController.UpdateMenu += UpdateMenu;
-            GraphEventController.UpdateMenu += ChangeMenu;
-        }
-        private void OnDisable() {
-            SelectionController.UpdateMenu -= UpdateMenu;
-            GraphEventController.UpdateMenu -= ChangeMenu;
-        }
-
         private void Awake(){
             _loadedPrefabs = new Stack<string>();
             actualPrefabName = "";

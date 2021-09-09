@@ -8,6 +8,6 @@ namespace Utils.Enums
         MainMenu,
         TraversalMenu,
         NodeSelectionMenu,
-        NodeMultiselectionMenu
+        NodeMultiSelectionMenu
     }
 }

@@ -25,7 +25,7 @@ namespace View.EventController
                 {MenuEnum.RemoveElementInputMenu, gameObject.transform.Find("RemoveElementInputMenu").gameObject},
                 {MenuEnum.SearchElementInputMenu, gameObject.transform.Find("SearchElementInputMenu").gameObject}
             };
-            base._activeMenu = MenuEnum.MainMenu;
+            base._activeSubMenu = MenuEnum.MainMenu;
         }
 
         public void OnTouchAddNode(){

@@ -310,6 +310,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3571018381400711219}
   - component: {fileID: 7858725861880234076}
+  - component: {fileID: 7214306936968172999}
   m_Layer: 0
   m_Name: GraphMenu
   m_TagString: Untagged
@@ -350,6 +351,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3953196626536793542}
   m_CullTransparentMesh: 1
+--- !u!114 &7214306936968172999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3953196626536793542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 668012fa7fe203141a3b039bcf511991, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5243966649568284028
 GameObject:
   m_ObjectHideFlags: 0
@@ -736,6 +749,19 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Ingrese el valor del nuevo nodo
+--- !u!114 &8181946802582146930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8882276312872156877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d627db75b891924c8f33e8d6d03b278, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _menu: 4
 --- !u!1001 &131337634479955578
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1517,6 +1543,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4525720365599861951}
     m_Modifications:
+    - target: {fileID: 2731015000048538532, guid: 018b92f87d8c67943a5996b69df131bf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2731015000048538532, guid: 018b92f87d8c67943a5996b69df131bf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7214306936968172999}
+    - target: {fileID: 2731015000048538532, guid: 018b92f87d8c67943a5996b69df131bf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeToMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 2731015000048538532, guid: 018b92f87d8c67943a5996b69df131bf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: View.EventController.AppEventController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2731015000048538532, guid: 018b92f87d8c67943a5996b69df131bf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 8181946802582146930}
+    - target: {fileID: 2731015000048538532, guid: 018b92f87d8c67943a5996b69df131bf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: Utils.Parameters.MenuEnumParameter, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 3571018381400711219, guid: 018b92f87d8c67943a5996b69df131bf, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1618,6 +1668,11 @@ PrefabInstance:
 --- !u!224 &8941459524303477560 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3571018381400711219, guid: 018b92f87d8c67943a5996b69df131bf, type: 3}
+  m_PrefabInstance: {fileID: 5591426040743590667}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8882276312872156877 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3953196626536793542, guid: 018b92f87d8c67943a5996b69df131bf, type: 3}
   m_PrefabInstance: {fileID: 5591426040743590667}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6059343031406141795

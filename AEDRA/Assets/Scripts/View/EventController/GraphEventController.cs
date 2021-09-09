@@ -18,18 +18,37 @@ namespace View.EventController
     {
 
         private SelectionController _selectionController;
-        public static event Action<int> UpdateMenu;
 
-        public void Awake(){
+        public void Start(){
             _selectionController = FindObjectOfType<SelectionController>();
-            base._menus = new Dictionary<MenuEnum, GameObject>(){
-                {MenuEnum.MainMenu, gameObject.transform.Find("MainMenu").gameObject},
-                {MenuEnum.TraversalMenu, gameObject.transform.Find("TraversalMenu").gameObject},
-                {MenuEnum.NodeSelectionMenu, gameObject.transform.Find("NodeSelectionMenu").gameObject},
-                {MenuEnum.NodeMultiselectionMenu, gameObject.transform.Find("NodeMultiselectionMenu").gameObject}
-            };
-            base._activeMenu = MenuEnum.MainMenu;
+            base._menus = new Dictionary<MenuEnum, GameObject>();
+            base._menus.Add(MenuEnum.MainMenu, gameObject.transform.Find("MainMenu").gameObject);
+            base._menus.Add(MenuEnum.TraversalMenu, gameObject.transform.Find("TraversalMenu").gameObject);
+            base._menus.Add(MenuEnum.NodeSelectionMenu, gameObject.transform.Find("NodeSelectionMenu").gameObject);
+            base._menus.Add(MenuEnum.NodeMultiSelectionMenu, gameObject.transform.Find("NodeMultiSelectionMenu").gameObject);
+            base._menus.Add(MenuEnum.AddElementInputMenu, gameObject.transform.Find("AddElementInputMenu").gameObject);
+            base._activeSubMenu = MenuEnum.MainMenu;
         }
+
+        public void OnEnable() {
+            SelectionController.UpdateMenu += UpdateMenuOnSelection;
+        }
+
+        public void OnDisable() {
+            SelectionController.UpdateMenu -= UpdateMenuOnSelection;
+        }
+
+        private void UpdateMenuOnSelection(List<ProjectedObject> selectedObjects){
+            switch(selectedObjects.Count){
+                case 0: base.ChangeToMenu(MenuEnum.MainMenu);
+                break;
+                case 1: base.ChangeToMenu(MenuEnum.NodeSelectionMenu);
+                break;
+                default: base.ChangeToMenu(MenuEnum.NodeMultiSelectionMenu);
+                break;
+            }
+        }
+
         /// <summary>
         /// Method to detect when the user taps on add node button
         /// </summary>
@@ -82,11 +101,6 @@ namespace View.EventController
             }
         }
 
-        //TODO: review this method
-        public void ChangeToTraversalMenu(){
-            UpdateMenu?.Invoke(0);
-        }
-
         public void DoTraversalBFS(){
             List<ProjectedObject> objs = _selectionController.GetSelectedObjects();
             if (objs.Count == 1 && objs[0].GetType() == typeof(ProjectedNode))
@@ -98,17 +112,6 @@ namespace View.EventController
             else
             {
                 Debug.Log("Numero de nodos seleccionados inválido");
-            }
-        }
-
-        //TODO: Revisar paso de parametros, This method should not be here
-        public void ChangeMenu(int menu){
-            OptionsMenu optionsMenu = FindObjectOfType<OptionsMenu>();
-            //TODO: Refactor this code, pliiis
-            switch(menu) {
-                case 0:
-                    optionsMenu.LoadPrefab(Constants.PathAddElementInputMenu, "InputMenu", "ProjectionLayout");
-                    break;
             }
         }
 

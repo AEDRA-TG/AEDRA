@@ -34,7 +34,6 @@ namespace View.EventController
                 UpdateMenu?.Invoke(this._selectedObjects);
             }
         }
-        
         public List<ProjectedObject> GetSelectedObjects(){
             return _selectedObjects;
         }

@@ -20,6 +20,7 @@ namespace Utils
         public const string ObjectsParentName = "StructureProjection";
         public const string PrefabPath = "Prefabs/";
         public const string GraphFile = "Assets/Files/Graph.json";
+        public const string MenusParentName = "ProjectionLayout";
 
         #region UNITY NAMES
         public const string NodeName = "Node_";
