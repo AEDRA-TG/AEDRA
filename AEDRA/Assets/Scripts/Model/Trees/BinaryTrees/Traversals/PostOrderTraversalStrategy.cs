@@ -19,12 +19,15 @@ namespace Model.TreeModel.BinaryTree.Traversals
             }
             if(parent!=null)
             {
-                node.NotifyEdge(parent, node, AnimationEnum.PaintAnimation);
+                node.NotifyEdge(parent, node, AnimationEnum.KeepPaintAnimation);
             }
             PostOrder(node._leftChild, node);
             PostOrder(node._rightChild, node);
-            node.NotifyNode(parent, node, AnimationEnum.PaintAnimation);
-
+            node.NotifyNode(parent, node, AnimationEnum.KeepPaintAnimation);
+            if(parent!=null)
+            {
+                node.NotifyEdge(parent, node, AnimationEnum.UnPaintAnimation);
+            } 
         }
     }
 }
