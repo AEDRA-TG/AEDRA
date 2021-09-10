@@ -334,7 +334,7 @@ Mesh:
     vertexCount: 4
     localAABB:
       m_Center: {x: 0, y: 0, z: 0}
-      m_Extent: {x: 0.5, y: 0, z: 0.6375}
+      m_Extent: {x: 0.1, y: 0, z: 0.1}
   m_Shapes:
     vertices: []
     shapes: []
@@ -1179,10 +1179,10 @@ GameObject:
   - component: {fileID: 1918132457}
   - component: {fileID: 1918132463}
   - component: {fileID: 1918132462}
+  - component: {fileID: 1918132458}
   - component: {fileID: 1918132461}
   - component: {fileID: 1918132460}
   - component: {fileID: 1918132459}
-  - component: {fileID: 1918132458}
   m_Layer: 0
   m_Name: TreeTarget
   m_TagString: Untagged
@@ -1217,8 +1217,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 655522b90df8d134c93b0eb5984b2b7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _structure: 0
-  _prefabMenu: {fileID: 3953196626536793542, guid: a5e3b27df2d2cb34a9bede6b3f29afa8, type: 3}
+  _structure: 1
+  _prefabMenu: {fileID: 3953196626536793542, guid: 39bdfe2b16f06934caf8009e3bbb96ff, type: 3}
 --- !u!33 &1918132459
 MeshFilter:
   m_ObjectHideFlags: 0

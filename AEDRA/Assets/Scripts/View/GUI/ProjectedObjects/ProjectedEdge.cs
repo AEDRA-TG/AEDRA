@@ -48,6 +48,7 @@ namespace View.GUI.ProjectedObjects
             GameObject nodeFound = GameObject.Find(Constants.NodeName+ id);
             return nodeFound.transform.localPosition;
         }
+
         public override Tween DeleteAnimation(){
             return gameObject.transform.DOScale(new Vector3(0,0,0),base.AnimationTime);
         }
