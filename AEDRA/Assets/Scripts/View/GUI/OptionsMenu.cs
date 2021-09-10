@@ -123,7 +123,7 @@ namespace View
                 LoadPrefab(Constants.PrefabPath+Constants.GraphTraversalMenu, "GraphTraversalMenu", "ProjectionLayout");
             }
             else if(id == 1){
-                LoadPrefab(Constants.PathTraversalOptions, "GraphTraversalMenu", "ProjectionLayout");
+                LoadPrefab(Constants.PathTraversalOptions, "TreeTraversalOptions", "ProjectionLayout");
             }
             ToggleMenu();
         }
