@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using Model.Common;
+using Model.TreeModel.BinaryTree.Traversals;
 using SideCar.DTOs;
 using Utils.Enums;
 
@@ -6,48 +8,80 @@ namespace Model.TreeModel
 {
     public class BinarySearchTree : DataStructure
     {
-        private BinarySearchTreeNode _root;
-        private int _nodesCount;
+        public BinarySearchTreeNode Root {get; set;}
+        public int NodesCount {get; set;}
+        private Dictionary<TraversalEnum, ITraversalTreeStrategy> _traversals;
 
         public BinarySearchTree(){
-            this._nodesCount = 0;
-            this._root = null;
+            this.NodesCount = 0;
+            this.Root = null;
+            _traversals = new Dictionary<TraversalEnum, ITraversalTreeStrategy>() {
+                {TraversalEnum.TreePreOrder, new PreOrderTraversalStrategy()},
+                {TraversalEnum.TreeInOrder, new InOrderTraversalStrategy()},
+                {TraversalEnum.TreePostOrder, new PostOrderTraversalStrategy()}
+            };
         }
         public override void CreateDataStructure()
         {
+            if(this.Root != null){
+                CreateTree( this.Root, null);
+            }
+        }
+
+        public void CreateTree(BinarySearchTreeNode node, BinarySearchTreeNode parent)
+        {
+            if(node==null)
+            {
+                return;
+            }
+            node.NotifyNode(parent, node, AnimationEnum.CreateAnimation);
+            if(parent!=null)
+            {
+                node.NotifyEdge(parent, node, AnimationEnum.CreateAnimation);
+            }
+            CreateTree(node._leftChild, node);
+            CreateTree(node._rightChild, node);
         }
 
         public override void AddElement(ElementDTO element)
         {
-            if(this._root != null && this._root.Value!=(int)element.Value){
-                this._root.NotifyNode(null, this._root, AnimationEnum.PaintAnimation);
-                this._root.AddElement(this._nodesCount, (int)element.Value);
-                this._nodesCount++;
+            if(this.Root != null && this.Root.Value!=(int)element.Value){
+                this.Root.NotifyNode(null, this.Root, AnimationEnum.PaintAnimation);
+                this.Root.AddElement(this.NodesCount, (int)element.Value);
+                this.NodesCount++;
             }
-            else if(this._root == null){
-                this._root = new BinarySearchTreeNode(this._nodesCount, (int)element.Value);
-                this._root.NotifyNode(null, this._root, AnimationEnum.CreateAnimation);
-                this._nodesCount++;
+            else if(this.Root == null){
+                this.Root = new BinarySearchTreeNode(this.NodesCount, (int)element.Value);
+                this.Root.NotifyNode(null, this.Root, AnimationEnum.CreateAnimation);
+                this.NodesCount++;
             }
         }
 
         public override void DeleteElement(ElementDTO element)
         {
-            if(this._root !=null){
-                if(this._root.IsLeaf() && this._root.Value == (int)element.Value){
-                    this._root.NotifyNode(null, this._root, AnimationEnum.DeleteAnimation);
-                    this._root = null;
+            if(this.Root !=null){
+                if(this.Root.IsLeaf() && this.Root.Value == (int)element.Value){
+                    this.Root.NotifyNode(null, this.Root, AnimationEnum.DeleteAnimation);
+                    this.Root = null;
                 }
                 else{
-                    this._root.NotifyNode(null, this._root, AnimationEnum.PaintAnimation);
-                    this._root.DeleteElement((int)element.Value);
+                    this.Root.NotifyNode(null, this.Root, AnimationEnum.PaintAnimation);
+                    this.Root.DeleteElement((int)element.Value);
                 }
             }
         }
 
-        public override void DoTraversal(TraversalEnum traversalName, ElementDTO startNode)
+        /// <summary>
+        /// Method to do a traversal on the tree
+        /// </summary>
+        /// <param name="traversalName">Enum of the traversal to execute</param>
+        public override void DoTraversal(TraversalEnum traversalName, ElementDTO data = null)
         {
-            throw new System.NotImplementedException();
+            this._traversals[traversalName].DoTraversal(this);
+        }
+
+        public BinarySearchTreeNode GetRoot(){
+            return Root;
         }
     }
 }

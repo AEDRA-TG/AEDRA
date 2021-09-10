@@ -36,6 +36,8 @@ namespace View.GUI.ProjectedObjects
             Animations = new Dictionary<AnimationEnum, Func<Tween>> {
                 {AnimationEnum.CreateAnimation, CreateAnimation},
                 {AnimationEnum.DeleteAnimation, DeleteAnimation},
+                {AnimationEnum.KeepPaintAnimation,KeepPaintAnimation},
+                {AnimationEnum.UnPaintAnimation, UnPaintAnimation},
                 {AnimationEnum.PaintAnimation, PaintAnimation},
                 {AnimationEnum.UpdateAnimation, UpdateAnimation}
             };
@@ -52,6 +54,16 @@ namespace View.GUI.ProjectedObjects
         }
 
         virtual public Tween PaintAnimation()
+        {
+            return null;
+        }
+        
+        virtual public Tween KeepPaintAnimation()
+        {
+            return null;
+        }
+        
+        virtual public Tween UnPaintAnimation()
         {
             return null;
         }

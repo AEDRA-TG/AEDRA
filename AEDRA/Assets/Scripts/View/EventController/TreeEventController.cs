@@ -43,5 +43,18 @@ namespace View.EventController
             DeleteElementCommand deleteCommand = new DeleteElementCommand(nodeDTO);
             CommandController.GetInstance().Invoke(deleteCommand);
         }
+
+        public void OnTouchPreOrderTraversal(){
+            DoTraversalCommand traversalCommand = new DoTraversalCommand(TraversalEnum.TreePreOrder,null);
+            CommandController.GetInstance().Invoke(traversalCommand);
+        }
+        public void OnTouchInOrderTraversal(){
+            DoTraversalCommand traversalCommand = new DoTraversalCommand(TraversalEnum.TreeInOrder,null);
+            CommandController.GetInstance().Invoke(traversalCommand);
+        }
+        public void OnTouchPostOrderTraversal(){
+            DoTraversalCommand traversalCommand = new DoTraversalCommand(TraversalEnum.TreePostOrder,null);
+            CommandController.GetInstance().Invoke(traversalCommand);
+        }
     }
 }

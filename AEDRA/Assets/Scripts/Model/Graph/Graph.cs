@@ -70,6 +70,7 @@ namespace Model.GraphModel
             Nodes.Add(node.Id,node);
             AdjacentMtx.Add(node.Id, new Dictionary<int, object>());
             //return DTO updated
+            // ESTOY HAY QUE BORRARLO
             node.Coordinates = Utilities.GenerateRandomPoint();
             element = _nodeConverter.ToDto(node);
             element.Operation = AnimationEnum.CreateAnimation;
