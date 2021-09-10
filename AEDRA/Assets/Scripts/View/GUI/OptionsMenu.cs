@@ -83,7 +83,7 @@ namespace View
         private void Awake(){
             _loadedPrefabs = new Stack<string>();
             actualPrefabName = "";
-            LoadPrefab(Constants.PrefabPath + Constants.TreeMainMenu, "TreeMainMenu", "ProjectionLayout");
+            //LoadPrefab(Constants.PrefabPath + Constants.TreeMainMenu, "TreeMainMenu", "ProjectionLayout");
         }
 
         public void Start()
@@ -106,18 +106,6 @@ namespace View
             ToggleMenu();
         }
 
-        public void ChangeMenu(int id){
-            if(_isExpanded){
-                ToggleMenu();
-            }
-            if(id == 0){
-                LoadPrefab(Constants.PrefabPath+Constants.GraphTraversalMenu, "GraphTraversalMenu", "ProjectionLayout");
-            }
-            else if(id == 1){
-                LoadPrefab(Constants.PathTraversalOptions, "GraphTraversalMenu", "ProjectionLayout");
-            }
-            ToggleMenu();
-        }
 
         /// <summary>
         /// Method to load a prefab and assign his parent and instance name

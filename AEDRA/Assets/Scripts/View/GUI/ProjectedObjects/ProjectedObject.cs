@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System;
 using Utils.Enums;
 using Utils;
+using View.GUI.ObjectsPhysics;
 
 namespace View.GUI.ProjectedObjects
 {
@@ -17,8 +18,19 @@ namespace View.GUI.ProjectedObjects
         public ElementDTO Dto { get; set; }
         public bool IsCreated { get; set; }
         public float AnimationTime{get; set;}
+
+        #region Fisicas
+        protected ObjectPhysics _objectPhysics;
+
+        virtual public void FixedUpdate() {
+            _objectPhysics.RepulseObject();
+            _objectPhysics.ParentPosition();
+        }
+        #endregion
+
         virtual public void Awake()
         {
+            _objectPhysics = new ObjectPhysics(this.gameObject);
             AnimationTime = Constants.AnimationTime;
             IsCreated = false;
             Animations = new Dictionary<AnimationEnum, Func<Tween>> {
@@ -73,6 +85,7 @@ namespace View.GUI.ProjectedObjects
             return other != null &&
                 Dto.Id == other.Dto.Id;
         }
+
 
         public override int GetHashCode()
         {

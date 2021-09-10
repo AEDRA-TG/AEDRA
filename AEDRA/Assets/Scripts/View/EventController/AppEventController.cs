@@ -20,14 +20,16 @@ namespace View.EventController
         /// </summary>
         public void OnTargetDetected(TargetParameter targetParameter){
             StructureProjection projection = GameObject.FindObjectOfType<StructureProjection>();
-            projection.Name = targetParameter.GetStructure().ToString();
-            Command command = new LoadCommand(projection.Name);
-            CommandController.GetInstance().Invoke(command);
-            if(_activeMenu != null){
-                Destroy(_activeMenu);
+            if(projection.Name != targetParameter.GetStructure().ToString()){
+                projection.Name = targetParameter.GetStructure().ToString();
+                Command command = new LoadCommand(projection.Name);
+                CommandController.GetInstance().Invoke(command);
+                if(_activeMenu != null){
+                    Destroy(_activeMenu);
+                }
+                _activeMenu = Instantiate(targetParameter.GetPrefabMenu(), new Vector3(0,0,0), Quaternion.identity, GameObject.Find(Constants.MenusParentName).transform);
+                _activeMenu.transform.localPosition = new Vector3(0,0,0);
             }
-            _activeMenu = Instantiate(targetParameter.GetPrefabMenu(), new Vector3(0,0,0), Quaternion.identity, GameObject.Find(Constants.MenusParentName).transform);
-            _activeMenu.transform.localPosition = new Vector3(0,0,0);
         }
 
         /// <summary>

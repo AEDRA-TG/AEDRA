@@ -6,6 +6,8 @@ using Utils;
 using SideCar.DTOs;
 using Controller;
 using Utils.Enums;
+using UnityEngine.UI;
+using System;
 
 namespace View.EventController
 {
@@ -15,8 +17,6 @@ namespace View.EventController
 
     public class TreeEventController : AppEventController
     {
-        [SerializeField] public int value;
-
         public void Awake(){
             base._menus = new Dictionary<MenuEnum, GameObject>(){
                 {MenuEnum.MainMenu, gameObject.transform.Find("MainMenu").gameObject},
@@ -29,23 +29,19 @@ namespace View.EventController
         }
 
         public void OnTouchAddNode(){
-            //!!TODO: this could be another kind of tree node
-            BinarySearchNodeDTO nodeDTO = new BinarySearchNodeDTO(0, this.value, null, true, null, null);
+            //!!TODO: this should accept other types of values
+            int value = Int32.Parse(FindObjectOfType<InputField>().text);
+            BinarySearchNodeDTO nodeDTO = new BinarySearchNodeDTO(0, value, null, true, null, null);
             AddElementCommand addCommand = new AddElementCommand(nodeDTO);
             CommandController.GetInstance().Invoke(addCommand);
         }
 
         public void OnTouchDeleteNode(){
-            //!!TODO: this could be another kind of tree node
-            BinarySearchNodeDTO nodeDTO = new BinarySearchNodeDTO(0, this.value, null, true, null, null);
+            //!!TODO: this should accept other types of values
+            int value = Int32.Parse(FindObjectOfType<InputField>().text);
+            BinarySearchNodeDTO nodeDTO = new BinarySearchNodeDTO(0, value, null, true, null, null);
             DeleteElementCommand deleteCommand = new DeleteElementCommand(nodeDTO);
             CommandController.GetInstance().Invoke(deleteCommand);
-        }
-
-        //TODO this code is part of refactor (do not modify this logic plis, contact IT support if you have issues)
-        public void ChangeToTraversalMenu(){
-            OptionsMenu menu = FindObjectOfType<OptionsMenu>();
-            menu.ChangeMenu(1);
         }
     }
 }
