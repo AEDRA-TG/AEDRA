@@ -21,7 +21,7 @@ namespace View.GUI.ProjectedObjects
             if(base.Dto != null){
                 base.Dto.Coordinates.X = transform.localPosition.x;
                 base.Dto.Coordinates.Y = transform.localPosition.y;
-                base.Dto.Coordinates.Z = transform.localPosition.z;
+                base.Dto.Coordinates.Z = 0;
             }
         }
 

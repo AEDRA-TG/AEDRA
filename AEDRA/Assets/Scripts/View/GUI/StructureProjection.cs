@@ -72,7 +72,8 @@ namespace View.GUI
             Vector3 position = CalculatePosition(dto);
             string prefabPath = Constants.PrefabPath + dto.Name;
             GameObject prefab = Resources.Load(prefabPath) as GameObject;
-            prefab = Instantiate(prefab,position,Quaternion.identity,this.transform);
+            prefab = Instantiate(prefab,new Vector3(0,0,0),Quaternion.identity,this.transform);
+            prefab.transform.localPosition = position;
             prefab.name = dto.GetUnityId();
             ProjectedObject createdObject = prefab.GetComponent<ProjectedObject>();
             createdObject.SetDTO(dto);
@@ -106,10 +107,10 @@ namespace View.GUI
                 if(castDTO.ParentId != null){
                     GameObject parentObject = GameObject.Find(Constants.NodeName + castDTO.ParentId);
                     if(castDTO.IsLeft){
-                        position = new Vector3(parentObject.transform.position.x - Constants.HorizontalChildToParentDistance, parentObject.transform.position.y - Constants.VerticalNodeTreeDistance, parentObject.transform.position.z);
+                        position = new Vector3(parentObject.transform.localPosition.x - Constants.HorizontalChildToParentDistance, parentObject.transform.localPosition.y - Constants.VerticalNodeTreeDistance, 0);
                     }
                     else{
-                        position = new Vector3(parentObject.transform.position.x + Constants.HorizontalChildToParentDistance, parentObject.transform.position.y - Constants.VerticalNodeTreeDistance, parentObject.transform.position.z);
+                        position = new Vector3(parentObject.transform.localPosition.x + Constants.HorizontalChildToParentDistance, parentObject.transform.localPosition.y - Constants.VerticalNodeTreeDistance, 0);
                     }
                 }
             }

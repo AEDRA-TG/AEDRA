@@ -39,7 +39,6 @@ namespace View.GUI.ProjectedObjects
             EdgeDTO edgeDTO = (EdgeDTO) base.Dto;
             Vector3 startPosition = GetNodeCoordinates(edgeDTO.IdStartNode);
             Vector3 endPosition = GetNodeCoordinates(edgeDTO.IdEndNode);
-
             const float width = 0.2f;
             Vector3 offset = endPosition - startPosition;
             Vector3 scale = new Vector3(width, offset.magnitude / 2.0f, width);
@@ -61,7 +60,6 @@ namespace View.GUI.ProjectedObjects
             MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
             return mesh.material.DOColor(Color.cyan,base.AnimationTime).OnComplete( () => mesh.material.DOColor(Color.white, base.AnimationTime) );
         }
-        
         public override Tween KeepPaintAnimation(){
             MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
             return mesh.material.DOColor(Color.cyan,base.AnimationTime);
