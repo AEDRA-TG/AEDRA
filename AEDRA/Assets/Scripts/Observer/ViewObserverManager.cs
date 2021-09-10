@@ -17,7 +17,7 @@ namespace Observer
             DataStructure.UpdateElement += UpdateUI;
             Command.OperationCompleted += ExecuteAnimation;
             Command.OperationCompleted += SaveDataStructure;
-            //Command.OperationCompleted += CleanUserSelection;
+            Command.OperationCompleted += CleanUserSelection;
         }
 
         public void OnDisable(){

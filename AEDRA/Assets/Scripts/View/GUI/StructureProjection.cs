@@ -101,7 +101,7 @@ namespace View.GUI
         }
 
         public Vector3 CalculatePosition(ElementDTO dto){
-            Vector3 position = new Vector3(0,0,0);
+            Vector3 position = new Vector3(0,0,5);
             if (dto is BinarySearchNodeDTO castDTO){
                 if(castDTO.ParentId != null){
                     GameObject parentObject = GameObject.Find(Constants.NodeName + castDTO.ParentId);

@@ -27,7 +27,7 @@ namespace Model.TreeModel.BinaryTree.Traversals
             if(parent!=null)
             {
                 node.NotifyEdge(parent, node, AnimationEnum.UnPaintAnimation);
-            } 
+            }
         }
     }
 }

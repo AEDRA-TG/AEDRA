@@ -26,10 +26,8 @@ namespace View.Animations
             foreach (ElementDTO dto in structureProjection.DTOs){
                 ProjectedObject projectedObject = GameObject.Find(dto.GetUnityId()).GetComponent<ProjectedObject>();
                 projectedObject.AnimationTime = 0;
-                animationList.Append((projectedObject.UnPaintAnimation()));
+                animationList.Append(projectedObject.UnPaintAnimation());
             }
         }
-
-
     }
 }

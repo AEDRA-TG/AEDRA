@@ -24,9 +24,9 @@ namespace Model.GraphModel.Traversals
                 int current = nodes.Item2;
                 visitedMap[current] = true;
                 if(graph.AdjacentMtx[previous].ContainsKey(current)){
-                    graph.NotifyEdge(previous,current,AnimationEnum.PaintAnimation);
+                    graph.NotifyEdge(previous,current,AnimationEnum.KeepPaintAnimation);
                 }
-                graph.NotifyNode(current,AnimationEnum.PaintAnimation);
+                graph.NotifyNode(current,AnimationEnum.KeepPaintAnimation);
 
                 foreach (int key in graph.AdjacentMtx[current].Keys)
                 {

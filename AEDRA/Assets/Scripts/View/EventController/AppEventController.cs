@@ -20,8 +20,15 @@ namespace View.EventController
         /// Method that executes when a target is detected by the camera
         /// </summary>
         public void OnTargetDetected(TargetParameter targetParameter){
-            StructureProjection projection = targetParameter.GetStructureProjection().GetComponent<StructureProjection>();
-            targetParameter.GetStructureProjection().SetActive(true);
+            GameObject structureProjection = GameObject.Find(Constants.ObjectsParentName);
+            if(_activeStructure != targetParameter.GetStructure()){
+                Destroy(structureProjection);
+                structureProjection = null;
+            }
+            if(structureProjection==null){
+                structureProjection = new GameObject(Constants.ObjectsParentName, typeof(StructureProjection));
+                structureProjection.transform.parent = GameObject.Find(targetParameter.GetTargetName()).transform;
+            }
             if(_activeStructure != targetParameter.GetStructure()){
                 _activeStructure = targetParameter.GetStructure();
                 Command command = new LoadCommand(_activeStructure);
@@ -30,6 +37,7 @@ namespace View.EventController
                     Destroy(_activeMenu);
                 }
                 _activeMenu = Instantiate(targetParameter.GetPrefabMenu(), new Vector3(0,0,0), Quaternion.identity, GameObject.Find(Constants.MenusParentName).transform);
+                _activeMenu.name = targetParameter.GetPrefabMenu().name;
                 _activeMenu.transform.localPosition = new Vector3(0,0,0);
                 _activeMenu.transform.SetAsFirstSibling();
             }
@@ -43,7 +51,6 @@ namespace View.EventController
             GameObject structureProjection = GameObject.Find(Constants.ObjectsParentName);
             _activeMenu?.SetActive(false);
             if(structureProjection != null){
-                structureProjection.SetActive(false);
                 Command command = new SaveCommand();
                 CommandController.GetInstance().Invoke(command);
             }
