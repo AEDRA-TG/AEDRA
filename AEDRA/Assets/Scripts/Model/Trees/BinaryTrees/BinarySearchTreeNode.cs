@@ -10,71 +10,73 @@ namespace Model.TreeModel
     {
         public int Id{get;set;}
         public int Value {get; set;}
-        public BinarySearchTreeNode _leftChild {get; set;}
-        public BinarySearchTreeNode _rightChild {get; set;}
+        public BinarySearchTreeNode LeftChild {get; set;}
+        public BinarySearchTreeNode RightChild {get; set;}
+        public Point Coordinates {get; set;}
 
         public BinarySearchTreeNode(int id, int value){
             this.Id = id;
             this.Value = value;
+            this.Coordinates = new Point(0,0,0);
         }
 
         public bool IsLeaf(){
-            return this._leftChild == null && this._rightChild == null;
+            return this.LeftChild == null && this.RightChild == null;
         }
 
         public void AddElement(int id, int value){
             if(value > this.Value){
-                if(this._rightChild!=null){
-                    NotifyEdge(this, this._rightChild, AnimationEnum.PaintAnimation);
-                    NotifyNode(this, this._rightChild, AnimationEnum.PaintAnimation);
-                    this._rightChild.AddElement(id,value);
+                if(this.RightChild!=null){
+                    NotifyEdge(this, this.RightChild, AnimationEnum.PaintAnimation);
+                    NotifyNode(this, this.RightChild, AnimationEnum.PaintAnimation);
+                    this.RightChild.AddElement(id,value);
                 }
                 else{
-                    this._rightChild = new BinarySearchTreeNode(id, value);
-                    NotifyNode(this,this._rightChild, AnimationEnum.CreateAnimation);
-                    NotifyEdge(this, this._rightChild, AnimationEnum.CreateAnimation);
+                    this.RightChild = new BinarySearchTreeNode(id, value);
+                    NotifyNode(this,this.RightChild, AnimationEnum.CreateAnimation);
+                    NotifyEdge(this, this.RightChild, AnimationEnum.CreateAnimation);
                 }
             }
             else if(value < this.Value){
-                if(this._leftChild!=null){
-                    NotifyEdge(this, this._leftChild, AnimationEnum.PaintAnimation);
-                    NotifyNode(this, this._leftChild, AnimationEnum.PaintAnimation);
-                    this._leftChild.AddElement(id,value);
+                if(this.LeftChild!=null){
+                    NotifyEdge(this, this.LeftChild, AnimationEnum.PaintAnimation);
+                    NotifyNode(this, this.LeftChild, AnimationEnum.PaintAnimation);
+                    this.LeftChild.AddElement(id,value);
                 }
                 else{
-                    this._leftChild = new BinarySearchTreeNode(id, value);
-                    NotifyNode(this,this._leftChild, AnimationEnum.CreateAnimation);
-                    NotifyEdge(this, this._leftChild, AnimationEnum.CreateAnimation);
+                    this.LeftChild = new BinarySearchTreeNode(id, value);
+                    NotifyNode(this,this.LeftChild, AnimationEnum.CreateAnimation);
+                    NotifyEdge(this, this.LeftChild, AnimationEnum.CreateAnimation);
                 }
             }
         }
 
         public void DeleteElement(int value){
             if(value > this.Value){
-                if(this._rightChild != null){
-                    if(value == this._rightChild.Value){
-                        NotifyEdge(this, this._rightChild, AnimationEnum.DeleteAnimation);
-                        NotifyNode(this, this._rightChild, AnimationEnum.DeleteAnimation);
-                        this._rightChild = null;
+                if(this.RightChild != null){
+                    if(value == this.RightChild.Value){
+                        NotifyEdge(this, this.RightChild, AnimationEnum.DeleteAnimation);
+                        NotifyNode(this, this.RightChild, AnimationEnum.DeleteAnimation);
+                        this.RightChild = null;
                     }
                     else{
-                        NotifyEdge(this, this._rightChild, AnimationEnum.PaintAnimation);
-                        NotifyNode(this, this._rightChild, AnimationEnum.PaintAnimation);
-                        this._rightChild.DeleteElement(value);
+                        NotifyEdge(this, this.RightChild, AnimationEnum.PaintAnimation);
+                        NotifyNode(this, this.RightChild, AnimationEnum.PaintAnimation);
+                        this.RightChild.DeleteElement(value);
                     }
                 }
             }
             else if(value < this.Value){
-                if(this._leftChild != null){
-                    if(value == this._leftChild.Value){
-                        NotifyEdge(this, this._leftChild, AnimationEnum.DeleteAnimation);
-                        NotifyNode(this, this._leftChild, AnimationEnum.DeleteAnimation);
-                        this._leftChild = null;
+                if(this.LeftChild != null){
+                    if(value == this.LeftChild.Value){
+                        NotifyEdge(this, this.LeftChild, AnimationEnum.DeleteAnimation);
+                        NotifyNode(this, this.LeftChild, AnimationEnum.DeleteAnimation);
+                        this.LeftChild = null;
                     }
                     else{
-                        NotifyEdge(this, this._leftChild, AnimationEnum.PaintAnimation);
-                        NotifyNode(this, this._leftChild, AnimationEnum.PaintAnimation);
-                        this._leftChild.DeleteElement(value);
+                        NotifyEdge(this, this.LeftChild, AnimationEnum.PaintAnimation);
+                        NotifyNode(this, this.LeftChild, AnimationEnum.PaintAnimation);
+                        this.LeftChild.DeleteElement(value);
                     }
                 }
             }
@@ -93,13 +95,13 @@ namespace Model.TreeModel
             bool isLeft = false;
             if(parent != null){
                 parentId = parent.Id;
-                if(parent._leftChild != null && parent._leftChild.Value == node.Value){
+                if(parent.LeftChild != null && parent.LeftChild.Value == node.Value){
                     isLeft = true;
                 }
             }
-            BinarySearchNodeDTO dto = new BinarySearchNodeDTO(node.Id, node.Value, parentId, isLeft, node._leftChild?.Id, node._rightChild?.Id){
+            BinarySearchNodeDTO dto = new BinarySearchNodeDTO(node.Id, node.Value, parentId, isLeft, node.LeftChild?.Id, node.RightChild?.Id){
                 Operation = operation,
-                Coordinates = new Point(0,0,0)
+                Coordinates = this.Coordinates
             };
             DataStructure.Notify(dto);
         }
