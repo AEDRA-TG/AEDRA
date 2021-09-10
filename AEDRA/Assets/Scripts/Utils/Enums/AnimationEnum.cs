@@ -5,6 +5,8 @@ namespace Utils.Enums
         CreateAnimation,
         DeleteAnimation,
         PaintAnimation,
+        KeepPaintAnimation,
+        UnPaintAnimation,
         UpdateAnimation
     }
 }

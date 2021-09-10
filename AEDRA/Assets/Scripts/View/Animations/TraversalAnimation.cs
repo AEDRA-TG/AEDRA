@@ -23,6 +23,13 @@ namespace View.Animations
                 projectedObject.AnimationTime = 1;
                 animationList.Append(projectedObject.Animations[dto.Operation]());
             }
+            foreach (ElementDTO dto in structureProjection.DTOs){
+                ProjectedObject projectedObject = GameObject.Find(dto.GetUnityId()).GetComponentInChildren<ProjectedObject>();
+                projectedObject.AnimationTime = 0;
+                animationList.Append((projectedObject.UnPaintAnimation()));
+            }
         }
+
+
     }
 }
