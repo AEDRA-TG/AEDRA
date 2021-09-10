@@ -9,12 +9,12 @@ namespace Controller
     public class LoadCommand : Command
     {
         // Start is called before the first frame update
-        private string _structureName;
+        private StructureEnum _structureName;
         /// <summary>
         /// Command to load a DataStructure from persistent storage
         /// </summary>
         /// <param name="structureName"></param>
-        public LoadCommand(string structureName)
+        public LoadCommand(StructureEnum structureName)
         {
             this._structureName = structureName;
         }

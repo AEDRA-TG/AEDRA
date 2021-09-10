@@ -21,11 +21,6 @@ namespace View.GUI.ProjectedObjects
 
         #region Fisicas
         protected ObjectPhysics _objectPhysics;
-
-        virtual public void FixedUpdate() {
-            _objectPhysics.RepulseObject();
-            _objectPhysics.ParentPosition();
-        }
         #endregion
 
         virtual public void Awake()
@@ -57,12 +52,10 @@ namespace View.GUI.ProjectedObjects
         {
             return null;
         }
-        
         virtual public Tween KeepPaintAnimation()
         {
             return null;
         }
-        
         virtual public Tween UnPaintAnimation()
         {
             return null;

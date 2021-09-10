@@ -27,7 +27,6 @@ namespace View.Animations
                 }else{
                     obj.IsCreated = true;
                 }
-                
                 //TODO: review how to change this value
                 obj.AnimationTime = 0;
                 animationList.Append(obj.Animations[dto.Operation]());

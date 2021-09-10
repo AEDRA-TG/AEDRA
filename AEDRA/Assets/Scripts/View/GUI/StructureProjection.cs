@@ -18,7 +18,7 @@ namespace View.GUI
         /// <summary>
         /// Name of the structure projection
         /// </summary>
-        public string Name { get; set; }
+        public StructureEnum Name { get; set; }
 
         /// <summary>
         /// Type of the structure projection
@@ -72,8 +72,7 @@ namespace View.GUI
             Vector3 position = CalculatePosition(dto);
             string prefabPath = Constants.PrefabPath + dto.Name;
             GameObject prefab = Resources.Load(prefabPath) as GameObject;
-            prefab = Instantiate(prefab,new Vector3(0,0,0),Quaternion.identity,this.transform);
-            prefab.transform.localPosition = position;
+            prefab = Instantiate(prefab,position,Quaternion.identity,this.transform);
             prefab.name = dto.GetUnityId();
             ProjectedObject createdObject = prefab.GetComponent<ProjectedObject>();
             createdObject.SetDTO(dto);
@@ -107,10 +106,10 @@ namespace View.GUI
                 if(castDTO.ParentId != null){
                     GameObject parentObject = GameObject.Find(Constants.NodeName + castDTO.ParentId);
                     if(castDTO.IsLeft){
-                        position = new Vector3(parentObject.transform.localPosition.x - Constants.HorizontalChildToParentDistance, parentObject.transform.localPosition.y - Constants.VerticalNodeTreeDistance, 0);
+                        position = new Vector3(parentObject.transform.position.x - Constants.HorizontalChildToParentDistance, parentObject.transform.position.y - Constants.VerticalNodeTreeDistance, 0);
                     }
                     else{
-                        position = new Vector3(parentObject.transform.localPosition.x + Constants.HorizontalChildToParentDistance, parentObject.transform.localPosition.y - Constants.VerticalNodeTreeDistance, 0);
+                        position = new Vector3(parentObject.transform.position.x + Constants.HorizontalChildToParentDistance, parentObject.transform.position.y - Constants.VerticalNodeTreeDistance, 0);
                     }
                 }
             }

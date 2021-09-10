@@ -15,19 +15,18 @@ namespace View.EventController
         protected MenuEnum _activeSubMenu;
         private GameObject _activeMenu;
 
-        
-        public void Start() {
-            // Just for testing
-            //OnTargetDetected(new TargetParameter(StructureEnum.BinarySearchTree, Resources.Load("Prefabs/Menus/TreeMenu") as GameObject));    
-        }
+        private StructureEnum _activeStructure;
         /// <summary>
         /// Method that executes when a target is detected by the camera
         /// </summary>
         public void OnTargetDetected(TargetParameter targetParameter){
-            StructureProjection projection = GameObject.FindObjectOfType<StructureProjection>();
-            if(projection.Name != targetParameter.GetStructure().ToString()){
-                projection.Name = targetParameter.GetStructure().ToString();
-                Command command = new LoadCommand(projection.Name);
+            StructureProjection projection = targetParameter.GetStructureProjection().GetComponent<StructureProjection>();
+            targetParameter.GetStructureProjection().SetActive(true);
+            Debug.Log("PN: " + projection.Name + " TP: " + targetParameter.GetStructure());
+            if(_activeStructure != targetParameter.GetStructure()){
+                Debug.Log("Entro al if");
+                _activeStructure = targetParameter.GetStructure();
+                Command command = new LoadCommand(_activeStructure);
                 CommandController.GetInstance().Invoke(command);
                 if(_activeMenu != null){
                     Destroy(_activeMenu);
@@ -35,14 +34,20 @@ namespace View.EventController
                 _activeMenu = Instantiate(targetParameter.GetPrefabMenu(), new Vector3(0,0,0), Quaternion.identity, GameObject.Find(Constants.MenusParentName).transform);
                 _activeMenu.transform.localPosition = new Vector3(0,0,0);
             }
+            _activeMenu?.SetActive(true);
         }
 
         /// <summary>
         /// Method that executes when a target is lost by the camera
         /// </summary>
         public void OnTargetLost(){
-            Command command = new SaveCommand();
-            CommandController.GetInstance().Invoke(command);
+            GameObject structureProjection = GameObject.Find(Constants.ObjectsParentName);
+            _activeMenu?.SetActive(false);
+            if(structureProjection != null){
+                structureProjection.SetActive(false);
+                Command command = new SaveCommand();
+                CommandController.GetInstance().Invoke(command);
+            }
         }
 
         public void ChangeToMenu(MenuEnumParameter menu){

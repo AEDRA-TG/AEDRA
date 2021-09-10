@@ -1,6 +1,7 @@
 using Model.Common;
 using Model.GraphModel;
 using Utils;
+using Utils.Enums;
 
 namespace Repository
 {
@@ -8,8 +9,8 @@ namespace Repository
     {
         private static Graph graph;
         private string _filePath;
-        public GraphRepository(string structureName){
-            this._filePath = Constants.DataStructureFilePath + structureName + ".json";
+        public GraphRepository(StructureEnum structureName){
+            this._filePath = Constants.DataStructureFilePath + structureName.ToString() + ".json";
         }
         private Graph GetInstance()
         {

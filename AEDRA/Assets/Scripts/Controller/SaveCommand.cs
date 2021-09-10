@@ -8,7 +8,7 @@ using Utils;
 using View.GUI;
 
 namespace Controller
-{  
+{
     /// <summary>
     /// Command to persist the state of a datastructure
     /// </summary>

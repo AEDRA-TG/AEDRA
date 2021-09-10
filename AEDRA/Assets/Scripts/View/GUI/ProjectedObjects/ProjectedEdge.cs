@@ -17,13 +17,14 @@ namespace View.GUI.ProjectedObjects
         // Update is called once per frame
         public void Update()
         {
+            Vector3 scale = UpdateEdge();
             if(base.IsCreated){
-                gameObject.transform.localScale = UpdateEdge();
+                gameObject.transform.localScale = scale;
             }
         }
         public override Tween CreateAnimation(){
             //TODO: make name of IsCreated more explitic (e.g: OnCreatedAnimationCompleted)
-            return gameObject.transform.DOScale(UpdateEdge(),base.AnimationTime);
+            return gameObject.transform.DOScale(UpdateEdge(),base.AnimationTime).OnComplete(()=> base.IsCreated = true);
         }
 
         public void OnCollisionEnter(Collision other) {
@@ -35,16 +36,15 @@ namespace View.GUI.ProjectedObjects
             Vector3 endPosition = GetNodeCoordinates(edgeDTO.IdEndNode);
             const float width = 0.2f;
             Vector3 offset = endPosition - startPosition;
-            Vector3 rotationOffset =new Vector3(endPosition.x - startPosition.x, endPosition.z - startPosition.z,-(endPosition.y - startPosition.y));
             Vector3 scale = new Vector3(width, offset.magnitude / 2.0f, width);
-            gameObject.transform.localPosition = startPosition + (offset / 2.0f);
-            gameObject.transform.up = rotationOffset;
+            gameObject.transform.position = startPosition + (offset / 2.0f);
+            gameObject.transform.up = offset;
             return scale;
         }
 
         private Vector3 GetNodeCoordinates(int id){
             GameObject nodeFound = GameObject.Find(Constants.NodeName+ id);
-            return nodeFound.transform.localPosition;
+            return nodeFound.transform.position;
         }
 
         public override Tween DeleteAnimation(){

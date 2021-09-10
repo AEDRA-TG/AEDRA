@@ -7,10 +7,12 @@ namespace Utils.Parameters
     {
         [SerializeField] private StructureEnum _structure;
         [SerializeField] private GameObject _prefabMenu;
+        [SerializeField] private GameObject _structureProjection;
 
-        public TargetParameter(StructureEnum structure, GameObject prefabMenu){
+        public TargetParameter(StructureEnum structure, GameObject prefabMenu, GameObject structureProjection){
             this._structure = structure;
             this._prefabMenu = prefabMenu;
+            this._structureProjection = structureProjection;
         }
         public void SetStructure(StructureEnum structure){
             _structure = structure;
@@ -25,6 +27,13 @@ namespace Utils.Parameters
 
         public GameObject GetPrefabMenu(){
             return _prefabMenu;
+        }
+        public void SetStructureProjection(GameObject structureProjection){
+            _structureProjection = structureProjection;
+        }
+
+        public GameObject GetStructureProjection(){
+            return _structureProjection;
         }
     }
 }

@@ -25,14 +25,14 @@ namespace View.GUI.ProjectedObjects
             }
         }
 
+        public void FixedUpdate(){
+            base._objectPhysics.RepulseObject();
+            base._objectPhysics.ParentPosition();
+        }
+
 
         public override Tween CreateAnimation(){
-            Tween tween = gameObject.transform.DOScale(1,base.AnimationTime);
-            tween.OnComplete(()=>{
-                gameObject.GetComponent<MeshRenderer>().enabled = true;
-                gameObject.GetComponent<Collider>().enabled = true;
-            });
-            return tween;
+            return gameObject.transform.DOScale(1,base.AnimationTime);
         }
 
         public override Tween DeleteAnimation(){

@@ -2,6 +2,7 @@ using Model.Common;
 using Model.TreeModel;
 using UnityEngine;
 using Utils;
+using Utils.Enums;
 
 namespace Repository
 {
@@ -9,8 +10,8 @@ namespace Repository
     {
         private static BinarySearchTree tree;
         private string _filePath;
-        public BinarySearchTreeRepository(string structureName){
-            this._filePath = Constants.DataStructureFilePath + structureName + ".json";
+        public BinarySearchTreeRepository(StructureEnum structureName){
+            this._filePath = Constants.DataStructureFilePath + structureName.ToString() + ".json";
         }
         private BinarySearchTree GetInstance()
         {
