@@ -59,7 +59,6 @@ namespace Controller
         public void ChangeGlobalColor()
         {
             changeColorDelegate?.Invoke();
-            PersistPrefabs();
             CloseThemeChooser();
         }
         /// <summary>
@@ -69,16 +68,6 @@ namespace Controller
         {
             GameObject themeChooser = GameObject.Find("ThemeChooser");
             Destroy(themeChooser);
-        }
-        /// <summary>
-        /// Method to persist the selected color in all buttons prefabs
-        /// </summary>
-        private void PersistPrefabs()
-        {
-            GameObject largeButtonPrefab = Resources.Load(Constants.PathLargeButton) as GameObject;
-            largeButtonPrefab.GetComponent<Image>().color = Constants.GlobalColor;
-            GameObject roundedButtonPrefab = Resources.Load(Constants.PathRoundButton) as GameObject;
-            roundedButtonPrefab.GetComponent<Image>().color = Constants.GlobalColor;
         }
 
     }

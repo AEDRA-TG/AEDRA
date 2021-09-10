@@ -6,30 +6,58 @@ using View.GUI.ProjectedObjects;
 using System.Collections.Generic;
 using Utils.Enums;
 using System;
+using Utils;
+using UnityEngine.UI;
 
 namespace View.EventController
 {
     /// <summary>
     /// Class to manage events received from an action executed on a graph by the user
     /// </summary>
-    public class GraphEventController : MonoBehaviour
+    public class GraphEventController : AppEventController
     {
 
         private SelectionController _selectionController;
-        public static event Action<int> UpdateMenu;
 
-        public void Awake()
-        {
+        public void Start(){
             _selectionController = FindObjectOfType<SelectionController>();
+            base._menus = new Dictionary<MenuEnum, GameObject>();
+            base._menus.Add(MenuEnum.MainMenu, gameObject.transform.Find("MainMenu").gameObject);
+            base._menus.Add(MenuEnum.TraversalMenu, gameObject.transform.Find("TraversalMenu").gameObject);
+            base._menus.Add(MenuEnum.NodeSelectionMenu, gameObject.transform.Find("NodeSelectionMenu").gameObject);
+            base._menus.Add(MenuEnum.NodeMultiSelectionMenu, gameObject.transform.Find("NodeMultiSelectionMenu").gameObject);
+            base._menus.Add(MenuEnum.AddElementInputMenu, gameObject.transform.Find("AddElementInputMenu").gameObject);
+            base._activeSubMenu = MenuEnum.MainMenu;
         }
+
+        public void OnEnable() {
+            SelectionController.UpdateMenu += UpdateMenuOnSelection;
+        }
+
+        public void OnDisable() {
+            SelectionController.UpdateMenu -= UpdateMenuOnSelection;
+        }
+
+        private void UpdateMenuOnSelection(List<ProjectedObject> selectedObjects){
+            switch(selectedObjects.Count){
+                case 0: base.ChangeToMenu(MenuEnum.MainMenu);
+                break;
+                case 1: base.ChangeToMenu(MenuEnum.NodeSelectionMenu);
+                break;
+                default: base.ChangeToMenu(MenuEnum.NodeMultiSelectionMenu);
+                break;
+            }
+        }
+
         /// <summary>
         /// Method to detect when the user taps on add node button
         /// </summary>
         public void OnTouchAddNode()
         {
+            string value = FindObjectOfType<InputField>().text;
             //TODO: Obtener el dto de los datos de la pantalla
             List<int> neighbors = new List<int>();
-            GraphNodeDTO nodeDTO = new GraphNodeDTO(0, 0, neighbors);
+            GraphNodeDTO nodeDTO = new GraphNodeDTO(0, value, neighbors);
             AddElementCommand addCommand = new AddElementCommand(nodeDTO);
             CommandController.GetInstance().Invoke(addCommand);
         }
@@ -71,11 +99,6 @@ namespace View.EventController
             {
                 Debug.Log("Numero de nodos seleccionados inválido");
             }
-        }
-
-        //TODO: review this method
-        public void ChangeToTraversalMenu(){
-            UpdateMenu?.Invoke(0);
         }
 
         public void DoTraversalBFS(){

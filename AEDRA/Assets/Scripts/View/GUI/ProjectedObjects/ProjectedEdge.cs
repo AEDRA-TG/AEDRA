@@ -28,6 +28,9 @@ namespace View.GUI.ProjectedObjects
             return tween;
         }
 
+        public void OnCollisionEnter(Collision other) {
+            Physics.IgnoreCollision(this.gameObject.GetComponent<Collider>(), other.collider);
+        }
         private Vector3 UpdateEdge(){
             EdgeDTO edgeDTO = (EdgeDTO) base.Dto;
             Vector3 startPosition = GetNodeCoordinates(edgeDTO.IdStartNode);
@@ -36,8 +39,8 @@ namespace View.GUI.ProjectedObjects
             const float width = 0.2f;
             Vector3 offset = endPosition - startPosition;
             Vector3 scale = new Vector3(width, offset.magnitude / 2.0f, width);
-            gameObject.transform.parent.transform.localPosition = startPosition + (offset / 2.0f);
-            gameObject.transform.parent.transform.up = offset;
+            gameObject.transform.localPosition = startPosition + (offset / 2.0f);
+            gameObject.transform.up = offset;
             return scale;
         }
 
@@ -45,8 +48,9 @@ namespace View.GUI.ProjectedObjects
             GameObject nodeFound = GameObject.Find(Constants.NodeName+ id);
             return nodeFound.transform.localPosition;
         }
+
         public override Tween DeleteAnimation(){
-            return gameObject.transform.parent.transform.DOScale(new Vector3(0,0,0),base.AnimationTime);
+            return gameObject.transform.DOScale(new Vector3(0,0,0),base.AnimationTime);
         }
 
         public override Tween PaintAnimation(){
