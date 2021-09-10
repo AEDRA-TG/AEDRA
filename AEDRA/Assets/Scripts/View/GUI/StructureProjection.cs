@@ -51,7 +51,7 @@ namespace View.GUI
                 DTOs.Add(dto);
             }
             GameObject obj = GameObject.Find(dto.GetUnityId());
-            obj?.GetComponentInChildren<ProjectedObject>().SetDTO(dto);
+            obj?.GetComponent<ProjectedObject>().SetDTO(dto);
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace View.GUI
             GameObject prefab = Resources.Load(prefabPath) as GameObject;
             prefab = Instantiate(prefab,position,Quaternion.identity,this.transform);
             prefab.name = dto.GetUnityId();
-            ProjectedObject createdObject = prefab.GetComponentInChildren<ProjectedObject>();
+            ProjectedObject createdObject = prefab.GetComponent<ProjectedObject>();
             createdObject.SetDTO(dto);
             ProjectedObjects.Add(createdObject);
             return createdObject;

@@ -8,6 +8,10 @@ namespace Utils.Parameters
         [SerializeField] private StructureEnum _structure;
         [SerializeField] private GameObject _prefabMenu;
 
+        public TargetParameter(StructureEnum structure, GameObject prefabMenu){
+            this._structure = structure;
+            this._prefabMenu = prefabMenu;
+        }
         public void SetStructure(StructureEnum structure){
             _structure = structure;
         }

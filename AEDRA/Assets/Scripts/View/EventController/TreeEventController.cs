@@ -34,6 +34,7 @@ namespace View.EventController
             BinarySearchNodeDTO nodeDTO = new BinarySearchNodeDTO(0, value, null, true, null, null);
             AddElementCommand addCommand = new AddElementCommand(nodeDTO);
             CommandController.GetInstance().Invoke(addCommand);
+            base.ChangeToMenu(MenuEnum.MainMenu);
         }
 
         public void OnTouchDeleteNode(){

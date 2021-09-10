@@ -163,7 +163,7 @@ namespace View
                 _itemsPositions[i] = _optionItems[i].transform.position;
             }
             //inflate hamburger menu
-            _hamburgerButton = GameObject.Find("HamburgerMenu").GetComponentInChildren<Button>();
+            _hamburgerButton = GameObject.Find("HamburgerMenu").GetComponent<Button>();
             _hamburgerButton.transform.SetAsLastSibling();
             //save position of hamburguer position
             _hamburgerButtonPosition = _hamburgerButton.transform.position;

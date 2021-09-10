@@ -24,7 +24,11 @@ namespace View.GUI.ProjectedObjects
         public override Tween CreateAnimation(){
             //TODO: make name of IsCreated more explitic (e.g: OnCreatedAnimationCompleted)
             Tween tween = gameObject.transform.DOScale(UpdateEdge(),base.AnimationTime);
-            tween.OnComplete(()=> this.IsCreated = true);
+            tween.OnComplete(()=> {
+                //gameObject.GetComponent<MeshRenderer>().enabled = true;
+                //gameObject.GetComponent<Collider>().enabled = true;
+                this.IsCreated = true;
+            });
             return tween;
         }
 
@@ -54,17 +58,17 @@ namespace View.GUI.ProjectedObjects
         }
 
         public override Tween PaintAnimation(){
-            MeshRenderer mesh = gameObject.GetComponentInChildren<MeshRenderer>();
+            MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
             return mesh.material.DOColor(Color.cyan,base.AnimationTime).OnComplete( () => mesh.material.DOColor(Color.white, base.AnimationTime) );
         }
         
         public override Tween KeepPaintAnimation(){
-            MeshRenderer mesh = gameObject.GetComponentInChildren<MeshRenderer>();
+            MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
             return mesh.material.DOColor(Color.cyan,base.AnimationTime);
         }
 
         public override Tween UnPaintAnimation(){
-            MeshRenderer mesh = gameObject.GetComponentInChildren<MeshRenderer>();
+            MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
             return mesh.material.DOColor(Color.white,base.AnimationTime);
         }
 

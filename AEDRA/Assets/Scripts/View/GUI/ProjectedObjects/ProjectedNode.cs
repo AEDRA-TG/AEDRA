@@ -27,7 +27,12 @@ namespace View.GUI.ProjectedObjects
 
 
         public override Tween CreateAnimation(){
-            return gameObject.transform.DOScale(1,base.AnimationTime);
+            Tween tween = gameObject.transform.DOScale(1,base.AnimationTime);
+            tween.OnComplete(()=>{
+                gameObject.GetComponent<MeshRenderer>().enabled = true;
+                gameObject.GetComponent<Collider>().enabled = true;
+            });
+            return tween;
         }
 
         public override Tween DeleteAnimation(){
@@ -35,17 +40,17 @@ namespace View.GUI.ProjectedObjects
         }
 
         public override Tween PaintAnimation(){
-            MeshRenderer mesh = gameObject.GetComponentInChildren<MeshRenderer>();
+            MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
             return mesh.material.DOColor(Color.cyan,base.AnimationTime).OnComplete( () => mesh.material.DOColor(Color.white, base.AnimationTime) );
         }
 
         public override Tween KeepPaintAnimation(){
-            MeshRenderer mesh = gameObject.GetComponentInChildren<MeshRenderer>();
+            MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
             return mesh.material.DOColor(Color.cyan,base.AnimationTime);
         }
         
         public override Tween UnPaintAnimation(){
-            MeshRenderer mesh = gameObject.GetComponentInChildren<MeshRenderer>();
+            MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
             return mesh.material.DOColor(Color.white,0);
         }
 

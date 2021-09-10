@@ -22,7 +22,7 @@ namespace View.Animations
                 if(dto.Operation == AnimationEnum.CreateAnimation){
                     projectedObject = projection.CreateObject(dto);
                 }else{
-                    projectedObject = GameObject.Find(dto.GetUnityId()).GetComponentInChildren<ProjectedObject>();
+                    projectedObject = GameObject.Find(dto.GetUnityId()).GetComponent<ProjectedObject>();
                 }
                 animationList.Append(projectedObject.Animations[dto.Operation]());
             }

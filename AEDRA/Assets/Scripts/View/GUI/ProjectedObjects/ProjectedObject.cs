@@ -80,7 +80,7 @@ namespace View.GUI.ProjectedObjects
         virtual public void SetDTO(ElementDTO dto)
         {
             Dto = dto;
-            TextMesh text = gameObject.GetComponentInChildren<TextMesh>();
+            TextMesh text = gameObject.GetComponent<TextMesh>();
             if(text != null){
                 text.text = dto.Value.ToString();
             }
@@ -121,7 +121,7 @@ namespace View.GUI.ProjectedObjects
         public void SetSelected(bool selected)
         {
             this._selected = selected;
-            MeshRenderer mesh = gameObject.GetComponentInChildren<MeshRenderer>();
+            MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
             if (_selected)
             {
                 mesh.material.DOColor(Color.red, 0);

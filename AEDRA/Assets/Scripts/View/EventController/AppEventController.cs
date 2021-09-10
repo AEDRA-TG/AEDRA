@@ -15,6 +15,11 @@ namespace View.EventController
         protected MenuEnum _activeSubMenu;
         private GameObject _activeMenu;
 
+        
+        public void Start() {
+            // Just for testing
+            //OnTargetDetected(new TargetParameter(StructureEnum.BinarySearchTree, Resources.Load("Prefabs/Menus/TreeMenu") as GameObject));    
+        }
         /// <summary>
         /// Method that executes when a target is detected by the camera
         /// </summary>
