@@ -19,6 +19,11 @@ namespace View.EventController
 
         private SelectionController _selectionController;
 
+        public void Awake(){
+            GameObject backButton = GameObject.Find("BackButton");
+            backButton.GetComponent<Button>().onClick.AddListener(base.OnTouchBackButton);
+        }
+
         public void Start(){
             _selectionController = FindObjectOfType<SelectionController>();
             base._menus = new Dictionary<MenuEnum, GameObject>();

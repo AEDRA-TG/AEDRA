@@ -22,9 +22,7 @@ namespace View.EventController
         public void OnTargetDetected(TargetParameter targetParameter){
             StructureProjection projection = targetParameter.GetStructureProjection().GetComponent<StructureProjection>();
             targetParameter.GetStructureProjection().SetActive(true);
-            Debug.Log("PN: " + projection.Name + " TP: " + targetParameter.GetStructure());
             if(_activeStructure != targetParameter.GetStructure()){
-                Debug.Log("Entro al if");
                 _activeStructure = targetParameter.GetStructure();
                 Command command = new LoadCommand(_activeStructure);
                 CommandController.GetInstance().Invoke(command);
@@ -33,6 +31,7 @@ namespace View.EventController
                 }
                 _activeMenu = Instantiate(targetParameter.GetPrefabMenu(), new Vector3(0,0,0), Quaternion.identity, GameObject.Find(Constants.MenusParentName).transform);
                 _activeMenu.transform.localPosition = new Vector3(0,0,0);
+                _activeMenu.transform.SetAsFirstSibling();
             }
             _activeMenu?.SetActive(true);
         }
@@ -58,12 +57,20 @@ namespace View.EventController
             _activeSubMenu = menu.GetMenu();
         }
 
-        protected void ChangeToMenu(MenuEnum menu){
+        public void ChangeToMenu(MenuEnum menu){
             MenuEnumParameter menuEnumParameter = new MenuEnumParameter();
             menuEnumParameter.SetMenu(menu);
             ChangeToMenu(menuEnumParameter);
         }
 
+        public void OnTouchBackButton(){
+            if(_activeSubMenu != MenuEnum.MainMenu){
+                ChangeToMenu(MenuEnum.MainMenu);
+            }
+            else{
+                ChangeScene(0);
+            }
+        }
         public void ChangeScene(int nextPage)
         {
             SceneManager.LoadScene(nextPage);

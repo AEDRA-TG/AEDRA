@@ -38,12 +38,16 @@ namespace View.GUI.ObjectsPhysics
             if (_gameObject.GetComponent<ProjectedObject>().Dto is BinarySearchNodeDTO dto){
                 if(dto.LeftChild != null){
                     GameObject leftChild = GameObject.Find(Constants.NodeName + dto.LeftChild);
-                    if(dto.RightChild != null){
-                        GameObject rightChild = GameObject.Find(Constants.NodeName + dto.RightChild);
-                        Vector3 distanceLeftToParent = leftChild.transform.position - _gameObject.transform.position;
-                        Vector3 distanceRightToParent = rightChild.transform.position - _gameObject.transform.position;
-                        if(Mathf.Abs(distanceRightToParent.x) < Mathf.Abs(distanceLeftToParent.x)){
-                            rightChild.GetComponent<Rigidbody>().AddForce(new Vector3(Mathf.Abs(distanceLeftToParent.x),0,0)*Constants.ObjectPhysicsRepulsionForce*Constants.OjectPhysicsRepulsionDistance);
+                    if(leftChild != null){
+                        if(dto.RightChild != null){
+                            GameObject rightChild = GameObject.Find(Constants.NodeName + dto.RightChild);
+                            if(rightChild != null){
+                                Vector3 distanceLeftToParent = leftChild.transform.position - _gameObject.transform.position;
+                                Vector3 distanceRightToParent = rightChild.transform.position - _gameObject.transform.position;
+                                if(Mathf.Abs(distanceRightToParent.x) < Mathf.Abs(distanceLeftToParent.x)){
+                                    rightChild.GetComponent<Rigidbody>().AddForce(new Vector3(Mathf.Abs(distanceLeftToParent.x),0,0)*Constants.ObjectPhysicsRepulsionForce*Constants.OjectPhysicsRepulsionDistance);
+                                }
+                            }
                         }
                     }
                 }

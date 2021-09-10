@@ -19,9 +19,9 @@ namespace View.GUI.ProjectedObjects
         public void Update()
         {
             if(base.Dto != null){
-                base.Dto.Coordinates.X = transform.localPosition.x;
-                base.Dto.Coordinates.Y = transform.localPosition.y;
-                base.Dto.Coordinates.Z = 0;
+                base.Dto.Coordinates.X = transform.position.x;
+                base.Dto.Coordinates.Y = transform.position.y;
+                base.Dto.Coordinates.Z = transform.position.z;
             }
         }
 
@@ -48,14 +48,13 @@ namespace View.GUI.ProjectedObjects
             MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
             return mesh.material.DOColor(Color.cyan,base.AnimationTime);
         }
-        
         public override Tween UnPaintAnimation(){
             MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
             return mesh.material.DOColor(Color.white,0);
         }
 
         public override void Move(Vector3 coordinates){
-            gameObject.transform.localPosition = coordinates;
+            gameObject.transform.position = coordinates;
         }
 
         public static ProjectedNode FindById(int id){
