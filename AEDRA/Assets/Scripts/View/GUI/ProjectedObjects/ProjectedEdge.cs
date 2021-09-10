@@ -23,13 +23,7 @@ namespace View.GUI.ProjectedObjects
         }
         public override Tween CreateAnimation(){
             //TODO: make name of IsCreated more explitic (e.g: OnCreatedAnimationCompleted)
-            Tween tween = gameObject.transform.DOScale(UpdateEdge(),base.AnimationTime);
-            tween.OnComplete(()=> {
-                //gameObject.GetComponent<MeshRenderer>().enabled = true;
-                //gameObject.GetComponent<Collider>().enabled = true;
-                this.IsCreated = true;
-            });
-            return tween;
+            return gameObject.transform.DOScale(UpdateEdge(),base.AnimationTime);
         }
 
         public void OnCollisionEnter(Collision other) {
@@ -41,9 +35,10 @@ namespace View.GUI.ProjectedObjects
             Vector3 endPosition = GetNodeCoordinates(edgeDTO.IdEndNode);
             const float width = 0.2f;
             Vector3 offset = endPosition - startPosition;
+            Vector3 rotationOffset =new Vector3(endPosition.x - startPosition.x, endPosition.z - startPosition.z,-(endPosition.y - startPosition.y));
             Vector3 scale = new Vector3(width, offset.magnitude / 2.0f, width);
             gameObject.transform.localPosition = startPosition + (offset / 2.0f);
-            gameObject.transform.up = offset;
+            gameObject.transform.up = rotationOffset;
             return scale;
         }
 
