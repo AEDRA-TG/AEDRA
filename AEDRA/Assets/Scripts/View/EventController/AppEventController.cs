@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Controller;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using Utils;
 using Utils.Enums;
 using Utils.Parameters;
@@ -20,6 +21,9 @@ namespace View.EventController
         /// Method that executes when a target is detected by the camera
         /// </summary>
         public void OnTargetDetected(TargetParameter targetParameter){
+            GameObject optionsMenu = GameObject.Find("BackButton");
+            optionsMenu.GetComponent<Button>().onClick.RemoveAllListeners();
+
             GameObject structureProjection = GameObject.Find(Constants.ObjectsParentName);
             if(_activeStructure != targetParameter.GetStructure()){
                 Destroy(structureProjection);
@@ -54,6 +58,8 @@ namespace View.EventController
                 Command command = new SaveCommand();
                 CommandController.GetInstance().Invoke(command);
             }
+            GameObject optionsMenu = GameObject.Find("BackButton");
+            optionsMenu.GetComponent<Button>().onClick.AddListener(delegate{ChangeScene(0);});
         }
 
         public void ChangeToMenu(MenuEnumParameter menu){
@@ -70,13 +76,23 @@ namespace View.EventController
             ChangeToMenu(menuEnumParameter);
         }
 
+        public void OnTouchOptionsButton(){
+            GameObject optionsMenu = GameObject.Find("BackButton");
+            optionsMenu.transform.Find("BackOptionsMenu").gameObject.SetActive(true);
+        }
+
         public void OnTouchBackButton(){
             if(_activeSubMenu != MenuEnum.MainMenu){
                 ChangeToMenu(MenuEnum.MainMenu);
             }
             else{
-                ChangeScene(0);
+                OnTouchOptionsButton();
             }
+        }
+
+        public void OnTouchCleanStructure(){
+            Command command = new CleanStructureCommand();
+            CommandController.GetInstance().Invoke(command);
         }
         public void ChangeScene(int nextPage)
         {

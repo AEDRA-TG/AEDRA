@@ -21,7 +21,7 @@ namespace Controller
 
         public override void Execute()
         {
-            IDataStructureRepository repository =  RepositoryFactory.CreateRepository(_structureName);
+            DataStructureRepository repository =  RepositoryFactory.CreateRepository(_structureName);
             CommandController.GetInstance().Repository = repository;
             repository.Load().CreateDataStructure();
             Notify(OperationEnum.CreateDataStructure);

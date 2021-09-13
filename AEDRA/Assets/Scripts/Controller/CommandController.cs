@@ -15,7 +15,7 @@ namespace Controller
         /// Property used to store the command controller instance
         /// </summary>
         private static CommandController _commandController;
-        public IDataStructureRepository Repository {get; set;}
+        public DataStructureRepository Repository {get; set;}
 
         /// <summary>
         /// Singleton Method

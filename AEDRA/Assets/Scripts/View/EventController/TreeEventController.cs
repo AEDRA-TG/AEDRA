@@ -17,11 +17,11 @@ namespace View.EventController
 
     public class TreeEventController : AppEventController
     {
+
         public void Awake(){
             GameObject backButton = GameObject.Find("BackButton");
             backButton.GetComponent<Button>().onClick.AddListener(base.OnTouchBackButton);
         }
-
         public void Start(){
             base._menus = new Dictionary<MenuEnum, GameObject>(){
                 {MenuEnum.MainMenu, gameObject.transform.Find("MainMenu").gameObject},

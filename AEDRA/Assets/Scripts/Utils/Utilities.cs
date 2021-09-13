@@ -56,6 +56,15 @@ namespace Utils {
             SerializeJSON(filename,jsonObject);
         }
 
+        public static bool DeleteFile(string filePath){
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+                return true;
+            }
+            return false;
+        }
+
         /// <summary>
         /// Method to retrieve the globalColor value from a file
         /// </summary>
@@ -80,13 +89,5 @@ namespace Utils {
             Constants.GlobalColor = color;
         }
 
-        /// <summary>
-        /// Method to generate a random 3D coordinate
-        /// </summary>
-        /// <returns></returns>
-        public static Point GenerateRandomPoint(){
-            System.Random rand = new System.Random();
-            return new Point(rand.Next(Constants.MaxWidth),rand.Next(Constants.MaxHeight),rand.Next(Constants.MaxDepth));
-        }
     }
 }

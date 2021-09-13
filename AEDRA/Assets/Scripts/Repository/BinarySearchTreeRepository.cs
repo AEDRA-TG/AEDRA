@@ -6,7 +6,7 @@ using Utils.Enums;
 
 namespace Repository
 {
-    public class BinarySearchTreeRepository: IDataStructureRepository
+    public class BinarySearchTreeRepository: DataStructureRepository
     {
         private static BinarySearchTree tree;
         private string _filePath;
@@ -22,14 +22,21 @@ namespace Repository
             }
             return tree;
         }
-        public DataStructure Load()
+        public override DataStructure Load()
         {
             return GetInstance();
         }
 
-        public void Save()
+        public override void Save()
         {
             Utilities.SerializeJSON<BinarySearchTree>(_filePath,tree);
+        }
+
+        public override void Clean(){
+            if(Utilities.DeleteFile(_filePath)){
+                tree = new BinarySearchTree();
+                base.Notify();
+            }
         }
     }
 }

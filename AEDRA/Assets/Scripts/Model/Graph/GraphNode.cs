@@ -13,7 +13,7 @@ namespace Model.GraphModel
         public GraphNode(int id, object value, Point coordinates){
             Value = value;
             Id = id;
-            Coordinates = coordinates;
+            Coordinates = coordinates ?? new Point(0, 0, 0);
         }
     }
 }

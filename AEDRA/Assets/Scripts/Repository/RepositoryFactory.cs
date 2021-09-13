@@ -7,7 +7,7 @@ namespace Repository
 {
     public static class RepositoryFactory
     {
-        public static IDataStructureRepository CreateRepository(StructureEnum dataStructureName)
+        public static DataStructureRepository CreateRepository(StructureEnum dataStructureName)
         {
             return dataStructureName switch
             {

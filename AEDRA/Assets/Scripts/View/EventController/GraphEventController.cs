@@ -19,11 +19,10 @@ namespace View.EventController
 
         private SelectionController _selectionController;
 
-        public void Awake(){
+         public void Awake(){
             GameObject backButton = GameObject.Find("BackButton");
             backButton.GetComponent<Button>().onClick.AddListener(base.OnTouchBackButton);
         }
-
         public void Start(){
             _selectionController = FindObjectOfType<SelectionController>();
             base._menus = new Dictionary<MenuEnum, GameObject>();
@@ -125,7 +124,7 @@ namespace View.EventController
             if (objs.Count == 1 && objs[0].GetType() == typeof(ProjectedNode))
             {
                     GraphNodeDTO nodeDTO = (GraphNodeDTO)objs[0].Dto;
-                    DoTraversalCommand traversalCommand = new DoTraversalCommand(TraversalEnum.GraphDFS,nodeDTO);
+                    Command traversalCommand = new DoTraversalCommand(TraversalEnum.GraphDFS,nodeDTO);
                     CommandController.GetInstance().Invoke(traversalCommand);
             }
             else

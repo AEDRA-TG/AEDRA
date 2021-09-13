@@ -1,8 +1,10 @@
 
 using Controller;
 using Model.Common;
+using Repository;
 using SideCar.DTOs;
 using UnityEngine;
+using Utils;
 using Utils.Enums;
 using View.EventController;
 using View.GUI;
@@ -18,6 +20,7 @@ namespace Observer
             Command.OperationCompleted += ExecuteAnimation;
             Command.OperationCompleted += SaveDataStructure;
             Command.OperationCompleted += CleanUserSelection;
+            DataStructureRepository.CleanStructure += CleanDataStructure;
         }
 
         public void OnDisable(){
@@ -25,6 +28,8 @@ namespace Observer
             DataStructure.UpdateElement -= UpdateUI;
             Command.OperationCompleted -= ExecuteAnimation;
             Command.OperationCompleted -= SaveDataStructure;
+            Command.OperationCompleted -= CleanUserSelection;
+            DataStructureRepository.CleanStructure -= CleanDataStructure;
         }
         /// <summary>
         /// Method to update the projection on UI
@@ -59,6 +64,17 @@ namespace Observer
         private void CleanUserSelection(OperationEnum operation){
             SelectionController selectionController = FindObjectOfType<SelectionController>();
             selectionController.DeselectAllObjects();
+        }
+
+        public void CleanDataStructure(){
+            GameObject projection = GameObject.FindObjectOfType<StructureProjection>()?.gameObject;
+            if(projection != null){
+                Transform target = projection.transform.parent;
+                Destroy(projection);
+
+                projection = new GameObject(Constants.ObjectsParentName, typeof(StructureProjection));
+                projection.transform.parent = target;
+            }
         }
         //TODO: Revisar de que forma manejar estos mensajes
         private void CreateNotification(string notificationText){
