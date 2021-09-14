@@ -69,7 +69,7 @@ namespace View.GUI
         /// <param name="dto"></param>
         /// <returns></returns>
         public ProjectedObject CreateObject(ElementDTO dto){
-            Vector3 position = CalculatePosition(dto);
+            Vector3 position = CalculateInitialPosition(dto);
             string prefabPath = Constants.PrefabPath + dto.Name;
             GameObject prefab = Resources.Load(prefabPath) as GameObject;
             prefab = Instantiate(prefab,position,Quaternion.identity,this.transform);
@@ -77,6 +77,7 @@ namespace View.GUI
             ProjectedObject createdObject = prefab.GetComponent<ProjectedObject>();
             createdObject.SetDTO(dto);
             ProjectedObjects.Add(createdObject);
+            createdObject.PositionObject();
             return createdObject;
         }
 
@@ -100,17 +101,12 @@ namespace View.GUI
             Destroy(objectToBeDeleted.gameObject);
         }
 
-        public Vector3 CalculatePosition(ElementDTO dto){
+        public Vector3 CalculateInitialPosition(ElementDTO dto){
             Vector3 position = new Vector3(0,0,5);
             if (dto is BinarySearchNodeDTO castDTO){
                 if(castDTO.ParentId != null){
                     GameObject parentObject = GameObject.Find(Constants.NodeName + castDTO.ParentId);
-                    if(castDTO.IsLeft){
-                        position = new Vector3(parentObject.transform.position.x - Constants.HorizontalChildToParentDistance, parentObject.transform.position.y - Constants.VerticalNodeTreeDistance, 0);
-                    }
-                    else{
-                        position = new Vector3(parentObject.transform.position.x + Constants.HorizontalChildToParentDistance, parentObject.transform.position.y - Constants.VerticalNodeTreeDistance, 0);
-                    }
+                    position = new Vector3(parentObject.transform.position.x, parentObject.transform.position.y - Constants.VerticalNodeTreeDistance, 0);
                 }
             }
             return position;

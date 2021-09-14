@@ -13,59 +13,102 @@ namespace View.GUI.ObjectsPhysics
             this._gameObject = gameObject;
         }
 
-        public void RepulseObject(){
-            //Get the active colliders in scene
-            Collider[] collidersInScene = Physics.OverlapSphere(_gameObject.transform.position, Constants.OjectPhysicsRepulsionDistance);
-            foreach (Collider collider in collidersInScene)
+        public void ApplyGraphPhysics(){
+            Collider[] closesColliders = Physics.OverlapSphere(_gameObject.transform.position, Constants.MinimalNodeDistance);
+            foreach (Collider closeCollider in closesColliders)
             {
-                Rigidbody colliderRigidBody = collider.attachedRigidbody;
+                Rigidbody colliderRigidBody = closeCollider.attachedRigidbody;
                 if (colliderRigidBody != null && colliderRigidBody != _gameObject.GetComponent<Rigidbody>())
                 {
-                    Vector3 repulsionDirection;
-                    if (_gameObject.GetComponent<ProjectedObject>().Dto is BinarySearchNodeDTO dto){
-                        repulsionDirection = new Vector3(collider.transform.position.x - _gameObject.transform.position.x, 0, 0);
-                        colliderRigidBody.AddForce(repulsionDirection * Constants.ObjectPhysicsRepulsionForce * Constants.ObjectPhysicsRepulsionHorizontalDistance);
+                    Vector3 forceDirection = new Vector3(colliderRigidBody.transform.position.x- _gameObject.transform.position.x, colliderRigidBody.transform.position.y- _gameObject.transform.position.y,0);
+                    AddForce(colliderRigidBody.gameObject, forceDirection , Constants.HorizontalForce * Constants.MinimalNodeDistance, ForceMode.Force);
+                }
+            }
+        }
+
+        public void ApplyBinaryTreePhysics(){
+            RepulseHorizontal();
+            CheckHorizontalToParentDistance();
+            CheckHorizontalChildsDistance();
+        }
+
+        private void RepulseHorizontal(){
+            Collider[] closesColliders = Physics.OverlapSphere(_gameObject.transform.position, Constants.MinimalNodeDistance);
+            foreach(Collider closeCollider in closesColliders){
+                Rigidbody closeRigidBody = closeCollider.attachedRigidbody;
+                if(closeRigidBody != null && closeRigidBody != _gameObject.GetComponent<Rigidbody>()){
+                    Vector3 forceDirection = new Vector3(closeCollider.transform.position.x - _gameObject.transform.position.x, 0, 0);
+                    AddForce(closeRigidBody.gameObject, forceDirection, Constants.HorizontalForce, ForceMode.Force);
+                }
+            }
+        }
+
+        private void CheckHorizontalToParentDistance(){
+            BinarySearchNodeDTO dto = _gameObject.GetComponent<ProjectedObject>().Dto as BinarySearchNodeDTO;
+            if(dto.ParentId != null){
+                GameObject parent = GameObject.Find(Constants.NodeName + dto.ParentId);
+                _gameObject.transform.position= new Vector3(_gameObject.transform.position.x, parent.transform.position.y - Constants.VerticalNodeTreeDistance,_gameObject.transform.position.z);
+                BinarySearchNodeDTO parentDTO = parent.GetComponent<ProjectedObject>()?.Dto as BinarySearchNodeDTO;
+                Vector3 distanceToParent = _gameObject.transform.position- parent.transform.position;
+                if(Mathf.Abs(distanceToParent.x) < Constants.HorizontalChildToParentDistance){
+                    Vector3 forceParentDirection;
+                    Vector3 forceDirection;
+                    if(dto.IsLeft){
+                        forceDirection = new Vector3(-1,0,0);
+                        forceParentDirection = new Vector3(1,0,0);
+                    }else{
+                        forceDirection = new Vector3(1,0,0);
+                        forceParentDirection = new Vector3(-1,0,0);
+                    }
+                    if(parentDTO.ParentId != null){
+                        AddForce(parent, forceParentDirection, Constants.MinimalHorizontalForce, ForceMode.Force);
                     }
                     else{
-                        repulsionDirection = collider.transform.position - _gameObject.transform.position;
-                        colliderRigidBody.AddForce(repulsionDirection * Constants.ObjectPhysicsRepulsionForce * Constants.OjectPhysicsRepulsionDistance);
+                        AddForce(_gameObject, forceDirection, Constants.MinimalHorizontalForce, ForceMode.Force);
                     }
                 }
             }
         }
 
-        public void ParentPosition(){
-            if (_gameObject.GetComponent<ProjectedObject>().Dto is BinarySearchNodeDTO dto){
-                if(dto.LeftChild != null){
-                    GameObject leftChild = GameObject.Find(Constants.NodeName + dto.LeftChild);
-                    if(leftChild != null){
-                        if(dto.RightChild != null){
-                            GameObject rightChild = GameObject.Find(Constants.NodeName + dto.RightChild);
-                            if(rightChild != null){
-                                Vector3 distanceLeftToParent = leftChild.transform.position - _gameObject.transform.position;
-                                Vector3 distanceRightToParent = rightChild.transform.position - _gameObject.transform.position;
-                                if(Mathf.Abs(distanceRightToParent.x) < Mathf.Abs(distanceLeftToParent.x)){
-                                    rightChild.GetComponent<Rigidbody>().AddForce(new Vector3(Mathf.Abs(distanceLeftToParent.x),0,0)*Constants.ObjectPhysicsRepulsionForce*Constants.OjectPhysicsRepulsionDistance);
-                                }
-                            }
-                        }
-                    }
+        private void CheckHorizontalChildsDistance(){
+            BinarySearchNodeDTO dto = _gameObject.GetComponent<ProjectedObject>().Dto as BinarySearchNodeDTO;
+            GameObject leftChild = null;
+            GameObject rightChild = null;
+
+            if(dto.LeftChild != null){
+                leftChild = GameObject.Find(Constants.NodeName + dto.LeftChild);
+            }
+            if(dto.RightChild != null){
+                rightChild = GameObject.Find(Constants.NodeName + dto.RightChild);
+            }
+            if(leftChild != null && rightChild != null){
+                float distanceLeftToParent = Mathf.Sqrt(Mathf.Pow(leftChild.transform.position.x - _gameObject.transform.position.x, 2));
+                float distanceRightToParent = Mathf.Sqrt(Mathf.Pow(rightChild.transform.position.x - _gameObject.transform.position.x, 2));
+                float maxHorizontalDistanceToParent = Mathf.Max(distanceLeftToParent, distanceRightToParent);
+                if(Mathf.Abs(maxHorizontalDistanceToParent - distanceLeftToParent) > 0.5){
+                    AddForce(leftChild, new Vector3(-1, 0,0), Constants.MinimalHorizontalForce, ForceMode.Force);
                 }
+                if(Mathf.Abs(maxHorizontalDistanceToParent - distanceRightToParent) > 0.5){
+                    AddForce(rightChild, new Vector3(1,0,0), Constants.MinimalHorizontalForce, ForceMode.Force);
+                }
+            }
+        }
+
+        public void PositionObject(){
+            if(_gameObject.GetComponent<ProjectedObject>().Dto is BinarySearchNodeDTO dto){
                 if(dto.ParentId != null){
-                    GameObject parentObject = GameObject.Find(Constants.NodeName + dto.ParentId);
-                    _gameObject.transform.position =  new Vector3(_gameObject.transform.position.x,parentObject.transform.position.y-3,_gameObject.transform.position.z);
-                    Vector3 distance = _gameObject.transform.position - parentObject.transform.position;
-                    if(Mathf.Abs(distance.x) < Constants.OjectPhysicsRepulsionDistance){
-                        Rigidbody parentRigidBody = parentObject.GetComponent<Rigidbody>();
-                        Vector3 impulseDirection = new Vector3(-1, 0, 0);
-                        if(!dto.IsLeft){
-                            parentRigidBody.AddForce(impulseDirection*Constants.ObjectPhysicsRepulsionForce*Constants.OjectPhysicsRepulsionDistance);
-                        }else{
-                            _gameObject.GetComponent<Rigidbody>().AddForce(impulseDirection);
-                        }
+                    if(dto.IsLeft){
+                        AddForce(_gameObject,new Vector3(-1,0,0), Constants.HorizontalForce, ForceMode.Impulse);
+                    }
+                    else{
+                        AddForce(_gameObject, new Vector3(1,0,0), Constants.HorizontalForce, ForceMode.Impulse);
                     }
                 }
             }
+        }
+
+        private void AddForce(GameObject objectToApply, Vector3 forceDirection, float forceToApply, ForceMode forceMode){
+            objectToApply.GetComponent<Rigidbody>()?.AddForce(forceDirection * forceToApply, forceMode);
         }
     }
 }

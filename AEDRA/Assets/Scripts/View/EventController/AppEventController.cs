@@ -17,6 +17,7 @@ namespace View.EventController
         private GameObject _activeMenu;
 
         private StructureEnum _activeStructure;
+
         /// <summary>
         /// Method that executes when a target is detected by the camera
         /// </summary>
@@ -76,9 +77,9 @@ namespace View.EventController
             ChangeToMenu(menuEnumParameter);
         }
 
-        public void OnTouchOptionsButton(){
+        private void ShowOptionsMenu(bool state){
             GameObject optionsMenu = GameObject.Find("BackButton");
-            optionsMenu.transform.Find("BackOptionsMenu").gameObject.SetActive(true);
+            optionsMenu.transform.Find("BackOptionsMenu").gameObject.SetActive(state);
         }
 
         public void OnTouchBackButton(){
@@ -86,13 +87,14 @@ namespace View.EventController
                 ChangeToMenu(MenuEnum.MainMenu);
             }
             else{
-                OnTouchOptionsButton();
+                ShowOptionsMenu(true);
             }
         }
 
         public void OnTouchCleanStructure(){
             Command command = new CleanStructureCommand();
             CommandController.GetInstance().Invoke(command);
+            ShowOptionsMenu(false);
         }
         public void ChangeScene(int nextPage)
         {

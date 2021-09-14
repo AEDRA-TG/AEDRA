@@ -1,6 +1,18 @@
 {
-  "NodesId": 0,
+  "NodesId": 1,
   "EdgesId": 0,
-  "Nodes": {},
-  "AdjacentMtx": {}
+  "Nodes": {
+    "0": {
+      "Id": 0,
+      "Value": "0",
+      "Coordinates": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0
+      }
+    }
+  },
+  "AdjacentMtx": {
+    "0": {}
+  }
 }

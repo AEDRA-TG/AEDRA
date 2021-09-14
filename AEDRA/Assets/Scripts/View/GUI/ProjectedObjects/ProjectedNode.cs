@@ -27,13 +27,17 @@ namespace View.GUI.ProjectedObjects
         }
 
         public void FixedUpdate(){
-            base._objectPhysics.RepulseObject();
-            base._objectPhysics.ParentPosition();
+            if(base.Dto is BinarySearchNodeDTO){
+                base._objectPhysics.ApplyBinaryTreePhysics();
+            }
+            else{
+                base._objectPhysics.ApplyGraphPhysics();
+            }
         }
 
 
         public override Tween CreateAnimation(){
-            return gameObject.transform.DOScale(1,base.AnimationTime);
+            return gameObject.transform.DOScale(1,base.AnimationTime).OnComplete( ()=> base.IsCreated = true);
         }
 
         public override Tween DeleteAnimation(){

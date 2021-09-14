@@ -38,6 +38,10 @@ namespace View.GUI.ProjectedObjects
             };
         }
 
+        public void PositionObject(){
+            _objectPhysics.PositionObject();
+        }
+
         virtual public Tween CreateAnimation()
         {
             return null;
@@ -77,7 +81,6 @@ namespace View.GUI.ProjectedObjects
             if(text != null){
                 text.text = dto.Value.ToString();
             }
-            //TODO: update object properties
         }
 
         public override bool Equals(object other)
