@@ -12,9 +12,12 @@ namespace Controller
     public class CommandController
     {
         /// <summary>
-        /// Property used to store the command controller instance
+        /// Field name used to store the command controller instance
         /// </summary>
         private static CommandController _commandController;
+        /// <summary>
+        /// Property name for the data structure repository
+        /// </summary>
         public DataStructureRepository Repository {get; set;}
 
         /// <summary>

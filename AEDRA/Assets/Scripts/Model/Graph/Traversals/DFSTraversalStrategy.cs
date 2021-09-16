@@ -10,9 +10,14 @@ namespace Model.GraphModel.Traversals
     /// </summary>
     public class DFSTraversalStrategy : ITraversalGraphStrategy
     {
+        /// <summary>
+        /// Graph to apply the traversal
+        /// </summary>
         private static Graph graph;
+        /// <summary>
+        /// Dictionary that indicates if a node was visited
+        /// </summary>
         private static Dictionary<int,bool> visited;
-
         public void DoTraversal(Graph graph, ElementDTO data = null)
         {
             DFSTraversalStrategy.graph = graph;

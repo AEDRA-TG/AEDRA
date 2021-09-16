@@ -25,12 +25,14 @@ namespace View.EventController
         }
         public void Start(){
             _selectionController = FindObjectOfType<SelectionController>();
-            base._menus = new Dictionary<MenuEnum, GameObject>();
-            base._menus.Add(MenuEnum.MainMenu, gameObject.transform.Find("MainMenu").gameObject);
-            base._menus.Add(MenuEnum.TraversalMenu, gameObject.transform.Find("TraversalMenu").gameObject);
-            base._menus.Add(MenuEnum.NodeSelectionMenu, gameObject.transform.Find("NodeSelectionMenu").gameObject);
-            base._menus.Add(MenuEnum.NodeMultiSelectionMenu, gameObject.transform.Find("NodeMultiSelectionMenu").gameObject);
-            base._menus.Add(MenuEnum.AddElementInputMenu, gameObject.transform.Find("AddElementInputMenu").gameObject);
+            base._menus = new Dictionary<MenuEnum, GameObject>
+            {
+                { MenuEnum.MainMenu, gameObject.transform.Find("MainMenu").gameObject },
+                { MenuEnum.TraversalMenu, gameObject.transform.Find("TraversalMenu").gameObject },
+                { MenuEnum.NodeSelectionMenu, gameObject.transform.Find("NodeSelectionMenu").gameObject },
+                { MenuEnum.NodeMultiSelectionMenu, gameObject.transform.Find("NodeMultiSelectionMenu").gameObject },
+                { MenuEnum.AddElementInputMenu, gameObject.transform.Find("AddElementInputMenu").gameObject }
+            };
             base._activeSubMenu = MenuEnum.MainMenu;
         }
 
@@ -93,7 +95,6 @@ namespace View.EventController
             if (objs.Count == 2)
             {
                 if(objs[0].GetType() == typeof(ProjectedNode) && objs[1].GetType() == typeof(ProjectedNode)){
-                    Debug.Log(objs[0].Dto.Id+ "-" + objs[1].Dto.Id );
                     EdgeDTO edgeDTO = new EdgeDTO(0, 0, objs[0].Dto.Id, objs[1].Dto.Id);
                     ConnectElementsCommand connectCommand = new ConnectElementsCommand(edgeDTO);
                     CommandController.GetInstance().Invoke(connectCommand);

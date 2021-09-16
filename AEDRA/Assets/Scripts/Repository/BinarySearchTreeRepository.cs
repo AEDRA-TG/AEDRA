@@ -11,7 +11,7 @@ namespace Repository
         private static BinarySearchTree tree;
         private string _filePath;
         public BinarySearchTreeRepository(StructureEnum structureName){
-            this._filePath = Constants.DataStructureFilePath + structureName.ToString() + ".json";
+            this._filePath = Constants.DataPath + structureName.ToString() + ".json";
         }
         private BinarySearchTree GetInstance()
         {

@@ -102,7 +102,8 @@ namespace View.GUI
         }
 
         public Vector3 CalculateInitialPosition(ElementDTO dto){
-            Vector3 position = new Vector3(0,0,5);
+            GameObject structureProjection = GameObject.Find(Constants.ObjectsParentName);
+            Vector3 position = structureProjection.transform.parent.localPosition;
             if (dto is BinarySearchNodeDTO castDTO){
                 if(castDTO.ParentId != null){
                     GameObject parentObject = GameObject.Find(Constants.NodeName + castDTO.ParentId);

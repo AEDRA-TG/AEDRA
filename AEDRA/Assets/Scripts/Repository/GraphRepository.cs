@@ -10,7 +10,7 @@ namespace Repository
         private static Graph graph;
         private string _filePath;
         public GraphRepository(StructureEnum structureName){
-            this._filePath = Constants.DataStructureFilePath + structureName.ToString() + ".json";
+            this._filePath = Constants.DataPath + structureName.ToString() + ".json";
         }
         private Graph GetInstance()
         {

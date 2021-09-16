@@ -5,7 +5,7 @@ using Utils.Enums;
 namespace Model.Common
 {
     /// <summary>
-    /// Interface for defining operations of a generic Data Structure
+    /// Abstract class for defining operations of a generic Data Structure
     /// </summary>
     public abstract class DataStructure
     {
@@ -40,7 +40,7 @@ namespace Model.Common
         /// <summary>
         /// Method to Notify observer that the specified operation has completed execution
         /// </summary>
-        /// <param name="element"></param>
+        /// <param name="element"> Element that was modified</param>
         public static void Notify(ElementDTO element){
             UpdateElement?.Invoke(element);
         }

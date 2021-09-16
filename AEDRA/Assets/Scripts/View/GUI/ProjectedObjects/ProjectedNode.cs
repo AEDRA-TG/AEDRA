@@ -20,9 +20,9 @@ namespace View.GUI.ProjectedObjects
         {
             gameObject.transform.rotation = Quaternion.identity;
             if(base.Dto != null){
-                base.Dto.Coordinates.X = transform.position.x;
-                base.Dto.Coordinates.Y = transform.position.y;
-                base.Dto.Coordinates.Z = transform.position.z;
+                base.Dto.Coordinates.X = gameObject.transform.localPosition.x;
+                base.Dto.Coordinates.Y = gameObject.transform.localPosition.y;
+                base.Dto.Coordinates.Z = gameObject.transform.localPosition.z;
             }
         }
 

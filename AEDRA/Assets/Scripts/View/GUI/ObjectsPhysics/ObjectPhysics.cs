@@ -2,6 +2,7 @@ using UnityEngine;
 using View.GUI.ProjectedObjects;
 using Utils;
 using SideCar.DTOs;
+using System;
 
 namespace View.GUI.ObjectsPhysics
 {
@@ -14,13 +15,14 @@ namespace View.GUI.ObjectsPhysics
         }
 
         public void ApplyGraphPhysics(){
-            Collider[] closesColliders = Physics.OverlapSphere(_gameObject.transform.position, Constants.MinimalNodeDistance);
-            foreach (Collider closeCollider in closesColliders)
+            foreach (Collider closeCollider in Physics.OverlapSphere(_gameObject.transform.position, Constants.MinimalNodeDistance))
             {
                 Rigidbody colliderRigidBody = closeCollider.attachedRigidbody;
                 if (colliderRigidBody != null && colliderRigidBody != _gameObject.GetComponent<Rigidbody>())
                 {
-                    Vector3 forceDirection = new Vector3(colliderRigidBody.transform.position.x- _gameObject.transform.position.x, colliderRigidBody.transform.position.y- _gameObject.transform.position.y,0);
+                    System.Random random = new System.Random();
+                    float deep = random.Next(-1, 1);
+                    Vector3 forceDirection = new Vector3(colliderRigidBody.transform.position.x- _gameObject.transform.position.x, colliderRigidBody.transform.position.y- _gameObject.transform.position.y,deep);
                     AddForce(colliderRigidBody.gameObject, forceDirection , Constants.HorizontalForce * Constants.MinimalNodeDistance, ForceMode.Force);
                 }
             }
@@ -33,8 +35,7 @@ namespace View.GUI.ObjectsPhysics
         }
 
         private void RepulseHorizontal(){
-            Collider[] closesColliders = Physics.OverlapSphere(_gameObject.transform.position, Constants.MinimalNodeDistance);
-            foreach(Collider closeCollider in closesColliders){
+            foreach(Collider closeCollider in Physics.OverlapSphere(_gameObject.transform.position, Constants.MinimalNodeDistance)){
                 Rigidbody closeRigidBody = closeCollider.attachedRigidbody;
                 if(closeRigidBody != null && closeRigidBody != _gameObject.GetComponent<Rigidbody>()){
                     Vector3 forceDirection = new Vector3(closeCollider.transform.position.x - _gameObject.transform.position.x, 0, 0);

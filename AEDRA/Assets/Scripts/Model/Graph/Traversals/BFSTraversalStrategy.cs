@@ -14,7 +14,7 @@ namespace Model.GraphModel.Traversals
         public void DoTraversal(Graph graph, ElementDTO startNode = null)
         {
             Dictionary<int, bool> visitedMap = graph.Nodes.Keys.ToDictionary(id => id, _ => false);
-            // Item1 anterior item2 actual
+            // Item1 Previous neighbour node item2 actual node
             Queue<Tuple<int, int> > q = new Queue<Tuple<int, int> >();
             q.Enqueue(new Tuple<int, int>(startNode.Id, startNode.Id));
 

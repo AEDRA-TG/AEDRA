@@ -98,6 +98,11 @@ namespace View.EventController
         }
         public void ChangeScene(int nextPage)
         {
+            GameObject structureProjection = GameObject.Find(Constants.ObjectsParentName);
+            if(structureProjection != null){
+                Command command = new SaveCommand();
+                CommandController.GetInstance().Invoke(command);
+            }
             SceneManager.LoadScene(nextPage);
         }
     }

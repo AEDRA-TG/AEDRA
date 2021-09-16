@@ -7,6 +7,9 @@ using Model.GraphModel;
 
 namespace Controller
 {
+    /// <summary>
+    /// Class to manage the connect elements command
+    /// </summary>
     public class ConnectElementsCommand : Command
     {
         /// <summary>
@@ -15,7 +18,7 @@ namespace Controller
         private DataStructure _dataStructure;
 
         /// <summary>
-        /// Elements that will be connected on the data structure
+        /// Elements information that will be connected on the data structure
         /// </summary>
         private ElementDTO _edgeDTO;
 

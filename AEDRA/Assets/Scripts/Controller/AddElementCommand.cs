@@ -8,7 +8,7 @@ using Utils.Enums;
 namespace Controller
 {
     /// <summary>
-    /// Class to manage the add object command
+    /// Class to manage the add element command
     /// </summary>
     public class AddElementCommand : Command
     {

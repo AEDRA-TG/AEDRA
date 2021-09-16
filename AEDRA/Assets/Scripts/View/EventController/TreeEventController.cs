@@ -23,7 +23,7 @@ namespace View.EventController
             backButton.GetComponent<Button>().onClick.AddListener(base.OnTouchBackButton);
         }
         public void Start(){
-            base._menus = new Dictionary<MenuEnum, GameObject>(){
+            base._menus = new Dictionary<MenuEnum, GameObject>{
                 {MenuEnum.MainMenu, gameObject.transform.Find("MainMenu").gameObject},
                 {MenuEnum.TraversalMenu, gameObject.transform.Find("TraversalMenu").gameObject},
                 {MenuEnum.AddElementInputMenu, gameObject.transform.Find("AddElementInputMenu").gameObject},
