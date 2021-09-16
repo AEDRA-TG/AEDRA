@@ -1,11 +1,11 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using View.GUI.ProjectedObjects;
+
 namespace View.EventController
 {
-    using System;
-    using System.Collections.Generic;
-    using UnityEngine;
-    using UnityEngine.EventSystems;
-    using View.GUI.ProjectedObjects;
-
     public class SelectionController : MonoBehaviour
     {
         //NOTE: this can be changed for a string to improve flexibility

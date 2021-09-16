@@ -2,12 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using System.Collections.Generic;
-using System.Threading;
-using Utils;
-using View.GUI;
-using Controller;
-using System.IO;
-using View.EventController;
 using View.GUI.ProjectedObjects;
 
 namespace View

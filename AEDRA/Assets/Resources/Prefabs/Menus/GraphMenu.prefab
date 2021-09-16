@@ -1038,7 +1038,19 @@ PrefabInstance:
     - target: {fileID: 2731015000048538532, guid: 018b92f87d8c67943a5996b69df131bf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 3953196626536793542}
+      objectReference: {fileID: 7214306936968172999}
+    - target: {fileID: 2731015000048538532, guid: 018b92f87d8c67943a5996b69df131bf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnTouchDeleteNode
+      objectReference: {fileID: 0}
+    - target: {fileID: 2731015000048538532, guid: 018b92f87d8c67943a5996b69df131bf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: View.EventController.GraphEventController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2731015000048538532, guid: 018b92f87d8c67943a5996b69df131bf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3571018381400711219, guid: 018b92f87d8c67943a5996b69df131bf, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

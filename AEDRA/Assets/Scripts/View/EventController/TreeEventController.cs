@@ -1,8 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using View;
-using Utils;
 using SideCar.DTOs;
 using Controller;
 using Utils.Enums;

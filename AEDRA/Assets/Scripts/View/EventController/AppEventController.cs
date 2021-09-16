@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Controller;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Utils;
@@ -18,12 +19,30 @@ namespace View.EventController
 
         private StructureEnum _activeStructure;
 
+        public void Update(){
+#if UNITY_EDITOR
+            if (Input.GetMouseButtonDown(0))
+            {
+                //ShowOptionsMenu(false);
+            }
+#elif UNITY_ANDROID
+            if (Input.touchCount > 0)
+            {
+                Touch touch = Input.GetTouch(0);
+                if (touch.phase == TouchPhase.Began)
+                {
+                   // ShowOptionsMenu(false);
+                }
+            }
+#endif
+        }
         /// <summary>
         /// Method that executes when a target is detected by the camera
         /// </summary>
         public void OnTargetDetected(TargetParameter targetParameter){
             GameObject optionsMenu = GameObject.Find("BackButton");
             optionsMenu.GetComponent<Button>().onClick.RemoveAllListeners();
+            optionsMenu.GetComponent<Button>().onClick.AddListener(OnTouchBackButton);
 
             GameObject structureProjection = GameObject.Find(Constants.ObjectsParentName);
             if(_activeStructure != targetParameter.GetStructure()){
@@ -53,13 +72,15 @@ namespace View.EventController
         /// Method that executes when a target is lost by the camera
         /// </summary>
         public void OnTargetLost(){
+            GameObject optionsMenu = GameObject.Find("BackButton");
+            optionsMenu.GetComponent<Button>().onClick.RemoveAllListeners();
+            ShowOptionsMenu(false);
             GameObject structureProjection = GameObject.Find(Constants.ObjectsParentName);
             _activeMenu?.SetActive(false);
             if(structureProjection != null){
                 Command command = new SaveCommand();
                 CommandController.GetInstance().Invoke(command);
             }
-            GameObject optionsMenu = GameObject.Find("BackButton");
             optionsMenu.GetComponent<Button>().onClick.AddListener(delegate{ChangeScene(0);});
         }
 

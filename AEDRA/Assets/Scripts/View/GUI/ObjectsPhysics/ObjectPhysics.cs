@@ -2,7 +2,6 @@ using UnityEngine;
 using View.GUI.ProjectedObjects;
 using Utils;
 using SideCar.DTOs;
-using System;
 
 namespace View.GUI.ObjectsPhysics
 {
@@ -20,9 +19,7 @@ namespace View.GUI.ObjectsPhysics
                 Rigidbody colliderRigidBody = closeCollider.attachedRigidbody;
                 if (colliderRigidBody != null && colliderRigidBody != _gameObject.GetComponent<Rigidbody>())
                 {
-                    System.Random random = new System.Random();
-                    float deep = random.Next(-1, 1);
-                    Vector3 forceDirection = new Vector3(colliderRigidBody.transform.position.x- _gameObject.transform.position.x, colliderRigidBody.transform.position.y- _gameObject.transform.position.y,deep);
+                    Vector3 forceDirection = new Vector3(colliderRigidBody.transform.position.x- _gameObject.transform.position.x, colliderRigidBody.transform.position.y- _gameObject.transform.position.y,0);
                     AddForce(colliderRigidBody.gameObject, forceDirection , Constants.HorizontalForce * Constants.MinimalNodeDistance, ForceMode.Force);
                 }
             }

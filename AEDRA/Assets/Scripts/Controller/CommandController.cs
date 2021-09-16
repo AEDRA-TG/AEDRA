@@ -1,8 +1,4 @@
-using System.Collections.Generic;
-using Utils.Enums;
-using UnityEngine;
 using Repository;
-using Model.Common;
 
 namespace Controller
 {

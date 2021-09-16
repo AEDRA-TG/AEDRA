@@ -1,12 +1,9 @@
 using UnityEngine;
 using Controller;
 using SideCar.DTOs;
-using View.GUI;
 using View.GUI.ProjectedObjects;
 using System.Collections.Generic;
 using Utils.Enums;
-using System;
-using Utils;
 using UnityEngine.UI;
 
 namespace View.EventController

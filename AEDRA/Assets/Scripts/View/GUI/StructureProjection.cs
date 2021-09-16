@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using Model.Common;
 using SideCar.DTOs;
-using UnityEditor;
 using UnityEngine;
 using Utils;
 using Utils.Enums;
@@ -107,7 +105,7 @@ namespace View.GUI
             if (dto is BinarySearchNodeDTO castDTO){
                 if(castDTO.ParentId != null){
                     GameObject parentObject = GameObject.Find(Constants.NodeName + castDTO.ParentId);
-                    position = new Vector3(parentObject.transform.position.x, parentObject.transform.position.y - Constants.VerticalNodeTreeDistance, 0);
+                    position = new Vector3(parentObject.transform.localPosition.x, parentObject.transform.localPosition.y - Constants.VerticalNodeTreeDistance, parentObject.transform.localPosition.z);
                 }
             }
             return position;

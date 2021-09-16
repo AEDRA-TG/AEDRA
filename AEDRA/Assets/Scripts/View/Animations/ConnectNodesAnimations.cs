@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using DG.Tweening;
 using Utils.Enums;
 using View.GUI.ProjectedObjects;
-using Utils;
 
 namespace View.Animations
 {
