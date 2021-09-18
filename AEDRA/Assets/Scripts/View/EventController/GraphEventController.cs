@@ -79,6 +79,7 @@ namespace View.EventController
             }
             else
             {
+                //TODO: delete this
                 Debug.Log("Numero de nodos seleccionados inválido");
             }
         }
@@ -99,6 +100,7 @@ namespace View.EventController
             }
             else
             {
+                //TODO: delete this
                 Debug.Log("Numero de nodos seleccionados inválido");
             }
         }
@@ -113,6 +115,7 @@ namespace View.EventController
             }
             else
             {
+                //TODO: delete this
                 Debug.Log("Numero de nodos seleccionados inválido");
             }
         }
@@ -127,6 +130,7 @@ namespace View.EventController
             }
             else
             {
+                //TODO: delete this
                 Debug.Log("Numero de nodos seleccionados inválido");
             }
         }

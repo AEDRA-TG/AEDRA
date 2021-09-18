@@ -16,7 +16,7 @@ namespace View.GUI.ProjectedObjects
         // Update is called once per frame
         public void Update()
         {
-            gameObject.transform.rotation = Quaternion.identity;
+            //gameObject.transform.rotation = Quaternion.identity;
             if(base.Dto != null){
                 base.Dto.Coordinates.X = gameObject.transform.localPosition.x;
                 base.Dto.Coordinates.Y = gameObject.transform.localPosition.y;

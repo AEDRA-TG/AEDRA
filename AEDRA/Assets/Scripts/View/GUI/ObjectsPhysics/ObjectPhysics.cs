@@ -45,7 +45,7 @@ namespace View.GUI.ObjectsPhysics
             BinarySearchNodeDTO dto = _gameObject.GetComponent<ProjectedObject>().Dto as BinarySearchNodeDTO;
             if(dto.ParentId != null){
                 GameObject parent = GameObject.Find(Constants.NodeName + dto.ParentId);
-                _gameObject.transform.position= new Vector3(_gameObject.transform.position.x, parent.transform.position.y - Constants.VerticalNodeTreeDistance,_gameObject.transform.position.z);
+                _gameObject.transform.position= new Vector3(_gameObject.transform.position.x, parent.transform.position.y - Constants.VerticalNodeTreeDistance,parent.transform.position.z);
                 BinarySearchNodeDTO parentDTO = parent.GetComponent<ProjectedObject>()?.Dto as BinarySearchNodeDTO;
                 Vector3 distanceToParent = _gameObject.transform.position- parent.transform.position;
                 if(Mathf.Abs(distanceToParent.x) < Constants.HorizontalChildToParentDistance){

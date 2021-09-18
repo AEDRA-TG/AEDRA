@@ -19,6 +19,7 @@ namespace View.EventController
 
         private StructureEnum _activeStructure;
 
+        //TODO: regañar a Andrés
         public void Update(){
 #if UNITY_EDITOR
             if (Input.GetMouseButtonDown(0))
@@ -43,7 +44,13 @@ namespace View.EventController
             GameObject optionsMenu = GameObject.Find("BackButton");
             optionsMenu.GetComponent<Button>().onClick.RemoveAllListeners();
             optionsMenu.GetComponent<Button>().onClick.AddListener(OnTouchBackButton);
+            // TEST
+            //Vector3 coordinates =  GameObject.Find(targetParameter.GetTargetName()).transform.position;
+            //Debug.Log("Global coordinates:" + GameObject.Find(targetParameter.GetTargetName()).transform.position);
+            //Debug.Log("Local coordinates:" + GameObject.Find(targetParameter.GetTargetName()).transform.localPosition);
+            //GameObject.CreatePrimitive(PrimitiveType.Cube).transform.position = coordinates;
 
+            // END TEST
             GameObject structureProjection = GameObject.Find(Constants.ObjectsParentName);
             if(_activeStructure != targetParameter.GetStructure()){
                 Destroy(structureProjection);
@@ -53,6 +60,7 @@ namespace View.EventController
                 structureProjection = new GameObject(Constants.ObjectsParentName, typeof(StructureProjection));
                 structureProjection.transform.parent = GameObject.Find(targetParameter.GetTargetName()).transform;
             }
+            //structureProjection.transform.position = GameObject.Find("Center").transform.position;
             if(_activeStructure != targetParameter.GetStructure()){
                 _activeStructure = targetParameter.GetStructure();
                 Command command = new LoadCommand(_activeStructure);
