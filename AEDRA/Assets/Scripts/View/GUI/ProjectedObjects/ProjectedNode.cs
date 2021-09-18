@@ -31,6 +31,7 @@ namespace View.GUI.ProjectedObjects
             else{
                 base._objectPhysics.ApplyGraphPhysics();
             }
+            //TODO: 
         }
 
 

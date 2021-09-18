@@ -35,7 +35,8 @@ namespace View.GUI
                 { OperationEnum.DeleteObject, new DeleteNodeAnimation()},
                 { OperationEnum.ConnectObjects, new ConnectNodesAnimation()},
                 { OperationEnum.TraversalObjects, new TraversalAnimation() },
-                { OperationEnum.CreateDataStructure, new CreateDataStructureAnimation() }
+                { OperationEnum.CreateDataStructure, new CreateDataStructureAnimation() },
+                { OperationEnum.UpdateObjects, new UpdateAnimation() }
             };
         }
 

@@ -12,7 +12,7 @@ namespace Model.Common
         /// <summary>
         /// Observer event to notify that an element of the datastructure has been updated
         /// </summary>
-        public static event Action<ElementDTO> UpdateElement;
+        public static event Action<ElementDTO> UpdateElementEvent;
 
         /// <summary>
         /// Method to create the datastructure
@@ -23,6 +23,12 @@ namespace Model.Common
         /// </summary>
         /// <param name="element"> Element to add to the data structure </param>
         public abstract void AddElement(ElementDTO element);
+
+        /// <summary>
+        /// Method to update an element of a data structure
+        /// </summary>
+        /// <param name="element"> Element to update</param>
+        public abstract void UpdateElement(ElementDTO element);
 
         /// <summary>
         /// Method to remove an element of a data structure
@@ -42,7 +48,7 @@ namespace Model.Common
         /// </summary>
         /// <param name="element"> Element that was modified</param>
         public static void Notify(ElementDTO element){
-            UpdateElement?.Invoke(element);
+            UpdateElementEvent?.Invoke(element);
         }
     }
 }

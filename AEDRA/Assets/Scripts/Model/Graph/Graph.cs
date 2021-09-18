@@ -199,5 +199,13 @@ namespace Model.GraphModel
             NotifyNode(end, AnimationEnum.UpdateAnimation);
             Notify(edge);
         }
+
+        public override void UpdateElement(ElementDTO element)
+        {
+            GraphNode node = Nodes[element.Id];
+            node.Coordinates = element.Coordinates;
+            node.Value = element.Value;
+            NotifyNode(node.Id, AnimationEnum.UpdateAnimation);
+        }
     }
 }

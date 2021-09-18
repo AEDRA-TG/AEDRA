@@ -15,7 +15,7 @@ namespace Observer
 
         public void OnEnable(){
             // Projection subscribes to Update element event for updating UI
-            DataStructure.UpdateElement += UpdateUI;
+            DataStructure.UpdateElementEvent += UpdateUI;
             Command.OperationCompleted += ExecuteAnimation;
             Command.OperationCompleted += SaveDataStructure;
             Command.OperationCompleted += CleanUserSelection;
@@ -24,7 +24,7 @@ namespace Observer
 
         public void OnDisable(){
             // Projection unsubscribes from Update Element event for updating UI
-            DataStructure.UpdateElement -= UpdateUI;
+            DataStructure.UpdateElementEvent -= UpdateUI;
             Command.OperationCompleted -= ExecuteAnimation;
             Command.OperationCompleted -= SaveDataStructure;
             Command.OperationCompleted -= CleanUserSelection;

@@ -83,5 +83,11 @@ namespace Model.TreeModel
         public BinarySearchTreeNode GetRoot(){
             return Root;
         }
+
+        public override void UpdateElement(ElementDTO element)
+        {
+            //TODO: ver que hacer con este método
+            throw new System.NotImplementedException();
+        }
     }
 }
