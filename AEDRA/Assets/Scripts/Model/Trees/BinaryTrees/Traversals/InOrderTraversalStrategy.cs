@@ -21,13 +21,13 @@ namespace Model.TreeModel.BinaryTree.Traversals
             {
                 node.NotifyEdge(parent, node, AnimationEnum.KeepPaintAnimation);
             }
-            InOrder(node._leftChild, node);
+            InOrder(node.LeftChild, node);
             node.NotifyNode(parent, node, AnimationEnum.KeepPaintAnimation);
-            InOrder(node._rightChild, node);
+            InOrder(node.RightChild, node);
             if(parent!=null)
             {
                 node.NotifyEdge(parent, node, AnimationEnum.UnPaintAnimation);
-            } 
+            }
         }
     }
 }

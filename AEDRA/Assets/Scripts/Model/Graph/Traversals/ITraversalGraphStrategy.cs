@@ -2,6 +2,9 @@ using SideCar.DTOs;
 
 namespace Model.GraphModel.Traversals
 {
+    /// <summary>
+    /// Inteface that defines the graph traversal strategy
+    /// </summary>
     public interface ITraversalGraphStrategy
     {
         /// <summary>

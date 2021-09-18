@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using DG.Tweening;
 using Utils.Enums;
 using View.GUI.ProjectedObjects;
-using Utils;
 
 namespace View.Animations
 {
@@ -25,7 +24,7 @@ namespace View.Animations
                     projectedObject = structureProjection.CreateObject(dto);
                 }
                 else{
-                    projectedObject = GameObject.Find(dto.GetUnityId()).GetComponentInChildren<ProjectedObject>();
+                    projectedObject = GameObject.Find(dto.GetUnityId()).GetComponent<ProjectedObject>();
                 }
                 animationList.Append(projectedObject.Animations[dto.Operation]());
             }

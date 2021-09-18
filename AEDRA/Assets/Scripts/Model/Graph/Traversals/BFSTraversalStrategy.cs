@@ -14,7 +14,7 @@ namespace Model.GraphModel.Traversals
         public void DoTraversal(Graph graph, ElementDTO startNode = null)
         {
             Dictionary<int, bool> visitedMap = graph.Nodes.Keys.ToDictionary(id => id, _ => false);
-            // Item1 anterior item2 actual
+            // Item1 Previous neighbour node item2 actual node
             Queue<Tuple<int, int> > q = new Queue<Tuple<int, int> >();
             q.Enqueue(new Tuple<int, int>(startNode.Id, startNode.Id));
 
@@ -24,9 +24,9 @@ namespace Model.GraphModel.Traversals
                 int current = nodes.Item2;
                 visitedMap[current] = true;
                 if(graph.AdjacentMtx[previous].ContainsKey(current)){
-                    graph.NotifyEdge(previous,current,AnimationEnum.PaintAnimation);
+                    graph.NotifyEdge(previous,current,AnimationEnum.KeepPaintAnimation);
                 }
-                graph.NotifyNode(current,AnimationEnum.PaintAnimation);
+                graph.NotifyNode(current,AnimationEnum.KeepPaintAnimation);
 
                 foreach (int key in graph.AdjacentMtx[current].Keys)
                 {

@@ -2,7 +2,6 @@ using DG.Tweening;
 using SideCar.DTOs;
 using UnityEngine;
 using Utils;
-using Utils.Enums;
 using View.GUI;
 using View.GUI.ProjectedObjects;
 

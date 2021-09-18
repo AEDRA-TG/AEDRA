@@ -1,6 +1,4 @@
 
-using System.Collections.Generic;
-
 namespace SideCar.DTOs
 {
     public class BinarySearchNodeDTO : ElementDTO

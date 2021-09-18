@@ -39,8 +39,8 @@ namespace Model.TreeModel
             {
                 node.NotifyEdge(parent, node, AnimationEnum.CreateAnimation);
             }
-            CreateTree(node._leftChild, node);
-            CreateTree(node._rightChild, node);
+            CreateTree(node.LeftChild, node);
+            CreateTree(node.RightChild, node);
         }
 
         public override void AddElement(ElementDTO element)

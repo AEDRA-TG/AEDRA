@@ -2,10 +2,10 @@ namespace Utils.Enums
 {
     public enum MenuEnum
     {
+        MainMenu,
         AddElementInputMenu,
         RemoveElementInputMenu,
         SearchElementInputMenu,
-        MainMenu,
         TraversalMenu,
         NodeSelectionMenu,
         NodeMultiSelectionMenu

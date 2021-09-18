@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using Utils;
@@ -17,15 +15,14 @@ namespace View.GUI.ProjectedObjects
         // Update is called once per frame
         public void Update()
         {
+            Vector3 scale = UpdateEdge();
             if(base.IsCreated){
-                gameObject.transform.localScale = UpdateEdge();
+                gameObject.transform.localScale = scale;
             }
         }
         public override Tween CreateAnimation(){
             //TODO: make name of IsCreated more explitic (e.g: OnCreatedAnimationCompleted)
-            Tween tween = gameObject.transform.DOScale(UpdateEdge(),base.AnimationTime);
-            tween.OnComplete(()=> this.IsCreated = true);
-            return tween;
+            return gameObject.transform.DOScale(UpdateEdge(),base.AnimationTime).OnComplete(()=> base.IsCreated = true);
         }
 
         public void OnCollisionEnter(Collision other) {
@@ -35,18 +32,17 @@ namespace View.GUI.ProjectedObjects
             EdgeDTO edgeDTO = (EdgeDTO) base.Dto;
             Vector3 startPosition = GetNodeCoordinates(edgeDTO.IdStartNode);
             Vector3 endPosition = GetNodeCoordinates(edgeDTO.IdEndNode);
-
             const float width = 0.2f;
             Vector3 offset = endPosition - startPosition;
             Vector3 scale = new Vector3(width, offset.magnitude / 2.0f, width);
-            gameObject.transform.localPosition = startPosition + (offset / 2.0f);
+            gameObject.transform.position = startPosition + (offset / 2.0f);
             gameObject.transform.up = offset;
             return scale;
         }
 
         private Vector3 GetNodeCoordinates(int id){
             GameObject nodeFound = GameObject.Find(Constants.NodeName+ id);
-            return nodeFound.transform.localPosition;
+            return nodeFound.transform.position;
         }
 
         public override Tween DeleteAnimation(){
@@ -54,17 +50,16 @@ namespace View.GUI.ProjectedObjects
         }
 
         public override Tween PaintAnimation(){
-            MeshRenderer mesh = gameObject.GetComponentInChildren<MeshRenderer>();
+            MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
             return mesh.material.DOColor(Color.cyan,base.AnimationTime).OnComplete( () => mesh.material.DOColor(Color.white, base.AnimationTime) );
         }
-        
         public override Tween KeepPaintAnimation(){
-            MeshRenderer mesh = gameObject.GetComponentInChildren<MeshRenderer>();
+            MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
             return mesh.material.DOColor(Color.cyan,base.AnimationTime);
         }
 
         public override Tween UnPaintAnimation(){
-            MeshRenderer mesh = gameObject.GetComponentInChildren<MeshRenderer>();
+            MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
             return mesh.material.DOColor(Color.white,base.AnimationTime);
         }
 

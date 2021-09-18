@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using DG.Tweening;
 using Utils.Enums;
 using View.GUI.ProjectedObjects;
-using Utils;
 
 namespace View.Animations
 {
@@ -21,12 +20,13 @@ namespace View.Animations
             StructureProjection structureProjection = GameObject.FindObjectOfType<StructureProjection>();
             foreach (ElementDTO dto in structureProjection.DTOs){
 
-                ProjectedObject projectedObject = GameObject.Find(dto.GetUnityId()).GetComponentInChildren<ProjectedObject>();
+                ProjectedObject projectedObject = GameObject.Find(dto.GetUnityId()).GetComponent<ProjectedObject>();
                 if(dto.Operation == AnimationEnum.DeleteAnimation){
                     objectsToBeDeleted.Add(projectedObject);
                 }
                 if(projectedObject as ProjectedEdge && dto.Operation == AnimationEnum.DeleteAnimation)
                 {
+                    projectedObject.IsCreated = false;
                     animationList.Join(projectedObject.Animations[dto.Operation]());
                 }
                 else{

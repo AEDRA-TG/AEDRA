@@ -1,9 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using SideCar.DTOs;
 using UnityEngine;
 
 namespace Utils {
@@ -56,14 +54,28 @@ namespace Utils {
             SerializeJSON(filename,jsonObject);
         }
 
+        public static bool DeleteFile(string filePath){
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+                return true;
+            }
+            return false;
+        }
+
         /// <summary>
         /// Method to retrieve the globalColor value from a file
         /// </summary>
         /// <returns>The Unity Color retrieved</returns>
         public static Color LoadGlobalColor(){
-            JObject map = LoadJSONKey("Assets/Files/Constants.json","globalColor");
-            Color color = new Color((float)map["r"],(float)map["g"],(float)map["b"],(float)map["a"]);
-            return color;
+            if(File.Exists(Constants.ConstantsFilePath)){
+                JObject map = LoadJSONKey(Constants.ConstantsFilePath,"globalColor");
+                Color color = new Color((float)map["r"],(float)map["g"],(float)map["b"],(float)map["a"]);
+                return color;
+            }
+            else{
+                return Color.gray;
+            }
         }
         /// <summary>
         /// Method to persist the global color in a file
@@ -76,17 +88,16 @@ namespace Utils {
                 {"b",color.b},
                 {"a",color.a}
             };
-            SaveJSONKey("Assets/Files/Constants.json","globalColor",colorData);
+            SaveJSONKey(Constants.ConstantsFilePath,"globalColor",colorData);
             Constants.GlobalColor = color;
         }
-
-        /// <summary>
-        /// Method to generate a random 3D coordinate
-        /// </summary>
-        /// <returns></returns>
-        public static Point GenerateRandomPoint(){
-            System.Random rand = new System.Random();
-            return new Point(rand.Next(Constants.MaxWidth),rand.Next(Constants.MaxHeight),rand.Next(Constants.MaxDepth));
+        public static string GetDataPath(){
+#if UNITY_EDITOR
+            return "Assets/Files/";
+#elif UNITY_ANDROID
+            return Application.persistentDataPath + "/";      
+#endif
         }
+
     }
 }

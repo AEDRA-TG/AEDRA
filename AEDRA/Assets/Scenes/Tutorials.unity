@@ -344,7 +344,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 402774123}
-        m_TargetAssemblyTypeName: ChangeScreen, Assembly-CSharp
+        m_TargetAssemblyTypeName: View.EventController.AppEventController, Assembly-CSharp
         m_MethodName: ChangeScene
         m_Mode: 3
         m_Arguments:
@@ -381,7 +381,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 402774122}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f88b181fada2f47449640d704ff7ee48, type: 3}
+  m_Script: {fileID: 11500000, guid: da5d4b9213910924898e34ac2a4e8a6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &402774124

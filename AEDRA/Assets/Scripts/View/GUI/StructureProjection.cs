@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using Model.Common;
 using SideCar.DTOs;
-using UnityEditor;
 using UnityEngine;
 using Utils;
 using Utils.Enums;
@@ -18,7 +16,7 @@ namespace View.GUI
         /// <summary>
         /// Name of the structure projection
         /// </summary>
-        public string Name { get; set; }
+        public StructureEnum Name { get; set; }
 
         /// <summary>
         /// Type of the structure projection
@@ -51,7 +49,7 @@ namespace View.GUI
                 DTOs.Add(dto);
             }
             GameObject obj = GameObject.Find(dto.GetUnityId());
-            obj?.GetComponentInChildren<ProjectedObject>().SetDTO(dto);
+            obj?.GetComponent<ProjectedObject>().SetDTO(dto);
         }
 
         /// <summary>
@@ -69,14 +67,15 @@ namespace View.GUI
         /// <param name="dto"></param>
         /// <returns></returns>
         public ProjectedObject CreateObject(ElementDTO dto){
-            Vector3 position = CalculatePosition(dto);
+            Vector3 position = CalculateInitialPosition(dto);
             string prefabPath = Constants.PrefabPath + dto.Name;
             GameObject prefab = Resources.Load(prefabPath) as GameObject;
             prefab = Instantiate(prefab,position,Quaternion.identity,this.transform);
             prefab.name = dto.GetUnityId();
-            ProjectedObject createdObject = prefab.GetComponentInChildren<ProjectedObject>();
+            ProjectedObject createdObject = prefab.GetComponent<ProjectedObject>();
             createdObject.SetDTO(dto);
             ProjectedObjects.Add(createdObject);
+            createdObject.PositionObject();
             return createdObject;
         }
 
@@ -100,17 +99,13 @@ namespace View.GUI
             Destroy(objectToBeDeleted.gameObject);
         }
 
-        public Vector3 CalculatePosition(ElementDTO dto){
-            Vector3 position = new Vector3(0,0,0);
+        public Vector3 CalculateInitialPosition(ElementDTO dto){
+            GameObject structureProjection = GameObject.Find(Constants.ObjectsParentName);
+            Vector3 position = structureProjection.transform.parent.localPosition;
             if (dto is BinarySearchNodeDTO castDTO){
                 if(castDTO.ParentId != null){
                     GameObject parentObject = GameObject.Find(Constants.NodeName + castDTO.ParentId);
-                    if(castDTO.IsLeft){
-                        position = new Vector3(parentObject.transform.position.x - Constants.HorizontalChildToParentDistance, parentObject.transform.position.y - Constants.VerticalNodeTreeDistance, parentObject.transform.position.z);
-                    }
-                    else{
-                        position = new Vector3(parentObject.transform.position.x + Constants.HorizontalChildToParentDistance, parentObject.transform.position.y - Constants.VerticalNodeTreeDistance, parentObject.transform.position.z);
-                    }
+                    position = new Vector3(parentObject.transform.localPosition.x, parentObject.transform.localPosition.y - Constants.VerticalNodeTreeDistance, parentObject.transform.localPosition.z);
                 }
             }
             return position;

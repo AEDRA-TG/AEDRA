@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using Utils;
@@ -18,16 +16,26 @@ namespace View.GUI.ProjectedObjects
         // Update is called once per frame
         public void Update()
         {
+            gameObject.transform.rotation = Quaternion.identity;
             if(base.Dto != null){
-                base.Dto.Coordinates.X = transform.localPosition.x;
-                base.Dto.Coordinates.Y = transform.localPosition.y;
-                base.Dto.Coordinates.Z = transform.localPosition.z;
+                base.Dto.Coordinates.X = gameObject.transform.localPosition.x;
+                base.Dto.Coordinates.Y = gameObject.transform.localPosition.y;
+                base.Dto.Coordinates.Z = gameObject.transform.localPosition.z;
+            }
+        }
+
+        public void FixedUpdate(){
+            if(base.Dto is BinarySearchNodeDTO){
+                base._objectPhysics.ApplyBinaryTreePhysics();
+            }
+            else{
+                base._objectPhysics.ApplyGraphPhysics();
             }
         }
 
 
         public override Tween CreateAnimation(){
-            return gameObject.transform.DOScale(1,base.AnimationTime);
+            return gameObject.transform.DOScale(1,base.AnimationTime).OnComplete( ()=> base.IsCreated = true);
         }
 
         public override Tween DeleteAnimation(){
@@ -35,22 +43,21 @@ namespace View.GUI.ProjectedObjects
         }
 
         public override Tween PaintAnimation(){
-            MeshRenderer mesh = gameObject.GetComponentInChildren<MeshRenderer>();
+            MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
             return mesh.material.DOColor(Color.cyan,base.AnimationTime).OnComplete( () => mesh.material.DOColor(Color.white, base.AnimationTime) );
         }
 
         public override Tween KeepPaintAnimation(){
-            MeshRenderer mesh = gameObject.GetComponentInChildren<MeshRenderer>();
+            MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
             return mesh.material.DOColor(Color.cyan,base.AnimationTime);
         }
-        
         public override Tween UnPaintAnimation(){
-            MeshRenderer mesh = gameObject.GetComponentInChildren<MeshRenderer>();
+            MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
             return mesh.material.DOColor(Color.white,0);
         }
 
         public override void Move(Vector3 coordinates){
-            gameObject.transform.localPosition = coordinates;
+            gameObject.transform.position = coordinates;
         }
 
         public static ProjectedNode FindById(int id){

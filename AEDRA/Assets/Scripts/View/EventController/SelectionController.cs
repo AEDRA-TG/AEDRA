@@ -1,10 +1,11 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using View.GUI.ProjectedObjects;
+
 namespace View.EventController
 {
-    using System;
-    using System.Collections.Generic;
-    using UnityEngine;
-    using View.GUI.ProjectedObjects;
-
     public class SelectionController : MonoBehaviour
     {
         //NOTE: this can be changed for a string to improve flexibility
@@ -106,7 +107,9 @@ namespace View.EventController
 #if UNITY_EDITOR
             if (Input.GetMouseButtonDown(0))
             {
-                inputPosition = Input.mousePosition;
+                if(EventSystem.current.IsPointerOverGameObject()){
+                    inputPosition = Input.mousePosition;
+                }
             }
 #elif UNITY_ANDROID
             if (Input.touchCount > 0)
@@ -114,7 +117,9 @@ namespace View.EventController
                 Touch touch = Input.GetTouch(0);
                 if (touch.phase == TouchPhase.Began)
                 {
-                    inputPosition = touch.position;
+                    if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId)) {
+                        inputPosition = touch.position;
+			        }
                 }
             }
 #endif

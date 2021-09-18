@@ -1,8 +1,6 @@
-using System.Collections;
 using Utils.Enums;
 using SideCar.DTOs;
 using Model.Common;
-using UnityEngine; // REMOVE THIS IMPORT
 
 namespace Model.TreeModel
 {
@@ -33,6 +31,7 @@ namespace Model.TreeModel
                 }
                 else{
                     this.RightChild = new BinarySearchTreeNode(id, value);
+                    NotifyNode(null, this, AnimationEnum.UpdateAnimation);
                     NotifyNode(this,this.RightChild, AnimationEnum.CreateAnimation);
                     NotifyEdge(this, this.RightChild, AnimationEnum.CreateAnimation);
                 }
@@ -45,6 +44,7 @@ namespace Model.TreeModel
                 }
                 else{
                     this.LeftChild = new BinarySearchTreeNode(id, value);
+                    NotifyNode(null, this, AnimationEnum.UpdateAnimation);
                     NotifyNode(this,this.LeftChild, AnimationEnum.CreateAnimation);
                     NotifyEdge(this, this.LeftChild, AnimationEnum.CreateAnimation);
                 }
@@ -55,6 +55,7 @@ namespace Model.TreeModel
             if(value > this.Value){
                 if(this.RightChild != null){
                     if(value == this.RightChild.Value){
+                        NotifyNode(null, this, AnimationEnum.UpdateAnimation);
                         NotifyEdge(this, this.RightChild, AnimationEnum.DeleteAnimation);
                         NotifyNode(this, this.RightChild, AnimationEnum.DeleteAnimation);
                         this.RightChild = null;
@@ -69,6 +70,7 @@ namespace Model.TreeModel
             else if(value < this.Value){
                 if(this.LeftChild != null){
                     if(value == this.LeftChild.Value){
+                        NotifyNode(null, this, AnimationEnum.UpdateAnimation);
                         NotifyEdge(this, this.LeftChild, AnimationEnum.DeleteAnimation);
                         NotifyNode(this, this.LeftChild, AnimationEnum.DeleteAnimation);
                         this.LeftChild = null;

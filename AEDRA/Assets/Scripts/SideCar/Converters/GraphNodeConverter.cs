@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Model.GraphModel;
 using SideCar.DTOs;
-using Repository;
 using Controller;
 
 namespace SideCar.Converters

@@ -1,16 +1,16 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Utils.Enums;
 
 namespace Controller
 {
     /// <summary>
-    /// Interface for defining operations of a generic command
+    /// Abstract class that contains methods definitions for all commands
     /// </summary>
     public abstract class Command
     {
+        /// <summary>
+        /// Notifier that indicates to view when an operation has been completed
+        /// </summary>
         public static event Action<OperationEnum> OperationCompleted;
         /// <summary>
         /// Method to execute the command

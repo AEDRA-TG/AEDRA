@@ -2,12 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using System.Collections.Generic;
-using System.Threading;
-using Utils;
-using View.GUI;
-using Controller;
-using System.IO;
-using View.EventController;
 using View.GUI.ProjectedObjects;
 
 namespace View
@@ -163,7 +157,7 @@ namespace View
                 _itemsPositions[i] = _optionItems[i].transform.position;
             }
             //inflate hamburger menu
-            _hamburgerButton = GameObject.Find("HamburgerMenu").GetComponentInChildren<Button>();
+            _hamburgerButton = GameObject.Find("HamburgerMenu").GetComponent<Button>();
             _hamburgerButton.transform.SetAsLastSibling();
             //save position of hamburguer position
             _hamburgerButtonPosition = _hamburgerButton.transform.position;

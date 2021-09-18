@@ -1,8 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using View;
-using Utils;
 using SideCar.DTOs;
 using Controller;
 using Utils.Enums;
@@ -17,8 +14,13 @@ namespace View.EventController
 
     public class TreeEventController : AppEventController
     {
+
         public void Awake(){
-            base._menus = new Dictionary<MenuEnum, GameObject>(){
+            GameObject backButton = GameObject.Find("BackButton");
+            backButton.GetComponent<Button>().onClick.AddListener(base.OnTouchBackButton);
+        }
+        public void Start(){
+            base._menus = new Dictionary<MenuEnum, GameObject>{
                 {MenuEnum.MainMenu, gameObject.transform.Find("MainMenu").gameObject},
                 {MenuEnum.TraversalMenu, gameObject.transform.Find("TraversalMenu").gameObject},
                 {MenuEnum.AddElementInputMenu, gameObject.transform.Find("AddElementInputMenu").gameObject},
@@ -34,6 +36,7 @@ namespace View.EventController
             BinarySearchNodeDTO nodeDTO = new BinarySearchNodeDTO(0, value, null, true, null, null);
             AddElementCommand addCommand = new AddElementCommand(nodeDTO);
             CommandController.GetInstance().Invoke(addCommand);
+            base.ChangeToMenu(MenuEnum.MainMenu);
         }
 
         public void OnTouchDeleteNode(){
@@ -42,6 +45,7 @@ namespace View.EventController
             BinarySearchNodeDTO nodeDTO = new BinarySearchNodeDTO(0, value, null, true, null, null);
             DeleteElementCommand deleteCommand = new DeleteElementCommand(nodeDTO);
             CommandController.GetInstance().Invoke(deleteCommand);
+            base.ChangeToMenu(MenuEnum.MainMenu);
         }
 
         public void OnTouchPreOrderTraversal(){

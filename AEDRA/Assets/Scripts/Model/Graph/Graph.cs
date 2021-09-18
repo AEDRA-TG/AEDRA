@@ -1,15 +1,10 @@
 using System.Collections.Generic;
-using System;
 using Utils.Enums;
 using Model.Common;
 using SideCar.Converters;
 using SideCar.DTOs;
 using Newtonsoft.Json;
-using Repository;
-using Utils;
 using UnityEngine;
-using System.Linq;
-using System.Collections;
 using Model.GraphModel.Traversals;
 
 namespace Model.GraphModel
@@ -44,7 +39,6 @@ namespace Model.GraphModel
         /// Class to convert between NodeDTO and GraphNode
         /// </summary>
         private GraphNodeConverter _nodeConverter;
-
         private Dictionary<TraversalEnum, ITraversalGraphStrategy> _traversals;
 
         public Graph(){
@@ -70,8 +64,6 @@ namespace Model.GraphModel
             Nodes.Add(node.Id,node);
             AdjacentMtx.Add(node.Id, new Dictionary<int, object>());
             //return DTO updated
-            // ESTOY HAY QUE BORRARLO
-            node.Coordinates = Utilities.GenerateRandomPoint();
             element = _nodeConverter.ToDto(node);
             element.Operation = AnimationEnum.CreateAnimation;
             DataStructure.Notify(element);
@@ -102,7 +94,7 @@ namespace Model.GraphModel
         /// <summary>
         /// Method to connect two nodes bidirectionally
         /// </summary>
-        /// <param name="element"></param>
+        /// <param name="EdgeDTO">Information needed for edge creation</param>
         public void ConnectElements(ElementDTO EdgeDTO)
         {
             EdgeDTO edgeDTO = (EdgeDTO) EdgeDTO;
@@ -133,7 +125,9 @@ namespace Model.GraphModel
             return neighbors;
         }
 
-        //TODO: rename method or create graph from this 
+        /// <summary>
+        /// Create an saved graph
+        /// </summary>
         public override void CreateDataStructure()
         {
             Dictionary<int,bool> visited = new Dictionary<int, bool>();
@@ -175,13 +169,23 @@ namespace Model.GraphModel
         }
 
         //TODO: This method needs to take into account that a GraphNode may have been deleted
+        /// <summary>
+        /// Method to notify when a node is notified
+        /// </summary>
+        /// <param name="id">Id of the modified node</param>
+        /// <param name="operation">Operation that was applied to node</param>
         public void NotifyNode(int id, AnimationEnum operation){
             GraphNode node = this.Nodes[id];
             GraphNodeDTO dto = _nodeConverter.ToDto(node);
             dto.Operation = operation;
-            DataStructure.Notify(dto);
+            Notify(dto);
         }
-
+        /// <summary>
+        /// Method to notify when an edge is modified
+        /// </summary>
+        /// <param name="start">Id node from edge start</param>
+        /// <param name="end">Id node from edge ends</param>
+        /// <param name="operation">Operations that was applied to node</param>
         public void NotifyEdge(int start, int end, AnimationEnum operation){
             object value = null;
             if(AdjacentMtx[start].ContainsKey(end)){
@@ -193,7 +197,7 @@ namespace Model.GraphModel
             };
             NotifyNode(start, AnimationEnum.UpdateAnimation);
             NotifyNode(end, AnimationEnum.UpdateAnimation);
-            DataStructure.Notify(edge);
+            Notify(edge);
         }
     }
 }

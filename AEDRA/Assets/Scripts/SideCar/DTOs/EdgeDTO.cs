@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using Utils.Enums;
 
 namespace SideCar.DTOs
 {

@@ -21,11 +21,6 @@ namespace View.GUI.ProjectedObjects
 
         #region Fisicas
         protected ObjectPhysics _objectPhysics;
-
-        virtual public void FixedUpdate() {
-            _objectPhysics.RepulseObject();
-            _objectPhysics.ParentPosition();
-        }
         #endregion
 
         virtual public void Awake()
@@ -43,6 +38,10 @@ namespace View.GUI.ProjectedObjects
             };
         }
 
+        public void PositionObject(){
+            _objectPhysics.PositionObject();
+        }
+
         virtual public Tween CreateAnimation()
         {
             return null;
@@ -57,12 +56,10 @@ namespace View.GUI.ProjectedObjects
         {
             return null;
         }
-        
         virtual public Tween KeepPaintAnimation()
         {
             return null;
         }
-        
         virtual public Tween UnPaintAnimation()
         {
             return null;
@@ -84,7 +81,6 @@ namespace View.GUI.ProjectedObjects
             if(text != null){
                 text.text = dto.Value.ToString();
             }
-            //TODO: update object properties
         }
 
         public override bool Equals(object other)
@@ -121,7 +117,7 @@ namespace View.GUI.ProjectedObjects
         public void SetSelected(bool selected)
         {
             this._selected = selected;
-            MeshRenderer mesh = gameObject.GetComponentInChildren<MeshRenderer>();
+            MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
             if (_selected)
             {
                 mesh.material.DOColor(Color.red, 0);
