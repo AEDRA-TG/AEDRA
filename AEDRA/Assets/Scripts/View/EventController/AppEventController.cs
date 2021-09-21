@@ -18,6 +18,11 @@ namespace View.EventController
         private GameObject _activeMenu;
 
         private StructureEnum _activeStructure;
+        private GameObject _infoMenuPrefab;
+
+        private void Start() {
+            _infoMenuPrefab = LoadPrefab(Constants.TooltipPrefabPath + "StartInfoMenu", Constants.StartParentName);
+        }
 
         public void Update(){
 #if UNITY_EDITOR
@@ -97,7 +102,6 @@ namespace View.EventController
             menuEnumParameter.SetMenu(menu);
             ChangeToMenu(menuEnumParameter);
         }
-
         private void ShowOptionsMenu(bool state){
             GameObject optionsMenu = GameObject.Find("BackButton");
             optionsMenu.transform.Find("BackOptionsMenu").gameObject.SetActive(state);
@@ -125,6 +129,13 @@ namespace View.EventController
                 CommandController.GetInstance().Invoke(command);
             }
             SceneManager.LoadScene(nextPage);
+        }
+
+        public GameObject LoadPrefab(string path, string parent) {
+            GameObject prefab = Resources.Load(path) as GameObject;
+            prefab = Instantiate(prefab, new Vector3(0,0,0), Quaternion.identity, GameObject.Find(parent).transform);
+            prefab.transform.localPosition = Vector3.zero;
+            return prefab;
         }
     }
 }

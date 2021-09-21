@@ -8,27 +8,37 @@
       "LeftChild": null,
       "RightChild": null,
       "Coordinates": {
-        "X": -4.620282,
-        "Y": -1.52769852,
-        "Z": 26.76753
+        "X": -11.6070051,
+        "Y": -4.59400368,
+        "Z": 28.2724762
       }
     },
     "RightChild": {
       "Id": 2,
       "Value": 10,
-      "LeftChild": null,
+      "LeftChild": {
+        "Id": 3,
+        "Value": 5,
+        "LeftChild": null,
+        "RightChild": null,
+        "Coordinates": {
+          "X": 0.327100754,
+          "Y": -3.896124,
+          "Z": 22.7460117
+        }
+      },
       "RightChild": null,
       "Coordinates": {
-        "X": 2.47221613,
-        "Y": -1.16682434,
-        "Z": 26.6712856
+        "X": 1.97575569,
+        "Y": 2.35992813,
+        "Z": 23.9247513
       }
     },
     "Coordinates": {
-      "X": -3.665132,
-      "Y": -6.0245285,
-      "Z": 27.4213352
+      "X": -2.73466539,
+      "Y": -6.759041,
+      "Z": 27.984375
     }
   },
-  "NodesCount": 3
+  "NodesCount": 4
 }

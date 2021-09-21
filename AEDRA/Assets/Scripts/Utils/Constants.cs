@@ -15,6 +15,8 @@ namespace Utils
         public const float AnimationTime = 1;
         public const string ObjectsParentName = "StructureProjection";
         public const string PrefabPath = "Prefabs/ProjectedObjects/";
+        public const string TooltipPrefabPath = "Prefabs/Menus/";
+        public const string StartParentName = "MainLayout";
         public const string MenusParentName = "ProjectionLayout";
 
         #region UNITY NAMES
