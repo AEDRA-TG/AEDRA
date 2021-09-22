@@ -61,8 +61,10 @@ namespace Observer
         /// </summary>
         /// <param name="operation"></param>
         private void CleanUserSelection(OperationEnum operation){
-            SelectionController selectionController = FindObjectOfType<SelectionController>();
-            selectionController.DeselectAllObjects();
+            if(operation != OperationEnum.UpdateObjects){
+                SelectionController selectionController = FindObjectOfType<SelectionController>();
+                selectionController.DeselectAllObjects();
+            }
         }
 
         public void CleanDataStructure(){

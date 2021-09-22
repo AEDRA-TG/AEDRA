@@ -58,12 +58,14 @@ namespace View.EventController
         /// Method to deselect all projected objects previously selected
         /// </summary>
         public void DeselectAllObjects(){
-            foreach (ProjectedObject obj in _selectedObjects)
-            {
-                obj.SetSelected(false);
+            if(_selectedObjects.Count > 0 ){
+                foreach (ProjectedObject obj in _selectedObjects)
+                {
+                    obj.SetSelected(false);
+                }
+                _selectedObjects.Clear();
+                UpdateMenu?.Invoke(this._selectedObjects);
             }
-            _selectedObjects.Clear();
-            UpdateMenu?.Invoke(this._selectedObjects);
         }
 
         /// <summary>
