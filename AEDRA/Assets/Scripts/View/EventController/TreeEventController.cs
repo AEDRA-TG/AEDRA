@@ -28,6 +28,7 @@ namespace View.EventController
                 {MenuEnum.SearchElementInputMenu, gameObject.transform.Find("SearchElementInputMenu").gameObject}
             };
             base._activeSubMenu = MenuEnum.MainMenu;
+            base.ChangeToMenu(MenuEnum.MainMenu);
         }
 
         public void OnTouchAddNode(){

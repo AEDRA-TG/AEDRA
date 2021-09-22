@@ -31,6 +31,7 @@ namespace View.EventController
                 { MenuEnum.AddElementInputMenu, gameObject.transform.Find("AddElementInputMenu").gameObject }
             };
             base._activeSubMenu = MenuEnum.MainMenu;
+            base.ChangeToMenu(MenuEnum.MainMenu);
         }
 
         public void OnEnable() {
