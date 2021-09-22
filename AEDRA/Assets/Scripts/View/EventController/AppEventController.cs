@@ -16,12 +16,14 @@ namespace View.EventController
         protected Dictionary<MenuEnum, GameObject> _menus;
         protected MenuEnum _activeSubMenu;
         private GameObject _activeMenu;
-
+        private GameObject _activeInfoMenu;
         private StructureEnum _activeStructure;
+        private GameObject _startInfoPrefab;
 
         private void Start() {
             if(SceneManager.GetActiveScene().name == "Main"){
-                LoadPrefab(Constants.TooltipPrefabPath + "StartInfoMenu", Constants.StartParentName);
+                _startInfoPrefab = GameObject.Find("MainLayout").transform.Find("StartInfoMenu").gameObject;
+                _startInfoPrefab?.SetActive(true);
             }
         }
 
@@ -49,6 +51,7 @@ namespace View.EventController
             GameObject optionsMenu = GameObject.Find("BackButton");
             optionsMenu.GetComponent<Button>().onClick.RemoveAllListeners();
             optionsMenu.GetComponent<Button>().onClick.AddListener(OnTouchBackButton);
+            _activeInfoMenu = GameObject.Find("ProjectionLayout").transform.Find("InfoButton").gameObject;
 
             GameObject structureProjection = GameObject.Find(Constants.ObjectsParentName);
             if(_activeStructure != targetParameter.GetStructure()){
@@ -72,6 +75,7 @@ namespace View.EventController
                 _activeMenu.transform.SetAsFirstSibling();
             }
             _activeMenu?.SetActive(true);
+            _activeInfoMenu?.SetActive(true);
         }
 
         /// <summary>
@@ -83,6 +87,7 @@ namespace View.EventController
             ShowOptionsMenu(false);
             GameObject structureProjection = GameObject.Find(Constants.ObjectsParentName);
             _activeMenu?.SetActive(false);
+            _activeInfoMenu?.SetActive(false);
             if(structureProjection != null){
                 Command command = new SaveCommand();
                 CommandController.GetInstance().Invoke(command);
@@ -139,6 +144,10 @@ namespace View.EventController
             prefab = Instantiate(prefab, new Vector3(0,0,0), Quaternion.identity, GameObject.Find(parent).transform);
             prefab.transform.localPosition = Vector3.zero;
             return prefab;
+        }
+
+        public void HideStartInfoMenuPrefab() {
+            _startInfoPrefab?.SetActive(false);
         }
     }
 }
