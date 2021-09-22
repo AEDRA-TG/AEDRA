@@ -18,10 +18,11 @@ namespace View.EventController
         private GameObject _activeMenu;
 
         private StructureEnum _activeStructure;
-        private GameObject _infoMenuPrefab;
 
         private void Start() {
-            _infoMenuPrefab = LoadPrefab(Constants.TooltipPrefabPath + "StartInfoMenu", Constants.StartParentName);
+            if(SceneManager.GetActiveScene().name == "Main"){
+                LoadPrefab(Constants.TooltipPrefabPath + "StartInfoMenu", Constants.StartParentName);
+            }
         }
 
         public void Update(){
@@ -130,7 +131,9 @@ namespace View.EventController
             }
             SceneManager.LoadScene(nextPage);
         }
-
+        /// <summary>
+        /// Method for loading a prefab on a scene instance
+        /// </summary>
         public GameObject LoadPrefab(string path, string parent) {
             GameObject prefab = Resources.Load(path) as GameObject;
             prefab = Instantiate(prefab, new Vector3(0,0,0), Quaternion.identity, GameObject.Find(parent).transform);
