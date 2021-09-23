@@ -10,11 +10,15 @@ using View.GUI;
 
 namespace Observer
 {
+    /// <summary>
+    /// Class that receives all the model notifications
+    /// </summary>
     public class ViewObserverManager: MonoBehaviour
     {
-
+        /// <summary>
+        /// Projection subscribes to Update element event for updating UI
+        /// </summary>
         public void OnEnable(){
-            // Projection subscribes to Update element event for updating UI
             DataStructure.UpdateElementEvent += UpdateUI;
             Command.OperationCompleted += ExecuteAnimation;
             Command.OperationCompleted += SaveDataStructure;
@@ -22,14 +26,17 @@ namespace Observer
             DataStructureRepository.CleanStructure += CleanDataStructure;
         }
 
+        /// <summary>
+        /// Projection unsubscribes from Update Element event for updating UI
+        /// </summary>
         public void OnDisable(){
-            // Projection unsubscribes from Update Element event for updating UI
             DataStructure.UpdateElementEvent -= UpdateUI;
             Command.OperationCompleted -= ExecuteAnimation;
             Command.OperationCompleted -= SaveDataStructure;
             Command.OperationCompleted -= CleanUserSelection;
             DataStructureRepository.CleanStructure -= CleanDataStructure;
         }
+
         /// <summary>
         /// Method to update the projection on UI
         /// </summary>
@@ -38,6 +45,7 @@ namespace Observer
             StructureProjection projection = GameObject.FindObjectOfType<StructureProjection>();
             projection.AddDto(dto);
         }
+
         /// <summary>
         /// Method to execute an animation
         /// </summary>
@@ -67,6 +75,9 @@ namespace Observer
             }
         }
 
+        /// <summary>
+        /// Method to clean all the projection elements
+        /// </summary>
         public void CleanDataStructure(){
             GameObject projection = GameObject.FindObjectOfType<StructureProjection>()?.gameObject;
             if(projection != null){
@@ -77,7 +88,11 @@ namespace Observer
                 projection.transform.parent = target;
             }
         }
-        //TODO: Revisar de que forma manejar estos mensajes
+
+        /// <summary>
+        /// Method to show a text when is required
+        /// </summary>
+        /// <param name="notificationText"></param>
         private void CreateNotification(string notificationText){
             //StructureProjection projection = GameObject.FindObjectOfType<StructureProjection>();
             //projection.ShowNotification(notificationText);

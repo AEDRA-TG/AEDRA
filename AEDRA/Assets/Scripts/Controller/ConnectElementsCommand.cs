@@ -28,6 +28,7 @@ namespace Controller
             this._dataStructure = CommandController.GetInstance().Repository.Load();
             this._edgeDTO = edgeDTO;
         }
+
         public override void Execute()
         {
             if(this._dataStructure is Graph graph)

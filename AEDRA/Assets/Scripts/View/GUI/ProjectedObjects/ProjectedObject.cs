@@ -9,12 +9,30 @@ using View.GUI.ObjectsPhysics;
 
 namespace View.GUI.ProjectedObjects
 {
+    /// <summary>
+    /// Base class that defines method for projected objects
+    /// </summary>
     public class ProjectedObject : MonoBehaviour
     {
-        [SerializeField]
-        private bool _selectable;
+        /// <summary>
+        /// Indicates if the object could be selected
+        /// </summary>
+        [SerializeField] private bool _selectable;
+
+        /// <summary>
+        /// Indicates if the projected object is selected
+        /// </summary>
         private bool _selected;
+
+        /// <summary>
+        /// Dictionary that contains all the animations that could be applied to the objects
+        /// </summary>
         public Dictionary<AnimationEnum, Func<Tween>> Animations { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <value></value>
         public ElementDTO Dto { get; set; }
         public bool IsCreated { get; set; }
         public float AnimationTime{get; set;}

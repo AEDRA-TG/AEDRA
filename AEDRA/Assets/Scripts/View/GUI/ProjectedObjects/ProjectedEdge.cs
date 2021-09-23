@@ -5,6 +5,9 @@ using SideCar.DTOs;
 
 namespace View.GUI.ProjectedObjects
 {
+    /// <summary>
+    /// Class to manage a projected edge
+    /// </summary>
     public class ProjectedEdge : ProjectedObject
     {
         public void Start()
@@ -12,7 +15,6 @@ namespace View.GUI.ProjectedObjects
 
         }
 
-        // Update is called once per frame
         public void Update()
         {
             Vector3 scale = UpdateEdge();
@@ -20,6 +22,7 @@ namespace View.GUI.ProjectedObjects
                 gameObject.transform.localScale = scale;
             }
         }
+
         public override Tween CreateAnimation(){
             //TODO: make name of IsCreated more explitic (e.g: OnCreatedAnimationCompleted)
             return gameObject.transform.DOScale(UpdateEdge(),base.AnimationTime).OnComplete(()=> base.IsCreated = true);

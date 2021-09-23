@@ -5,14 +5,23 @@ using SideCar.DTOs;
 
 namespace View.GUI.ObjectsPhysics
 {
+    /// <summary>
+    /// Class to manage the objects physics
+    /// </summary>
     public class ObjectPhysics
     {
+        /// <summary>
+        /// Game object to be the physics will be applied
+        /// </summary>
         private GameObject _gameObject;
 
         public ObjectPhysics(GameObject gameObject){
             this._gameObject = gameObject;
         }
 
+        /// <summary>
+        /// Mehtod that defines physics restrictions when data structure is graph
+        /// </summary>
         public void ApplyGraphPhysics(){
             foreach (Collider closeCollider in Physics.OverlapSphere(_gameObject.transform.position, Constants.MinimalNodeDistance))
             {
@@ -25,12 +34,18 @@ namespace View.GUI.ObjectsPhysics
             }
         }
 
+        /// <summary>
+        /// Method that defines physics restrictions when data structure is binary search tree
+        /// </summary>
         public void ApplyBinaryTreePhysics(){
             RepulseHorizontal();
             CheckHorizontalToParentDistance();
             CheckHorizontalChildsDistance();
         }
 
+        /// <summary>
+        /// Method to control the horizontal repulsion on tree data structure
+        /// </summary>
         private void RepulseHorizontal(){
             foreach(Collider closeCollider in Physics.OverlapSphere(_gameObject.transform.position, Constants.MinimalNodeDistance)){
                 Rigidbody closeRigidBody = closeCollider.attachedRigidbody;
@@ -41,6 +56,9 @@ namespace View.GUI.ObjectsPhysics
             }
         }
 
+        /// <summary>
+        /// Method to control what happens when a node child is near to their parent
+        /// </summary>
         private void CheckHorizontalToParentDistance(){
             BinarySearchNodeDTO dto = _gameObject.GetComponent<ProjectedObject>().Dto as BinarySearchNodeDTO;
             if(dto.ParentId != null){
@@ -68,6 +86,9 @@ namespace View.GUI.ObjectsPhysics
             }
         }
 
+        /// <summary>
+        /// Method that separates childs at the same parent distance
+        /// </summary>
         private void CheckHorizontalChildsDistance(){
             BinarySearchNodeDTO dto = _gameObject.GetComponent<ProjectedObject>().Dto as BinarySearchNodeDTO;
             GameObject leftChild = null;
@@ -92,6 +113,9 @@ namespace View.GUI.ObjectsPhysics
             }
         }
 
+        /// <summary>
+        /// Method that position an object when is created depending if it is left or right child
+        /// </summary>
         public void PositionObject(){
             if(_gameObject.GetComponent<ProjectedObject>().Dto is BinarySearchNodeDTO dto){
                 if(dto.ParentId != null){

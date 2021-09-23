@@ -5,6 +5,9 @@ using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 namespace Utils {
+    /// <summary>
+    /// Class that contains generic methods
+    /// </summary>
     public static class Utilities
     {
         /// <summary>
@@ -20,6 +23,7 @@ namespace Utils {
             }
             return default;
         }
+
         /// <summary>
         /// Method to serialize a Object to a JSON file
         /// </summary>
@@ -41,6 +45,7 @@ namespace Utils {
             string json = File.ReadAllText(filename);
             return (JObject)JObject.Parse(json)[key];
         }
+
         /// <summary>
         /// Method to override the value of a given key in a json file
         /// </summary>
@@ -54,6 +59,11 @@ namespace Utils {
             SerializeJSON(filename,jsonObject);
         }
 
+        /// <summary>
+        /// Method that delete a file on the device directory
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns>True if the file was deleted, false if the file dont exists</returns>
         public static bool DeleteFile(string filePath){
             if (File.Exists(filePath))
             {
@@ -77,6 +87,7 @@ namespace Utils {
                 return Color.gray;
             }
         }
+
         /// <summary>
         /// Method to persist the global color in a file
         /// </summary>
@@ -91,6 +102,11 @@ namespace Utils {
             SaveJSONKey(Constants.ConstantsFilePath,"globalColor",colorData);
             Constants.GlobalColor = color;
         }
+
+        /// <summary>
+        /// Method to get the file base path
+        /// </summary>
+        /// <returns>The path in wich files will be modified</returns>
         public static string GetDataPath(){
 #if UNITY_EDITOR
             return "Assets/Files/";

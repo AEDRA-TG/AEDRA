@@ -10,11 +10,19 @@ namespace Controller
     /// </summary>
     public class UpdateCommand : Command
     {
+        /// <summary>
+        /// Element that will be updated
+        /// </summary>
         private ElementDTO _data;
 
+        /// <summary>
+        /// Command to update some element on model
+        /// </summary>
+        /// <param name="data">Element that will be updated</param>
         public UpdateCommand(ElementDTO data){
             this._data = data;
         }
+
         public override void Execute()
         {
             DataStructure dataStructure = CommandController.GetInstance().Repository.Load();

@@ -6,10 +6,26 @@ using Utils.Enums;
 
 namespace Model.TreeModel
 {
+    /// <summary>
+    /// Class to manage operations and data related to a Binary Search Tree
+    /// </summary>
     public class BinarySearchTree : DataStructure
     {
+        /// <summary>
+        /// Tree node root
+        /// </summary>
+        /// <value>Null when tree is created</value>
         public BinarySearchTreeNode Root {get; set;}
+
+        /// <summary>
+        /// Number of binary search tree nodes
+        /// </summary>
+        /// <value>0 when tree is created</value>
         public int NodesCount {get; set;}
+
+        /// <summary>
+        /// Dictionary to save all the tree traversals implementations
+        /// </summary>
         private Dictionary<TraversalEnum, ITraversalTreeStrategy> _traversals;
 
         public BinarySearchTree(){
@@ -21,6 +37,10 @@ namespace Model.TreeModel
                 {TraversalEnum.TreePostOrder, new PostOrderTraversalStrategy()}
             };
         }
+
+        /// <summary>
+        /// Created an saved tree
+        /// </summary>
         public override void CreateDataStructure()
         {
             if(this.Root != null){
@@ -28,6 +48,11 @@ namespace Model.TreeModel
             }
         }
 
+        /// <summary>
+        /// Created an tree recursively
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="parent"></param>
         public void CreateTree(BinarySearchTreeNode node, BinarySearchTreeNode parent)
         {
             if(node==null)
@@ -43,6 +68,10 @@ namespace Model.TreeModel
             CreateTree(node.RightChild, node);
         }
 
+        /// <summary>
+        /// Method to add a node on the tree
+        /// </summary>
+        /// <param name="element">Node informatión to add</param>
         public override void AddElement(ElementDTO element)
         {
             if(this.Root != null && this.Root.Value!=(int)element.Value){
@@ -57,6 +86,10 @@ namespace Model.TreeModel
             }
         }
 
+        /// <summary>
+        /// Method to delete a node of the tree
+        /// </summary>
+        /// <param name="element">Node information to delete</param>
         public override void DeleteElement(ElementDTO element)
         {
             if(this.Root !=null){
@@ -84,10 +117,13 @@ namespace Model.TreeModel
             return Root;
         }
 
+        /// <summary>
+        /// Method that update a node information
+        /// </summary>
+        /// <param name="element">Node information to update</param>
         public override void UpdateElement(ElementDTO element)
         {
             //TODO: ver que hacer con este método
-            throw new System.NotImplementedException();
         }
     }
 }
