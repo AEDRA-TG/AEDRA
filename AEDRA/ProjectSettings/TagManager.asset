@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Node
+  - SubMenu
+  - Input
   layers:
   - Default
   - TransparentFX

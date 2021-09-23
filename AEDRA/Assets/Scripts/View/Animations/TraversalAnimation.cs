@@ -7,7 +7,7 @@ using View.GUI.ProjectedObjects;
 namespace View.Animations
 {
     /// <summary>
-    /// Strategy that animates the operation of deleting a Node from a DataStructure
+    /// Strategy that animates the operation of traversal a DataStructure
     /// </summary>
     public class TraversalAnimation : IAnimationStrategy
     {

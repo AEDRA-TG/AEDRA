@@ -12,6 +12,7 @@ namespace Controller
         /// Data structure name that will loaded
         /// </summary>
         private StructureEnum _structureName;
+
         /// <summary>
         /// Command to load a DataStructure from persistent storage
         /// </summary>

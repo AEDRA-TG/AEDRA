@@ -1,5 +1,8 @@
 namespace View.Animations
 {
+    /// <summary>
+    /// Interface that defines methos for animations
+    /// </summary>
     public interface IAnimationStrategy
     {
         /// <summary>

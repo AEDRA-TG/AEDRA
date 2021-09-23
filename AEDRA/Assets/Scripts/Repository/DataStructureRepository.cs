@@ -3,14 +3,22 @@ using Model.Common;
 
 namespace Repository
 {
+    /// <summary>
+    /// Class to define repository operations for all structures
+    /// </summary>
     public abstract class DataStructureRepository
     {
+        /// <summary>
+        /// Event to notify the view
+        /// </summary>
         public static event Action CleanStructure;
+
         /// <summary>
         /// Method to load a DataStructure instance from persistent storage
         /// </summary>
         /// <returns></returns>
         public abstract DataStructure Load();
+
         /// <summary>
         /// Method to persist a Datastructure instance in memory
         /// </summary>
@@ -21,6 +29,9 @@ namespace Repository
         /// </summary>
         public abstract void Clean();
 
+        /// <summary>
+        /// Method that notifies view when the data structure was cleaned
+        /// </summary>
         protected void Notify(){
             CleanStructure?.Invoke();
         }

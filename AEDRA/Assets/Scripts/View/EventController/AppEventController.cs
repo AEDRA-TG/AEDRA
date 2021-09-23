@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Controller;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Utils;
@@ -11,12 +10,29 @@ using View.GUI;
 
 namespace View.EventController
 {
+    /// <summary>
+    /// Class to manage the principal event system
+    /// </summary>
     public class AppEventController: MonoBehaviour
     {
+        /// <summary>
+        /// Dictionary that contains the actual data structure menus
+        /// </summary>
         protected Dictionary<MenuEnum, GameObject> _menus;
+
+        /// <summary>
+        /// Id of the actual sub menu that is visible to user
+        /// </summary>
         protected MenuEnum _activeSubMenu;
+
+        /// <summary>
+        /// Game Object with the actual structure menu
+        /// </summary>
         private GameObject _activeMenu;
-        private GameObject _activeInfoMenu;
+
+        /// <summary>
+        /// Id of the actual projected data structure
+        /// </summary>
         private StructureEnum _activeStructure;
         private GameObject _startInfoPrefab;
 
@@ -27,6 +43,7 @@ namespace View.EventController
             }
         }
 
+        //TODO: regañar a Andrés
         public void Update(){
 #if UNITY_EDITOR
             if (Input.GetMouseButtonDown(0))
@@ -44,6 +61,7 @@ namespace View.EventController
             }
 #endif
         }
+
         /// <summary>
         /// Method that executes when a target is detected by the camera
         /// </summary>
@@ -51,8 +69,7 @@ namespace View.EventController
             GameObject optionsMenu = GameObject.Find("BackButton");
             optionsMenu.GetComponent<Button>().onClick.RemoveAllListeners();
             optionsMenu.GetComponent<Button>().onClick.AddListener(OnTouchBackButton);
-            _activeInfoMenu = GameObject.Find("ProjectionLayout").transform.Find("InfoButton").gameObject;
-
+            
             GameObject structureProjection = GameObject.Find(Constants.ObjectsParentName);
             if(_activeStructure != targetParameter.GetStructure()){
                 Destroy(structureProjection);
@@ -75,7 +92,6 @@ namespace View.EventController
                 _activeMenu.transform.SetAsFirstSibling();
             }
             _activeMenu?.SetActive(true);
-            _activeInfoMenu?.SetActive(true);
         }
 
         /// <summary>
@@ -87,7 +103,6 @@ namespace View.EventController
             ShowOptionsMenu(false);
             GameObject structureProjection = GameObject.Find(Constants.ObjectsParentName);
             _activeMenu?.SetActive(false);
-            _activeInfoMenu?.SetActive(false);
             if(structureProjection != null){
                 Command command = new SaveCommand();
                 CommandController.GetInstance().Invoke(command);
@@ -95,6 +110,10 @@ namespace View.EventController
             optionsMenu.GetComponent<Button>().onClick.AddListener(delegate{ChangeScene(0);});
         }
 
+        /// <summary>
+        /// Method to change the actual sub menu
+        /// </summary>
+        /// <param name="menu">Information about the next menu</param>
         public void ChangeToMenu(MenuEnumParameter menu){
             GameObject activeMenu = _menus[_activeSubMenu];
             activeMenu?.SetActive(false);
@@ -103,16 +122,28 @@ namespace View.EventController
             _activeSubMenu = menu.GetMenu();
         }
 
+        /// <summary>
+        /// Method that create the information for the next menu
+        /// </summary>
+        /// <param name="menu">Id of the new menu</param>
         public void ChangeToMenu(MenuEnum menu){
             MenuEnumParameter menuEnumParameter = new MenuEnumParameter();
             menuEnumParameter.SetMenu(menu);
             ChangeToMenu(menuEnumParameter);
         }
+
+        /// <summary>
+        /// Method to activate o desactive the options menu
+        /// </summary>
+        /// <param name="state">True if do you want to active the menu, false otherwise</param>
         private void ShowOptionsMenu(bool state){
             GameObject optionsMenu = GameObject.Find("BackButton");
             optionsMenu.transform.Find("BackOptionsMenu").gameObject.SetActive(state);
         }
 
+        /// <summary>
+        /// Method to detect when the user taps on back button
+        /// </summary>
         public void OnTouchBackButton(){
             if(_activeSubMenu != MenuEnum.MainMenu){
                 ChangeToMenu(MenuEnum.MainMenu);
@@ -122,11 +153,19 @@ namespace View.EventController
             }
         }
 
+        /// <summary>
+        /// Method to detect when the user taps on clean structure button
+        /// </summary>
         public void OnTouchCleanStructure(){
             Command command = new CleanStructureCommand();
             CommandController.GetInstance().Invoke(command);
             ShowOptionsMenu(false);
         }
+
+        /// <summary>
+        /// Method to change between scenes
+        /// </summary>
+        /// <param name="nextPage">Id of the next scene</param>
         public void ChangeScene(int nextPage)
         {
             GameObject structureProjection = GameObject.Find(Constants.ObjectsParentName);

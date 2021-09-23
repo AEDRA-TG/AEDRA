@@ -14,6 +14,7 @@ namespace Model.GraphModel.Traversals
         /// Graph to apply the traversal
         /// </summary>
         private static Graph graph;
+
         /// <summary>
         /// Dictionary that indicates if a node was visited
         /// </summary>
@@ -32,7 +33,7 @@ namespace Model.GraphModel.Traversals
         public void DFS(int currentNode){
             visited[currentNode] = true;
             graph.NotifyNode(currentNode, AnimationEnum.KeepPaintAnimation);
-            //traverse all neighbors of a node
+            //Traverse all neighbors of a node
             foreach (int neighboor in DFSTraversalStrategy.graph.AdjacentMtx[currentNode].Keys)
             {
                 if(!visited[neighboor]){

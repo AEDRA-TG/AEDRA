@@ -13,13 +13,16 @@ namespace View.EventController
     /// </summary>
     public class GraphEventController : AppEventController
     {
-
+        /// <summary>
+        /// Instance of the application selection controller
+        /// </summary>
         private SelectionController _selectionController;
 
-         public void Awake(){
+        public void Awake(){
             GameObject backButton = GameObject.Find("BackButton");
             backButton.GetComponent<Button>().onClick.AddListener(base.OnTouchBackButton);
         }
+
         public void Start(){
             _selectionController = FindObjectOfType<SelectionController>();
             base._menus = new Dictionary<MenuEnum, GameObject>
@@ -31,16 +34,27 @@ namespace View.EventController
                 { MenuEnum.AddElementInputMenu, gameObject.transform.Find("AddElementInputMenu").gameObject }
             };
             base._activeSubMenu = MenuEnum.MainMenu;
+            base.ChangeToMenu(MenuEnum.MainMenu);
         }
 
+        /// <summary>
+        /// Graph controller subscribes to update menu event for updating UI
+        /// </summary>
         public void OnEnable() {
             SelectionController.UpdateMenu += UpdateMenuOnSelection;
         }
 
+        /// <summary>
+        /// Projection unsubscribes to update menu event for updating UI
+        /// </summary>
         public void OnDisable() {
             SelectionController.UpdateMenu -= UpdateMenuOnSelection;
         }
 
+        /// <summary>
+        /// Method to change the actual menu depending on user selection
+        /// </summary>
+        /// <param name="selectedObjects">List of the user selected objects</param>
         private void UpdateMenuOnSelection(List<ProjectedObject> selectedObjects){
             switch(selectedObjects.Count){
                 case 0: base.ChangeToMenu(MenuEnum.MainMenu);
@@ -79,6 +93,7 @@ namespace View.EventController
             }
             else
             {
+                //TODO: delete this
                 Debug.Log("Numero de nodos seleccionados inválido");
             }
         }
@@ -99,11 +114,15 @@ namespace View.EventController
             }
             else
             {
+                //TODO: delete this
                 Debug.Log("Numero de nodos seleccionados inválido");
             }
         }
 
-        public void DoTraversalBFS(){
+        /// <summary>
+        /// Method to detect when the user taps on BFS traversal button
+        /// </summary>
+        public void OnTouchBFSTraversal(){
             List<ProjectedObject> objs = _selectionController.GetSelectedObjects();
             if (objs.Count == 1 && objs[0].GetType() == typeof(ProjectedNode))
             {
@@ -113,11 +132,15 @@ namespace View.EventController
             }
             else
             {
+                //TODO: delete this
                 Debug.Log("Numero de nodos seleccionados inválido");
             }
         }
 
-        public void DoTraversalDFS(){
+        /// <summary>
+        /// Method to detect when the user taps on DFS traversal button
+        /// </summary>
+        public void OnTouchDFSTraversal(){
             List<ProjectedObject> objs = _selectionController.GetSelectedObjects();
             if (objs.Count == 1 && objs[0].GetType() == typeof(ProjectedNode))
             {
@@ -127,6 +150,7 @@ namespace View.EventController
             }
             else
             {
+                //TODO: delete this
                 Debug.Log("Numero de nodos seleccionados inválido");
             }
         }

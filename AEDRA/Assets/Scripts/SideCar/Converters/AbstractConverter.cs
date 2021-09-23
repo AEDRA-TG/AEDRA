@@ -2,6 +2,11 @@ using System.Collections.Generic;
 
 namespace SideCar.Converters
 {
+    /// <summary>
+    /// Abstract class that defines the converters methods
+    /// </summary>
+    /// <typeparam name="E"></typeparam>
+    /// <typeparam name="D"></typeparam>
     public abstract class AbstractConverter<E,D>
     {
         /// <summary>
@@ -17,6 +22,7 @@ namespace SideCar.Converters
         /// <param name="entity">Entity to convert</param>
         /// <returns>DTO with the data given by the entity</returns>
         public abstract D ToDto(E entity);
+
         /// <summary>
         /// Method to convert a list of DTOs to a List of Entities
         /// </summary>
@@ -27,6 +33,7 @@ namespace SideCar.Converters
             if (dtos == null) return null;
             return dtos.ConvertAll(ToEntity);
         }
+
         /// <summary>
         /// Method to convert a list of Entities to a List of DTOs
         /// </summary>

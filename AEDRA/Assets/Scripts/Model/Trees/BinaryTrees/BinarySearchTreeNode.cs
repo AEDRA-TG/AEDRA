@@ -6,10 +6,32 @@ namespace Model.TreeModel
 {
     public class BinarySearchTreeNode
     {
+        /// <summary>
+        /// Id node
+        /// </summary>
         public int Id{get;set;}
+
+        /// <summary>
+        /// Node value
+        /// </summary>
         public int Value {get; set;}
+
+        /// <summary>
+        /// Left node child
+        /// </summary>
+        /// <value>Null when node is created</value>
         public BinarySearchTreeNode LeftChild {get; set;}
+
+        /// <summary>
+        /// Right node child
+        /// </summary>
+        /// <value>Null when node is created</value>
         public BinarySearchTreeNode RightChild {get; set;}
+
+        /// <summary>
+        /// Node coordinates on view
+        /// </summary>
+        /// <value></value>
         public Point Coordinates {get; set;}
 
         public BinarySearchTreeNode(int id, int value){
@@ -18,10 +40,19 @@ namespace Model.TreeModel
             this.Coordinates = new Point(0,0,0);
         }
 
+        /// <summary>
+        /// Method that indicates if node is Leaf
+        /// </summary>
+        /// <returns>True if node have child, false if both are null</returns>
         public bool IsLeaf(){
             return this.LeftChild == null && this.RightChild == null;
         }
 
+        /// <summary>
+        /// Method to add a node on the tree recursively
+        /// </summary>
+        /// <param name="id">Node id to add</param>
+        /// <param name="value">Valu that new node will contain</param>
         public void AddElement(int id, int value){
             if(value > this.Value){
                 if(this.RightChild!=null){
@@ -51,6 +82,10 @@ namespace Model.TreeModel
             }
         }
 
+        /// <summary>
+        /// Method to delete a node of the tree recursively
+        /// </summary>
+        /// <param name="value">Value of the node to delete</param>
         public void DeleteElement(int value){
             if(value > this.Value){
                 if(this.RightChild != null){
@@ -84,6 +119,12 @@ namespace Model.TreeModel
             }
         }
 
+        /// <summary>
+        /// Method that notifies to view when a edge is modified
+        /// </summary>
+        /// <param name="parent">Node parent</param>
+        /// <param name="node">Node</param>
+        /// <param name="operation">Operation applied to edge</param>
         public void NotifyEdge(BinarySearchTreeNode parent, BinarySearchTreeNode node, AnimationEnum operation){
             EdgeDTO dto = new EdgeDTO(0, node.Value, parent.Id, node.Id)
             {
@@ -92,6 +133,12 @@ namespace Model.TreeModel
             DataStructure.Notify(dto);
         }
 
+        /// <summary>
+        /// Method that notifies to view when a node is modified
+        /// </summary>
+        /// <param name="parent">Node parent</param>
+        /// <param name="node">Modified node</param>
+        /// <param name="operation">Operation applied to node</param>
         public void NotifyNode(BinarySearchTreeNode parent, BinarySearchTreeNode node, AnimationEnum operation){
             int? parentId = null;
             bool isLeft = false;
