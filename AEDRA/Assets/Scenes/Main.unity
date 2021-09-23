@@ -619,7 +619,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -694,8 +694,8 @@ Canvas:
   m_GameObject: {fileID: 1031837813}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 963194227}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -915,6 +915,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2044919703}
     m_Modifications:
+    - target: {fileID: 385972885394820480, guid: f427e540d2da4164c9f6719bebf27c70, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 385972885394820480, guid: f427e540d2da4164c9f6719bebf27c70, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1641872747}
+    - target: {fileID: 385972885394820480, guid: f427e540d2da4164c9f6719bebf27c70, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CochinadaDaniel
+      objectReference: {fileID: 0}
+    - target: {fileID: 385972885394820480, guid: f427e540d2da4164c9f6719bebf27c70, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: View.EventController.AppEventController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 385972885394820480, guid: f427e540d2da4164c9f6719bebf27c70, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3571018381400711219, guid: f427e540d2da4164c9f6719bebf27c70, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1104,7 +1124,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1988138135}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -403, y: -709, z: 935}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 710.68854, y: 1272.9281, z: 1}
   m_Children: []
   m_Father: {fileID: 1031837817}
