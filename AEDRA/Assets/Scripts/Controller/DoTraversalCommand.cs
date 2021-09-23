@@ -34,6 +34,7 @@ namespace Controller
             this._traversalName = traversalName;
             this._startNodeDTO = startNodeDTO;
         }
+
         public override void Execute()
         {
             this._dataStructure.DoTraversal(this._traversalName, this._startNodeDTO);

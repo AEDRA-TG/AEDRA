@@ -2,6 +2,7 @@ using UnityEngine;
 using DG.Tweening;
 using Utils;
 using SideCar.DTOs;
+using Controller;
 
 namespace View.GUI.ProjectedObjects
 {
@@ -21,7 +22,10 @@ namespace View.GUI.ProjectedObjects
                 base.Dto.Coordinates.X = gameObject.transform.localPosition.x;
                 base.Dto.Coordinates.Y = gameObject.transform.localPosition.y;
                 base.Dto.Coordinates.Z = gameObject.transform.localPosition.z;
+                Command command = new UpdateCommand(base.Dto);
+                CommandController.GetInstance().Invoke(command);
             }
+
         }
 
         public void FixedUpdate(){
@@ -31,6 +35,7 @@ namespace View.GUI.ProjectedObjects
             else{
                 base._objectPhysics.ApplyGraphPhysics();
             }
+            //TODO: 
         }
 
 
@@ -57,7 +62,7 @@ namespace View.GUI.ProjectedObjects
         }
 
         public override void Move(Vector3 coordinates){
-            gameObject.transform.position = coordinates;
+            gameObject.transform.localPosition = coordinates;
         }
 
         public static ProjectedNode FindById(int id){

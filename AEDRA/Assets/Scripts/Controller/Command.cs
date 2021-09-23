@@ -12,6 +12,7 @@ namespace Controller
         /// Notifier that indicates to view when an operation has been completed
         /// </summary>
         public static event Action<OperationEnum> OperationCompleted;
+
         /// <summary>
         /// Method to execute the command
         /// </summary>

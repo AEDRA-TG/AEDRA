@@ -18,6 +18,7 @@ namespace Controller
         /// Element that will be deleted on the data structure
         /// </summary>
         private ElementDTO _element;
+
         /// <summary>
         /// Command to delete an element
         /// </summary>
@@ -26,6 +27,7 @@ namespace Controller
             this._dataStructure = CommandController.GetInstance().Repository.Load();
             this._element = element;
         }
+
         public override void Execute()
         {
             this._dataStructure.DeleteElement(this._element);

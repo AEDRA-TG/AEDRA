@@ -1,5 +1,8 @@
 namespace Model.TreeModel.BinaryTree.Traversals
 {
+    /// <summary>
+    /// Interface that defines binary search tree traversal strategy
+    /// </summary>
     public interface ITraversalTreeStrategy
     {
         /// <summary>

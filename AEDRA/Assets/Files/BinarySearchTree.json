@@ -1,34 +1,4 @@
 {
-  "Root": {
-    "Id": 0,
-    "Value": 0,
-    "LeftChild": {
-      "Id": 1,
-      "Value": -10,
-      "LeftChild": null,
-      "RightChild": null,
-      "Coordinates": {
-        "X": -4.620282,
-        "Y": -1.52769852,
-        "Z": 26.76753
-      }
-    },
-    "RightChild": {
-      "Id": 2,
-      "Value": 10,
-      "LeftChild": null,
-      "RightChild": null,
-      "Coordinates": {
-        "X": 2.47221613,
-        "Y": -1.16682434,
-        "Z": 26.6712856
-      }
-    },
-    "Coordinates": {
-      "X": -3.665132,
-      "Y": -6.0245285,
-      "Z": 27.4213352
-    }
-  },
-  "NodesCount": 3
+  "Root": null,
+  "NodesCount": 0
 }

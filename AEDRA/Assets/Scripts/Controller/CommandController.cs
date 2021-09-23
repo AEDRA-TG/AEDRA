@@ -11,6 +11,7 @@ namespace Controller
         /// Field name used to store the command controller instance
         /// </summary>
         private static CommandController _commandController;
+
         /// <summary>
         /// Property name for the data structure repository
         /// </summary>
@@ -26,6 +27,7 @@ namespace Controller
             }
             return _commandController;
         }
+
         /// <summary>
         /// Method to execute any command
         /// </summary>
