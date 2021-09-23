@@ -28,9 +28,18 @@ namespace View.GUI.ProjectedObjects
             return gameObject.transform.DOScale(UpdateEdge(),base.AnimationTime).OnComplete(()=> base.IsCreated = true);
         }
 
+        /// <summary>
+        /// Method that indicates if the edge enter in collision with other object
+        /// </summary>
+        /// <param name="other">The object that collision with edge</param>
         public void OnCollisionEnter(Collision other) {
             Physics.IgnoreCollision(this.gameObject.GetComponent<Collider>(), other.collider);
         }
+
+        /// <summary>
+        /// Method to actualize the edge position and size if their nodes moved
+        /// </summary>
+        /// <returns>Actualized edge scale</returns>
         private Vector3 UpdateEdge(){
             EdgeDTO edgeDTO = (EdgeDTO) base.Dto;
             Vector3 startPosition = GetNodeCoordinates(edgeDTO.IdStartNode);
@@ -43,6 +52,11 @@ namespace View.GUI.ProjectedObjects
             return scale;
         }
 
+        /// <summary>
+        /// Method to get a projected node coordinates
+        /// </summary>
+        /// <param name="id">Id to identify the node</param>
+        /// <returns>The coordinates of the found node</returns>
         private Vector3 GetNodeCoordinates(int id){
             GameObject nodeFound = GameObject.Find(Constants.NodeName+ id);
             return nodeFound.transform.position;

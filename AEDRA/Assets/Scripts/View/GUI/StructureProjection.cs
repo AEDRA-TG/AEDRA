@@ -22,9 +22,22 @@ namespace View.GUI
         /// Type of the structure projection
         /// </summary>
         public string Type { get; set; }
+
+        /// <summary>
+        /// List dtos asociated to the projected objects on projection
+        /// </summary>
         public List<ElementDTO> DTOs {get; set;}
+
+        /// <summary>
+        /// List of the actual projected objects
+        /// </summary>
         public List<ProjectedObject> ProjectedObjects {get; set;}
+
+        /// <summary>
+        /// Dictionary that contains all the animations for the projection
+        /// </summary>
         private Dictionary<OperationEnum, IAnimationStrategy> _animations;
+
         public void Awake()
         {
             DTOs = new List<ElementDTO>();
@@ -66,7 +79,7 @@ namespace View.GUI
         /// Method to instantiate a new GameObject
         /// </summary>
         /// <param name="dto"></param>
-        /// <returns></returns>
+        /// <returns>The projected object asociated with the created object</returns>
         public ProjectedObject CreateObject(ElementDTO dto){
             Vector3 position = CalculateInitialPosition(dto);
             string prefabPath = Constants.PrefabPath + dto.Name;
@@ -100,6 +113,11 @@ namespace View.GUI
             Destroy(objectToBeDeleted.gameObject);
         }
 
+        /// <summary>
+        /// Method to calculates the position in wich a new object will be created
+        /// </summary>
+        /// <param name="dto">The information of the new object</param>
+        /// <returns>Coordinates to instanciate the object</returns>
         public Vector3 CalculateInitialPosition(ElementDTO dto){
             GameObject structureProjection = GameObject.Find(Constants.ObjectsParentName);
             Vector3 position = structureProjection.transform.parent.localPosition;

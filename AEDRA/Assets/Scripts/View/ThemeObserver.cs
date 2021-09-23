@@ -5,6 +5,9 @@ using Controller;
 
 namespace Observer
 {
+    /// <summary>
+    /// Observer class to manage changes on application colors
+    /// </summary>
     public class ThemeObserver : MonoBehaviour
     {
         public void Start()
@@ -32,6 +35,7 @@ namespace Observer
         {
             ThemeController.changeColorDelegate += ChangeColor;
         }
+
         /// <summary>
         /// Method to stop the observer
         /// </summary>
