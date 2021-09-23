@@ -68,7 +68,6 @@ namespace View
 
             for (int i = 0; i < _originalButtonsPositions.Length; i++){
                 _originalButtonsPositions[i] = this.transform.GetChild(i).position;
-                Debug.Log("Hijo: " + i + " " + this.transform.GetChild(i).position);
             }
 
             MoveButtonAtHamburguerPosition();

@@ -1,4 +1,14 @@
 {
-  "Root": null,
-  "NodesCount": 0
+  "Root": {
+    "Id": 0,
+    "Value": 90,
+    "LeftChild": null,
+    "RightChild": null,
+    "Coordinates": {
+      "X": -0.0480213165,
+      "Y": -0.307280064,
+      "Z": 4.496568
+    }
+  },
+  "NodesCount": 1
 }
