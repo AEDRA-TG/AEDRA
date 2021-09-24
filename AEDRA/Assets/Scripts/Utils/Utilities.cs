@@ -103,17 +103,5 @@ namespace Utils {
             Constants.GlobalColor = color;
         }
 
-        /// <summary>
-        /// Method to get the file base path
-        /// </summary>
-        /// <returns>The path in wich files will be modified</returns>
-        public static string GetDataPath(){
-#if UNITY_EDITOR
-            return "Assets/Files/";
-#elif UNITY_ANDROID
-            return Application.persistentDataPath + "/";      
-#endif
-        }
-
     }
 }

@@ -42,9 +42,11 @@ namespace Utils
         /// </summary>
         #region PATHS
 
-        public static string DataPath = Utilities.GetDataPath();
-        public static string ConstantsFilePath = Utilities.GetDataPath() + "Constants.json";
-        public static string TargetsFilePath = Utilities.GetDataPath() + "Targets.json";
+        public static string DataPath = Application.persistentDataPath + "/";
+        public static string ConstantsStreamingFilePath = Application.streamingAssetsPath + "/ConfigFiles/Variables.json";
+        public static string ConstantsFilePath = Application.persistentDataPath + "/Variables.json";
+        public static string TargetsStreamingFilePath = Application.streamingAssetsPath + "/ConfigFiles/Targets.json";
+        public static string TargetsFilePath = Application.persistentDataPath + "/Targets.json";
         public const string PrefabPath = "Prefabs/ProjectedObjects/";
 
         #endregion

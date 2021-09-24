@@ -58,10 +58,6 @@ namespace View.EventController
         /// Method that executes when a target is detected by the camera
         /// </summary>
         public void OnTargetDetected(TargetParameter targetParameter){
-            GameObject optionsMenu = GameObject.Find("BackButton");
-            optionsMenu.GetComponent<Button>().onClick.RemoveAllListeners();
-            optionsMenu.GetComponent<Button>().onClick.AddListener(OnTouchBackButton);
-
             GameObject structureProjection = GameObject.Find(Constants.ObjectsParentName);
             if(_activeStructure != targetParameter.GetStructure()){
                 Destroy(structureProjection);
@@ -139,6 +135,8 @@ namespace View.EventController
         public void OnTouchBackButton(){
             if(_activeSubMenu != MenuEnum.MainMenu){
                 ChangeToMenu(MenuEnum.MainMenu);
+                SelectionController selectionController = FindObjectOfType<SelectionController>();
+                selectionController.DeselectAllObjects();
             }
             else{
                 ShowOptionsMenu(true);
