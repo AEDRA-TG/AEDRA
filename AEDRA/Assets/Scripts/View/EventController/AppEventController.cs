@@ -37,9 +37,14 @@ namespace View.EventController
         private GameObject _startInfoPrefab;
 
         private void Start() {
-            if(SceneManager.GetActiveScene().name == "Main"){
-                _startInfoPrefab = GameObject.Find("MainLayout").transform.Find("StartInfoMenu").gameObject;
-                _startInfoPrefab?.SetActive(true);
+            if (PlayerPrefs.GetInt("FIRSTTIMEOPENING", 1) == 1)
+            {
+                PlayerPrefs.SetInt("FIRSTTIMEOPENING", 0);
+                if(SceneManager.GetActiveScene().name == "Main")
+                {
+                    _startInfoPrefab = GameObject.Find("MainLayout").transform.Find("StartInfoMenu").gameObject;
+                    _startInfoPrefab?.SetActive(true);
+                }
             }
         }
 
@@ -69,7 +74,7 @@ namespace View.EventController
             GameObject optionsMenu = GameObject.Find("BackButton");
             optionsMenu.GetComponent<Button>().onClick.RemoveAllListeners();
             optionsMenu.GetComponent<Button>().onClick.AddListener(OnTouchBackButton);
-            
+
             GameObject structureProjection = GameObject.Find(Constants.ObjectsParentName);
             if(_activeStructure != targetParameter.GetStructure()){
                 Destroy(structureProjection);
@@ -175,16 +180,10 @@ namespace View.EventController
             }
             SceneManager.LoadScene(nextPage);
         }
-        /// <summary>
-        /// Method for loading a prefab on a scene instance
-        /// </summary>
-        public GameObject LoadPrefab(string path, string parent) {
-            GameObject prefab = Resources.Load(path) as GameObject;
-            prefab = Instantiate(prefab, new Vector3(0,0,0), Quaternion.identity, GameObject.Find(parent).transform);
-            prefab.transform.localPosition = Vector3.zero;
-            return prefab;
-        }
 
+        /// <summary>
+        /// Method for hidding the start info menu prefab on the main scene
+        /// </summary>
         public void HideStartInfoMenuPrefab() {
             _startInfoPrefab?.SetActive(false);
         }

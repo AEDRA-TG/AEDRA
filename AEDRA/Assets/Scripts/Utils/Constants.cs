@@ -30,6 +30,9 @@ namespace Utils
         public const string NodeName = "Node_";
         public const string EdgeName = "Edge_";
         public const string HamburgerButtonName = "HamburgerMenu";
+        public const string InfoButtonName = "InfoButton";
+        public const string HelpButtonMenuName = "HelpButtonMenu";
+        public const string TooltipName = "Tooltip";
         public const string MenusParentName = "ProjectionLayout";
 
         #endregion
