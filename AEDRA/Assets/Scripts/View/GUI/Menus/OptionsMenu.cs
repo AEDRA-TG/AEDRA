@@ -2,6 +2,7 @@ using UnityEngine;
 using DG.Tweening;
 using Utils;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace View
 {
@@ -28,7 +29,25 @@ namespace View
 
         public void Awake(){
             _hamburgerButton = GameObject.Find(Constants.HamburgerButtonName);
+            ShowHelpButtonMenu();
             InitializeSubMenu();
+        }
+
+        /// <summary>
+        /// Method to show Help Button Menu when user open the app for first time
+        /// </summary>
+        public void ShowHelpButtonMenu() {
+            if (PlayerPrefs.GetInt("FIRSTTIMEOPENING", 1) == 1)
+            {
+                PlayerPrefs.SetInt("FIRSTTIMEOPENING", 0);
+                if(SceneManager.GetActiveScene().name == "Projection")
+                {
+                    GameObject.Find(Constants.HelpButtonMenuName).transform.GetChild(0).GetComponent<Image>().DOFade(0f, 6).From(1f);
+                    GameObject.Find(Constants.HelpButtonMenuName).transform.GetChild(0).GetChild(0).GetComponent<Text>().DOFade(0f, 6).From(1f);
+                }
+            } else {
+                GameObject.Find(Constants.HelpButtonMenuName).gameObject.SetActive(false);
+            }
         }
 
         /// <summary>
@@ -53,6 +72,9 @@ namespace View
         /// Method to execute an animation for showing tooltips
         /// </summary>
         public void ShowTooltips(){
+            if(!_isExpanded){
+                Expand();
+            }
             Sequence showList = DOTween.Sequence();
             for(int i = 0; i < _originalButtonsPositions.Length; i++){
                 this.transform.GetChild(i).Find(Constants.TooltipName).gameObject.SetActive(true);
