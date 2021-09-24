@@ -1,6 +1,7 @@
 using System.IO;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace Utils.Configuration
 {
@@ -10,26 +11,30 @@ namespace Utils.Configuration
         {
             ConfigureFiles();
         }
-
-        [System.Obsolete]
         public void ConfigureFiles()
         {
             if (!File.Exists(Constants.ConstantsFilePath))
             {
-                WWW www = new WWW(Constants.ConstantsStreamingFilePath);
-                while (!www.isDone) {; }
-                if (string.IsNullOrEmpty(www.error))
-                {
-                    File.WriteAllBytes(Constants.ConstantsFilePath, www.bytes);
-                }
+                #if UNITY_EDITOR
+                string pathFile = "file://" + Constants.ConstantsStreamingFilePath;
+                #elif UNITY_ANDROID
+                string pathFile = Constants.ConstantsStreamingFilePath;
+                #endif
+                UnityWebRequest fileRequest = UnityWebRequest.Get(pathFile);
+                fileRequest.SendWebRequest();
+                while(!fileRequest.isDone){}
+                File.WriteAllBytes(Constants.ConstantsFilePath, fileRequest.downloadHandler.data);
             }
             if(!File.Exists(Constants.TargetsFilePath)){
-                WWW www = new WWW(Constants.TargetsStreamingFilePath);
-                while (!www.isDone) {; }
-                if (string.IsNullOrEmpty(www.error))
-                {
-                    File.WriteAllBytes(Constants.TargetsFilePath, www.bytes);
-                }
+                #if UNITY_EDITOR
+                string pathFile = "file://" + Constants.TargetsStreamingFilePath;
+                #elif UNITY_ANDROID
+                string pathFile = Constants.TargetsStreamingFilePath;
+                #endif
+                UnityWebRequest fileRequest = UnityWebRequest.Get(pathFile);
+                fileRequest.SendWebRequest();
+                while(!fileRequest.isDone){}
+                File.WriteAllBytes(Constants.TargetsFilePath, fileRequest.downloadHandler.data);
             }
         }
     }
