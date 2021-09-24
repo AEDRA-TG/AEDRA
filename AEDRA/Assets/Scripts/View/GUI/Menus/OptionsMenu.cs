@@ -46,7 +46,7 @@ namespace View
                     GameObject.Find(Constants.HelpButtonMenuName).transform.GetChild(0).GetChild(0).GetComponent<Text>().DOFade(0f, 6).From(1f);
                 }
             } else {
-                GameObject.Find(Constants.HelpButtonMenuName).gameObject.SetActive(false);
+                GameObject.Find(Constants.HelpButtonMenuName)?.gameObject.SetActive(false);
             }
         }
 
