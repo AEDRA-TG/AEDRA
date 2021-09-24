@@ -37,9 +37,9 @@ namespace View
         /// Method to show Help Button Menu when user open the app for first time
         /// </summary>
         public void ShowHelpButtonMenu() {
-            if (PlayerPrefs.GetInt("FIRSTTIMEOPENING", 1) == 1)
+            if (PlayerPrefs.GetInt("FirstTargetDetected", 1) == 1)
             {
-                PlayerPrefs.SetInt("FIRSTTIMEOPENING", 0);
+                PlayerPrefs.SetInt("FirstTargetDetected", 0);
                 if(SceneManager.GetActiveScene().name == "Projection")
                 {
                     GameObject.Find(Constants.HelpButtonMenuName).transform.GetChild(0).GetComponent<Image>().DOFade(0f, 6).From(1f);

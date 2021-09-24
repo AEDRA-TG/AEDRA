@@ -6,21 +6,24 @@ using UnityEngine.UI;
 using Utils;
 using Vuforia;
 
-public class TargetEventController : MonoBehaviour
+namespace View.EventController
 {
-    // Start is called before the first frame update
-    [SerializeField]
-    private GameObject targetItemPrefab;
-    public void Start()
+    public class TargetEventController : MonoBehaviour
     {
-        List<Target> targets = Utilities.DeserializeJSON<List<Target>>(Constants.TargetsFilePath);
-        foreach (Target target in targets)
+        // Start is called before the first frame update
+        [SerializeField]
+        private GameObject targetItemPrefab;
+        public void Start()
         {
-            Transform parent = GameObject.Find(Constants.TargetListParent).transform;
-            GameObject item = Instantiate(targetItemPrefab,Vector3.zero, Quaternion.identity,parent);
-            item.transform.localPosition = Vector3.zero;
-            item.GetComponentInChildren<Text>().text = target.Name;
+            List<Target> targets = Utilities.DeserializeJSON<List<Target>>(Constants.TargetsFilePath);
+            foreach (Target target in targets)
+            {
+                Transform parent = GameObject.Find(Constants.TargetListParent).transform;
+                GameObject item = Instantiate(targetItemPrefab, Vector3.zero, Quaternion.identity, parent);
+                item.transform.localPosition = Vector3.zero;
+                item.GetComponentInChildren<Text>().text = target.Name;
+            }
         }
-    }
 
+    }
 }

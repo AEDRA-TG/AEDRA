@@ -214,6 +214,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3466340543088098298, guid: af8a655c7a636594d8369555eb2f4777, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1641872747}
+    - target: {fileID: 3466340543088098298, guid: af8a655c7a636594d8369555eb2f4777, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeScene
+      objectReference: {fileID: 0}
     - target: {fileID: 8913169541917004257, guid: af8a655c7a636594d8369555eb2f4777, type: 3}
       propertyPath: m_Name
       value: StartInfoMenu
@@ -221,6 +229,14 @@ PrefabInstance:
     - target: {fileID: 8913169541917004257, guid: af8a655c7a636594d8369555eb2f4777, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8975028184299508883, guid: af8a655c7a636594d8369555eb2f4777, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1641872747}
+    - target: {fileID: 8975028184299508883, guid: af8a655c7a636594d8369555eb2f4777, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: HideStartInfoMenuPrefab
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7350377790866754274, guid: af8a655c7a636594d8369555eb2f4777, type: 3}
