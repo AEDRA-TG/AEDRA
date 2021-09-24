@@ -1,27 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using Model.Common;
 using UnityEngine;
+using UnityEngine.UI;
+using Utils;
 using Vuforia;
 
 public class TargetEventController : MonoBehaviour
 {
     // Start is called before the first frame update
+    [SerializeField]
+    private GameObject targetItemPrefab;
     public void Start()
     {
-        /*
-        VuforiaBehaviour.Instance.ObserverFactory.
-
-        StateManager sm = TrackerManager.Instance.GetStateManager();
-        
-        foreach (TrackableBehaviour tb in sm.)
+        List<Target> targets = Utilities.DeserializeJSON<List<Target>>(Constants.TargetsFilePath);
+        foreach (Target target in targets)
         {
-            if (tb is ImageTargetBehaviour)
-            {
-                ImageTargetBehaviour itb = tb as ImageTargetBehaviour;
-                float dist2cam = (itb.transform.position - Camera.main.transform.position).magnitude;
-                ImageTarget it = itb.Trackable as ImageTarget; Vector2 size = it.GetSize();
-                GUI.Box(new Rect(50, 100, 300, 40), it.Name + " - " + size.ToString() + "\nDistance to camera: " + dist2cam);
-            }
-        }*/
+            Transform parent = GameObject.Find(Constants.TargetListParent).transform;
+            GameObject item = Instantiate(targetItemPrefab,Vector3.zero, Quaternion.identity,parent);
+            item.transform.localPosition = Vector3.zero;
+            item.GetComponentInChildren<Text>().text = target.Name;
+        }
     }
+
 }

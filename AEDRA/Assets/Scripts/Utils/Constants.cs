@@ -31,7 +31,7 @@ namespace Utils
         public const string EdgeName = "Edge_";
         public const string HamburgerButtonName = "HamburgerMenu";
         public const string MenusParentName = "ProjectionLayout";
-
+        public const string TargetListParent = "Content";
         #endregion
 
         /// <summary>
@@ -41,6 +41,7 @@ namespace Utils
 
         public static string DataPath = Utilities.GetDataPath();
         public static string ConstantsFilePath = Utilities.GetDataPath() + "Constants.json";
+        public static string TargetsFilePath = Utilities.GetDataPath() + "Targets.json";
         public const string PrefabPath = "Prefabs/ProjectedObjects/";
 
         #endregion
