@@ -37,9 +37,12 @@ namespace View.EventController
         private GameObject _startInfoPrefab;
 
         private void Start() {
-            if (PlayerPrefs.GetInt("FIRSTTIMEOPENING", 1) == 1)
+            //TODO: Delete this
+            //PlayerPrefs.SetInt("FIRSTTIMEOPENING", 1);
+            if (PlayerPrefs.GetInt("FirstTimeOpening", 1) == 1)
             {
-                PlayerPrefs.SetInt("FIRSTTIMEOPENING", 0);
+                PlayerPrefs.SetInt("FirstTimeOpening", 0);
+                Debug.Log(SceneManager.GetActiveScene().name);
                 if(SceneManager.GetActiveScene().name == "Main")
                 {
                     _startInfoPrefab = GameObject.Find("MainLayout").transform.Find("StartInfoMenu").gameObject;

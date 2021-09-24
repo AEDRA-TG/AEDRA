@@ -30,16 +30,25 @@ namespace View.GUI.ProjectedObjects
         public Dictionary<AnimationEnum, Func<Tween>> Animations { get; set; }
 
         /// <summary>
-        /// 
+        /// Asociated object DTO
         /// </summary>
-        /// <value></value>
         public ElementDTO Dto { get; set; }
+
+        /// <summary>
+        /// Indicates if the projected object is visible for user
+        /// </summary>
+        /// <value>True when user can see the object, false otherwise</value>
         public bool IsCreated { get; set; }
+
+        /// <summary>
+        /// Time in seconds for each projected object animation
+        /// </summary>
         public float AnimationTime{get; set;}
 
-        #region Fisicas
+        /// <summary>
+        /// Intance of the class physics for the projected object
+        /// </summary>
         protected ObjectPhysics _objectPhysics;
-        #endregion
 
         virtual public void Awake()
         {
@@ -56,38 +65,71 @@ namespace View.GUI.ProjectedObjects
             };
         }
 
+        /// <summary>
+        /// Method to position the object if needed
+        /// </summary>
         public void PositionObject(){
             _objectPhysics.PositionObject();
         }
 
+        /// <summary>
+        /// Animation that will be executed when object is created
+        /// </summary>
+        /// <returns>DOTWeen Tween with the animation</returns>
         virtual public Tween CreateAnimation()
         {
             return null;
         }
 
+        /// <summary>
+        /// Animation that will be executed when object is deleted
+        /// </summary>
+        /// <returns>DOTWeen Tween with the animation</returns>
         virtual public Tween DeleteAnimation()
         {
             return null;
         }
 
+        /// <summary>
+        /// Animation that paint the object with other color
+        /// </summary>
+        /// <returns>DOTWeen Tween with the animation</returns>
         virtual public Tween PaintAnimation()
         {
             return null;
         }
+
+        /// <summary>
+        /// Animation that keep paint the object
+        /// </summary>
+        /// <returns>DOTWeen Tween with the animation</returns>
         virtual public Tween KeepPaintAnimation()
         {
             return null;
         }
+
+        /// <summary>
+        /// Animation that restore the original object color
+        /// </summary>
+        /// <returns>DOTWeen Tween with the animation</returns>
         virtual public Tween UnPaintAnimation()
         {
             return null;
         }
 
+        /// <summary>
+        /// Animation that actualice the object visual elements
+        /// </summary>
+        /// <returns>DOTWeen Tween with the animation</returns>
         virtual public Tween UpdateAnimation()
         {
             return default;
         }
 
+        /// <summary>
+        /// Method to move the object of the given coordinates
+        /// </summary>
+        /// <param name="coordinates">Coordinates to move the object</param>
         virtual public void Move(Vector3 coordinates)
         {
         }
@@ -112,17 +154,21 @@ namespace View.GUI.ProjectedObjects
                 Dto.Id == other.Dto.Id;
         }
 
-
         public override int GetHashCode()
         {
             //TODO: Look how to implement this method since library HashCode.Combine can't be used
             throw new NotImplementedException();
         }
+
         public bool IsSelectable()
         {
             return _selectable;
         }
 
+        /// <summary>
+        /// Method to define if the object can be selected or no
+        /// </summary>
+        /// <param name="selectable">True if the object can be selected, false otherwise</param>
         public void SetSelectable(bool selectable)
         {
             this._selectable = selectable;
@@ -132,6 +178,10 @@ namespace View.GUI.ProjectedObjects
             return _selected;
         }
 
+        /// <summary>
+        /// Method to change the color if the object is selected
+        /// </summary>
+        /// <param name="selected">True if the object was selected, false otherwise</param>
         public void SetSelected(bool selected)
         {
             this._selected = selected;

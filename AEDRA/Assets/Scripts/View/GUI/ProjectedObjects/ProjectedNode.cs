@@ -6,15 +6,16 @@ using Controller;
 
 namespace View.GUI.ProjectedObjects
 {
+    /// <summary>
+    /// Class to manage a projected node
+    /// </summary>
     public class ProjectedNode : ProjectedObject
     {
-        // Start is called before the first frame update
         public void Start()
         {
 
         }
 
-        // Update is called once per frame
         public void Update()
         {
             gameObject.transform.rotation = Quaternion.identity;
@@ -28,6 +29,9 @@ namespace View.GUI.ProjectedObjects
 
         }
 
+        /// <summary>
+        /// This method is used to control physics on an object
+        /// </summary>
         public void FixedUpdate(){
             if(base.Dto is BinarySearchNodeDTO){
                 base._objectPhysics.ApplyBinaryTreePhysics();
@@ -35,7 +39,7 @@ namespace View.GUI.ProjectedObjects
             else{
                 base._objectPhysics.ApplyGraphPhysics();
             }
-            //TODO: 
+            //TODO: Cambiar la forma en la que se identifica el tipo de nodo
         }
 
 
@@ -63,10 +67,6 @@ namespace View.GUI.ProjectedObjects
 
         public override void Move(Vector3 coordinates){
             gameObject.transform.localPosition = coordinates;
-        }
-
-        public static ProjectedNode FindById(int id){
-            return GameObject.Find(Constants.NodeName + id).GetComponent<ProjectedNode>();
         }
     }
 }

@@ -1,0 +1,12 @@
+[
+    {
+        "Name":"Grafo",
+        "ARMarker":"URI",
+        "Description":"Mi bonito grafo"
+    },
+    {
+        "Name":"Árbol",
+        "ARMarker":"URI",
+        "Description":"Mi bonito árbol"
+    }
+]

@@ -15,15 +15,21 @@ namespace Controller
         /// List of the possible colors that the user can use
         /// </summary>
         private List<Color> _colors;
+
         /// <summary>
         /// Delegete for the observer that change the color of the buttons
         /// </summary>
         public delegate void ChangeColorDelegate();
+
+        /// <summary>
+        /// Delegate for the observer that change the color
+        /// </summary>
         public static ChangeColorDelegate changeColorDelegate;
 
         public void Awake() {
             _colors = new List<Color>();
         }
+
         public void Start()
         {
             _colors.Add(new Color(0.4156863f, 0.07450981f, 0.8313726f, 0.7058824f));
@@ -33,11 +39,6 @@ namespace Controller
             GameObject acceptButton = GameObject.Find("AcceptButton");
             acceptButton = acceptButton.transform.GetChild(0).gameObject;
             acceptButton.GetComponent<Image>().color = Constants.GlobalColor;
-        }
-
-        public void Update()
-        {
-
         }
 
         /// <summary>
@@ -60,6 +61,7 @@ namespace Controller
             changeColorDelegate?.Invoke();
             CloseThemeChooser();
         }
+
         /// <summary>
         /// Method to close the theme chooser
         /// </summary>
