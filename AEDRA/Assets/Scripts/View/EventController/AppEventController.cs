@@ -34,22 +34,6 @@ namespace View.EventController
         /// Id of the actual projected data structure
         /// </summary>
         private StructureEnum _activeStructure;
-        private GameObject _startInfoPrefab;
-
-        private void Start() {
-            //TODO: Delete this
-            //PlayerPrefs.SetInt("FIRSTTIMEOPENING", 1);
-            if (PlayerPrefs.GetInt("FirstTimeOpening", 1) == 1)
-            {
-                PlayerPrefs.SetInt("FirstTimeOpening", 0);
-                Debug.Log(SceneManager.GetActiveScene().name);
-                if(SceneManager.GetActiveScene().name == "Main")
-                {
-                    _startInfoPrefab = GameObject.Find("MainLayout").transform.Find("StartInfoMenu").gameObject;
-                    _startInfoPrefab?.SetActive(true);
-                }
-            }
-        }
 
         //TODO: regañar a Andrés
         public void Update(){
@@ -182,13 +166,6 @@ namespace View.EventController
                 CommandController.GetInstance().Invoke(command);
             }
             SceneManager.LoadScene(nextPage);
-        }
-
-        /// <summary>
-        /// Method for hidding the start info menu prefab on the main scene
-        /// </summary>
-        public void HideStartInfoMenuPrefab() {
-            _startInfoPrefab?.SetActive(false);
         }
     }
 }
