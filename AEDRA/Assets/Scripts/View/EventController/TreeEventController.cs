@@ -17,6 +17,7 @@ namespace View.EventController
 
         public void Awake(){
             GameObject backButton = GameObject.Find("BackButton");
+            backButton.GetComponent<Button>().onClick.RemoveAllListeners();
             backButton.GetComponent<Button>().onClick.AddListener(base.OnTouchBackButton);
         }
 
