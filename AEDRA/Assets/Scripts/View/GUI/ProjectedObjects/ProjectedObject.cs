@@ -143,6 +143,17 @@ namespace View.GUI.ProjectedObjects
             }
         }
 
+        public void UpdateDTO(ElementDTO dto){
+            if(Dto is BinarySearchNodeDTO oldDTO){
+                BinarySearchNodeDTO newDTO = dto as BinarySearchNodeDTO;
+                oldDTO.LeftChild = newDTO.LeftChild;
+                oldDTO.RightChild = newDTO.RightChild;
+            }
+            else{
+                Dto = dto;
+            }
+        }
+
         public override bool Equals(object other)
         {
             return Equals(other as ProjectedObject);

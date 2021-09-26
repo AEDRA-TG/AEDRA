@@ -38,6 +38,11 @@ namespace View.GUI
         /// </summary>
         private Dictionary<OperationEnum, IAnimationStrategy> _animations;
 
+        /// <summary>
+        /// Reference point to instanciate objects
+        /// </summary>
+        private Transform _referencePoint;
+
         public void Awake()
         {
             DTOs = new List<ElementDTO>();
@@ -51,6 +56,7 @@ namespace View.GUI
                 { OperationEnum.CreateDataStructure, new CreateDataStructureAnimation() },
                 { OperationEnum.UpdateObjects, new UpdateAnimation() }
             };
+            _referencePoint = GameObject.Find(Constants.ReferencePointName).transform;
         }
 
         /// <summary>
@@ -63,7 +69,7 @@ namespace View.GUI
                 DTOs.Add(dto);
             }
             GameObject obj = GameObject.Find(dto.GetUnityId());
-            obj?.GetComponent<ProjectedObject>().SetDTO(dto);
+            obj?.GetComponent<ProjectedObject>().UpdateDTO(dto);
         }
 
         /// <summary>
@@ -85,6 +91,7 @@ namespace View.GUI
             string prefabPath = Constants.PrefabPath + dto.Name;
             GameObject prefab = Resources.Load(prefabPath) as GameObject;
             prefab = Instantiate(prefab,position,Quaternion.identity,this.transform);
+            prefab.transform.localPosition = position;
             prefab.name = dto.GetUnityId();
             ProjectedObject createdObject = prefab.GetComponent<ProjectedObject>();
             createdObject.SetDTO(dto);
@@ -119,16 +126,21 @@ namespace View.GUI
         /// <param name="dto">The information of the new object</param>
         /// <returns>Coordinates to instanciate the object</returns>
         public Vector3 CalculateInitialPosition(ElementDTO dto){
-            GameObject structureProjection = GameObject.Find(Constants.ObjectsParentName);
-            Vector3 position = structureProjection.transform.parent.localPosition;
-            position = new Vector3(position.x, position.y, position.z);
-            if (dto is BinarySearchNodeDTO castDTO){
-                if(castDTO.ParentId != null){
-                    GameObject parentObject = GameObject.Find(Constants.NodeName + castDTO.ParentId);
-                    position = new Vector3(parentObject.transform.position.x, parentObject.transform.position.y - Constants.VerticalNodeTreeDistance, parentObject.transform.position.z);
+            //Calcular las coordenadas¿
+            Vector3 objectPosition;
+            if(dto is BinarySearchNodeDTO binaryDTO){
+                if(binaryDTO.ParentId == null){
+                    objectPosition = new Vector3(_referencePoint.localPosition.x,-1.5f,_referencePoint.localPosition.y);
+                }
+                else{
+                    GameObject parentNode = GameObject.Find(Constants.NodeName + binaryDTO.ParentId);
+                    objectPosition = new Vector3(parentNode.transform.localPosition.x, parentNode.transform.localPosition.z - Constants.VerticalNodeTreeDistance, parentNode.transform.localPosition.y);
                 }
             }
-            return position;
+            else{
+                objectPosition = new Vector3(_referencePoint.localPosition.x,-_referencePoint.localPosition.z,_referencePoint.localPosition.y);
+            }
+            return objectPosition;
         }
     }
 }

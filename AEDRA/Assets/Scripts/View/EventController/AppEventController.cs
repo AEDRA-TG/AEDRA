@@ -65,7 +65,8 @@ namespace View.EventController
             }
             if(structureProjection==null){
                 structureProjection = new GameObject(Constants.ObjectsParentName, typeof(StructureProjection));
-                structureProjection.transform.parent = GameObject.Find(targetParameter.GetTargetName()).transform;
+                structureProjection.transform.parent = GameObject.Find(targetParameter.GetTargetName()).transform.Find(Constants.ReferencePointName).transform;
+                structureProjection.transform.localPosition = Vector3.zero;
             }
             if(_activeStructure != targetParameter.GetStructure()){
                 _activeStructure = targetParameter.GetStructure();

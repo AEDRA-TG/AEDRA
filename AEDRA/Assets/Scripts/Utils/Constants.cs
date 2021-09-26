@@ -35,6 +35,9 @@ namespace Utils
         public const string TooltipName = "Tooltip";
         public const string MenusParentName = "ProjectionLayout";
         public const string TargetListParent = "Content";
+
+        public const string ReferencePointName = "ReferencePoint";
+
         #endregion
 
         /// <summary>
@@ -60,7 +63,7 @@ namespace Utils
         public const float VerticalNodeTreeDistance = 2f;
         public const float HorizontalChildToParentDistance = 1.5f;
         public const float HorizontalForce = 5f;
-        public const float MinimalHorizontalForce = 1f;
+        public const float MinimalHorizontalForce = 2f;
         public const float MinimalNodeDistance = 2f;
 
         #endregion

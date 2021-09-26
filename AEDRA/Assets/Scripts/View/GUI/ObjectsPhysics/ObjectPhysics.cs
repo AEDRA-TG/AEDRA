@@ -28,7 +28,7 @@ namespace View.GUI.ObjectsPhysics
                 Rigidbody colliderRigidBody = closeCollider.attachedRigidbody;
                 if (colliderRigidBody != null && colliderRigidBody != _gameObject.GetComponent<Rigidbody>())
                 {
-                    Vector3 forceDirection = new Vector3(colliderRigidBody.transform.position.x- _gameObject.transform.position.x, colliderRigidBody.transform.position.y- _gameObject.transform.position.y,0);
+                    Vector3 forceDirection = new Vector3(colliderRigidBody.transform.localPosition.x- _gameObject.transform.localPosition.x,0, colliderRigidBody.transform.localPosition.z- _gameObject.transform.localPosition.z);
                     AddForce(colliderRigidBody.gameObject, forceDirection , Constants.HorizontalForce * Constants.MinimalNodeDistance, ForceMode.Force);
                 }
             }
@@ -50,7 +50,7 @@ namespace View.GUI.ObjectsPhysics
             foreach(Collider closeCollider in Physics.OverlapSphere(_gameObject.transform.position, Constants.MinimalNodeDistance)){
                 Rigidbody closeRigidBody = closeCollider.attachedRigidbody;
                 if(closeRigidBody != null && closeRigidBody != _gameObject.GetComponent<Rigidbody>()){
-                    Vector3 forceDirection = new Vector3(closeCollider.transform.position.x - _gameObject.transform.position.x, 0, 0);
+                    Vector3 forceDirection = new Vector3(closeCollider.transform.localPosition.x - _gameObject.transform.localPosition.x, 0, 0);
                     AddForce(closeRigidBody.gameObject, forceDirection, Constants.HorizontalForce, ForceMode.Force);
                 }
             }
@@ -63,9 +63,11 @@ namespace View.GUI.ObjectsPhysics
             BinarySearchNodeDTO dto = _gameObject.GetComponent<ProjectedObject>().Dto as BinarySearchNodeDTO;
             if(dto.ParentId != null){
                 GameObject parent = GameObject.Find(Constants.NodeName + dto.ParentId);
-                _gameObject.transform.position= new Vector3(_gameObject.transform.position.x, parent.transform.position.y - Constants.VerticalNodeTreeDistance,parent.transform.position.z);
+                //Update children position so children will have the same parent deep
+                _gameObject.transform.localPosition = new Vector3(_gameObject.transform.localPosition.x, parent.transform.localPosition.y - Constants.VerticalNodeTreeDistance, parent.transform.localPosition.z);
+                
                 BinarySearchNodeDTO parentDTO = parent.GetComponent<ProjectedObject>()?.Dto as BinarySearchNodeDTO;
-                Vector3 distanceToParent = _gameObject.transform.position- parent.transform.position;
+                Vector3 distanceToParent = _gameObject.transform.localPosition- parent.transform.localPosition;
                 if(Mathf.Abs(distanceToParent.x) < Constants.HorizontalChildToParentDistance){
                     Vector3 forceParentDirection;
                     Vector3 forceDirection;
@@ -101,8 +103,8 @@ namespace View.GUI.ObjectsPhysics
                 rightChild = GameObject.Find(Constants.NodeName + dto.RightChild);
             }
             if(leftChild != null && rightChild != null){
-                float distanceLeftToParent = Mathf.Sqrt(Mathf.Pow(leftChild.transform.position.x - _gameObject.transform.position.x, 2));
-                float distanceRightToParent = Mathf.Sqrt(Mathf.Pow(rightChild.transform.position.x - _gameObject.transform.position.x, 2));
+                float distanceLeftToParent = Mathf.Sqrt(Mathf.Pow(leftChild.transform.localPosition.x - _gameObject.transform.localPosition.x, 2));
+                float distanceRightToParent = Mathf.Sqrt(Mathf.Pow(rightChild.transform.localPosition.x - _gameObject.transform.localPosition.x, 2));
                 float maxHorizontalDistanceToParent = Mathf.Max(distanceLeftToParent, distanceRightToParent);
                 if(Mathf.Abs(maxHorizontalDistanceToParent - distanceLeftToParent) > 0.5){
                     AddForce(leftChild, new Vector3(-1, 0,0), Constants.MinimalHorizontalForce, ForceMode.Force);
