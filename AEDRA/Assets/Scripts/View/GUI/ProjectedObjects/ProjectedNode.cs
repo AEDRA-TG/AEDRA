@@ -18,11 +18,10 @@ namespace View.GUI.ProjectedObjects
 
         public void Update()
         {
-            gameObject.transform.rotation = Quaternion.identity;
             if(base.Dto != null){
                 base.Dto.Coordinates.X = gameObject.transform.localPosition.x;
-                base.Dto.Coordinates.Y = gameObject.transform.localPosition.y;
-                base.Dto.Coordinates.Z = gameObject.transform.localPosition.z;
+                base.Dto.Coordinates.Y = gameObject.transform.localPosition.z;
+                base.Dto.Coordinates.Z = gameObject.transform.localPosition.y;
                 Command command = new UpdateCommand(base.Dto);
                 CommandController.GetInstance().Invoke(command);
             }
@@ -33,11 +32,13 @@ namespace View.GUI.ProjectedObjects
         /// This method is used to control physics on an object
         /// </summary>
         public void FixedUpdate(){
-            if(base.Dto is BinarySearchNodeDTO){
-                base._objectPhysics.ApplyBinaryTreePhysics();
-            }
-            else{
-                base._objectPhysics.ApplyGraphPhysics();
+            if(IsCreated){
+                if(base.Dto is BinarySearchNodeDTO){
+                    //base._objectPhysics.ApplyBinaryTreePhysics();
+                }
+                else{
+                    base._objectPhysics.ApplyGraphPhysics();
+                }
             }
             //TODO: Cambiar la forma en la que se identifica el tipo de nodo
         }

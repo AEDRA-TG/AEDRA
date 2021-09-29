@@ -10,6 +10,20 @@ namespace Utils
     public static class Constants
     {
         /// <summary>
+        /// This section contains file and prefab paths
+        /// </summary>
+        #region PATHS
+
+        public static string DataPath = Application.persistentDataPath + "/";
+        public static string ConstantsStreamingFilePath = Application.streamingAssetsPath + "/ConfigFiles/Variables.json";
+        public static string ConstantsFilePath = Application.persistentDataPath + "/Variables.json";
+        public static string TargetsStreamingFilePath = Application.streamingAssetsPath + "/ConfigFiles/Targets.json";
+        public static string TargetsFilePath = Application.persistentDataPath + "/Targets.json";
+        public const string PrefabPath = "Prefabs/ProjectedObjects/";
+
+        #endregion
+
+        /// <summary>
         /// Default value for the animation duration
         /// </summary>
         public const float AnimationTime = 1;
@@ -37,23 +51,9 @@ namespace Utils
         #endregion
 
         /// <summary>
-        /// This section contains file and prefab paths
-        /// </summary>
-        #region PATHS
-
-        public static string DataPath = Application.persistentDataPath + "/";
-        public static string ConstantsStreamingFilePath = Application.streamingAssetsPath + "/ConfigFiles/Variables.json";
-        public static string ConstantsFilePath = Application.persistentDataPath + "/Variables.json";
-        public static string TargetsStreamingFilePath = Application.streamingAssetsPath + "/ConfigFiles/Targets.json";
-        public static string TargetsFilePath = Application.persistentDataPath + "/Targets.json";
-        public const string PrefabPath = "Prefabs/ProjectedObjects/";
-
-        #endregion
-
-        /// <summary>
         /// Global color of all buttons in the app
         /// </summary>
-        public static Color GlobalColor = Utilities.LoadGlobalColor();
+        public static Color GlobalColor;
 
         public const int MaxWidth = 10;
         public const int MaxHeight = 10;

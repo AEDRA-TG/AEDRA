@@ -21,11 +21,11 @@ namespace View.Animations
                 //TODO: check this logic
                 ProjectedObject obj = structureProjection.CreateObject(dto);
                 if(obj.GetType() == typeof(ProjectedNode)){
-                    Vector3 coordinates = new Vector3(dto.Coordinates.X, dto.Coordinates.Y, dto.Coordinates.Z);
+                    Vector3 coordinates = new Vector3(dto.Coordinates.X, dto.Coordinates.Z, dto.Coordinates.Y);
+                    Debug.Log("Cor: " + coordinates);
                     obj.Move(coordinates);
-                }else{
-                    obj.IsCreated = true;
                 }
+                obj.IsCreated = true;
                 //TODO: review how to change this value
                 obj.AnimationTime = 0;
                 animationList.Append(obj.Animations[dto.Operation]());
