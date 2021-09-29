@@ -33,7 +33,7 @@ namespace Observer
         /// </summary>
         public void OnEnable()
         {
-            ThemeController.changeColorDelegate += ChangeColor;
+            ThemeChooserEventController.changeColorDelegate += ChangeColor;
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace Observer
         /// </summary>
         public void OnDisable()
         {
-            ThemeController.changeColorDelegate -= ChangeColor;
+            ThemeChooserEventController.changeColorDelegate -= ChangeColor;
         }
     }
 }

@@ -10,10 +10,6 @@ namespace Utils
     public static class Constants
     {
         /// <summary>
-        /// Global color of all buttons in the app
-        /// </summary>
-        public static Color GlobalColor = Utilities.LoadGlobalColor();
-        /// <summary>
         /// Default value for the animation duration
         /// </summary>
         public const float AnimationTime = 1;
@@ -37,7 +33,7 @@ namespace Utils
         public const string TargetListParent = "Content";
 
         public const string ReferencePointName = "ReferencePoint";
-
+        public const string ChooserName = "Chooser";
         #endregion
 
         /// <summary>
@@ -53,6 +49,11 @@ namespace Utils
         public const string PrefabPath = "Prefabs/ProjectedObjects/";
 
         #endregion
+
+        /// <summary>
+        /// Global color of all buttons in the app
+        /// </summary>
+        public static Color GlobalColor = Utilities.LoadGlobalColor();
 
         public const int MaxWidth = 10;
         public const int MaxHeight = 10;

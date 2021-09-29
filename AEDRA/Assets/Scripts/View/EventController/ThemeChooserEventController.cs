@@ -9,7 +9,7 @@ namespace Controller
     /// <summary>
     /// Class to manage the colors of the aplication
     /// </summary>
-    public class ThemeController : MonoBehaviour
+    public class ThemeChooserEventController : MonoBehaviour
     {
         /// <summary>
         /// List of the possible colors that the user can use
@@ -26,19 +26,24 @@ namespace Controller
         /// </summary>
         public static ChangeColorDelegate changeColorDelegate;
 
+        /// <summary>
+        /// Atribute to save the actual selected color by user
+        /// </summary>
+        private int _actualColor;
+
         public void Awake() {
             _colors = new List<Color>();
         }
 
         public void Start()
         {
-            _colors.Add(new Color(0.4156863f, 0.07450981f, 0.8313726f, 0.7058824f));
-            _colors.Add(new Color(0f, 0.5921569f, 1f, 0.7058824f));
-            _colors.Add(new Color(0.509804f, 0.509804f, 0.509804f, 0.7058824f));
-            _colors.Add(new Color(0.1372549f, 0.9098039f, 0.6666667f, 0.7058824f));
-            GameObject acceptButton = GameObject.Find("AcceptButton");
+            Transform chooser = gameObject.transform.Find(Constants.ChooserName);
+            for(int i = 2; i < chooser.childCount; i++){
+                _colors.Add(chooser.GetChild(i).GetComponent<Image>().color);
+            }
+            /*GameObject acceptButton = GameObject.Find("AcceptButton");
             acceptButton = acceptButton.transform.GetChild(0).gameObject;
-            acceptButton.GetComponent<Image>().color = Constants.GlobalColor;
+            acceptButton.GetComponent<Image>().color = Constants.GlobalColor;*/
         }
 
         /// <summary>
@@ -47,10 +52,9 @@ namespace Controller
         /// <param name="idColor">Index of the selected color by the user</param>
         public void ChangeColor(int idColor)
         {
+            _actualColor = idColor;
             GameObject acceptButton = GameObject.Find("AcceptButton");
-            acceptButton = acceptButton.transform.GetChild(0).gameObject;
             acceptButton.GetComponent<Image>().color = _colors[idColor];
-            Utilities.SaveGlobalColor(_colors[idColor]);
         }
 
         /// <summary>
@@ -58,17 +62,12 @@ namespace Controller
         /// </summary>
         public void ChangeGlobalColor()
         {
+            Utilities.SaveGlobalColor(_colors[_actualColor]);
             changeColorDelegate?.Invoke();
-            CloseThemeChooser();
         }
 
-        /// <summary>
-        /// Method to close the theme chooser
-        /// </summary>
-        public void CloseThemeChooser()
-        {
-            GameObject themeChooser = GameObject.Find("ThemeChooser");
-            Destroy(themeChooser);
+        public void ActivateThemeChooser(bool status){
+            gameObject.SetActive(status);
         }
 
     }
