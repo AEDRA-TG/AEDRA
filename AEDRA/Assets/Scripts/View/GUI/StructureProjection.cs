@@ -95,6 +95,11 @@ namespace View.GUI
             prefab.name = dto.GetUnityId();
             ProjectedObject createdObject = prefab.GetComponent<ProjectedObject>();
             createdObject.SetDTO(dto);
+
+            // Activate selectable object if is Graph element
+            if(dto is GraphNodeDTO){
+                createdObject.SetSelectable(true);
+            }
             ProjectedObjects.Add(createdObject);
             createdObject.PositionObject();
             return createdObject;
