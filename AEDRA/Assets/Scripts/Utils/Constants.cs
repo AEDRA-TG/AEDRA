@@ -35,6 +35,8 @@ namespace Utils
         public const string TooltipName = "Tooltip";
         public const string MenusParentName = "ProjectionLayout";
         public const string TargetListParent = "Content";
+        public const string BackOptionsMenuParent = "BackButton";
+
         #endregion
 
         /// <summary>
