@@ -96,5 +96,9 @@ namespace Utils
         public const float CollapseFadeDuration = 0;
 
         #endregion
+
+        #region UNITY TAGS
+        public const string TagBackSubMenu = "BackSubMenu";
+        #endregion
     }
 }

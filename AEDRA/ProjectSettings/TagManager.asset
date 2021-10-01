@@ -7,6 +7,7 @@ TagManager:
   - Node
   - SubMenu
   - Input
+  - BackSubMenu
   layers:
   - Default
   - TransparentFX
