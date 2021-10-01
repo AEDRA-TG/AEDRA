@@ -86,6 +86,8 @@ namespace Observer
 
                 projection = new GameObject(Constants.ObjectsParentName, typeof(StructureProjection));
                 projection.transform.parent = target;
+                projection.transform.localScale = Vector3.one;
+                projection.transform.localRotation = Quaternion.identity;
                 projection.transform.localPosition = Vector3.zero;
             }
         }

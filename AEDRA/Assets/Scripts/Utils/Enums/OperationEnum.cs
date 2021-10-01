@@ -10,6 +10,7 @@ namespace Utils.Enums
         ConnectObjects,
         TraversalObjects,
         CreateDataStructure,
-        UpdateObjects
+        UpdateObjects,
+        Algorithm
     }
 }

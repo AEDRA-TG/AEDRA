@@ -4,6 +4,7 @@ using UnityEngine;
 using Utils;
 using Utils.Enums;
 using View.Animations;
+using View.Animations.Algorithms;
 using View.GUI.ProjectedObjects;
 
 namespace View.GUI
@@ -54,7 +55,8 @@ namespace View.GUI
                 { OperationEnum.ConnectObjects, new ConnectNodesAnimation()},
                 { OperationEnum.TraversalObjects, new TraversalAnimation() },
                 { OperationEnum.CreateDataStructure, new CreateDataStructureAnimation() },
-                { OperationEnum.UpdateObjects, new UpdateAnimation() }
+                { OperationEnum.UpdateObjects, new UpdateAnimation() },
+                { OperationEnum.Algorithm, new AlgorithmAnimation()}
             };
             _referencePoint = GameObject.Find(Constants.ReferencePointName).transform;
         }
@@ -91,7 +93,9 @@ namespace View.GUI
             string prefabPath = Constants.PrefabPath + dto.Name;
             GameObject prefab = Resources.Load(prefabPath) as GameObject;
             prefab = Instantiate(prefab,position,Quaternion.identity,this.transform);
+            Debug.Log("POS: "+position);
             prefab.transform.localPosition = position;
+            prefab.transform.localRotation = Quaternion.identity;
             prefab.name = dto.GetUnityId();
             ProjectedObject createdObject = prefab.GetComponent<ProjectedObject>();
             createdObject.SetDTO(dto);
@@ -101,7 +105,6 @@ namespace View.GUI
                 createdObject.SetSelectable(true);
             }
             ProjectedObjects.Add(createdObject);
-            createdObject.PositionObject();
             return createdObject;
         }
 
@@ -131,7 +134,7 @@ namespace View.GUI
         /// <param name="dto">The information of the new object</param>
         /// <returns>Coordinates to instanciate the object</returns>
         public Vector3 CalculateInitialPosition(ElementDTO dto){
-            //Calcular las coordenadas¿
+            //Calcular las coordenadas
             Vector3 objectPosition;
             if(dto is BinarySearchNodeDTO binaryDTO){
                 if(binaryDTO.ParentId == null){

@@ -38,7 +38,6 @@ namespace View.GUI.ObjectsPhysics
         /// Method that defines physics restrictions when data structure is binary search tree
         /// </summary>
         public void ApplyBinaryTreePhysics(){
-            this.PositionObject();
             this.RepulseHorizontal();
             this.CheckHorizontalToParentDistance();
             this.CheckHorizontalChildsDistance();

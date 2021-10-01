@@ -224,5 +224,9 @@ namespace Model.GraphModel
                 NotifyNode(node.Id, AnimationEnum.UpdateAnimation);
             }
         }
+
+        public override void DoAlgorithm(AlgorithmEnum algorithmName, ElementDTO data = null)
+        {
+        }
     }
 }

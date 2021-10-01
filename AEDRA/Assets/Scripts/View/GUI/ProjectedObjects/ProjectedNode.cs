@@ -32,13 +32,11 @@ namespace View.GUI.ProjectedObjects
         /// This method is used to control physics on an object
         /// </summary>
         public void FixedUpdate(){
-            if(IsCreated){
-                if(base.Dto is BinarySearchNodeDTO){
-                    //base._objectPhysics.ApplyBinaryTreePhysics();
-                }
-                else{
-                    base._objectPhysics.ApplyGraphPhysics();
-                }
+            if(base.Dto is BinarySearchNodeDTO){
+                base._objectPhysics.ApplyBinaryTreePhysics();
+            }
+            else{
+                base._objectPhysics.ApplyGraphPhysics();
             }
             //TODO: Cambiar la forma en la que se identifica el tipo de nodo
         }
