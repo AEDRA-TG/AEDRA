@@ -78,7 +78,8 @@ namespace View.EventController
             // Instantiate structure if is the first time detecting the target
             if(structureProjection==null){
                 structureProjection = new GameObject(Constants.ObjectsParentName, typeof(StructureProjection));
-                structureProjection.transform.parent = GameObject.Find(targetParameter.GetTargetName()).transform;
+                structureProjection.transform.parent = GameObject.Find(targetParameter.GetTargetName()).transform.Find(Constants.ReferencePointName).transform;
+                structureProjection.transform.localPosition = Vector3.zero;
             }
             // Load new structure 
             if(_activeStructure != targetParameter.GetStructure()){

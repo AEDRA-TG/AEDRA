@@ -45,6 +45,13 @@ namespace Model.Common
         public abstract void DoTraversal(TraversalEnum traversalName, ElementDTO data = null);
 
         /// <summary>
+        /// Method to do algorithm on a data structure
+        /// </summary>
+        /// <param name="algorithmName">Name of the algorithm that will be executed on the data structure</param>
+        /// <param name="data">Optional parameter with the required data to execute the algorithm</param>
+        public abstract void DoAlgorithm(AlgorithmEnum algorithmName, ElementDTO data = null);
+
+        /// <summary>
         /// Method to Notify observer that the specified operation has completed execution
         /// </summary>
         /// <param name="element"> Element that was modified</param>

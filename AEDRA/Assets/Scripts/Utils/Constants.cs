@@ -10,9 +10,19 @@ namespace Utils
     public static class Constants
     {
         /// <summary>
-        /// Global color of all buttons in the app
+        /// This section contains file and prefab paths
         /// </summary>
-        public static Color GlobalColor = Utilities.LoadGlobalColor();
+        #region PATHS
+
+        public static string DataPath = Application.persistentDataPath + "/";
+        public static string ConstantsStreamingFilePath = Application.streamingAssetsPath + "/ConfigFiles/Variables.json";
+        public static string ConstantsFilePath = Application.persistentDataPath + "/Variables.json";
+        public static string TargetsStreamingFilePath = Application.streamingAssetsPath + "/ConfigFiles/Targets.json";
+        public static string TargetsFilePath = Application.persistentDataPath + "/Targets.json";
+        public const string PrefabPath = "Prefabs/ProjectedObjects/";
+
+        #endregion
+
         /// <summary>
         /// Default value for the animation duration
         /// </summary>
@@ -35,23 +45,17 @@ namespace Utils
         public const string TooltipName = "Tooltip";
         public const string MenusParentName = "ProjectionLayout";
         public const string TargetListParent = "Content";
+
+        public const string ReferencePointName = "ReferencePoint";
+        public const string ChooserName = "Chooser";
         public const string BackOptionsMenuParent = "BackButton";
 
         #endregion
 
         /// <summary>
-        /// This section contains file and prefab paths
+        /// Global color of all buttons in the app
         /// </summary>
-        #region PATHS
-
-        public static string DataPath = Application.persistentDataPath + "/";
-        public static string ConstantsStreamingFilePath = Application.streamingAssetsPath + "/ConfigFiles/Variables.json";
-        public static string ConstantsFilePath = Application.persistentDataPath + "/Variables.json";
-        public static string TargetsStreamingFilePath = Application.streamingAssetsPath + "/ConfigFiles/Targets.json";
-        public static string TargetsFilePath = Application.persistentDataPath + "/Targets.json";
-        public const string PrefabPath = "Prefabs/ProjectedObjects/";
-
-        #endregion
+        public static Color GlobalColor;
 
         public const int MaxWidth = 10;
         public const int MaxHeight = 10;
@@ -62,7 +66,7 @@ namespace Utils
         public const float VerticalNodeTreeDistance = 2f;
         public const float HorizontalChildToParentDistance = 1.5f;
         public const float HorizontalForce = 5f;
-        public const float MinimalHorizontalForce = 1f;
+        public const float MinimalHorizontalForce = 2f;
         public const float MinimalNodeDistance = 2f;
 
         #endregion

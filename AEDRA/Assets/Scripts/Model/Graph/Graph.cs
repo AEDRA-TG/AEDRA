@@ -217,10 +217,16 @@ namespace Model.GraphModel
         /// <param name="element">Node information to update</param>
         public override void UpdateElement(ElementDTO element)
         {
-            GraphNode node = Nodes[element.Id];
-            node.Coordinates = element.Coordinates;
-            node.Value = element.Value;
-            NotifyNode(node.Id, AnimationEnum.UpdateAnimation);
+            if(Nodes.ContainsKey(element.Id)){
+                GraphNode node = Nodes[element.Id];
+                node.Coordinates = element.Coordinates;
+                node.Value = element.Value;
+                NotifyNode(node.Id, AnimationEnum.UpdateAnimation);
+            }
+        }
+
+        public override void DoAlgorithm(AlgorithmEnum algorithmName, ElementDTO data = null)
+        {
         }
     }
 }

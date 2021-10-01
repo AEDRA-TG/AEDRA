@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48497fc735db79c4eaff878ae72b9d64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _selectable: 1
+  _selectable: 0
 --- !u!54 &2464364532219663539
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -125,7 +125,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &8009158549139442966
 GameObject:

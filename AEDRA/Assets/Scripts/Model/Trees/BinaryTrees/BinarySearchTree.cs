@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Algorithms.Tree;
 using Model.Common;
 using Model.TreeModel.BinaryTree.Traversals;
 using SideCar.DTOs;
@@ -28,6 +29,11 @@ namespace Model.TreeModel
         /// </summary>
         private Dictionary<TraversalEnum, ITraversalTreeStrategy> _traversals;
 
+        /// <summary>
+        /// Dictionary to save all the algorithms implementations
+        /// </summary>
+        private Dictionary<AlgorithmEnum, ITreeAlgorithmStrategy> _algorithms;
+
         public BinarySearchTree(){
             this.NodesCount = 0;
             this.Root = null;
@@ -35,6 +41,10 @@ namespace Model.TreeModel
                 {TraversalEnum.TreePreOrder, new PreOrderTraversalStrategy()},
                 {TraversalEnum.TreeInOrder, new InOrderTraversalStrategy()},
                 {TraversalEnum.TreePostOrder, new PostOrderTraversalStrategy()}
+            };
+
+            this._algorithms = new Dictionary<AlgorithmEnum, ITreeAlgorithmStrategy>(){
+                {AlgorithmEnum.BinarySearch, new BinarySearchAlgorithmStrategy()}
             };
         }
 
@@ -108,6 +118,7 @@ namespace Model.TreeModel
         /// Method to do a traversal on the tree
         /// </summary>
         /// <param name="traversalName">Enum of the traversal to execute</param>
+        /// <param name="data">Optional data for the traversal</param>
         public override void DoTraversal(TraversalEnum traversalName, ElementDTO data = null)
         {
             this._traversals[traversalName].DoTraversal(this);
@@ -124,6 +135,16 @@ namespace Model.TreeModel
         public override void UpdateElement(ElementDTO element)
         {
             //TODO: ver que hacer con este método
+        }
+
+        /// <summary>
+        /// Method to do an algorithm on the tree
+        /// </summary>
+        /// <param name="algorithmName">Enum of the algorithm to execute</param>
+        /// <param name="data">Optional information to required by the algorithm</param>
+        public override void DoAlgorithm(AlgorithmEnum algorithmName, ElementDTO data = null)
+        {
+            this._algorithms[algorithmName].DoAlgorithm(this, data);
         }
     }
 }

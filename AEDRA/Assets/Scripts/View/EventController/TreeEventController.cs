@@ -101,5 +101,16 @@ namespace View.EventController
             DoTraversalCommand traversalCommand = new DoTraversalCommand(TraversalEnum.TreePostOrder,null);
             CommandController.GetInstance().Invoke(traversalCommand);
         }
+
+        /// <summary>
+        /// Method to detect when the user taps on search value
+        /// </summary>
+        public void OnTouchSearchValue(){
+            //!!TODO: this should accept other types of values
+            int value = Int32.Parse(FindObjectOfType<InputField>().text);
+            ElementDTO elementToSearch = new BinarySearchNodeDTO(0, value, null, true, null, null);
+            DoAlgorithmCommand algorithmCommand = new DoAlgorithmCommand(AlgorithmEnum.BinarySearch,elementToSearch);
+            CommandController.GetInstance().Invoke(algorithmCommand);
+        }
     }
 }

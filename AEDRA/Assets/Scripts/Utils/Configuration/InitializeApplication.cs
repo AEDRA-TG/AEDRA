@@ -36,6 +36,7 @@ namespace Utils.Configuration
                 while(!fileRequest.isDone){}
                 File.WriteAllBytes(Constants.TargetsFilePath, fileRequest.downloadHandler.data);
             }
+            Constants.GlobalColor = Utilities.LoadGlobalColor();
         }
     }
 }

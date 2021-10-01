@@ -78,14 +78,12 @@ namespace Utils {
         /// </summary>
         /// <returns>The Unity Color retrieved</returns>
         public static Color LoadGlobalColor(){
+            Color color = default;
             if(File.Exists(Constants.ConstantsFilePath)){
                 JObject map = LoadJSONKey(Constants.ConstantsFilePath,"globalColor");
-                Color color = new Color((float)map["r"],(float)map["g"],(float)map["b"],(float)map["a"]);
-                return color;
+                color = new Color((float)map["r"],(float)map["g"],(float)map["b"],(float)map["a"]);
             }
-            else{
-                return Color.gray;
-            }
+            return color;
         }
 
         /// <summary>
@@ -102,6 +100,5 @@ namespace Utils {
             SaveJSONKey(Constants.ConstantsFilePath,"globalColor",colorData);
             Constants.GlobalColor = color;
         }
-
     }
 }

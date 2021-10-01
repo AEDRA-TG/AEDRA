@@ -5,6 +5,7 @@ using View.GUI.ProjectedObjects;
 using System.Collections.Generic;
 using Utils.Enums;
 using UnityEngine.UI;
+using Utils;
 
 namespace View.EventController
 {
@@ -81,12 +82,28 @@ namespace View.EventController
         /// </summary>
         public void OnTouchAddNode()
         {
+            bool isObjectSelected = false;
+            int selectedObjectId = -1;
+            List<ProjectedObject> objs = _selectionController.GetSelectedObjects();
+            if (objs.Count == 1 && objs[0].GetType() == typeof(ProjectedNode))
+            {
+                isObjectSelected = true;
+                selectedObjectId = objs[0].Dto.Id;
+            }
             string value = FindObjectOfType<InputField>().text;
             //TODO: Obtener el dto de los datos de la pantalla
             List<int> neighbors = new List<int>();
             GraphNodeDTO nodeDTO = new GraphNodeDTO(0, value, neighbors);
             AddElementCommand addCommand = new AddElementCommand(nodeDTO);
             CommandController.GetInstance().Invoke(addCommand);
+            if(isObjectSelected){
+                GameObject structureProjection = GameObject.Find(Constants.ObjectsParentName);
+                GameObject createdNode = structureProjection.transform.GetChild(structureProjection.transform.childCount-1).gameObject;
+
+                EdgeDTO edgeDTO = new EdgeDTO(0, 0, selectedObjectId, createdNode.GetComponent<ProjectedNode>().Dto.Id);
+                ConnectElementsCommand connectCommand = new ConnectElementsCommand(edgeDTO);
+                CommandController.GetInstance().Invoke(connectCommand);
+            }
         }
 
         /// <summary>
@@ -94,17 +111,13 @@ namespace View.EventController
         /// </summary>
         public void OnTouchDeleteNode()
         {
-            List<ProjectedObject> objs = _selectionController.GetSelectedObjects();
-            if (objs.Count == 1 && objs[0].GetType() == typeof(ProjectedNode))
-            {
-                    GraphNodeDTO nodeDTO = (GraphNodeDTO)objs[0].Dto;
+            List<ProjectedObject> objs = new List<ProjectedObject>(_selectionController.GetSelectedObjects());
+            foreach(ProjectedObject selectedObject in objs){
+                if(selectedObject.GetType() == typeof(ProjectedNode)){
+                    GraphNodeDTO nodeDTO = (GraphNodeDTO)selectedObject.Dto;
                     DeleteElementCommand deleteCommand = new DeleteElementCommand(nodeDTO);
                     CommandController.GetInstance().Invoke(deleteCommand);
-            }
-            else
-            {
-                //TODO: delete this
-                Debug.Log("Numero de nodos seleccionados inválido");
+                }
             }
         }
 
