@@ -33,9 +33,10 @@ namespace View.EventController
         /// </summary>
         public static event Action<List<ProjectedObject>> UpdateMenu;
 
-        // Observer event to notify selection objects
+        /// <summary>
+        /// Observer event to notify when user taps on the screen
         /// </summary>
-        public static event Action OnEmptyTouch; 
+        public static event Action OnEmptyTouch;
 
 
         public void Awake(){
@@ -54,10 +55,8 @@ namespace View.EventController
                 }
                 UpdateMenu?.Invoke(this._selectedObjects);
             }
-           
         }
 
-        
         public List<ProjectedObject> GetSelectedObjects(){
             return _selectedObjects;
         }
