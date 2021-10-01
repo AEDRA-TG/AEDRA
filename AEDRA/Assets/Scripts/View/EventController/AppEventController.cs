@@ -26,6 +26,11 @@ namespace View.EventController
         protected MenuEnum _activeSubMenu;
 
         /// <summary>
+        /// Id of the previous sub menu that was visible to user
+        /// </summary>
+        protected MenuEnum _previousActiveSubMenu;
+
+        /// <summary>
         /// Game Object with the actual structure menu
         /// </summary>
         private GameObject _activeMenu;
@@ -34,6 +39,12 @@ namespace View.EventController
         /// Id of the actual projected data structure
         /// </summary>
         private StructureEnum _activeStructure;
+
+        /// <summary>
+        /// Indicates if an structure is projected
+        /// </summary>
+        private bool _hasProjectedStructure;
+
 
         //TODO: regañar a Andrés
         public void Update(){
@@ -59,15 +70,18 @@ namespace View.EventController
         /// </summary>
         public void OnTargetDetected(TargetParameter targetParameter){
             GameObject structureProjection = GameObject.Find(Constants.ObjectsParentName);
+            // Destroy existing structure when detecting a new target
             if(_activeStructure != targetParameter.GetStructure()){
                 Destroy(structureProjection);
                 structureProjection = null;
             }
+            // Instantiate structure if is the first time detecting the target
             if(structureProjection==null){
                 structureProjection = new GameObject(Constants.ObjectsParentName, typeof(StructureProjection));
                 structureProjection.transform.parent = GameObject.Find(targetParameter.GetTargetName()).transform.Find(Constants.ReferencePointName).transform;
                 structureProjection.transform.localPosition = Vector3.zero;
             }
+            // Load new structure 
             if(_activeStructure != targetParameter.GetStructure()){
                 _activeStructure = targetParameter.GetStructure();
                 Command command = new LoadCommand(_activeStructure);
@@ -80,6 +94,7 @@ namespace View.EventController
                 _activeMenu.transform.localPosition = new Vector3(0,0,0);
                 _activeMenu.transform.SetAsFirstSibling();
             }
+            _hasProjectedStructure = true;
             _activeMenu?.SetActive(true);
         }
 
@@ -87,16 +102,13 @@ namespace View.EventController
         /// Method that executes when a target is lost by the camera
         /// </summary>
         public void OnTargetLost(){
-            GameObject optionsMenu = GameObject.Find("BackButton");
-            optionsMenu.GetComponent<Button>().onClick.RemoveAllListeners();
-            ShowOptionsMenu(false);
             GameObject structureProjection = GameObject.Find(Constants.ObjectsParentName);
             _activeMenu?.SetActive(false);
             if(structureProjection != null){
                 Command command = new SaveCommand();
                 CommandController.GetInstance().Invoke(command);
             }
-            optionsMenu.GetComponent<Button>().onClick.AddListener(delegate{ChangeScene(0);});
+            _hasProjectedStructure = false;
         }
 
         /// <summary>
@@ -108,7 +120,11 @@ namespace View.EventController
             activeMenu?.SetActive(false);
             GameObject newMenu = _menus[menu.GetMenu()];
             newMenu?.SetActive(true);
+            _previousActiveSubMenu = _activeSubMenu;
             _activeSubMenu = menu.GetMenu();
+            if(_activeSubMenu.ToString().Contains("Input")){
+                ClearInputTextField();
+            }
         }
 
         /// <summary>
@@ -121,27 +137,22 @@ namespace View.EventController
             ChangeToMenu(menuEnumParameter);
         }
 
-        /// <summary>
-        /// Method to activate o desactive the options menu
-        /// </summary>
-        /// <param name="state">True if do you want to active the menu, false otherwise</param>
-        private void ShowOptionsMenu(bool state){
-            GameObject optionsMenu = GameObject.Find("BackButton");
-            optionsMenu.transform.Find("BackOptionsMenu").gameObject.SetActive(state);
-        }
 
         /// <summary>
         /// Method to detect when the user taps on back button
         /// </summary>
         public void OnTouchBackButton(){
-            if(_activeSubMenu != MenuEnum.MainMenu){
-                ChangeToMenu(MenuEnum.MainMenu);
-                SelectionController selectionController = FindObjectOfType<SelectionController>();
-                selectionController.DeselectAllObjects();
-            }
-            else{
-                ShowOptionsMenu(true);
-            }
+            GameObject backButtonMenu = GameObject.Find(Constants.BackOptionsMenuParent).transform.Find("BackOptionsMenu").gameObject;
+            backButtonMenu.SetActive(true);
+            backButtonMenu.transform.Find("CleanOption").gameObject.SetActive(_hasProjectedStructure);
+
+        }
+
+        /// <summary>
+        /// Method to change to previous menu
+        /// </summary>
+        public void OnTouchBackToPreviousMenu(){
+            ChangeToMenu(_previousActiveSubMenu);
         }
 
         /// <summary>
@@ -150,7 +161,6 @@ namespace View.EventController
         public void OnTouchCleanStructure(){
             Command command = new CleanStructureCommand();
             CommandController.GetInstance().Invoke(command);
-            ShowOptionsMenu(false);
         }
 
         /// <summary>
@@ -166,5 +176,13 @@ namespace View.EventController
             }
             SceneManager.LoadScene(nextPage);
         }
+
+        /// <summary>
+        /// Method to clear input field
+        /// </summary>
+        public void ClearInputTextField(){
+            FindObjectOfType<InputField>().text = "";
+        }
+        
     }
 }

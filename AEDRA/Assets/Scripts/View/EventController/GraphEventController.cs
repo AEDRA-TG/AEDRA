@@ -19,12 +19,6 @@ namespace View.EventController
         /// </summary>
         private SelectionController _selectionController;
 
-        public void Awake(){
-            GameObject backButton = GameObject.Find("BackButton");
-            backButton.GetComponent<Button>().onClick.RemoveAllListeners();
-            backButton.GetComponent<Button>().onClick.AddListener(base.OnTouchBackButton);
-        }
-
         public void Start(){
             _selectionController = FindObjectOfType<SelectionController>();
             base._menus = new Dictionary<MenuEnum, GameObject>
@@ -44,6 +38,7 @@ namespace View.EventController
         /// </summary>
         public void OnEnable() {
             SelectionController.UpdateMenu += UpdateMenuOnSelection;
+            SelectionController.OnEmptyTouch += OnEmptyTouch;
         }
 
         /// <summary>
@@ -51,6 +46,20 @@ namespace View.EventController
         /// </summary>
         public void OnDisable() {
             SelectionController.UpdateMenu -= UpdateMenuOnSelection;
+            SelectionController.OnEmptyTouch -= OnEmptyTouch;
+        }
+
+        /// <summary>
+        /// Hide menus when touching empty space
+        /// </summary>
+        public void OnEmptyTouch(){
+            GameObject BackOptionsMenu = GameObject.Find("BackOptionsMenu");
+            if(_activeSubMenu.ToString().Contains("Input")){
+                ChangeToMenu(MenuEnum.MainMenu);
+            }
+            if(BackOptionsMenu!=null){
+                BackOptionsMenu.SetActive(false);
+            }
         }
 
         /// <summary>
@@ -168,5 +177,7 @@ namespace View.EventController
                 Debug.Log("Numero de nodos seleccionados inválido");
             }
         }
+
+        
     }
 }

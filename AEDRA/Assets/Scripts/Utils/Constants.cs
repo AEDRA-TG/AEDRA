@@ -48,6 +48,8 @@ namespace Utils
 
         public const string ReferencePointName = "ReferencePoint";
         public const string ChooserName = "Chooser";
+        public const string BackOptionsMenuParent = "BackButton";
+
         #endregion
 
         /// <summary>

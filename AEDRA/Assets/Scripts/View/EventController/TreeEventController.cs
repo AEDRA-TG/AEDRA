@@ -15,12 +15,6 @@ namespace View.EventController
     public class TreeEventController : AppEventController
     {
 
-        public void Awake(){
-            GameObject backButton = GameObject.Find("BackButton");
-            backButton.GetComponent<Button>().onClick.RemoveAllListeners();
-            backButton.GetComponent<Button>().onClick.AddListener(base.OnTouchBackButton);
-        }
-
         public void Start(){
             base._menus = new Dictionary<MenuEnum, GameObject>{
                 {MenuEnum.MainMenu, gameObject.transform.Find("MainMenu").gameObject},
@@ -31,6 +25,33 @@ namespace View.EventController
             };
             base._activeSubMenu = MenuEnum.MainMenu;
             base.ChangeToMenu(MenuEnum.MainMenu);
+        }
+
+        /// <summary>
+        /// Graph controller subscribes to update menu event for updating UI
+        /// </summary>
+        public void OnEnable() {
+            SelectionController.OnEmptyTouch += OnEmptyTouch;
+        }
+
+        /// <summary>
+        /// Projection unsubscribes to update menu event for updating UI
+        /// </summary>
+        public void OnDisable() {
+            SelectionController.OnEmptyTouch -= OnEmptyTouch;
+        }
+
+        /// <summary>
+        /// Hide menus when touching empty space
+        /// </summary>
+        public void OnEmptyTouch(){
+            GameObject BackOptionsMenu = GameObject.Find("BackOptionsMenu");
+            if(_activeSubMenu.ToString().Contains("Input")){
+                ChangeToMenu(MenuEnum.MainMenu);
+            }
+            if(BackOptionsMenu!=null){
+                BackOptionsMenu.SetActive(false);
+            }
         }
 
         /// <summary>
