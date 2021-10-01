@@ -108,7 +108,9 @@ namespace View.GUI
             if(dto is GraphNodeDTO){
                 createdObject.SetSelectable(true);
             }
-            createdObject.PositionObject();
+            if(coordinates == null){
+                createdObject.PositionObject();
+            }
             ProjectedObjects.Add(createdObject);
             return createdObject;
         }
