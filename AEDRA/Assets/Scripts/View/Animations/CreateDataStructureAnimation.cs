@@ -19,10 +19,20 @@ namespace View.Animations
             foreach (ElementDTO dto in structureProjection.DTOs)
             {
                 //TODO: check this logic
-                ProjectedObject obj = structureProjection.CreateObject(dto);
+                Vector3 coordinates;
+                ProjectedObject obj;
+                if(dto.Coordinates != null){
+                    coordinates = new Vector3(dto.Coordinates.X, dto.Coordinates.Y, dto.Coordinates.Z);
+                    obj = structureProjection.CreateObject(dto, coordinates);
+                }
+                else{
+                    obj = structureProjection.CreateObject(dto);
+                }
                 if(obj.GetType() == typeof(ProjectedNode)){
-                    Vector3 coordinates = new Vector3(dto.Coordinates.X, dto.Coordinates.Z, dto.Coordinates.Y);
-                    obj.Move(coordinates);
+                    coordinates = new Vector3(dto.Coordinates.X, dto.Coordinates.Z, dto.Coordinates.Y);
+                    if(dto is GraphNodeDTO){
+                        obj.Move(coordinates);
+                    }
                 }
                 obj.IsCreated = true;
                 //TODO: review how to change this value

@@ -22,7 +22,7 @@ namespace Model.TreeModel
         /// Number of binary search tree nodes
         /// </summary>
         /// <value>0 when tree is created</value>
-        public int NodesCount {get; set;}
+        private int _idSequence;
 
         /// <summary>
         /// Dictionary to save all the tree traversals implementations
@@ -34,9 +34,12 @@ namespace Model.TreeModel
         /// </summary>
         private Dictionary<AlgorithmEnum, ITreeAlgorithmStrategy> _algorithms;
 
+        private Dictionary<int, Point> _nodesCoordinates;
+
         public BinarySearchTree(){
-            this.NodesCount = 0;
+            this._idSequence = 0;
             this.Root = null;
+            this._nodesCoordinates = new Dictionary<int, Point>();
             _traversals = new Dictionary<TraversalEnum, ITraversalTreeStrategy>() {
                 {TraversalEnum.TreePreOrder, new PreOrderTraversalStrategy()},
                 {TraversalEnum.TreeInOrder, new InOrderTraversalStrategy()},
@@ -54,6 +57,7 @@ namespace Model.TreeModel
         public override void CreateDataStructure()
         {
             if(this.Root != null){
+                this._nodesCoordinates[this.Root.Id] = this.Root.Coordinates;
                 CreateTree( this.Root, null);
             }
         }
@@ -69,6 +73,7 @@ namespace Model.TreeModel
             {
                 return;
             }
+            this._nodesCoordinates[node.Id] = node.Coordinates;
             node.NotifyNode(parent, node, AnimationEnum.CreateAnimation);
             if(parent!=null)
             {
@@ -84,15 +89,18 @@ namespace Model.TreeModel
         /// <param name="element">Node informatión to add</param>
         public override void AddElement(ElementDTO element)
         {
+            Point point = new Point(0,0,0);
             if(this.Root != null && this.Root.Value!=(int)element.Value){
+                _nodesCoordinates.Add(this._idSequence, point);
                 this.Root.NotifyNode(null, this.Root, AnimationEnum.PaintAnimation);
-                this.Root.AddElement(this.NodesCount, (int)element.Value);
-                this.NodesCount++;
+                this.Root.AddElement(this._idSequence, (int)element.Value, point);
+                this._idSequence++;
             }
             else if(this.Root == null){
-                this.Root = new BinarySearchTreeNode(this.NodesCount, (int)element.Value);
+                _nodesCoordinates.Add(this._idSequence, point);
+                this.Root = new BinarySearchTreeNode(this._idSequence, (int)element.Value, point);
                 this.Root.NotifyNode(null, this.Root, AnimationEnum.CreateAnimation);
-                this.NodesCount++;
+                this._idSequence++;
             }
         }
 
@@ -134,7 +142,11 @@ namespace Model.TreeModel
         /// <param name="element">Node information to update</param>
         public override void UpdateElement(ElementDTO element)
         {
-            //TODO: ver que hacer con este método
+            if(this._nodesCoordinates.ContainsKey(element.Id)){
+                this._nodesCoordinates[element.Id].X = element.Coordinates.X;
+                this._nodesCoordinates[element.Id].Y = element.Coordinates.Y;
+                this._nodesCoordinates[element.Id].Z = element.Coordinates.Z;
+            }
         }
 
         /// <summary>

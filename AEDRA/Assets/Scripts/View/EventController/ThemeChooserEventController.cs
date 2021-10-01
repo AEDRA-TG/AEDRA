@@ -32,6 +32,7 @@ namespace Controller
         private int _actualColor;
 
         public void Awake() {
+            _actualColor = -1;
             _colors = new List<Color>();
         }
 
@@ -41,9 +42,6 @@ namespace Controller
             for(int i = 2; i < chooser.childCount; i++){
                 _colors.Add(chooser.GetChild(i).GetComponent<Image>().color);
             }
-            /*GameObject acceptButton = GameObject.Find("AcceptButton");
-            acceptButton = acceptButton.transform.GetChild(0).gameObject;
-            acceptButton.GetComponent<Image>().color = Constants.GlobalColor;*/
         }
 
         /// <summary>
@@ -62,8 +60,10 @@ namespace Controller
         /// </summary>
         public void ChangeGlobalColor()
         {
-            Utilities.SaveGlobalColor(_colors[_actualColor]);
-            changeColorDelegate?.Invoke();
+            if(_actualColor != -1){
+                Utilities.SaveGlobalColor(_colors[_actualColor]);
+                changeColorDelegate?.Invoke();
+            }
         }
 
         public void ActivateThemeChooser(bool status){

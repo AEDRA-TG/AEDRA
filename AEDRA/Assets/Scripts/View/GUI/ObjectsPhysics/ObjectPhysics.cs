@@ -64,7 +64,7 @@ namespace View.GUI.ObjectsPhysics
             if(dto.ParentId != null){
                 GameObject parent = GameObject.Find(Constants.NodeName + dto.ParentId);
                 //Update children position so children will have the same parent deep
-                _gameObject.transform.localPosition = new Vector3(_gameObject.transform.localPosition.x, parent.transform.localPosition.y - Constants.VerticalNodeTreeDistance, parent.transform.localPosition.z);
+                _gameObject.transform.localPosition = new Vector3(_gameObject.transform.localPosition.x, parent.transform.localPosition.y, parent.transform.localPosition.z - Constants.VerticalNodeTreeDistance);
                 BinarySearchNodeDTO parentDTO = parent.GetComponent<ProjectedObject>()?.Dto as BinarySearchNodeDTO;
                 Vector3 distanceToParent = _gameObject.transform.localPosition- parent.transform.localPosition;
                 if(Mathf.Abs(distanceToParent.x) < Constants.HorizontalChildToParentDistance){

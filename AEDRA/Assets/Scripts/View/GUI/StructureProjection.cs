@@ -88,13 +88,18 @@ namespace View.GUI
         /// </summary>
         /// <param name="dto"></param>
         /// <returns>The projected object asociated with the created object</returns>
-        public ProjectedObject CreateObject(ElementDTO dto){
-            Vector3 position = CalculateInitialPosition(dto);
+        public ProjectedObject CreateObject(ElementDTO dto, Vector3? coordinates = null){
+            Vector3 position;
+            if(coordinates != null){
+                position = coordinates ?? default;
+            }
+            else{
+                position = CalculateInitialPosition(dto);
+            }
             string prefabPath = Constants.PrefabPath + dto.Name;
             GameObject prefab = Resources.Load(prefabPath) as GameObject;
             prefab = Instantiate(prefab,position,Quaternion.identity,this.transform);
             prefab.transform.localPosition = position;
-            prefab.transform.localRotation = Quaternion.identity;
             prefab.name = dto.GetUnityId();
             ProjectedObject createdObject = prefab.GetComponent<ProjectedObject>();
             createdObject.SetDTO(dto);
@@ -103,6 +108,7 @@ namespace View.GUI
             if(dto is GraphNodeDTO){
                 createdObject.SetSelectable(true);
             }
+            createdObject.PositionObject();
             ProjectedObjects.Add(createdObject);
             return createdObject;
         }

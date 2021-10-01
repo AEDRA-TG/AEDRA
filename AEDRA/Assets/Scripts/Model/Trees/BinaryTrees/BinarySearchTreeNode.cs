@@ -34,10 +34,10 @@ namespace Model.TreeModel
         /// <value></value>
         public Point Coordinates {get; set;}
 
-        public BinarySearchTreeNode(int id, int value){
+        public BinarySearchTreeNode(int id, int value, Point point){
             this.Id = id;
             this.Value = value;
-            this.Coordinates = new Point(0,0,0);
+            this.Coordinates = point;
         }
 
         /// <summary>
@@ -53,15 +53,15 @@ namespace Model.TreeModel
         /// </summary>
         /// <param name="id">Node id to add</param>
         /// <param name="value">Valu that new node will contain</param>
-        public void AddElement(int id, int value){
+        public void AddElement(int id, int value, Point point){
             if(value > this.Value){
                 if(this.RightChild!=null){
                     NotifyEdge(this, this.RightChild, AnimationEnum.PaintAnimation);
                     NotifyNode(this, this.RightChild, AnimationEnum.PaintAnimation);
-                    this.RightChild.AddElement(id,value);
+                    this.RightChild.AddElement(id,value, point);
                 }
                 else{
-                    this.RightChild = new BinarySearchTreeNode(id, value);
+                    this.RightChild = new BinarySearchTreeNode(id, value, point);
                     NotifyNode(null, this, AnimationEnum.UpdateAnimation);
                     NotifyNode(this,this.RightChild, AnimationEnum.CreateAnimation);
                     NotifyEdge(this, this.RightChild, AnimationEnum.CreateAnimation);
@@ -71,10 +71,10 @@ namespace Model.TreeModel
                 if(this.LeftChild!=null){
                     NotifyEdge(this, this.LeftChild, AnimationEnum.PaintAnimation);
                     NotifyNode(this, this.LeftChild, AnimationEnum.PaintAnimation);
-                    this.LeftChild.AddElement(id,value);
+                    this.LeftChild.AddElement(id,value, point);
                 }
                 else{
-                    this.LeftChild = new BinarySearchTreeNode(id, value);
+                    this.LeftChild = new BinarySearchTreeNode(id, value, point);
                     NotifyNode(null, this, AnimationEnum.UpdateAnimation);
                     NotifyNode(this,this.LeftChild, AnimationEnum.CreateAnimation);
                     NotifyEdge(this, this.LeftChild, AnimationEnum.CreateAnimation);
@@ -150,7 +150,7 @@ namespace Model.TreeModel
             }
             BinarySearchNodeDTO dto = new BinarySearchNodeDTO(node.Id, node.Value, parentId, isLeft, node.LeftChild?.Id, node.RightChild?.Id){
                 Operation = operation,
-                Coordinates = this.Coordinates
+                Coordinates = new Point(this.Coordinates.X, this.Coordinates.Y, this.Coordinates.Z)
             };
             DataStructure.Notify(dto);
         }

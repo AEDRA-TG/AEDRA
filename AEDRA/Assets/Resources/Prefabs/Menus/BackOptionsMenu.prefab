@@ -216,7 +216,8 @@ PrefabInstance:
       propertyPath: m_FontData.m_FontSize
       value: 30
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6340856021511729382, guid: f427e540d2da4164c9f6719bebf27c70, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f427e540d2da4164c9f6719bebf27c70, type: 3}
 --- !u!224 &3472296685884699457 stripped
 RectTransform:
@@ -366,7 +367,8 @@ PrefabInstance:
       propertyPath: m_FontData.m_Alignment
       value: 4
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6340856021511729382, guid: f427e540d2da4164c9f6719bebf27c70, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f427e540d2da4164c9f6719bebf27c70, type: 3}
 --- !u!224 &1394643275963383878 stripped
 RectTransform:
