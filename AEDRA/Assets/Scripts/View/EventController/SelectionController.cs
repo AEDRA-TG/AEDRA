@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Utils.Enums;
 using View.GUI.ProjectedObjects;
 
 namespace View.EventController
@@ -32,6 +33,11 @@ namespace View.EventController
         /// </summary>
         public static event Action<List<ProjectedObject>> UpdateMenu;
 
+        // Observer event to notify selection objects
+        /// </summary>
+        public static event Action OnEmptyTouch; 
+
+
         public void Awake(){
             _selectedObjects = new List<ProjectedObject>();
         }
@@ -48,8 +54,10 @@ namespace View.EventController
                 }
                 UpdateMenu?.Invoke(this._selectedObjects);
             }
+           
         }
 
+        
         public List<ProjectedObject> GetSelectedObjects(){
             return _selectedObjects;
         }
@@ -109,6 +117,9 @@ namespace View.EventController
                 if (Physics.Raycast(ray, out RaycastHit hitObject))
                 {
                     selectedObject = hitObject.transform.GetComponent<ProjectedObject>();
+                }
+                else{
+                    OnEmptyTouch?.Invoke();
                 }
             }
             return selectedObject;
