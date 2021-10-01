@@ -93,7 +93,6 @@ namespace View.GUI
             string prefabPath = Constants.PrefabPath + dto.Name;
             GameObject prefab = Resources.Load(prefabPath) as GameObject;
             prefab = Instantiate(prefab,position,Quaternion.identity,this.transform);
-            Debug.Log("POS: "+position);
             prefab.transform.localPosition = position;
             prefab.transform.localRotation = Quaternion.identity;
             prefab.name = dto.GetUnityId();
