@@ -2,6 +2,7 @@ using UnityEngine;
 using View.GUI.ProjectedObjects;
 using Utils;
 using SideCar.DTOs;
+using DG.Tweening;
 
 namespace View.GUI.ObjectsPhysics
 {
@@ -25,11 +26,10 @@ namespace View.GUI.ObjectsPhysics
         public void ApplyGraphPhysics(){
             foreach (Collider closeCollider in Physics.OverlapSphere(_gameObject.transform.position, Constants.MinimalNodeDistance))
             {
-                Rigidbody colliderRigidBody = closeCollider.attachedRigidbody;
-                if (colliderRigidBody != null && colliderRigidBody != _gameObject.GetComponent<Rigidbody>())
+                if (closeCollider != null && closeCollider != _gameObject.GetComponent<Collider>())
                 {
-                    Vector3 forceDirection = new Vector3(colliderRigidBody.transform.localPosition.x- _gameObject.transform.localPosition.x,0, colliderRigidBody.transform.localPosition.z- _gameObject.transform.localPosition.z);
-                    AddForce(colliderRigidBody.gameObject, forceDirection , Constants.HorizontalForce * Constants.MinimalNodeDistance, ForceMode.Force);
+                    Vector3 forceDirection = new Vector3(closeCollider.gameObject.transform.localPosition.x- _gameObject.transform.localPosition.x,closeCollider.gameObject.transform.localPosition.y- _gameObject.transform.localPosition.y, 0);
+                    AddForce(closeCollider.gameObject, forceDirection , Constants.HorizontalForce * Constants.MinimalNodeDistance, ForceMode.Force);
                 }
             }
         }
@@ -48,10 +48,9 @@ namespace View.GUI.ObjectsPhysics
         /// </summary>
         private void RepulseHorizontal(){
             foreach(Collider closeCollider in Physics.OverlapSphere(_gameObject.transform.position, Constants.MinimalNodeDistance)){
-                Rigidbody closeRigidBody = closeCollider.attachedRigidbody;
-                if(closeRigidBody != null && closeRigidBody != _gameObject.GetComponent<Rigidbody>()){
+                if(closeCollider != null && closeCollider != _gameObject.GetComponent<Collider>()){
                     Vector3 forceDirection = new Vector3(closeCollider.transform.localPosition.x - _gameObject.transform.localPosition.x, 0, 0);
-                    AddForce(closeRigidBody.gameObject, forceDirection, Constants.HorizontalForce, ForceMode.Force);
+                    AddForce(closeCollider.gameObject, forceDirection, Constants.HorizontalForce, ForceMode.Force);
                 }
             }
         }
@@ -131,7 +130,17 @@ namespace View.GUI.ObjectsPhysics
         }
 
         private void AddForce(GameObject objectToApply, Vector3 forceDirection, float forceToApply, ForceMode forceMode){
-            objectToApply.GetComponent<Rigidbody>()?.AddForce(forceDirection * forceToApply, forceMode);
+            Vector3 deltaMove = new Vector3(0.01f,0.01f,0.01f);
+            if(forceDirection.x < 0){
+                deltaMove.x = -0.01f;
+            }
+            if(forceDirection.y < 0){
+                deltaMove.y = -0.01f;
+            }
+            if(forceDirection.z < 0){
+                deltaMove.z = -0.01f;
+            }
+            objectToApply.transform.localPosition += deltaMove;
         }
     }
 }
