@@ -107,7 +107,7 @@ namespace View.EventController
         /// Method to obtain the object selected by the user
         /// </summary>
         /// <returns>The projected object asociated with the selected object</returns>
-        private ProjectedObject GetRayCastedObject()
+        public ProjectedObject GetRayCastedObject()
         {
             Vector3? inputPosition = GetInputPosition();
             ProjectedObject selectedObject = null;
