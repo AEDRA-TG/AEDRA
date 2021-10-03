@@ -130,15 +130,12 @@ namespace View.GUI.ObjectsPhysics
         }
 
         private void AddForce(GameObject objectToApply, Vector3 forceDirection, float forceToApply, ForceMode forceMode){
-            Vector3 deltaMove = new Vector3(0.01f,0.01f,0.01f);
+            Vector3 deltaMove = new Vector3(0.01f,0.01f,0f);
             if(forceDirection.x < 0){
                 deltaMove.x = -0.01f;
             }
             if(forceDirection.y < 0){
                 deltaMove.y = -0.01f;
-            }
-            if(forceDirection.z < 0){
-                deltaMove.z = -0.01f;
             }
             objectToApply.transform.localPosition += deltaMove;
         }
