@@ -98,8 +98,9 @@ namespace View.GUI
             }
             string prefabPath = Constants.PrefabPath + dto.Name;
             GameObject prefab = Resources.Load(prefabPath) as GameObject;
-            prefab = Instantiate(prefab,position,Quaternion.identity,this.transform);
+            prefab = Instantiate(prefab,this.transform);
             prefab.transform.localPosition = position;
+            prefab.transform.localRotation = Quaternion.Euler(90,0,0);
             prefab.name = dto.GetUnityId();
             ProjectedObject createdObject = prefab.GetComponent<ProjectedObject>();
             createdObject.SetDTO(dto);
@@ -145,15 +146,16 @@ namespace View.GUI
             Vector3 objectPosition;
             if(dto is BinarySearchNodeDTO binaryDTO){
                 if(binaryDTO.ParentId == null){
-                    objectPosition = new Vector3(_referencePoint.localPosition.x,-1.5f,_referencePoint.localPosition.y);
+                    objectPosition = new Vector3(_referencePoint.localPosition.x,_referencePoint.localPosition.y,-1.5f);
                 }
                 else{
                     GameObject parentNode = GameObject.Find(Constants.NodeName + binaryDTO.ParentId);
-                    objectPosition = new Vector3(parentNode.transform.localPosition.x, parentNode.transform.localPosition.z - Constants.VerticalNodeTreeDistance, parentNode.transform.localPosition.y);
+                    objectPosition = new Vector3(parentNode.transform.localPosition.x, parentNode.transform.localPosition.y - Constants.VerticalNodeTreeDistance, parentNode.transform.localPosition.z);
+                    Debug.Log("M: " + objectPosition);
                 }
             }
             else{
-                objectPosition = new Vector3(_referencePoint.localPosition.x,-_referencePoint.localPosition.z,_referencePoint.localPosition.y);
+                objectPosition = new Vector3(_referencePoint.localPosition.x,-_referencePoint.localPosition.y,_referencePoint.localPosition.z);
             }
             return objectPosition;
         }

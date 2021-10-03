@@ -20,8 +20,8 @@ namespace View.GUI.ProjectedObjects
         {
             if(base.Dto != null){
                 base.Dto.Coordinates.X = gameObject.transform.localPosition.x;
-                base.Dto.Coordinates.Y = gameObject.transform.localPosition.z;
-                base.Dto.Coordinates.Z = gameObject.transform.localPosition.y;
+                base.Dto.Coordinates.Y = gameObject.transform.localPosition.y;
+                base.Dto.Coordinates.Z = gameObject.transform.localPosition.z;
                 Command command = new UpdateCommand(base.Dto);
                 CommandController.GetInstance().Invoke(command);
             }
