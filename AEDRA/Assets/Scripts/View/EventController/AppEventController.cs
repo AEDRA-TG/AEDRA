@@ -8,8 +8,9 @@ using Utils.Enums;
 using Utils.Parameters;
 using View.GUI;
 
+
 namespace View.EventController
-{
+{ 
     /// <summary>
     /// Class to manage the principal event system
     /// </summary>
@@ -45,6 +46,7 @@ namespace View.EventController
         /// </summary>
         private bool _hasProjectedStructure;
 
+        
 
         //TODO: regañar a Andrés
         public void Update(){
