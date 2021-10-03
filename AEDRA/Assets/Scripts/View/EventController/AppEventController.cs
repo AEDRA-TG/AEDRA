@@ -7,10 +7,10 @@ using Utils;
 using Utils.Enums;
 using Utils.Parameters;
 using View.GUI;
-using Vuforia;
+
 
 namespace View.EventController
-{
+{ 
     /// <summary>
     /// Class to manage the principal event system
     /// </summary>
@@ -46,11 +46,7 @@ namespace View.EventController
         /// </summary>
         private bool _hasProjectedStructure;
 
-        public void Start() {
-#if UNITY_ANDROID
-                VuforiaBehaviour.Instance.CameraDevice.SetFocusMode(FocusMode.FOCUS_MODE_CONTINUOUSAUTO);        
-#endif
-            }
+        
 
         //TODO: regañar a Andrés
         public void Update(){
