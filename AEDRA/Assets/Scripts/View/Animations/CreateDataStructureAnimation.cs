@@ -29,7 +29,7 @@ namespace View.Animations
                     obj = structureProjection.CreateObject(dto);
                 }
                 if(obj.GetType() == typeof(ProjectedNode)){
-                    coordinates = new Vector3(dto.Coordinates.X, dto.Coordinates.Z, dto.Coordinates.Y);
+                    coordinates = new Vector3(dto.Coordinates.X, dto.Coordinates.Y, dto.Coordinates.Z);
                     if(dto is GraphNodeDTO){
                         obj.Move(coordinates);
                     }
