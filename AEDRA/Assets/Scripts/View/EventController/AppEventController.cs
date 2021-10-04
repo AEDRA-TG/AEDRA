@@ -88,6 +88,7 @@ namespace View.EventController
                 _activeStructure = targetParameter.GetStructure();
                 Command command = new LoadCommand(_activeStructure);
                 CommandController.GetInstance().Invoke(command);
+                //Menu
                 if(_activeMenu != null){
                     Destroy(_activeMenu);
                 }

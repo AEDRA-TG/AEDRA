@@ -22,6 +22,7 @@ namespace View.GUI.ProjectedObjects
                 base.Dto.Coordinates.X = gameObject.transform.localPosition.x;
                 base.Dto.Coordinates.Y = gameObject.transform.localPosition.y;
                 base.Dto.Coordinates.Z = gameObject.transform.localPosition.z;
+                // CAREFUL
                 Command command = new UpdateCommand(base.Dto);
                 CommandController.GetInstance().Invoke(command);
             }
