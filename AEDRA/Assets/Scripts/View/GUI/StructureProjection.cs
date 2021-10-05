@@ -70,8 +70,10 @@ namespace View.GUI
             if(dto.Operation != AnimationEnum.UpdateAnimation){
                 DTOs.Add(dto);
             }
-            GameObject obj = GameObject.Find(dto.GetUnityId());
-            obj?.GetComponent<ProjectedObject>().UpdateDTO(dto);
+            if(dto.Operation != AnimationEnum.CreateAnimation){
+                GameObject obj = GameObject.Find(dto.GetUnityId());
+                obj?.GetComponent<ProjectedObject>().UpdateDTO(dto);
+            }
         }
 
         /// <summary>

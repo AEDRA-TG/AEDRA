@@ -45,57 +45,32 @@ namespace View.EventController
         /// Indicates if an structure is projected
         /// </summary>
         private bool _hasProjectedStructure;
+        //[SerializeField]
+        //private GameObject structurePrefab;
 
-        
-
-        //TODO: regañar a Andrés
-        public void Update(){
-#if UNITY_EDITOR
-            if (Input.GetMouseButtonDown(0))
-            {
-                //ShowOptionsMenu(false);
-            }
-#elif UNITY_ANDROID
-            if (Input.touchCount > 0)
-            {
-                Touch touch = Input.GetTouch(0);
-                if (touch.phase == TouchPhase.Began)
-                {
-                   // ShowOptionsMenu(false);
-                }
-            }
-#endif
-        }
+        private GameObject structureProjection;
 
         /// <summary>
         /// Method that executes when a target is detected by the camera
         /// </summary>
         public void OnTargetDetected(TargetParameter targetParameter){
-            GameObject structureProjection = GameObject.Find(Constants.ObjectsParentName);
-            // Destroy existing structure when detecting a new target
+            Debug.Log("-->" + targetParameter.GetTargetName());
+            //1. First time detecting a target
             if(_activeStructure != targetParameter.GetStructure()){
-                Destroy(structureProjection);
-                structureProjection = null;
-            }
-            // Instantiate structure if is the first time detecting the target
-            if(structureProjection==null){
-                structureProjection = new GameObject(Constants.ObjectsParentName, typeof(StructureProjection));
-                structureProjection.transform.parent = GameObject.Find(targetParameter.GetTargetName()).transform.Find(Constants.ReferencePointName).transform;
-                structureProjection.transform.localPosition = Vector3.zero;
-            }
-            // Load new structure 
-            if(_activeStructure != targetParameter.GetStructure()){
+                //_activeStructure is 'None' by default
+                if(structureProjection != null ){
+                    //2. We are changing target - If there is an existing structure we destroy it
+                    Destroy(structureProjection);
+                    structureProjection = null;
+                }
+                //If the is no structure we create a new
+                LoadDataStructure(targetParameter.GetReferencePoint().transform);
+                //Load target
                 _activeStructure = targetParameter.GetStructure();
                 Command command = new LoadCommand(_activeStructure);
                 CommandController.GetInstance().Invoke(command);
-                //Menu
-                if(_activeMenu != null){
-                    Destroy(_activeMenu);
-                }
-                _activeMenu = Instantiate(targetParameter.GetPrefabMenu(), new Vector3(0,0,0), Quaternion.identity, GameObject.Find(Constants.MenusParentName).transform);
-                _activeMenu.name = targetParameter.GetPrefabMenu().name;
-                _activeMenu.transform.localPosition = new Vector3(0,0,0);
-                _activeMenu.transform.SetAsFirstSibling();
+                //Change to respective menu
+                LoadStructureMenu( targetParameter.GetPrefabMenu() );
             }
             _hasProjectedStructure = true;
             _activeMenu?.SetActive(true);
@@ -186,6 +161,23 @@ namespace View.EventController
         public void ClearInputTextField(){
             FindObjectOfType<InputField>().text = "";
         }
-        
+        private void LoadStructureMenu(GameObject menu){
+            //Destroy previous menu
+            if(_activeMenu != null){
+                    Destroy(_activeMenu); //could be failing
+            }
+            _activeMenu = Instantiate(menu, new Vector3(0,0,0), Quaternion.identity, GameObject.Find(Constants.MenusParentName).transform);
+            _activeMenu.name = menu.name;
+            _activeMenu.transform.localPosition = Vector3.zero;
+            _activeMenu.transform.SetAsFirstSibling();
+        }
+
+        private void LoadDataStructure(Transform unityParent){
+            GameObject prefab = Resources.Load(Constants.PrefabPath + "StructureProjection") as GameObject;
+            structureProjection = Instantiate(prefab);
+            structureProjection.transform.parent = unityParent;
+            structureProjection.transform.localPosition = Vector3.zero;
+            structureProjection.transform.localRotation = Quaternion.Euler(Vector3.zero);
+        }
     }
 }
