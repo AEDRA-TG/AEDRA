@@ -54,7 +54,6 @@ namespace View.EventController
         /// Method that executes when a target is detected by the camera
         /// </summary>
         public void OnTargetDetected(TargetParameter targetParameter){
-            Debug.Log("-->" + targetParameter.GetTargetName());
             //1. First time detecting a target
             if(_activeStructure != targetParameter.GetStructure()){
                 //_activeStructure is 'None' by default
@@ -164,7 +163,7 @@ namespace View.EventController
         private void LoadStructureMenu(GameObject menu){
             //Destroy previous menu
             if(_activeMenu != null){
-                    Destroy(_activeMenu); //could be failing
+                Destroy(_activeMenu); //could be failing
             }
             _activeMenu = Instantiate(menu, new Vector3(0,0,0), Quaternion.identity, GameObject.Find(Constants.MenusParentName).transform);
             _activeMenu.name = menu.name;

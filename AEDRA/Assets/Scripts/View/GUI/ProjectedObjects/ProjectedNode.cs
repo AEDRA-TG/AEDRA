@@ -11,22 +11,43 @@ namespace View.GUI.ProjectedObjects
     /// </summary>
     public class ProjectedNode : ProjectedObject
     {
+        private Vector3 _lastPosition;
+        private bool _isMoving;
+        private bool _isSaved;
+        private float _timer;
+
         public void Start()
         {
-
+            _lastPosition = Vector3.zero;
+            _isSaved = false;
+            _timer = 0.0f;
         }
 
         public void Update()
         {
-            if(base.Dto != null){
-                base.Dto.Coordinates.X = gameObject.transform.localPosition.x;
-                base.Dto.Coordinates.Y = gameObject.transform.localPosition.y;
-                base.Dto.Coordinates.Z = gameObject.transform.localPosition.z;
-                // CAREFUL
-                Command command = new UpdateCommand(base.Dto);
-                CommandController.GetInstance().Invoke(command);
+            // Wait 0.5 seconds
+            if(WaitTimeInterval(0.5f))
+            {
+                // If the node is not moving
+                if(Vector3.Distance(_lastPosition,transform.localPosition)==0){
+                    if(!_isSaved) {
+                        // If it's not saved
+                        if(base.Dto != null){
+                            base.Dto.Coordinates.X = gameObject.transform.localPosition.x;
+                            base.Dto.Coordinates.Y = gameObject.transform.localPosition.y;
+                            base.Dto.Coordinates.Z = gameObject.transform.localPosition.z;
+                            Debug.Log("SAVING DATA");
+                            Command command = new UpdateCommand(base.Dto);
+                            CommandController.GetInstance().Invoke(command);
+                            _isSaved = true;
+                        }
+                    }
+                }
+                else{
+                    _isSaved = false;
+                    _lastPosition = transform.localPosition;
+                }
             }
-
         }
 
         /// <summary>
@@ -67,6 +88,17 @@ namespace View.GUI.ProjectedObjects
 
         public override void Move(Vector3 coordinates){
             gameObject.transform.localPosition = coordinates;
+        }
+
+        public bool WaitTimeInterval(float waitTime){
+            _timer += Time.deltaTime;
+            bool finished = false;
+            if (_timer > waitTime)
+            {
+                _timer = 0;
+                finished = true;
+            }
+            return finished;
         }
     }
 }

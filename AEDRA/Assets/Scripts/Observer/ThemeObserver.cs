@@ -15,11 +15,6 @@ namespace Observer
             GetComponent<Image>().color = Constants.GlobalColor;
         }
 
-        public void Update()
-        {
-
-        }
-
         /// <summary>
         /// Method that is invoice when the observer is notified and it change the button color
         /// </summary>
