@@ -91,7 +91,6 @@ namespace View.EventController
                 selectedObjectId = objs[0].Dto.Id;
             }
             string value = FindObjectOfType<InputField>().text;
-            //TODO: Obtener el dto de los datos de la pantalla
             List<int> neighbors = new List<int>();
             GraphNodeDTO nodeDTO = new GraphNodeDTO(0, value, neighbors);
             AddElementCommand addCommand = new AddElementCommand(nodeDTO);
