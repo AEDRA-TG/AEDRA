@@ -82,27 +82,16 @@ namespace View.EventController
         /// </summary>
         public void OnTouchAddNode()
         {
-            bool isObjectSelected = false;
-            int selectedObjectId = -1;
             List<ProjectedObject> objs = _selectionController.GetSelectedObjects();
-            if (objs.Count == 1 && objs[0].GetType() == typeof(ProjectedNode))
-            {
-                isObjectSelected = true;
-                selectedObjectId = objs[0].Dto.Id;
-            }
             string value = FindObjectOfType<InputField>().text;
             List<int> neighbors = new List<int>();
             GraphNodeDTO nodeDTO = new GraphNodeDTO(0, value, neighbors);
+            if (objs.Count == 1 && objs[0].GetType() == typeof(ProjectedNode))
+            {
+                nodeDTO.ElementToConnectID = objs[0].Dto.Id;
+            }
             AddElementCommand addCommand = new AddElementCommand(nodeDTO);
             CommandController.GetInstance().Invoke(addCommand);
-            if(isObjectSelected){
-                GameObject structureProjection = GameObject.Find(Constants.ObjectsParentName);
-                GameObject createdNode = structureProjection.transform.GetChild(structureProjection.transform.childCount-1).gameObject;
-
-                EdgeDTO edgeDTO = new EdgeDTO(0, 0, selectedObjectId, createdNode.GetComponent<ProjectedNode>().Dto.Id);
-                ConnectElementsCommand connectCommand = new ConnectElementsCommand(edgeDTO);
-                CommandController.GetInstance().Invoke(connectCommand);
-            }
         }
 
         /// <summary>
