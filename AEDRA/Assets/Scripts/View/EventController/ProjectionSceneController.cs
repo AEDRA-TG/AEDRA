@@ -8,8 +8,9 @@ namespace View.EventController
     public class ProjectionSceneController : MonoBehaviour {
         public void Start() {
 #if UNITY_ANDROID
-                VuforiaBehaviour.Instance.CameraDevice.SetFocusMode(FocusMode.FOCUS_MODE_CONTINUOUSAUTO);    
+            VuforiaBehaviour.Instance.CameraDevice.SetFocusMode(FocusMode.FOCUS_MODE_CONTINUOUSAUTO);    
 #endif
+            Application.targetFrameRate = 30;
         }
     }
 }

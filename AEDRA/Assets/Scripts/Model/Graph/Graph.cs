@@ -66,7 +66,8 @@ namespace Model.GraphModel
         /// <param name="element"> Node that will be added to the graph </param>
         public override void AddElement(ElementDTO element)
         {
-            GraphNode node = _nodeConverter.ToEntity((GraphNodeDTO)element);
+            GraphNodeDTO nodeDTO = (GraphNodeDTO)element;
+            GraphNode node = _nodeConverter.ToEntity(nodeDTO);
             node.Id = NodesId++;
             Nodes.Add(node.Id,node);
             AdjacentMtx.Add(node.Id, new Dictionary<int, object>());
@@ -74,6 +75,9 @@ namespace Model.GraphModel
             element = _nodeConverter.ToDto(node);
             element.Operation = AnimationEnum.CreateAnimation;
             DataStructure.Notify(element);
+            if(nodeDTO.ElementToConnectID!=null){
+                ConnectElements(new EdgeDTO(0, 0, (int)nodeDTO.ElementToConnectID, node.Id));
+            }
         }
 
         /// <summary>

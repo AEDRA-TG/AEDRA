@@ -28,7 +28,7 @@ namespace View.GUI.ObjectsPhysics
             {
                 if (closeCollider != null && closeCollider != _gameObject.GetComponent<Collider>())
                 {
-                    Vector3 forceDirection = new Vector3(closeCollider.gameObject.transform.localPosition.x- _gameObject.transform.localPosition.x,0, closeCollider.gameObject.transform.localPosition.y- _gameObject.transform.localPosition.y);
+                    Vector3 forceDirection = new Vector3(closeCollider.gameObject.transform.localPosition.x- _gameObject.transform.localPosition.x,0, closeCollider.gameObject.transform.localPosition.z-_gameObject.transform.localPosition.z);
                     AddForce(closeCollider.gameObject, forceDirection);
                 }
             }
@@ -87,7 +87,7 @@ namespace View.GUI.ObjectsPhysics
         }
 
         /// <summary>
-        /// Method that separates childs at the same parent distance
+        /// Method that separates children at the same parent distance
         /// </summary>
         private void CheckHorizontalChildsDistance(){
             BinarySearchNodeDTO dto = _gameObject.GetComponent<ProjectedObject>().Dto as BinarySearchNodeDTO;
