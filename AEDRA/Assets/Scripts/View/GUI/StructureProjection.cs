@@ -70,8 +70,10 @@ namespace View.GUI
             if(dto.Operation != AnimationEnum.UpdateAnimation){
                 DTOs.Add(dto);
             }
-            GameObject obj = GameObject.Find(dto.GetUnityId());
-            obj?.GetComponent<ProjectedObject>().UpdateDTO(dto);
+            if(dto.Operation != AnimationEnum.CreateAnimation){
+                GameObject obj = GameObject.Find(dto.GetUnityId());
+                obj?.GetComponent<ProjectedObject>().UpdateDTO(dto);
+            }
         }
 
         /// <summary>
@@ -151,11 +153,10 @@ namespace View.GUI
                 else{
                     GameObject parentNode = GameObject.Find(Constants.NodeName + binaryDTO.ParentId);
                     objectPosition = new Vector3(parentNode.transform.localPosition.x, parentNode.transform.localPosition.y - Constants.VerticalNodeTreeDistance, parentNode.transform.localPosition.z);
-                    Debug.Log("M: " + objectPosition);
                 }
             }
             else{
-                objectPosition = new Vector3(_referencePoint.localPosition.x,-_referencePoint.localPosition.y,_referencePoint.localPosition.z);
+                objectPosition = new Vector3(Random.Range(-5, 5),_referencePoint.localPosition.y,Random.Range(0, -(_referencePoint.transform.localPosition.z*2)));
             }
             return objectPosition;
         }

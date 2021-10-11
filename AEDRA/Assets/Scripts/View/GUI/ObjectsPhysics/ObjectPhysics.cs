@@ -28,8 +28,8 @@ namespace View.GUI.ObjectsPhysics
             {
                 if (closeCollider != null && closeCollider != _gameObject.GetComponent<Collider>())
                 {
-                    Vector3 forceDirection = new Vector3(closeCollider.gameObject.transform.localPosition.x- _gameObject.transform.localPosition.x,closeCollider.gameObject.transform.localPosition.y- _gameObject.transform.localPosition.y, 0);
-                    AddForce(closeCollider.gameObject, forceDirection , Constants.HorizontalForce * Constants.MinimalNodeDistance, ForceMode.Force);
+                    Vector3 forceDirection = new Vector3(closeCollider.gameObject.transform.localPosition.x- _gameObject.transform.localPosition.x,0, closeCollider.gameObject.transform.localPosition.z-_gameObject.transform.localPosition.z);
+                    AddForce(closeCollider.gameObject, forceDirection);
                 }
             }
         }
@@ -50,7 +50,7 @@ namespace View.GUI.ObjectsPhysics
             foreach(Collider closeCollider in Physics.OverlapSphere(_gameObject.transform.position, Constants.MinimalNodeDistance)){
                 if(closeCollider != null && closeCollider != _gameObject.GetComponent<Collider>()){
                     Vector3 forceDirection = new Vector3(closeCollider.transform.localPosition.x - _gameObject.transform.localPosition.x, 0, 0);
-                    AddForce(closeCollider.gameObject, forceDirection, Constants.HorizontalForce, ForceMode.Force);
+                    AddForce(closeCollider.gameObject, forceDirection);
                 }
             }
         }
@@ -77,17 +77,17 @@ namespace View.GUI.ObjectsPhysics
                         forceParentDirection = new Vector3(-1,0,0);
                     }
                     if(parentDTO.ParentId != null){
-                        AddForce(parent, forceParentDirection, Constants.MinimalHorizontalForce, ForceMode.Force);
+                        AddForce(parent, forceParentDirection);
                     }
                     else{
-                        AddForce(_gameObject, forceDirection, Constants.MinimalHorizontalForce, ForceMode.Force);
+                        AddForce(_gameObject, forceDirection);
                     }
                 }
             }
         }
 
         /// <summary>
-        /// Method that separates childs at the same parent distance
+        /// Method that separates children at the same parent distance
         /// </summary>
         private void CheckHorizontalChildsDistance(){
             BinarySearchNodeDTO dto = _gameObject.GetComponent<ProjectedObject>().Dto as BinarySearchNodeDTO;
@@ -105,10 +105,10 @@ namespace View.GUI.ObjectsPhysics
                 float distanceRightToParent = Mathf.Sqrt(Mathf.Pow(rightChild.transform.localPosition.x - _gameObject.transform.localPosition.x, 2));
                 float maxHorizontalDistanceToParent = Mathf.Max(distanceLeftToParent, distanceRightToParent);
                 if(Mathf.Abs(maxHorizontalDistanceToParent - distanceLeftToParent) > 0.5){
-                    AddForce(leftChild, new Vector3(-1, 0,0), Constants.MinimalHorizontalForce, ForceMode.Force);
+                    AddForce(leftChild, new Vector3(-1, 0,0));
                 }
                 if(Mathf.Abs(maxHorizontalDistanceToParent - distanceRightToParent) > 0.5){
-                    AddForce(rightChild, new Vector3(1,0,0), Constants.MinimalHorizontalForce, ForceMode.Force);
+                    AddForce(rightChild, new Vector3(1,0,0));
                 }
             }
         }
@@ -120,24 +120,30 @@ namespace View.GUI.ObjectsPhysics
             if(_gameObject.GetComponent<ProjectedObject>().Dto is BinarySearchNodeDTO dto){
                 if(dto.ParentId != null){
                     if(dto.IsLeft){
-                        AddForce(_gameObject,new Vector3(-1,0,0), Constants.HorizontalForce, ForceMode.Impulse);
+                        AddForce(_gameObject,new Vector3(-1,0,0));
                     }
                     else{
-                        AddForce(_gameObject, new Vector3(1,0,0), Constants.HorizontalForce, ForceMode.Impulse);
+                        AddForce(_gameObject, new Vector3(1,0,0));
                     }
                 }
             }
         }
 
-        private void AddForce(GameObject objectToApply, Vector3 forceDirection, float forceToApply, ForceMode forceMode){
-            Vector3 deltaMove = new Vector3(0.01f,0.01f,0f);
+        private void AddForce(GameObject objectToMove, Vector3 forceDirection){
+            Vector3 deltaMove = new Vector3(0.00f,0.00f,00f);
             if(forceDirection.x < 0){
                 deltaMove.x = -0.01f;
             }
-            if(forceDirection.y < 0){
-                deltaMove.y = -0.01f;
+            else if(forceDirection.x > 0){
+                deltaMove.x = 0.01f;
             }
-            objectToApply.transform.localPosition += deltaMove;
+            if(forceDirection.z < 0){
+                deltaMove.z = -0.01f;
+            }
+            else if(forceDirection.z > 0){
+                deltaMove.z= 0.01f;
+            }
+            objectToMove.transform.localPosition += deltaMove;
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Model.TreeModel
         /// Number of binary search tree nodes
         /// </summary>
         /// <value>0 when tree is created</value>
-        private int _idSequence;
+        public int IdSequence {get; set;}
 
         /// <summary>
         /// Dictionary to save all the tree traversals implementations
@@ -37,7 +37,7 @@ namespace Model.TreeModel
         private Dictionary<int, Point> _nodesCoordinates;
 
         public BinarySearchTree(){
-            this._idSequence = 0;
+            this.IdSequence = 0;
             this.Root = null;
             this._nodesCoordinates = new Dictionary<int, Point>();
             _traversals = new Dictionary<TraversalEnum, ITraversalTreeStrategy>() {
@@ -91,16 +91,16 @@ namespace Model.TreeModel
         {
             Point point = new Point(0,0,0);
             if(this.Root != null && this.Root.Value!=(int)element.Value){
-                _nodesCoordinates.Add(this._idSequence, point);
+                _nodesCoordinates.Add(this.IdSequence, point);
                 this.Root.NotifyNode(null, this.Root, AnimationEnum.PaintAnimation);
-                this.Root.AddElement(this._idSequence, (int)element.Value, point);
-                this._idSequence++;
+                this.Root.AddElement(this.IdSequence, (int)element.Value, point);
+                this.IdSequence++;
             }
             else if(this.Root == null){
-                _nodesCoordinates.Add(this._idSequence, point);
-                this.Root = new BinarySearchTreeNode(this._idSequence, (int)element.Value, point);
+                _nodesCoordinates.Add(this.IdSequence, point);
+                this.Root = new BinarySearchTreeNode(this.IdSequence, (int)element.Value, point);
                 this.Root.NotifyNode(null, this.Root, AnimationEnum.CreateAnimation);
-                this._idSequence++;
+                this.IdSequence++;
             }
         }
 

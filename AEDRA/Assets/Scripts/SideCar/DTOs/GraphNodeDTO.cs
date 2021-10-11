@@ -11,6 +11,11 @@ namespace SideCar.DTOs
         /// </summary>
         public List<int> Neighbors {get; set;}
 
+        /// <summary>
+        /// Element to be connected to the new element
+        /// </summary>
+        public int? ElementToConnectID {get; set;}
+
         public GraphNodeDTO(int idNode, object value, List<int> neighbors):base(idNode, value){
             Neighbors = neighbors;
             base.Name = "Node";

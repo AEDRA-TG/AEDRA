@@ -36,6 +36,7 @@ namespace SideCar.DTOs
         /// </summary>
         public AnimationEnum Operation {get; set;}
 
+
         public ElementDTO(int id, object value){
             Id = id;
             Value = value;
