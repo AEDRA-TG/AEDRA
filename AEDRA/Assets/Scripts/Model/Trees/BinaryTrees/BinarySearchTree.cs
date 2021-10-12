@@ -154,9 +154,9 @@ namespace Model.TreeModel
         /// </summary>
         /// <param name="algorithmName">Enum of the algorithm to execute</param>
         /// <param name="data">Optional information to required by the algorithm</param>
-        public override void DoAlgorithm(AlgorithmEnum algorithmName, ElementDTO data = null)
+        public override void DoAlgorithm(AlgorithmEnum algorithmName, List<ElementDTO> data = null)
         {
-            this._algorithms[algorithmName].DoAlgorithm(this, data);
+            //this._algorithms[algorithmName].DoAlgorithm(this, data);
         }
     }
 }

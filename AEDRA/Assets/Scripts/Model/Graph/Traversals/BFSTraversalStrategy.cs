@@ -22,18 +22,19 @@ namespace Model.GraphModel.Traversals
                 Tuple<int, int> nodes = q.Dequeue();
                 int previous = nodes.Item1;
                 int current = nodes.Item2;
-                visitedMap[current] = true;
-                if(graph.AdjacentMtx[previous].ContainsKey(current)){
-                    graph.NotifyEdge(previous,current,AnimationEnum.KeepPaintAnimation);
-                }
-                graph.NotifyNode(current,AnimationEnum.KeepPaintAnimation);
+                if(!visitedMap[current]){
+                    visitedMap[current] = true;
+                    if(graph.AdjacentMtx[previous].ContainsKey(current)){
+                        graph.NotifyEdge(previous,current,AnimationEnum.KeepPaintAnimation);
+                    }
+                    graph.NotifyNode(current,AnimationEnum.KeepPaintAnimation);
 
-                foreach (int key in graph.AdjacentMtx[current].Keys)
-                {
-                    GraphNode neighboorNode = graph.Nodes[key];
-                    if(!visitedMap[neighboorNode.Id]){
-                        visitedMap[neighboorNode.Id] = true;
-                        q.Enqueue(new Tuple<int, int>(current, neighboorNode.Id));
+                    foreach (int key in graph.AdjacentMtx[current].Keys)
+                    {
+                        GraphNode neighboorNode = graph.Nodes[key];
+                        if(!visitedMap[neighboorNode.Id]){
+                            q.Enqueue(new Tuple<int, int>(current, neighboorNode.Id));
+                        }
                     }
                 }
             }

@@ -1,6 +1,7 @@
 using Model.Common;
 using Utils.Enums;
 using SideCar.DTOs;
+using System.Collections.Generic;
 
 namespace Controller
 {
@@ -17,7 +18,7 @@ namespace Controller
         /// <summary>
         /// Element that contains necessary algorithm information
         /// </summary>
-        private ElementDTO _elementDTO;
+        private List<ElementDTO> _elementDTOs;
 
         /// <summary>
         /// Name of the algorithm that will be executed
@@ -29,15 +30,15 @@ namespace Controller
         /// </summary>
         /// <param name="algorithmName">Name of the algorithm that will be executed</param>
         /// <param name="elementDTO">Information needed to execute the algorithm</param>
-        public DoAlgorithmCommand(AlgorithmEnum algorithmName, ElementDTO elementDTO){
+        public DoAlgorithmCommand(AlgorithmEnum algorithmName, List<ElementDTO> elementDTOs){
             this._dataStructure = CommandController.GetInstance().Repository.Load();
             this._algorithmName = algorithmName;
-            this._elementDTO = elementDTO;
+            this._elementDTOs = elementDTOs;
         }
 
         public override void Execute()
         {
-            this._dataStructure.DoAlgorithm(this._algorithmName, this._elementDTO);
+            this._dataStructure.DoAlgorithm(this._algorithmName, this._elementDTOs);
             base.Notify(OperationEnum.Algorithm);
         }
     }

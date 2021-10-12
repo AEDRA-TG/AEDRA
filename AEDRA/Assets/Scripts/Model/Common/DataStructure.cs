@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using SideCar.DTOs;
 using Utils.Enums;
 
@@ -49,7 +50,7 @@ namespace Model.Common
         /// </summary>
         /// <param name="algorithmName">Name of the algorithm that will be executed on the data structure</param>
         /// <param name="data">Optional parameter with the required data to execute the algorithm</param>
-        public abstract void DoAlgorithm(AlgorithmEnum algorithmName, ElementDTO data = null);
+        public abstract void DoAlgorithm(AlgorithmEnum algorithmName, List<ElementDTO> data = null);
 
         /// <summary>
         /// Method to Notify observer that the specified operation has completed execution

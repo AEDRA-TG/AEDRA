@@ -6,6 +6,7 @@ using SideCar.DTOs;
 using Newtonsoft.Json;
 using UnityEngine;
 using Model.GraphModel.Traversals;
+using Model.GraphModel.Algorithms.ShortestPath;
 
 namespace Model.GraphModel
 {
@@ -228,9 +229,12 @@ namespace Model.GraphModel
                 NotifyNode(node.Id, AnimationEnum.UpdateAnimation);
             }
         }
-
-        public override void DoAlgorithm(AlgorithmEnum algorithmName, ElementDTO data = null)
+        public override void DoAlgorithm(AlgorithmEnum algorithmName, List<ElementDTO> data = null)
         {
+            switch(algorithmName){
+                case AlgorithmEnum.Dijkstra: new DijkstraShortestPath().FindShortestPath(this, data[0], data[1]);
+                break;
+            }
         }
     }
 }
