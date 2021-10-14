@@ -21,7 +21,7 @@ namespace SideCar.DTOs
             base.Name = "Node";
         }
 
-        public override ElementDTO ConvertDTO(ElementDTO DTO)
+        public override ElementDTO UpdateProperties(ElementDTO DTO)
         {
             GraphNodeDTO converted = (GraphNodeDTO) DTO;
             this.Neighbors = converted.Neighbors;
