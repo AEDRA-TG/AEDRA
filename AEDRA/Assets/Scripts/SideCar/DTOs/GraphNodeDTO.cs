@@ -20,5 +20,20 @@ namespace SideCar.DTOs
             Neighbors = neighbors;
             base.Name = "Node";
         }
+
+        public override ElementDTO ConvertDTO(ElementDTO DTO)
+        {
+            GraphNodeDTO converted = (GraphNodeDTO) DTO;
+            this.Neighbors = converted.Neighbors;
+            this.ElementToConnectID = converted.ElementToConnectID;
+            base.Coordinates = converted.Coordinates;
+            if(DTO.Info != default){
+                base.Info = converted.Info;
+            }
+            if(DTO.Color != default){
+                base.Color = converted.Color;
+            }
+            return this;
+        }
     }
 }

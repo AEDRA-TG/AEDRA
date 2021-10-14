@@ -67,13 +67,9 @@ namespace View.GUI
         /// <param name="dto"></param>
         public void AddDto(ElementDTO dto)
         {
-            if(dto.Operation != AnimationEnum.UpdateAnimation){
-                DTOs.Add(dto);
-            }
-            if(dto.Operation != AnimationEnum.CreateAnimation){
-                GameObject obj = GameObject.Find(dto.GetUnityId());
-                obj?.GetComponent<ProjectedObject>().UpdateDTO(dto);
-            }
+            DTOs.Add(dto);
+            GameObject obj = GameObject.Find(dto.GetUnityId());
+            obj?.GetComponent<ProjectedObject>().SetDTO(dto);
         }
 
         /// <summary>

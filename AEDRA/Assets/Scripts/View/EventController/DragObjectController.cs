@@ -25,7 +25,6 @@ namespace View.EventController
                 if (target != null)
                 {
                     _isMouseDrag = true;
-                    Debug.Log("target position :" + target.transform.position);
                     //Convert world position to screen position.
                     screenPosition = Camera.main.WorldToScreenPoint(target.transform.position);
                     offset = target.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPosition.z));

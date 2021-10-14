@@ -22,20 +22,20 @@ namespace Model.GraphModel.Algorithms.ShortestPath
                 double cost = nodes.Item1;
                 int previous = nodes.Item2;
                 int current = nodes.Item3;
+
                 if(!visitedMap[current]){
                     visitedMap[current] = true;
                     if(graph.AdjacentMtx[previous].ContainsKey(current)){
                         graph.NotifyEdge(previous,current,AnimationEnum.KeepPaintAnimation);
                     }
-                    graph.NotifyNode(current,AnimationEnum.KeepPaintAnimation);
+                    graph.NotifyNode(current,AnimationEnum.KeepPaintAnimation, Color.green, "C = "+ cost );
 
                     foreach (int key in graph.AdjacentMtx[current].Keys)
                     {
                         GraphNode neighboorNode = graph.Nodes[key];
                         if(!visitedMap[neighboorNode.Id]){
                             double noVisitedCost = (double)graph.AdjacentMtx[current][neighboorNode.Id];
-                            Debug.Log("Id Node: "+ graph.Nodes[current].Value + " ID2: " + neighboorNode.Value);
-                            Debug.Log("Calculted cost: " + cost + ", " + noVisitedCost);
+                            graph.NotifyNode(neighboorNode.Id, AnimationEnum.UpdateAnimation, default, "C = " + cost + "+" + noVisitedCost);
                             heap.Add(new Tuple<double, int, int>(cost + noVisitedCost, current, neighboorNode.Id));
                         }
                     }

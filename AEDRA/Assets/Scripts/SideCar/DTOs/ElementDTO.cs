@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
 using Utils.Enums;
 
 namespace SideCar.DTOs
@@ -36,10 +39,15 @@ namespace SideCar.DTOs
         /// </summary>
         public AnimationEnum Operation {get; set;}
 
+        public Color Color {get; set;}
+
+        public string Info {get;  set;}
+
 
         public ElementDTO(int id, object value){
             Id = id;
             Value = value;
+            Info = default;
         }
 
         /// <summary>
@@ -48,6 +56,10 @@ namespace SideCar.DTOs
         /// <returns>View id of the element</returns>
         public virtual string GetUnityId(){
             return Name + "_" + Id;
+        }
+
+        public virtual ElementDTO UpdateProperties(ElementDTO DTO){
+            return this;
         }
     }
 }

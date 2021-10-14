@@ -189,10 +189,12 @@ namespace Model.GraphModel
         /// </summary>
         /// <param name="id">Id of the modified node</param>
         /// <param name="operation">Operation that was applied to node</param>
-        public void NotifyNode(int id, AnimationEnum operation){
+        public void NotifyNode(int id, AnimationEnum operation, Color color = default, string info = ""){
             GraphNode node = this.Nodes[id];
             GraphNodeDTO dto = _nodeConverter.ToDto(node);
             dto.Operation = operation;
+            dto.Color = color;
+            dto.Info = info;
             Notify(dto);
         }
 
