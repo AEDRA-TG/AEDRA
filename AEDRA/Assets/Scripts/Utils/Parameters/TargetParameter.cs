@@ -27,6 +27,8 @@ namespace Utils.Parameters
 
         [SerializeField] private GameObject _referencePoint;
 
+        [SerializeField] private TargetTypeEnum _targetType;
+
         public TargetParameter(StructureEnum structure, GameObject prefabMenu, string targetName){
             this._structure = structure;
             this._prefabMenu = prefabMenu;
@@ -62,6 +64,14 @@ namespace Utils.Parameters
 
         public GameObject GetReferencePoint(){
             return _referencePoint;
+        }
+
+        public void SetTargetType(TargetTypeEnum targetType){
+            _targetType = targetType;
+        }
+
+        public TargetTypeEnum GetTargetType(){
+            return _targetType;
         }
     }
 }

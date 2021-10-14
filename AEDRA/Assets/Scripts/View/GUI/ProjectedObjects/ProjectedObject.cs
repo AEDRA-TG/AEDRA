@@ -136,11 +136,8 @@ namespace View.GUI.ProjectedObjects
 
         virtual public void SetDTO(ElementDTO dto)
         {
-            Dto.UpdateProperties(dto);
-            if(Dto is BinarySearchNodeDTO oldDTO){
-                BinarySearchNodeDTO newDTO = dto as BinarySearchNodeDTO;
-                oldDTO.LeftChild = newDTO.LeftChild;
-                oldDTO.RightChild = newDTO.RightChild;
+            if(Dto != null){
+                Dto.UpdateProperties(dto);
             }
             else{
                 Dto = dto;

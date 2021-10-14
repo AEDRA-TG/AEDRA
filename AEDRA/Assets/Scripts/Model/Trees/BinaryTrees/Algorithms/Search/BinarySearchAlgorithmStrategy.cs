@@ -1,13 +1,12 @@
-using Model.TreeModel;
 using SideCar.DTOs;
 using Utils.Enums;
 
-namespace Algorithms.Tree
+namespace Model.TreeModel.BinaryTree.Algorithms.Search
 {
     /// <summary>
     /// Class to perform Tree Binary Search Algorithm on a Tree
     /// </summary>
-    public class BinarySearchAlgorithmStrategy : ITreeAlgorithmStrategy
+    public class BinarySearchAlgorithmStrategy : IBinaryTreeSearchStrategy
     {
         public void DoAlgorithm(BinarySearchTree tree, ElementDTO data = null)
         {

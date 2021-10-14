@@ -58,8 +58,7 @@ namespace SideCar.DTOs
             return Name + "_" + Id;
         }
 
-        public virtual ElementDTO UpdateProperties(ElementDTO DTO){
-            return this;
+        public virtual void UpdateProperties(ElementDTO DTO){
         }
     }
 }
