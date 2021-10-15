@@ -118,7 +118,7 @@ namespace View.EventController
             if (objs.Count == 2)
             {
                 if(objs[0].GetType() == typeof(ProjectedNode) && objs[1].GetType() == typeof(ProjectedNode)){
-                    EdgeDTO edgeDTO = new EdgeDTO(0, 0, objs[0].Dto.Id, objs[1].Dto.Id);
+                    EdgeDTO edgeDTO = new EdgeDTO(0, Utilities.GenerateRandomDouble(), objs[0].Dto.Id, objs[1].Dto.Id);
                     ConnectElementsCommand connectCommand = new ConnectElementsCommand(edgeDTO);
                     CommandController.GetInstance().Invoke(connectCommand);
                 }
@@ -166,6 +166,19 @@ namespace View.EventController
             }
         }
 
-        
+        public void OnTouchExecuteAlgorithm(){
+            List<ProjectedObject> objs = _selectionController.GetSelectedObjects();
+            if (objs.Count == 2)
+            {
+                if(objs[0].GetType() == typeof(ProjectedNode) && objs[1].GetType() == typeof(ProjectedNode)){
+                    DoAlgorithmCommand doAlgorithmCommand = new DoAlgorithmCommand(AlgorithmEnum.Dijkstra,new List<ElementDTO>(){objs[0].Dto, objs[1].Dto});
+                    CommandController.GetInstance().Invoke(doAlgorithmCommand);
+                }
+            }
+            else
+            {
+                Debug.Log("Numero de nodos seleccionados inválido");
+            }
+        }
     }
 }

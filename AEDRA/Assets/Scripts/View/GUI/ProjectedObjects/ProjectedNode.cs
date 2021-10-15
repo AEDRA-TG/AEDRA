@@ -36,7 +36,6 @@ namespace View.GUI.ProjectedObjects
                             base.Dto.Coordinates.X = gameObject.transform.localPosition.x;
                             base.Dto.Coordinates.Y = gameObject.transform.localPosition.y;
                             base.Dto.Coordinates.Z = gameObject.transform.localPosition.z;
-                            Debug.Log("SAVING DATA");
                             Command command = new UpdateCommand(base.Dto);
                             CommandController.GetInstance().Invoke(command);
                             _isSaved = true;
@@ -79,7 +78,7 @@ namespace View.GUI.ProjectedObjects
 
         public override Tween KeepPaintAnimation(){
             MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
-            return mesh.material.DOColor(Color.cyan,base.AnimationTime);
+            return mesh.material.DOColor(base.Dto.Color,base.AnimationTime);
         }
         public override Tween UnPaintAnimation(){
             MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
@@ -99,6 +98,18 @@ namespace View.GUI.ProjectedObjects
                 finished = true;
             }
             return finished;
+        }
+
+        public override Tween UpdateAnimation()
+        {
+            Tween tween = default;
+            if(base.Dto.Info != default){
+                Transform infoGameObject = gameObject.transform.Find("Info");
+                
+                
+                tween = infoGameObject.DOScale(0.02f, 1);
+            }
+            return tween;
         }
     }
 }

@@ -6,6 +6,7 @@ using SideCar.DTOs;
 using Newtonsoft.Json;
 using UnityEngine;
 using Model.GraphModel.Traversals;
+using Model.GraphModel.Algorithms.ShortestPath;
 
 namespace Model.GraphModel
 {
@@ -188,10 +189,12 @@ namespace Model.GraphModel
         /// </summary>
         /// <param name="id">Id of the modified node</param>
         /// <param name="operation">Operation that was applied to node</param>
-        public void NotifyNode(int id, AnimationEnum operation){
+        public void NotifyNode(int id, AnimationEnum operation, Color color = default, string info = default){
             GraphNode node = this.Nodes[id];
             GraphNodeDTO dto = _nodeConverter.ToDto(node);
             dto.Operation = operation;
+            dto.Color = color;
+            dto.Info = info;
             Notify(dto);
         }
 
@@ -210,8 +213,10 @@ namespace Model.GraphModel
             {
                 Operation = operation
             };
-            NotifyNode(start, AnimationEnum.UpdateAnimation);
-            NotifyNode(end, AnimationEnum.UpdateAnimation);
+            if(operation != AnimationEnum.KeepPaintAnimation){
+                NotifyNode(start, AnimationEnum.UpdateAnimation);
+                NotifyNode(end, AnimationEnum.UpdateAnimation);
+            }
             Notify(edge);
         }
 
@@ -228,9 +233,12 @@ namespace Model.GraphModel
                 NotifyNode(node.Id, AnimationEnum.UpdateAnimation);
             }
         }
-
-        public override void DoAlgorithm(AlgorithmEnum algorithmName, ElementDTO data = null)
+        public override void DoAlgorithm(AlgorithmEnum algorithmName, List<ElementDTO> data = null)
         {
+            switch(algorithmName){
+                case AlgorithmEnum.Dijkstra: new DijkstraShortestPath().FindShortestPath(this, data[0], data[1]);
+                break;
+            }
         }
     }
 }

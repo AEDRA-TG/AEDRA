@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using Algorithms.Tree;
 using Model.Common;
+using Model.TreeModel.BinaryTree.Algorithms.Search;
 using Model.TreeModel.BinaryTree.Traversals;
 using SideCar.DTOs;
 using Utils.Enums;
@@ -32,7 +32,7 @@ namespace Model.TreeModel
         /// <summary>
         /// Dictionary to save all the algorithms implementations
         /// </summary>
-        private Dictionary<AlgorithmEnum, ITreeAlgorithmStrategy> _algorithms;
+        private Dictionary<AlgorithmEnum, IBinaryTreeSearchStrategy> _algorithms;
 
         private Dictionary<int, Point> _nodesCoordinates;
 
@@ -46,7 +46,7 @@ namespace Model.TreeModel
                 {TraversalEnum.TreePostOrder, new PostOrderTraversalStrategy()}
             };
 
-            this._algorithms = new Dictionary<AlgorithmEnum, ITreeAlgorithmStrategy>(){
+            this._algorithms = new Dictionary<AlgorithmEnum, IBinaryTreeSearchStrategy>(){
                 {AlgorithmEnum.BinarySearch, new BinarySearchAlgorithmStrategy()}
             };
         }
@@ -154,9 +154,9 @@ namespace Model.TreeModel
         /// </summary>
         /// <param name="algorithmName">Enum of the algorithm to execute</param>
         /// <param name="data">Optional information to required by the algorithm</param>
-        public override void DoAlgorithm(AlgorithmEnum algorithmName, ElementDTO data = null)
+        public override void DoAlgorithm(AlgorithmEnum algorithmName, List<ElementDTO> data = null)
         {
-            this._algorithms[algorithmName].DoAlgorithm(this, data);
+            //this._algorithms[algorithmName].DoAlgorithm(this, data);
         }
     }
 }

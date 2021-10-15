@@ -100,5 +100,9 @@ namespace Utils {
             SaveJSONKey(Constants.ConstantsFilePath,"globalColor",colorData);
             Constants.GlobalColor = color;
         }
+
+        public static double GenerateRandomDouble(){
+            return Random.Range(0, 10);
+        }
     }
 }

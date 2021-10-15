@@ -109,7 +109,7 @@ namespace View.EventController
             //!!TODO: this should accept other types of values
             int value = Int32.Parse(FindObjectOfType<InputField>().text);
             ElementDTO elementToSearch = new BinarySearchNodeDTO(0, value, null, true, null, null);
-            DoAlgorithmCommand algorithmCommand = new DoAlgorithmCommand(AlgorithmEnum.BinarySearch,elementToSearch);
+            DoAlgorithmCommand algorithmCommand = new DoAlgorithmCommand(AlgorithmEnum.BinarySearch,new List<ElementDTO>(){elementToSearch});
             CommandController.GetInstance().Invoke(algorithmCommand);
         }
     }

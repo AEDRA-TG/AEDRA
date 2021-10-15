@@ -136,21 +136,20 @@ namespace View.GUI.ProjectedObjects
 
         virtual public void SetDTO(ElementDTO dto)
         {
-            Dto = dto;
+            if(Dto != null){
+                Dto.UpdateProperties(dto);
+            }
+            else{
+                Dto = dto;
+            }
             TextMesh text = gameObject.GetComponentInChildren<TextMesh>();
             if(text != null){
                 text.text = dto.Value.ToString();
             }
-        }
-
-        public void UpdateDTO(ElementDTO dto){
-            if(Dto is BinarySearchNodeDTO oldDTO){
-                BinarySearchNodeDTO newDTO = dto as BinarySearchNodeDTO;
-                oldDTO.LeftChild = newDTO.LeftChild;
-                oldDTO.RightChild = newDTO.RightChild;
-            }
-            else{
-                Dto = dto;
+            Transform infoGameObject = gameObject.transform.Find("Info");
+            TextMesh info =  infoGameObject?.GetComponent<TextMesh>();
+            if(info != null){
+                info.text = dto.Info;
             }
         }
 

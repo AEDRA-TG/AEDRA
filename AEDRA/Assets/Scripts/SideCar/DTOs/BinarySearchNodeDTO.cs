@@ -38,5 +38,15 @@ namespace SideCar.DTOs
             this.RightChild = rigthtChild;
             base.Name = "Node";
         }
+
+        public override void UpdateProperties(ElementDTO DTO)
+        {
+            BinarySearchNodeDTO newProperties = (BinarySearchNodeDTO) DTO;
+            this.LeftChild = newProperties.LeftChild;
+            this.RightChild = newProperties.RightChild;
+            if(newProperties.Value != default){
+                this.Value = newProperties.Value;
+            }
+        }
     }
 }
