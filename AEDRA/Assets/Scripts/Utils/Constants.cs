@@ -52,10 +52,17 @@ namespace Utils
 
         #endregion
 
+        #region COLORS
         /// <summary>
         /// Global color of all buttons in the app
         /// </summary>
         public static Color GlobalColor;
+        public static Color CyanColor = Color.cyan;
+        public static Color SelectionColor = Color.red;
+        public static Color BaseObjectColor = Color.white;
+        public static Color VisitedObjectColor = Color.gray;
+
+        #endregion
 
         public const int MaxWidth = 10;
         public const int MaxHeight = 10;

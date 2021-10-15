@@ -21,7 +21,8 @@ namespace View.EventController
                 {MenuEnum.TraversalMenu, gameObject.transform.Find("TraversalMenu").gameObject},
                 {MenuEnum.AddElementInputMenu, gameObject.transform.Find("AddElementInputMenu").gameObject},
                 {MenuEnum.RemoveElementInputMenu, gameObject.transform.Find("RemoveElementInputMenu").gameObject},
-                {MenuEnum.SearchElementInputMenu, gameObject.transform.Find("SearchElementInputMenu").gameObject}
+                {MenuEnum.SearchElementInputMenu, gameObject.transform.Find("SearchElementInputMenu").gameObject},
+                { MenuEnum.AnimationControlMenu, gameObject.transform.Find("AnimationControlMenu").gameObject}
             };
             base._activeSubMenu = MenuEnum.MainMenu;
             base.ChangeToMenu(MenuEnum.MainMenu);
@@ -49,9 +50,7 @@ namespace View.EventController
             if(_activeSubMenu.ToString().Contains("Input")){
                 ChangeToMenu(MenuEnum.MainMenu);
             }
-            if(BackOptionsMenu!=null){
-                BackOptionsMenu.SetActive(false);
-            }
+            BackOptionsMenu?.SetActive(false);
         }
 
         /// <summary>
@@ -82,6 +81,7 @@ namespace View.EventController
         /// Method to detect when the user taps on pre order traversal button
         /// </summary>
         public void OnTouchPreOrderTraversal(){
+            base.IsAnimationControlEnable = true;
             DoTraversalCommand traversalCommand = new DoTraversalCommand(TraversalEnum.TreePreOrder,null);
             CommandController.GetInstance().Invoke(traversalCommand);
         }
@@ -90,6 +90,7 @@ namespace View.EventController
         /// Method to detect when the user taps on in order traversal button
         /// </summary>
         public void OnTouchInOrderTraversal(){
+            base.IsAnimationControlEnable = true;
             DoTraversalCommand traversalCommand = new DoTraversalCommand(TraversalEnum.TreeInOrder,null);
             CommandController.GetInstance().Invoke(traversalCommand);
         }
@@ -98,6 +99,7 @@ namespace View.EventController
         /// Method to detect when the user taps on post traversal button
         /// </summary>
         public void OnTouchPostOrderTraversal(){
+            base.IsAnimationControlEnable = true;
             DoTraversalCommand traversalCommand = new DoTraversalCommand(TraversalEnum.TreePostOrder,null);
             CommandController.GetInstance().Invoke(traversalCommand);
         }

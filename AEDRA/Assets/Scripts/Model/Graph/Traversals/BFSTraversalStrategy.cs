@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using SideCar.DTOs;
+using UnityEngine;
+using Utils;
 using Utils.Enums;
 
 namespace Model.GraphModel.Traversals
@@ -27,7 +29,7 @@ namespace Model.GraphModel.Traversals
                     if(graph.AdjacentMtx[previous].ContainsKey(current)){
                         graph.NotifyEdge(previous,current,AnimationEnum.KeepPaintAnimation);
                     }
-                    graph.NotifyNode(current,AnimationEnum.KeepPaintAnimation);
+                    graph.NotifyNode(current,AnimationEnum.KeepPaintAnimation, Constants.CyanColor);
 
                     foreach (int key in graph.AdjacentMtx[current].Keys)
                     {

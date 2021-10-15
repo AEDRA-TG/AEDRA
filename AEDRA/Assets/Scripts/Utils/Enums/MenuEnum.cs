@@ -11,6 +11,7 @@ namespace Utils.Enums
         SearchElementInputMenu,
         TraversalMenu,
         NodeSelectionMenu,
-        NodeMultiSelectionMenu
+        NodeMultiSelectionMenu,
+        AnimationControlMenu
     }
 }

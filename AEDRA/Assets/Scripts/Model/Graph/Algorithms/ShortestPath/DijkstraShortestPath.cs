@@ -5,6 +5,7 @@ using SideCar.DTOs;
 using C5;
 using Utils.Enums;
 using UnityEngine;
+using Utils;
 
 namespace Model.GraphModel.Algorithms.ShortestPath
 {
@@ -28,17 +29,20 @@ namespace Model.GraphModel.Algorithms.ShortestPath
                     if(graph.AdjacentMtx[previous].ContainsKey(current)){
                         graph.NotifyEdge(previous,current,AnimationEnum.KeepPaintAnimation);
                     }
-                    graph.NotifyNode(current,AnimationEnum.KeepPaintAnimation, Color.green, "C = "+ cost );
+                    graph.NotifyNode(current,AnimationEnum.KeepPaintAnimation, Constants.CyanColor, "C = "+ cost );
 
                     foreach (int key in graph.AdjacentMtx[current].Keys)
                     {
                         GraphNode neighboorNode = graph.Nodes[key];
                         if(!visitedMap[neighboorNode.Id]){
                             double noVisitedCost = (double)graph.AdjacentMtx[current][neighboorNode.Id];
-                            graph.NotifyNode(neighboorNode.Id, AnimationEnum.UpdateAnimation, default, "C = " + cost + "+" + noVisitedCost);
+                            //graph.NotifyNode(neighboorNode.Id, AnimationEnum.UpdateAnimation, default, "C = " + cost + "+" + noVisitedCost);
                             heap.Add(new Tuple<double, int, int>(cost + noVisitedCost, current, neighboorNode.Id));
                         }
                     }
+                }
+                if(visitedMap[previous]){
+                    graph.NotifyNode(previous, AnimationEnum.KeepPaintAnimation, Constants.VisitedObjectColor);
                 }
             }
         }

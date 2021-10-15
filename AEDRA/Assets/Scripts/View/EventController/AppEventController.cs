@@ -7,7 +7,7 @@ using Utils;
 using Utils.Enums;
 using Utils.Parameters;
 using View.GUI;
-
+using View.GUI.ProjectedObjects;
 
 namespace View.EventController
 { 
@@ -45,10 +45,12 @@ namespace View.EventController
         /// Indicates if an structure is projected
         /// </summary>
         private bool _hasProjectedStructure;
-        //[SerializeField]
-        //private GameObject structurePrefab;
 
-        private GameObject structureProjection;
+        private GameObject _structureProjection;
+
+        public bool IsAnimationControlEnable;
+
+
 
         /// <summary>
         /// Method that executes when a target is detected by the camera
@@ -57,10 +59,10 @@ namespace View.EventController
             //1. First time detecting a target
             if(_activeStructure != targetParameter.GetStructure()){
                 //_activeStructure is 'None' by default
-                if(structureProjection != null ){
+                if(_structureProjection != null ){
                     //2. We are changing target - If there is an existing structure we destroy it
-                    Destroy(structureProjection);
-                    structureProjection = null;
+                    Destroy(_structureProjection);
+                    _structureProjection = null;
                 }
                 //If the is no structure we create a new
                 LoadDataStructure(targetParameter.GetReferencePoint().transform);
@@ -109,9 +111,11 @@ namespace View.EventController
         /// </summary>
         /// <param name="menu">Id of the new menu</param>
         public void ChangeToMenu(MenuEnum menu){
-            MenuEnumParameter menuEnumParameter = new MenuEnumParameter();
-            menuEnumParameter.SetMenu(menu);
-            ChangeToMenu(menuEnumParameter);
+            if(!IsAnimationControlEnable){
+                MenuEnumParameter menuEnumParameter = new MenuEnumParameter();
+                menuEnumParameter.SetMenu(menu);
+                ChangeToMenu(menuEnumParameter);
+            }
         }
 
 
@@ -173,10 +177,27 @@ namespace View.EventController
 
         private void LoadDataStructure(Transform unityParent){
             GameObject prefab = Resources.Load(Constants.PrefabPath + "StructureProjection") as GameObject;
-            structureProjection = Instantiate(prefab);
-            structureProjection.transform.parent = unityParent;
-            structureProjection.transform.localPosition = Vector3.zero;
-            structureProjection.transform.localRotation = Quaternion.Euler(Vector3.zero);
+            _structureProjection = Instantiate(prefab);
+            _structureProjection.name = Constants.ObjectsParentName;
+            _structureProjection.transform.parent = unityParent;
+            _structureProjection.transform.localPosition = Vector3.zero;
+            _structureProjection.transform.localRotation = Quaternion.Euler(Vector3.zero);
+        }
+
+        public void OnAlgorithmTargetDetected(TargetParameter targetParameter){
+            AppEventController otherInstance = FindObjectOfType<AppEventController>();
+            if(otherInstance != this){
+                otherInstance.ChangeToMenu(MenuEnum.AnimationControlMenu);
+                otherInstance.IsAnimationControlEnable = true;
+            }
+        }
+
+        public void OnAlgorithmTargetLost(){
+            AppEventController otherInstance = FindObjectOfType<AppEventController>();
+            if(otherInstance != this){
+                otherInstance.IsAnimationControlEnable = false;
+                otherInstance.ChangeToMenu(MenuEnum.MainMenu);
+            }
         }
     }
 }

@@ -105,8 +105,6 @@ namespace View.GUI.ProjectedObjects
             Tween tween = default;
             if(base.Dto.Info != default){
                 Transform infoGameObject = gameObject.transform.Find("Info");
-                
-                
                 tween = infoGameObject.DOScale(0.02f, 1);
             }
             return tween;

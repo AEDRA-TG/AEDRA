@@ -198,11 +198,11 @@ namespace View.GUI.ProjectedObjects
             MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
             if (_selected)
             {
-                mesh.material.DOColor(Color.red, 0);
+                mesh.material.DOColor(Constants.SelectionColor, 0);
             }
             else
             {
-                mesh.material.DOColor(Color.white, 0);
+                mesh.material.DOColor(Constants.BaseObjectColor, 0);
             }
         }
     }

@@ -27,7 +27,8 @@ namespace View.EventController
                 { MenuEnum.TraversalMenu, gameObject.transform.Find("TraversalMenu").gameObject },
                 { MenuEnum.NodeSelectionMenu, gameObject.transform.Find("NodeSelectionMenu").gameObject },
                 { MenuEnum.NodeMultiSelectionMenu, gameObject.transform.Find("NodeMultiSelectionMenu").gameObject },
-                { MenuEnum.AddElementInputMenu, gameObject.transform.Find("AddElementInputMenu").gameObject }
+                { MenuEnum.AddElementInputMenu, gameObject.transform.Find("AddElementInputMenu").gameObject },
+                { MenuEnum.AnimationControlMenu, gameObject.transform.Find("AnimationControlMenu").gameObject}
             };
             base._activeSubMenu = MenuEnum.MainMenu;
             base.ChangeToMenu(MenuEnum.MainMenu);
@@ -57,9 +58,7 @@ namespace View.EventController
             if(_activeSubMenu.ToString().Contains("Input")){
                 ChangeToMenu(MenuEnum.MainMenu);
             }
-            if(BackOptionsMenu!=null){
-                BackOptionsMenu.SetActive(false);
-            }
+            BackOptionsMenu?.SetActive(false);
         }
 
         /// <summary>
@@ -134,6 +133,7 @@ namespace View.EventController
         /// Method to detect when the user taps on BFS traversal button
         /// </summary>
         public void OnTouchBFSTraversal(){
+            base.IsAnimationControlEnable = true;
             List<ProjectedObject> objs = _selectionController.GetSelectedObjects();
             if (objs.Count == 1 && objs[0].GetType() == typeof(ProjectedNode))
             {
@@ -152,6 +152,7 @@ namespace View.EventController
         /// Method to detect when the user taps on DFS traversal button
         /// </summary>
         public void OnTouchDFSTraversal(){
+            base.IsAnimationControlEnable = true;
             List<ProjectedObject> objs = _selectionController.GetSelectedObjects();
             if (objs.Count == 1 && objs[0].GetType() == typeof(ProjectedNode))
             {
