@@ -28,7 +28,7 @@ namespace SideCar.DTOs
             GraphNodeDTO updatedDTO = (GraphNodeDTO) DTO;
             this.Neighbors = updatedDTO.Neighbors;
             this.ElementToConnectID = updatedDTO.ElementToConnectID;
-            //base.Coordinates = new Point(updatedDTO.Coordinates.X, updatedDTO.Coordinates.Y, updatedDTO.Coordinates.Z);
+            base.Coordinates = new Point(updatedDTO.Coordinates.X, updatedDTO.Coordinates.Y, updatedDTO.Coordinates.Z);
             if(DTO.Info != default){
                 base.Info = updatedDTO.Info;
             }

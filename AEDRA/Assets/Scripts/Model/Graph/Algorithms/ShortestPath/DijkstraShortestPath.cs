@@ -42,7 +42,7 @@ namespace Model.GraphModel.Algorithms.ShortestPath
                     }
                 }
                 if(visitedMap[previous]){
-                    graph.NotifyNode(previous, AnimationEnum.KeepPaintAnimation, Constants.VisitedObjectColor);
+                    //graph.NotifyNode(previous, AnimationEnum.KeepPaintAnimation, Constants.VisitedObjectColor, "C = " + cost);
                 }
             }
         }
