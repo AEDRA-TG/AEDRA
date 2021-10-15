@@ -139,6 +139,7 @@ namespace View.EventController
             {
                     GraphNodeDTO nodeDTO = (GraphNodeDTO)objs[0].Dto;
                     DoTraversalCommand traversalCommand = new DoTraversalCommand(TraversalEnum.GraphBFS,nodeDTO);
+                    _selectionController.DeselectAllObjects();
                     CommandController.GetInstance().Invoke(traversalCommand);
             }
             else
@@ -158,6 +159,7 @@ namespace View.EventController
             {
                     GraphNodeDTO nodeDTO = (GraphNodeDTO)objs[0].Dto;
                     Command traversalCommand = new DoTraversalCommand(TraversalEnum.GraphDFS,nodeDTO);
+                    _selectionController.DeselectAllObjects();
                     CommandController.GetInstance().Invoke(traversalCommand);
             }
             else

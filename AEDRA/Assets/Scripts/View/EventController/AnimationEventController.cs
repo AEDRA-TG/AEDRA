@@ -45,6 +45,7 @@ namespace View.EventController
             {
                 if(objs[0].GetType() == typeof(ProjectedNode) && objs[1].GetType() == typeof(ProjectedNode)){
                     this._command = new DoAlgorithmCommand(AlgorithmEnum.Dijkstra,new List<ElementDTO>(){objs[0].Dto, objs[1].Dto});
+                    _selectionController.DeselectAllObjects();
                     CommandController.GetInstance().Invoke(this._command);
                 }
             }
@@ -92,6 +93,10 @@ namespace View.EventController
                 playPauseGameObject.transform.Find("IconPause").gameObject.SetActive(true);
                 playPauseGameObject.transform.Find("Icon").gameObject.SetActive(false);
             });
+        }
+
+        public void OnTouchExitAnimation(){
+            this._actualSequence.Goto(0);
         }
     }
 }

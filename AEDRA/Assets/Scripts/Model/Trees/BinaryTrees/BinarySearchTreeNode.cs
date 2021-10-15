@@ -1,6 +1,7 @@
 using Utils.Enums;
 using SideCar.DTOs;
 using Model.Common;
+using Utils;
 
 namespace Model.TreeModel
 {
@@ -152,6 +153,7 @@ namespace Model.TreeModel
                 Operation = operation,
                 Coordinates = new Point(this.Coordinates.X, this.Coordinates.Y, this.Coordinates.Z)
             };
+            dto.Color = Constants.CyanColor;
             DataStructure.Notify(dto);
         }
     }

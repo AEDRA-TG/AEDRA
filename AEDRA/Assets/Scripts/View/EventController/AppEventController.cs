@@ -104,6 +104,12 @@ namespace View.EventController
             if(_activeSubMenu.ToString().Contains("Input")){
                 ClearInputTextField();
             }
+            if(menu.GetMenu() == MenuEnum.AnimationControlMenu){
+                GameObject backButtonMenu = GameObject.Find(Constants.BackOptionsMenuParent).gameObject;
+                backButtonMenu.SetActive(false);
+                GameObject hamburger = GameObject.Find(Constants.HamburgerButtonName).gameObject;
+                hamburger.SetActive(false);
+            }
         }
 
         /// <summary>
@@ -133,7 +139,18 @@ namespace View.EventController
         /// Method to change to previous menu
         /// </summary>
         public void OnTouchBackToPreviousMenu(){
-            ChangeToMenu(_previousActiveSubMenu);
+            if(_activeSubMenu == MenuEnum.AnimationControlMenu){
+                GameObject backButtonMenu = GameObject.Find(Constants.MenusParentName).transform.Find(Constants.BackOptionsMenuParent).gameObject;
+                backButtonMenu.SetActive(true);
+                GameObject hamburger = GameObject.Find(_menus[_activeSubMenu].transform.parent.name).transform.Find(Constants.HamburgerButtonName).gameObject;
+                hamburger.SetActive(true);
+                IsAnimationControlEnable = false;
+                ChangeToMenu(MenuEnum.MainMenu);
+                _previousActiveSubMenu = MenuEnum.MainMenu;
+            }
+            else{
+                ChangeToMenu(_previousActiveSubMenu);
+            }
         }
 
         /// <summary>
