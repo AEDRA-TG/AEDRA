@@ -61,6 +61,7 @@ namespace View.EventController
                 //_activeStructure is 'None' by default
                 if(_structureProjection != null ){
                     //2. We are changing target - If there is an existing structure we destroy it
+                    _structureProjection.SetActive(false);
                     Destroy(_structureProjection);
                     _structureProjection = null;
                 }

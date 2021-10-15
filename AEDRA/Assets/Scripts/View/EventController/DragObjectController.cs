@@ -28,7 +28,6 @@ namespace View.EventController
                     //Convert world position to screen position.
                     screenPosition = Camera.main.WorldToScreenPoint(target.transform.position);
                     offset = target.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPosition.z));
-
                 }
             }
 
@@ -39,12 +38,15 @@ namespace View.EventController
 
             if (_isMouseDrag)
             {
+
+                Debug.Log("Object: " + target.transform.localPosition);
+                Debug.Log("Mouse: " + Input.mousePosition);
+                Debug.Log("Offset: " + offset);
                 //track mouse position.
                 Vector3 currentScreenSpace = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPosition.z);
 
                 //convert screen position to world position with offset changes.
                 Vector3 currentPosition = Camera.main.ScreenToWorldPoint(currentScreenSpace) + offset;
-
                 //It will update target gameobject's current postion.
                 target.transform.position = currentPosition;
             }
