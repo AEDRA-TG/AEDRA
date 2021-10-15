@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using UnityEngine;
+
 namespace SideCar.DTOs
 {
     /// <summary>
@@ -19,6 +21,20 @@ namespace SideCar.DTOs
         public GraphNodeDTO(int idNode, object value, List<int> neighbors):base(idNode, value){
             Neighbors = neighbors;
             base.Name = "Node";
+        }
+
+        public override void UpdateProperties(ElementDTO DTO)
+        {
+            GraphNodeDTO updatedDTO = (GraphNodeDTO) DTO;
+            this.Neighbors = updatedDTO.Neighbors;
+            this.ElementToConnectID = updatedDTO.ElementToConnectID;
+            base.Coordinates = updatedDTO.Coordinates;
+            if(DTO.Info != default){
+                base.Info = updatedDTO.Info;
+            }
+            if(DTO.Color != default){
+                base.Color = updatedDTO.Color;
+            }
         }
     }
 }

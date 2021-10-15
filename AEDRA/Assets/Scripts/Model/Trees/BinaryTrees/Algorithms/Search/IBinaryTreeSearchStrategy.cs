@@ -1,12 +1,11 @@
-using Model.TreeModel;
 using SideCar.DTOs;
 
-namespace Algorithms.Tree
+namespace Model.TreeModel.BinaryTree.Algorithms.Search
 {
     /// <summary>
     /// Interface that defines tree algorithm strategy
     /// </summary>
-    public interface ITreeAlgorithmStrategy
+    public interface IBinaryTreeSearchStrategy
     {
         /// <summary>
         /// Method to perform the corresponding algorithm strategy

@@ -1,6 +1,7 @@
 using DG.Tweening;
 using SideCar.DTOs;
 using UnityEngine;
+using Utils.Enums;
 using View.GUI;
 using View.GUI.ProjectedObjects;
 
@@ -15,7 +16,14 @@ namespace View.Animations.Algorithms
             foreach (ElementDTO dto in structureProjection.DTOs){
                 ProjectedObject projectedObject = GameObject.Find(dto.GetUnityId()).GetComponent<ProjectedObject>();
                 projectedObject.AnimationTime = 1;
-                animationList.Append(projectedObject.Animations[dto.Operation]());
+                projectedObject.Dto.Color = dto.Color;
+                if(dto.Operation == AnimationEnum.UpdateAnimation && dto.Info != default){
+                    projectedObject.Dto.Info = dto.Info;
+                    animationList.Join(projectedObject.Animations[dto.Operation]());
+                }
+                else{
+                    animationList.Append(projectedObject.Animations[dto.Operation]());
+                }
             }
             foreach (ElementDTO dto in structureProjection.DTOs){
                 ProjectedObject projectedObject = GameObject.Find(dto.GetUnityId()).GetComponent<ProjectedObject>();

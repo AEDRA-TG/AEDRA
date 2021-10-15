@@ -794,7 +794,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c11c028961e44f54cb912be264053083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectionController: {fileID: 0}
 --- !u!1 &4445113357863143828
 GameObject:
   m_ObjectHideFlags: 0
@@ -2438,7 +2437,7 @@ PrefabInstance:
       objectReference: {fileID: 7214306936968172999}
     - target: {fileID: 2731015000048538532, guid: 018b92f87d8c67943a5996b69df131bf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnTouchDeleteNode
+      value: OnTouchExecuteAlgorithm
       objectReference: {fileID: 0}
     - target: {fileID: 2731015000048538532, guid: 018b92f87d8c67943a5996b69df131bf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
