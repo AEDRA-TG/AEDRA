@@ -55,6 +55,8 @@ namespace Utils
         public const string ChooserName = "Chooser";
         public const string BackOptionsMenuParent = "BackButton";
 
+        public const string TargetsPopupMenuName = "PopupMenu";
+
         #endregion
 
         /// <summary>

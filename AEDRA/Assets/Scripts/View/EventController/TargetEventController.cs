@@ -17,12 +17,16 @@ namespace View.EventController
         private GameObject _layout;
         private GameObject _targetList;
         private GameObject _targetDetails;
+        private GameObject _popupMenu;
+        [SerializeField]
+        private GameObject closePopupMenu;
 
         public void Awake(){
             _targets = Utilities.DeserializeJSON<List<Target>>(Constants.TargetsFilePath);
             _layout = GameObject.Find(Constants.TargetsLayoutName);
             _targetList = _layout.transform.Find(Constants.TargetListName).gameObject;
             _targetDetails = _layout.transform.Find(Constants.TargetDetailsName).gameObject;
+            _popupMenu = _layout.transform.Find(Constants.TargetsPopupMenuName).gameObject;
         }
         public void Start()
         {
@@ -76,15 +80,26 @@ namespace View.EventController
         }
 
         private void SaveTargetFace(string targetName,Target targetFace){
+            _popupMenu.SetActive(true);
+            StartCoroutine(SaveFiles(targetName, targetFace));
+        }
+
+        private IEnumerator SaveFiles(string targetName,Target targetFace){
             Texture2D face = Resources.Load<Texture2D>(Constants.ImageTargetResourcePath + targetFace.ARMarker);
             byte[] faceBytes = face.EncodeToPNG();
             NativeGallery.SaveImageToGallery(faceBytes, Constants.DownloadTargetFolder, targetName + "_" + targetFace.Name + ".png", null);
+            yield return null;
+            closePopupMenu.SetActive(true);
         }
-
         public void OnTouchDownloadAll(){
             foreach(Target target in this._targets){
                 OnTouchDownloadActualTarget(target);
             }
+        }
+
+        public void OnTouchClosePopupMenu(){
+            _popupMenu.SetActive(false);
+            closePopupMenu.SetActive(false);
         }
     }
 }
