@@ -20,6 +20,7 @@ namespace Utils
         public static string TargetsStreamingFilePath = Application.streamingAssetsPath + "/ConfigFiles/Targets.json";
         public static string TargetsFilePath = Application.persistentDataPath + "/Targets.json";
         public const string PrefabPath = "Prefabs/ProjectedObjects/";
+        public const string TargetStreamingFileBasePath = Application.streamingAssetsPath + "/ImageTargets/";
 
         #endregion
 
@@ -44,8 +45,10 @@ namespace Utils
         public const string HelpButtonMenuName = "HelpButtonMenu";
         public const string TooltipName = "Tooltip";
         public const string MenusParentName = "ProjectionLayout";
-        public const string TargetListParent = "Content";
-
+        public const string TargetListContentName = "Content";
+        public const string TargetListName = "TargetList";
+        public const string TargetDetailsName = "TargetDetails";
+        public const string TargetsLayoutName = "TargetsLayout";
         public const string ReferencePointName = "ReferencePoint";
         public const string ChooserName = "Chooser";
         public const string BackOptionsMenuParent = "BackButton";
