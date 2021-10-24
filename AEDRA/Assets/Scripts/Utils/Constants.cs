@@ -20,8 +20,14 @@ namespace Utils
         public static string TargetsStreamingFilePath = Application.streamingAssetsPath + "/ConfigFiles/Targets.json";
         public static string TargetsFilePath = Application.persistentDataPath + "/Targets.json";
         public const string PrefabPath = "Prefabs/ProjectedObjects/";
-        public const string TargetStreamingFileBasePath = Application.streamingAssetsPath + "/ImageTargets/";
-
+        public static string IconTargetResourcePath = "Icon/Targets/";
+        public static string ImageTargetResourcePath = "Image/Targets/";
+        #if UNITY_EDITOR
+        public static string DownloadTargetPath = Application.persistentDataPath + "/";
+        #elif UNITY_ANDROID
+        public static string DownloadTargetPath = "/storage/emulated/0/Descargas";
+        #endif
+        
         #endregion
 
         /// <summary>

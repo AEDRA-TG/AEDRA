@@ -1,12 +1,38 @@
 [
     {
         "Name":"Grafo",
-        "ARMarker":"URI",
-        "Description":"Mi bonito grafo"
+        "ARMarker":"Grafo",
+        "Description":"Estructura",
+        "ResourceIconName":"IconMiniGraph",
+        "Faces": [
+            {
+                "Name":"Cara Frontal",
+                "ARMarker":"Grafo",
+                "Description":"Esta cara se usa para detectar la estructura."
+            },
+            {
+                "Name":"Cara Trasera",
+                "ARMarker":"Arbol",
+                "Description":"Esta cara se usa para mostrar información de la estructura en realidad aumentada."
+            }
+        ]
     },
     {
-        "Name":"Árbol",
-        "ARMarker":"URI",
-        "Description":"Mi bonito árbol"
+        "Name":"Arbol",
+        "ARMarker":"Arbol",
+        "Description":"Estructura",
+        "ResourceIconName":"IconMiniTree",
+        "Faces": [
+            {
+                "Name":"Cara Frontal",
+                "ARMarker":"Grafo",
+                "Description":"Esta cara se usa para detectar la estructura."
+            },
+            {
+                "Name":"Cara Trasera",
+                "ARMarker":"Arbol",
+                "Description":"Esta cara se usa para mostrar información de la estructura en realidad aumentada."
+            }
+        ]
     }
 ]
