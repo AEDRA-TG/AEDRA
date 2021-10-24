@@ -29,14 +29,15 @@ namespace Model.GraphModel.Algorithms.ShortestPath
                     if(graph.AdjacentMtx[previous].ContainsKey(current)){
                         graph.NotifyEdge(previous,current,AnimationEnum.KeepPaintAnimation);
                     }
-                    graph.NotifyNode(current,AnimationEnum.KeepPaintAnimation, Constants.CyanColor, "C = "+ cost );
+                    graph.NotifyNode(current,AnimationEnum.KeepPaintAnimation, Constants.CyanColor);
+                    graph.NotifyNode(current,AnimationEnum.UpdateAnimation, default, "C = "+ cost );
 
                     foreach (int key in graph.AdjacentMtx[current].Keys)
                     {
                         GraphNode neighboorNode = graph.Nodes[key];
                         if(!visitedMap[neighboorNode.Id]){
                             double noVisitedCost = (double)graph.AdjacentMtx[current][neighboorNode.Id];
-                            //graph.NotifyNode(neighboorNode.Id, AnimationEnum.UpdateAnimation, default, "C = " + cost + "+" + noVisitedCost);
+                            graph.NotifyNode(neighboorNode.Id, AnimationEnum.UpdateAnimation, default, "C = " + cost + "+" + noVisitedCost);
                             heap.Add(new Tuple<double, int, int>(cost + noVisitedCost, current, neighboorNode.Id));
                         }
                     }

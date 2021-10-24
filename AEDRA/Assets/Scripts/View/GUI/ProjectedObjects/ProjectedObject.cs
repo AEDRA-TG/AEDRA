@@ -147,11 +147,11 @@ namespace View.GUI.ProjectedObjects
             if(text != null){
                 text.text = dto.Value.ToString();
             }
-            Transform infoGameObject = gameObject.transform.Find("Info");
-            TextMesh info =  infoGameObject?.GetComponent<TextMesh>();
-            if(info != null){
-                info.text = dto.Info;
-            }
+            //Transform infoGameObject = gameObject.transform.Find("Info");
+            //TextMesh info =  infoGameObject?.GetComponent<TextMesh>();
+            //if(info != null){
+            //    info.text = dto.Info;
+            //}
         }
 
         public override bool Equals(object other)

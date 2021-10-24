@@ -69,7 +69,7 @@ namespace View.EventController
                 LoadDataStructure(targetParameter.GetReferencePoint().transform);
                 //Load target
                 _activeStructure = targetParameter.GetStructure();
-                Command command = new LoadCommand(_activeStructure);
+                Command command = new LoadCommand(_activeStructure, targetParameter.GetDataFilePath());
                 CommandController.GetInstance().Invoke(command);
                 //Change to respective menu
                 LoadStructureMenu( targetParameter.GetPrefabMenu() );
@@ -207,6 +207,8 @@ namespace View.EventController
             if(otherInstance != this){
                 otherInstance.ChangeToMenu(MenuEnum.AnimationControlMenu);
                 otherInstance.IsAnimationControlEnable = true;
+            }else{
+                OnTargetDetected(targetParameter);
             }
         }
 
@@ -215,6 +217,8 @@ namespace View.EventController
             if(otherInstance != this){
                 otherInstance.IsAnimationControlEnable = false;
                 otherInstance.ChangeToMenu(MenuEnum.MainMenu);
+            }else{
+                OnTargetLost();
             }
         }
     }

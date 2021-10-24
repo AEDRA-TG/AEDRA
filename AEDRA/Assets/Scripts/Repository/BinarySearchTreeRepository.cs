@@ -20,8 +20,8 @@ namespace Repository
         /// </summary>
         private string _filePath;
 
-        public BinarySearchTreeRepository(StructureEnum structureName){
-            this._filePath = Constants.DataPath + structureName.ToString() + ".json";
+        public BinarySearchTreeRepository(string dataFile){
+            this._filePath = Constants.DataPath + dataFile;
         }
 
         /// <summary>

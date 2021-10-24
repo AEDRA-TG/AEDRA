@@ -18,13 +18,20 @@ namespace View.Animations.Algorithms
             StructureProjection structureProjection = GameObject.FindObjectOfType<StructureProjection>();
             foreach (ElementDTO dto in structureProjection.DTOs){
                 ProjectedObject projectedObject = GameObject.Find(dto.GetUnityId()).GetComponent<ProjectedObject>();
-                projectedObject.AnimationTime = 1;
+                //projectedObject.AnimationTime = 1;
                 projectedObject.Dto.Color = dto.Color;
+                projectedObject.Dto.Info = dto.Info;
                 Tween actualTween = projectedObject.Animations[dto.Operation]();
                 actualTween.id = animationId;
                 actualTween.OnComplete(()=> animationList.id = (int)actualTween.id);
-                if(dto.Operation == AnimationEnum.UpdateAnimation && dto.Info != default){
-                    projectedObject.Dto.Info = dto.Info;
+                actualTween.OnStart(()=>  {
+                    Transform infoGameObject = projectedObject.transform.Find("Info");
+                    TextMesh info =  infoGameObject?.GetComponent<TextMesh>();
+                    if(info != null){
+                        info.text = dto.Info;
+                    }
+                });
+                if(dto.Operation == AnimationEnum.UpdateAnimation && dto.Info != null){
                     animationList.Join(actualTween);
                 }
                 else{
@@ -32,11 +39,11 @@ namespace View.Animations.Algorithms
                 }
                 animationId++;
             }
-            foreach (ElementDTO dto in structureProjection.DTOs){
+            /*foreach (ElementDTO dto in structureProjection.DTOs){
                 ProjectedObject projectedObject = GameObject.Find(dto.GetUnityId()).GetComponent<ProjectedObject>();
                 projectedObject.AnimationTime = 0;
                 animationList.Append(projectedObject.UnPaintAnimation());
-            }
+            }*/
 
             UpdateSecuenceEvent.Invoke(animationList);
         }

@@ -15,6 +15,8 @@ namespace View.GUI.ProjectedObjects
         private bool _isMoving;
         private bool _isSaved;
         private float _timer;
+        [SerializeField]
+        private TextMesh _info;
 
         public void Start()
         {
@@ -103,9 +105,9 @@ namespace View.GUI.ProjectedObjects
         public override Tween UpdateAnimation()
         {
             Tween tween = default;
-            if(base.Dto.Info != default){
-                Transform infoGameObject = gameObject.transform.Find("Info");
-                tween = infoGameObject.DOScale(0.02f, 1);
+            Debug.Log("NO entro :(" + Dto.Info);
+            if(base.Dto.Info != null){
+                tween = _info.transform.DOScale(0.02f, base.AnimationTime);
             }
             return tween;
         }

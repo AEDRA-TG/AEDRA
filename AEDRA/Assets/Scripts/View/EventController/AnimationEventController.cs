@@ -7,6 +7,7 @@ using Controller;
 using Utils.Enums;
 using SideCar.DTOs;
 using View.Animations;
+using Utils;
 
 namespace View.EventController
 {
@@ -77,7 +78,7 @@ namespace View.EventController
         }
 
         public void UpdateSequence(Sequence newSequence){
-            this._animationDuration = 1;
+            this._animationDuration = (int) Constants.AnimationTime;
             this._actualSequence = newSequence;
             this._actualSequence.id = (int)0;
             this._actualSequence.OnComplete(() => {

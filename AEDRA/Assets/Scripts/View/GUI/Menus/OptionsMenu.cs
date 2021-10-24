@@ -55,8 +55,10 @@ namespace View
         /// </summary>
         public void OnEnable() {
             Expand();
-            _hamburgerButton.GetComponent<Button>().onClick.RemoveAllListeners();
-            _hamburgerButton.GetComponent<Button>().onClick.AddListener(ToggleButtons);
+            if(_hamburgerButton != null){
+                _hamburgerButton.GetComponent<Button>().onClick.RemoveAllListeners();
+                _hamburgerButton.GetComponent<Button>().onClick.AddListener(ToggleButtons);
+            }
             GameObject.Find(Constants.InfoButtonName).GetComponent<Button>().onClick.RemoveAllListeners();
             GameObject.Find(Constants.InfoButtonName).GetComponent<Button>().onClick.AddListener(ShowTooltips);
         }
@@ -139,8 +141,10 @@ namespace View
         /// Method to move all sub menu buttons to the hamburger position
         /// </summary>
         private void MoveButtonAtHamburguerPosition(){
-            for(int i = 0; i < _originalButtonsPositions.Length; i++){
-                this.transform.GetChild(i).transform.position = _hamburgerButton.transform.position;
+            if(_hamburgerButton != null){
+                for(int i = 0; i < _originalButtonsPositions.Length; i++){
+                    this.transform.GetChild(i).transform.position = _hamburgerButton.transform.position;
+                }
             }
         }
 
@@ -148,10 +152,12 @@ namespace View
         /// Method to collapse all sub menu buttons to hamburger menu
         /// </summary>
         public void Collapse(){
-            for(int i = 0; i < _originalButtonsPositions.Length; i++){
-                this.transform.GetChild(i).transform.DOMove(_hamburgerButton.transform.position, Constants.CollapseDuration).SetEase(Constants.CollapseEase);
+            if(_hamburgerButton != null){
+                for(int i = 0; i < _originalButtonsPositions.Length; i++){
+                    this.transform.GetChild(i).transform.DOMove(_hamburgerButton.transform.position, Constants.CollapseDuration).SetEase(Constants.CollapseEase);
+                }
+                _isExpanded = false;
             }
-            _isExpanded = false;
         }
 
         /// <summary>

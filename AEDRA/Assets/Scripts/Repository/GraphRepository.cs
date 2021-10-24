@@ -20,8 +20,8 @@ namespace Repository
         /// </summary>
         private string _filePath;
 
-        public GraphRepository(StructureEnum structureName){
-            this._filePath = Constants.DataPath + structureName.ToString() + ".json";
+        public GraphRepository(string dataFile){
+            this._filePath = Constants.DataPath + dataFile;
         }
 
         /// <summary>
