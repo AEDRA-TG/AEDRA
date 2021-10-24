@@ -99,6 +99,9 @@ namespace View.GUI
             prefab = Instantiate(prefab,this.transform);
             prefab.transform.localPosition = position;
             prefab.transform.localRotation = Quaternion.Euler(90,0,0);
+            if(dto.Name == "Edge"){
+                prefab = prefab.transform.Find("Cylinder").gameObject;
+            }
             prefab.name = dto.GetUnityId();
             ProjectedObject createdObject = prefab.GetComponent<ProjectedObject>();
             createdObject.SetDTO(dto);

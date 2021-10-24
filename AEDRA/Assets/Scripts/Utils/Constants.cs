@@ -20,7 +20,9 @@ namespace Utils
         public static string TargetsStreamingFilePath = Application.streamingAssetsPath + "/ConfigFiles/Targets.json";
         public static string TargetsFilePath = Application.persistentDataPath + "/Targets.json";
         public const string PrefabPath = "Prefabs/ProjectedObjects/";
-
+        //TODO: delete this
+        public static string DijkstraFilePath = Application.persistentDataPath + "/Dijkstra.json";
+        public static string DijkstraStreamingFilePath = Application.streamingAssetsPath + "/Algorithms/Dijkstra.json";
         #endregion
 
         /// <summary>
@@ -106,6 +108,7 @@ namespace Utils
 
         #region UNITY TAGS
         public const string TagBackSubMenu = "BackSubMenu";
+
         #endregion
     }
 }

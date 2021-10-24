@@ -49,6 +49,8 @@ namespace View.GUI.ProjectedObjects
         /// Intance of the class physics for the projected object
         /// </summary>
         protected ObjectPhysics _objectPhysics;
+        [SerializeField]
+        protected TextMesh text;
 
         virtual public void Awake()
         {
@@ -142,7 +144,6 @@ namespace View.GUI.ProjectedObjects
             else{
                 Dto = dto;
             }
-            TextMesh text = gameObject.GetComponentInChildren<TextMesh>();
             if(text != null){
                 text.text = dto.Value.ToString();
             }

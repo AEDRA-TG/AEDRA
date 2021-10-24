@@ -111,6 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _selectable: 0
+  text: {fileID: 3197279758950597426}
 --- !u!1 &6182677539137779551
 GameObject:
   m_ObjectHideFlags: 0
