@@ -850,7 +850,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8235396016406507377}
   - component: {fileID: 2546429536528514898}
-  - component: {fileID: 2321645514656050970}
   - component: {fileID: 1572482516016925635}
   m_Layer: 0
   m_Name: AnimationControlMenu
@@ -890,18 +889,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8069980782337087532}
   m_CullTransparentMesh: 1
---- !u!114 &2321645514656050970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8069980782337087532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4b7488a07799fd43b252906e61f3c71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1572482516016925635
 MonoBehaviour:
   m_ObjectHideFlags: 0

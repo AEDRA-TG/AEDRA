@@ -23,7 +23,6 @@ namespace View.Animations.Algorithms
                 projectedObject.Dto.Info = dto.Info;
                 Tween actualTween = projectedObject.Animations[dto.Operation]();
                 actualTween.id = animationId;
-                actualTween.OnComplete(()=> animationList.id = (int)actualTween.id);
                 actualTween.OnStart(()=>  {
                     Transform infoGameObject = projectedObject.transform.Find("Info");
                     TextMesh info =  infoGameObject?.GetComponent<TextMesh>();
@@ -35,9 +34,10 @@ namespace View.Animations.Algorithms
                     animationList.Join(actualTween);
                 }
                 else{
+                    actualTween.OnComplete(()=> animationList.id = (int)actualTween.id);
                     animationList.Append(actualTween);
+                    animationId++;
                 }
-                animationId++;
             }
             /*foreach (ElementDTO dto in structureProjection.DTOs){
                 ProjectedObject projectedObject = GameObject.Find(dto.GetUnityId()).GetComponent<ProjectedObject>();

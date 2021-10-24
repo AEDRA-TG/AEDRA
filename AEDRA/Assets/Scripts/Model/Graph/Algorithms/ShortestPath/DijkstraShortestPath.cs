@@ -37,7 +37,7 @@ namespace Model.GraphModel.Algorithms.ShortestPath
                         GraphNode neighboorNode = graph.Nodes[key];
                         if(!visitedMap[neighboorNode.Id]){
                             double noVisitedCost = (double)graph.AdjacentMtx[current][neighboorNode.Id];
-                            graph.NotifyNode(neighboorNode.Id, AnimationEnum.UpdateAnimation, default, "C = " + cost + "+" + noVisitedCost);
+                            //graph.NotifyNode(neighboorNode.Id, AnimationEnum.UpdateAnimation, default, "C = " + cost + "+" + noVisitedCost);
                             heap.Add(new Tuple<double, int, int>(cost + noVisitedCost, current, neighboorNode.Id));
                         }
                     }
