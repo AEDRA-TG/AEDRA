@@ -4,8 +4,6 @@ using Model.Common;
 using UnityEngine;
 using UnityEngine.UI;
 using Utils;
-using System.IO;
-using UnityEngine.Networking;
 
 namespace View.EventController
 {
@@ -80,17 +78,12 @@ namespace View.EventController
         private void SaveTargetFace(string targetName,Target targetFace){
             Texture2D face = Resources.Load<Texture2D>(Constants.ImageTargetResourcePath + targetFace.ARMarker);
             byte[] faceBytes = face.EncodeToPNG();
-            string pathFile = Constants.DownloadTargetPath + targetName + "_" + targetFace.Name + ".png";
-            File.WriteAllBytes(pathFile, faceBytes);
-            Application.OpenURL("https://i.imgur.com/FnwBdVr.jpg");
+            NativeGallery.SaveImageToGallery(faceBytes, Constants.DownloadTargetFolder, targetName + "_" + targetFace.Name + ".png", null);
         }
 
         public void OnTouchDownloadAll(){
             foreach(Target target in this._targets){
                 OnTouchDownloadActualTarget(target);
-            }
-            if(!Directory.Exists(Constants.DownloadTargetPath)){
-                Directory.CreateDirectory(Constants.DownloadTargetPath);
             }
         }
     }

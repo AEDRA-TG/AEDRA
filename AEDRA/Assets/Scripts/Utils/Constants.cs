@@ -22,11 +22,7 @@ namespace Utils
         public const string PrefabPath = "Prefabs/ProjectedObjects/";
         public static string IconTargetResourcePath = "Icon/Targets/";
         public static string ImageTargetResourcePath = "Image/Targets/";
-        #if UNITY_EDITOR
-        public static string DownloadTargetPath = Application.persistentDataPath + "/";
-        #elif UNITY_ANDROID
-        public static string DownloadTargetPath = "/storage/emulated/0/Descargas";
-        #endif
+        public static string DownloadTargetFolder = "Marcadores_AEDRA";
         
         #endregion
 
