@@ -113,6 +113,7 @@ MonoBehaviour:
   _selectable: 0
   text: {fileID: 3197279758950597426}
   _info: {fileID: 34390476977988529}
+  _step: {fileID: 0}
 --- !u!1 &6182677539137779551
 GameObject:
   m_ObjectHideFlags: 0

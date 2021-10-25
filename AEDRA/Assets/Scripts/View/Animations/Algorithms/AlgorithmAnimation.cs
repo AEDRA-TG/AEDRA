@@ -21,22 +21,20 @@ namespace View.Animations.Algorithms
                 //projectedObject.AnimationTime = 1;
                 projectedObject.Dto.Color = dto.Color;
                 projectedObject.Dto.Info = dto.Info;
+                projectedObject.Dto.Step = dto.Step;
+
                 Tween actualTween = projectedObject.Animations[dto.Operation]();
-                actualTween.id = animationId;
-                actualTween.OnStart(()=>  {
-                    Transform infoGameObject = projectedObject.transform.Find("Info");
-                    TextMesh info =  infoGameObject?.GetComponent<TextMesh>();
-                    if(info != null){
-                        info.text = dto.Info;
+                if( actualTween != null){
+                    actualTween.id = animationId;
+
+                    if(dto.Operation == AnimationEnum.UpdateAnimation){
+                        animationList.Join(actualTween);
                     }
-                });
-                if(dto.Operation == AnimationEnum.UpdateAnimation && dto.Info != null){
-                    animationList.Join(actualTween);
-                }
-                else{
-                    actualTween.OnComplete(()=> animationList.id = (int)actualTween.id);
-                    animationList.Append(actualTween);
-                    animationId++;
+                    else{
+                        actualTween.OnComplete(()=> animationList.id = (int)actualTween.id);
+                        animationList.Append(actualTween);
+                        animationId++;
+                    }
                 }
             }
             /*foreach (ElementDTO dto in structureProjection.DTOs){

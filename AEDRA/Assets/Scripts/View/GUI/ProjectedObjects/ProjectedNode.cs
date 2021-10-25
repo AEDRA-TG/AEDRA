@@ -104,10 +104,17 @@ namespace View.GUI.ProjectedObjects
 
         public override Tween UpdateAnimation()
         {
-            Tween tween = default;
-            Debug.Log("NO entro :(" + Dto.Info);
+            Sequence tween = DOTween.Sequence();
             if(base.Dto.Info != null){
-                tween = _info.transform.DOScale(0.02f, base.AnimationTime);
+                tween.Join(_info.transform.DOScale(0.02f, base.AnimationTime).OnStart(()=> _info.text = Dto.Info) );
+            }
+            if(base.Dto.Step != null){
+                Debug.Log("Prueba");
+                TextMesh stepText = GameObject.Find("StepText")?.GetComponent<TextMesh>();
+                if(stepText != null){
+                    stepText.transform.position = GameObject.Find("StructureProjection").transform.position;
+                    tween.Join ( stepText.transform.DOScale(0.02f, base.AnimationTime).OnStart(()=> stepText.text = Dto.Step) );
+                }
             }
             return tween;
         }

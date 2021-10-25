@@ -30,7 +30,8 @@ namespace Model.GraphModel.Algorithms.ShortestPath
                         graph.NotifyEdge(previous,current,AnimationEnum.KeepPaintAnimation);
                     }
                     graph.NotifyNode(current,AnimationEnum.KeepPaintAnimation, Constants.CyanColor);
-                    graph.NotifyNode(current,AnimationEnum.UpdateAnimation, default, "C = "+ cost );
+                    //TODO: Andresito esto es una cochinada pero se va a quedar así hasta que arreglemos los problemas de concurrencia para el texto
+                    graph.NotifyNode(current,AnimationEnum.UpdateAnimation, default, "C = "+ cost , "Visito el nodo " + graph.Nodes[current].Value );
 
                     foreach (int key in graph.AdjacentMtx[current].Keys)
                     {
