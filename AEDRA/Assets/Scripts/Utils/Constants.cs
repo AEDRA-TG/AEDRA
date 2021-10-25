@@ -50,13 +50,37 @@ namespace Utils
         public const string TooltipName = "Tooltip";
         public const string MenusParentName = "ProjectionLayout";
         public const string ListContentName = "Content";
+        public const string ReferencePointName = "ReferencePoint";
+        public const string ChooserName = "Chooser";
+        
+        #endregion
+
+        /// <summary>
+        /// Targets screen gameobject names
+        /// </summary>
+        #region TARGETS GAMEOBJECTS NAMES
+
         public const string TargetListName = "TargetList";
         public const string TargetDetailsName = "TargetDetails";
         public const string TargetsLayoutName = "TargetsLayout";
-        public const string ReferencePointName = "ReferencePoint";
-        public const string ChooserName = "Chooser";
         public const string BackOptionsMenuParent = "BackButton";
         public const string TargetsPopupMenuName = "PopupMenu";
+        public const string TargetName = "Target_";
+        public const string TargetItemIconName = "TargetIcon";
+        public const string TargetDetailsBackFaceButton = "BackFaceButton";
+        public const string TargetDetailsNextFaceButton = "NextFaceButton";
+        public const string TargetDetailsDownloadTargetButton = "DownloadTargetButton";
+        public const string FaceDetailsName = "FaceName";
+        public const string FaceDetailsDescription ="FaceDescription";
+        public const string FaceDetailsImage ="FaceImage";
+
+        #endregion
+
+        /// <summary>
+        /// Tutorials screen gameobject names
+        /// </summary>
+        #region TUTORIALS GAMEOBJECT NAMES
+
         public const string TutorialListName = "TutorialList";
         public const string TutorialDetailsName = "TutorialDetails";
         public const string TutorialLayoutName = "TutorialsLayout";
@@ -67,6 +91,7 @@ namespace Utils
         public const string IconPlayName = "IconPlay";
         public const string IconPauseName = "IconPause";
         public const string ReproductionButtonName = "ReproductionButton";
+
         #endregion
 
         /// <summary>
