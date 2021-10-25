@@ -99,13 +99,13 @@ namespace View.GUI
             prefab = Instantiate(prefab,this.transform);
             prefab.transform.localPosition = position;
             prefab.transform.localRotation = Quaternion.Euler(90,0,0);
+            prefab.name = Constants.EdgeName;
             if(dto.Name == "Edge"){
                 prefab = prefab.transform.Find("Cylinder").gameObject;
             }
             prefab.name = dto.GetUnityId();
             ProjectedObject createdObject = prefab.GetComponent<ProjectedObject>();
             createdObject.SetDTO(dto);
-
             // Activate selectable object if is Graph element
             if(dto is GraphNodeDTO){
                 createdObject.SetSelectable(true);
@@ -134,7 +134,13 @@ namespace View.GUI
         /// <param name="objectToBeDeleted"></param>
         public void DeleteObject(ProjectedObject objectToBeDeleted){
             this.ProjectedObjects.Remove(objectToBeDeleted);
-            Destroy(objectToBeDeleted.gameObject);
+            if(objectToBeDeleted is ProjectedEdge){
+                Destroy(objectToBeDeleted.gameObject.transform.parent.gameObject);
+            }
+            else{
+                Destroy(objectToBeDeleted.gameObject);
+            }
+            
         }
 
         /// <summary>
