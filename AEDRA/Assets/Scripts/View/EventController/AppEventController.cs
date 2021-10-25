@@ -194,7 +194,7 @@ namespace View.EventController
         }
 
         private void LoadDataStructure(Transform unityParent){
-            GameObject prefab = Resources.Load(Constants.PrefabPath + "StructureProjection") as GameObject;
+            GameObject prefab = Resources.Load(Constants.PrefabPath + Constants.ObjectsParentName) as GameObject;
             _structureProjection = Instantiate(prefab);
             _structureProjection.name = Constants.ObjectsParentName;
             _structureProjection.transform.parent = unityParent;

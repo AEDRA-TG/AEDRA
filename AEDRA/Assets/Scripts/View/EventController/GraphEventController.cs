@@ -115,13 +115,15 @@ namespace View.EventController
         /// </summary>
         public void OnTouchConnectNodes()
         {
-            List<ProjectedObject> objs = _selectionController.GetSelectedObjects();
-            if (objs.Count == 2)
+            List<ProjectedObject> objs = new List<ProjectedObject>(_selectionController.GetSelectedObjects());
+            if (objs.Count >= 2)
             {
-                if(objs[0].GetType() == typeof(ProjectedNode) && objs[1].GetType() == typeof(ProjectedNode)){
-                    EdgeDTO edgeDTO = new EdgeDTO(0, Utilities.GenerateRandomDouble(), objs[0].Dto.Id, objs[1].Dto.Id);
-                    ConnectElementsCommand connectCommand = new ConnectElementsCommand(edgeDTO);
-                    CommandController.GetInstance().Invoke(connectCommand);
+                for(int i = 1; i < objs.Count; i++){
+                    if(objs[0].GetType() == typeof(ProjectedNode) && objs[i].GetType() == typeof(ProjectedNode)){
+                        EdgeDTO edgeDTO = new EdgeDTO(0, Utilities.GenerateRandomDouble(), objs[0].Dto.Id, objs[i].Dto.Id);
+                        ConnectElementsCommand connectCommand = new ConnectElementsCommand(edgeDTO);
+                        CommandController.GetInstance().Invoke(connectCommand);
+                    }
                 }
             }
             else

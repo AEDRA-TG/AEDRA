@@ -90,7 +90,7 @@ namespace Model.TreeModel
         public void DeleteElement(int value){
             if(value > this.Value){
                 if(this.RightChild != null){
-                    if(value == this.RightChild.Value){
+                    if(value == this.RightChild.Value && this.RightChild.IsLeaf()){
                         NotifyNode(null, this, AnimationEnum.UpdateAnimation);
                         NotifyEdge(this, this.RightChild, AnimationEnum.DeleteAnimation);
                         NotifyNode(this, this.RightChild, AnimationEnum.DeleteAnimation);
@@ -105,7 +105,7 @@ namespace Model.TreeModel
             }
             else if(value < this.Value){
                 if(this.LeftChild != null){
-                    if(value == this.LeftChild.Value){
+                    if(value == this.LeftChild.Value && this.LeftChild.IsLeaf()){
                         NotifyNode(null, this, AnimationEnum.UpdateAnimation);
                         NotifyEdge(this, this.LeftChild, AnimationEnum.DeleteAnimation);
                         NotifyNode(this, this.LeftChild, AnimationEnum.DeleteAnimation);
