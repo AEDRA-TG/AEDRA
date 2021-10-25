@@ -32,7 +32,7 @@ namespace View.EventController
         {
             foreach (Target target in _targets)
             {
-                Transform parent = GameObject.Find(Constants.TargetListContentName).transform;
+                Transform parent = GameObject.Find(Constants.ListContentName).transform;
                 GameObject item = Instantiate(targetItemPrefab, Vector3.zero, Quaternion.identity, parent);
                 item.transform.localPosition = Vector3.zero;
                 item.GetComponentInChildren<Text>().text = target.Name;
