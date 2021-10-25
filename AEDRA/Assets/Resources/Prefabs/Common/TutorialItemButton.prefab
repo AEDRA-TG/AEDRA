@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1451153110928131382}
   - component: {fileID: 7848337391570030707}
   m_Layer: 0
-  m_Name: TargetIcon
+  m_Name: TutorialIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 6340856021511729382}
   - component: {fileID: 385972885394820480}
   m_Layer: 0
-  m_Name: TargetItemButton
+  m_Name: TutorialItemButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -312,7 +312,7 @@ GameObject:
   - component: {fileID: 5603506969113872358}
   - component: {fileID: 8644061327477496948}
   m_Layer: 0
-  m_Name: TargetName
+  m_Name: TutorialName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -391,7 +391,7 @@ GameObject:
   - component: {fileID: 4989080885936586989}
   - component: {fileID: 971556289901954417}
   m_Layer: 0
-  m_Name: TargetButtonIcon
+  m_Name: TutorialButtonIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
