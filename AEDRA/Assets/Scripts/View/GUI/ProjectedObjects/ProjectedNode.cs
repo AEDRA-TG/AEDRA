@@ -87,21 +87,6 @@ namespace View.GUI.ProjectedObjects
             MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
             return mesh.material.DOColor(GetColorToUse(),0);
         }
-
-        private Color GetColorToUse(){
-            Color colorToUse;
-            switch(base.Dto.Operation){
-                case AnimationEnum.PaintValueFoundAnimation: colorToUse = Constants.ValueFoundColor;
-                    break;
-                case AnimationEnum.PaintAnimation: colorToUse = Constants.VisitedObjectColor;
-                    break;
-                case AnimationEnum.KeepPaintAnimation: colorToUse = Constants.VisitedObjectColor;
-                    break;
-                default: colorToUse = Constants.BaseObjectColor;
-                    break;
-            }
-            return colorToUse;
-        }
         public override void Move(Vector3 coordinates){
             gameObject.transform.localPosition = coordinates;
         }

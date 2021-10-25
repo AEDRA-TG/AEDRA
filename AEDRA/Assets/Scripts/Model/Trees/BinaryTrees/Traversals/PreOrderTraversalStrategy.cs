@@ -32,10 +32,6 @@ namespace Model.TreeModel.BinaryTree.Traversals
             node.NotifyNode(parent, node, AnimationEnum.KeepPaintAnimation);
             PreOrder(node.LeftChild, node);
             PreOrder(node.RightChild, node);
-            if(parent!=null)
-            {
-                node.NotifyEdge(parent, node, AnimationEnum.UnPaintAnimation);
-            }
         }
     }
 }

@@ -2,6 +2,7 @@ using UnityEngine;
 using DG.Tweening;
 using Utils;
 using SideCar.DTOs;
+using Utils.Enums;
 
 namespace View.GUI.ProjectedObjects
 {
@@ -80,16 +81,16 @@ namespace View.GUI.ProjectedObjects
 
         public override Tween PaintAnimation(){
             MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
-            return mesh.material.DOColor(Constants.VisitedObjectColor,base.AnimationTime).OnComplete( () => mesh.material.DOColor(Color.white, base.AnimationTime) );
+            return mesh.material.DOColor(GetColorToUse(),base.AnimationTime).OnComplete( () => mesh.material.DOColor(Color.white, base.AnimationTime) );
         }
         public override Tween KeepPaintAnimation(){
             MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
-            return mesh.material.DOColor(Constants.VisitedObjectColor,base.AnimationTime);
+            return mesh.material.DOColor(GetColorToUse(),base.AnimationTime);
         }
 
         public override Tween UnPaintAnimation(){
             MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
-            return mesh.material.DOColor(Constants.VisitedObjectColor,base.AnimationTime);
+            return mesh.material.DOColor(GetColorToUse(),base.AnimationTime);
         }
 
         public override void Move(Vector3 coordinates){

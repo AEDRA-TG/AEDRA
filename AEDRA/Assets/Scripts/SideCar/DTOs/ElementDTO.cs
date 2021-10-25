@@ -59,6 +59,7 @@ namespace SideCar.DTOs
         }
 
         public virtual void UpdateProperties(ElementDTO DTO){
+            Operation = DTO.Operation;
         }
     }
 }

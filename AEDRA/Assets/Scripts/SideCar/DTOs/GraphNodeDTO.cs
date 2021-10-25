@@ -32,7 +32,7 @@ namespace SideCar.DTOs
             if(DTO.Info != default){
                 base.Info = updatedDTO.Info;
             }
-            base.Operation = DTO.Operation;
+            base.UpdateProperties(DTO);
         }
     }
 }

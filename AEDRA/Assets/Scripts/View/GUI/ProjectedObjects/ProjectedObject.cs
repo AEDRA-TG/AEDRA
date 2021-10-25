@@ -152,6 +152,21 @@ namespace View.GUI.ProjectedObjects
             }
         }
 
+        public Color GetColorToUse(){
+            Color colorToUse;
+            switch(Dto.Operation){
+                case AnimationEnum.PaintValueFoundAnimation: colorToUse = Constants.ValueFoundColor;
+                    break;
+                case AnimationEnum.PaintAnimation: colorToUse = Constants.VisitedObjectColor;
+                    break;
+                case AnimationEnum.KeepPaintAnimation: colorToUse = Constants.VisitedObjectColor;
+                    break;
+                default: colorToUse = Constants.BaseObjectColor;
+                    break;
+            }
+            return colorToUse;
+        }
+
         public override bool Equals(object other)
         {
             return Equals(other as ProjectedObject);
