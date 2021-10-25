@@ -19,6 +19,7 @@ namespace Utils
         public static string ConstantsFilePath = Application.persistentDataPath + "/Variables.json";
         public static string TargetsStreamingFilePath = Application.streamingAssetsPath + "/ConfigFiles/Targets.json";
         public static string TargetsFilePath = Application.persistentDataPath + "/Targets.json";
+        public static string TutorialsFilePath = Application.persistentDataPath + "/Tutorials.json";
         public const string PrefabPath = "Prefabs/ProjectedObjects/";
         public static string IconTargetResourcePath = "Icon/Targets/";
         public static string ImageTargetResourcePath = "Image/Targets/";
@@ -47,15 +48,17 @@ namespace Utils
         public const string HelpButtonMenuName = "HelpButtonMenu";
         public const string TooltipName = "Tooltip";
         public const string MenusParentName = "ProjectionLayout";
-        public const string TargetListContentName = "Content";
+        public const string ListContentName = "Content";
         public const string TargetListName = "TargetList";
         public const string TargetDetailsName = "TargetDetails";
         public const string TargetsLayoutName = "TargetsLayout";
         public const string ReferencePointName = "ReferencePoint";
         public const string ChooserName = "Chooser";
         public const string BackOptionsMenuParent = "BackButton";
-
         public const string TargetsPopupMenuName = "PopupMenu";
+        public const string TutorialListName = "TutorialList";
+        public const string TutorialDetailsName = "TutorialDetails";
+        public const string TutorialLayoutName = "TutorialsLayout";
 
         #endregion
 
