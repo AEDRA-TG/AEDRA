@@ -32,17 +32,17 @@ namespace View.EventController
                 GameObject item = Instantiate(tutorialItemPrefab, Vector3.zero, Quaternion.identity, parent);
                 item.transform.localPosition = Vector3.zero;
                 item.GetComponentInChildren<Text>().text = tutorial.Name;
-                item.name= "Tutorial_"+tutorial.Name;
-                item.transform.Find("TargetIcon").transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>(Constants.IconTargetResourcePath + tutorial.ResourceIconName);
+                item.name= Constants.TutorialName+tutorial.Name;
+                item.transform.Find(Constants.TutorialItemIconName).transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>(Constants.IconResourceFolder + tutorial.ResourceIconName);
                 item.GetComponent<Button>()?.onClick.AddListener(delegate() {OnTouchViewTutorialDetails(tutorial);});
             }
         }
 
         private void OnTouchViewTutorialDetails(Tutorial tutorial){
             ToggleTutorialView(true);
-            GameObject title = GameObject.Find("Title");
+            GameObject title = GameObject.Find(Constants.TitleName);
             title.GetComponent<Text>().text = tutorial.Name;
-            GameObject videoControl = GameObject.Find("VideoControl");
+            GameObject videoControl = GameObject.Find(Constants.VideoControlName);
             //videoControl.GetComponent<UnityEngine.Video.VideoPlayer>().url = tutorial.VideoURL;
         }
 
@@ -56,14 +56,25 @@ namespace View.EventController
         }
 
         public void OnTouchReproductionButton(){
-            GameObject reproductionButton = GameObject.Find("ReproductionButton");
             if(_videoPlayer.isPlaying){
-                //reproductionButton.GetComponentInChildren<Immage>().sprite = 
+                ToggleReproductionIcon(true);
                 _videoPlayer.Pause();
             }
             else{
+                ToggleReproductionIcon(false);
                 _videoPlayer.Play();
             }
+        }
+
+        public void OnTouchRestartVideoButton(){
+            _videoPlayer.Stop();
+            ToggleReproductionIcon(true);
+        }
+
+        private void ToggleReproductionIcon(bool state){
+            GameObject reproductionButton = GameObject.Find(Constants.ReproductionButtonName);
+            reproductionButton.transform.Find(Constants.IconPlayName).gameObject.SetActive(state);
+            reproductionButton.transform.Find(Constants.IconPauseName).gameObject.SetActive(!state);
         }
     }
 }

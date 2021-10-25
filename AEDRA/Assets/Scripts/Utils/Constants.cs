@@ -24,6 +24,7 @@ namespace Utils
         public static string IconTargetResourcePath = "Icon/Targets/";
         public static string ImageTargetResourcePath = "Image/Targets/";
         public static string DownloadTargetFolder = "Marcadores_AEDRA";
+        public static string IconResourceFolder = "Icon/";
         
         #endregion
 
@@ -59,7 +60,13 @@ namespace Utils
         public const string TutorialListName = "TutorialList";
         public const string TutorialDetailsName = "TutorialDetails";
         public const string TutorialLayoutName = "TutorialsLayout";
-
+        public const string TutorialName = "Tutorial_";
+        public const string TutorialItemIconName = "TutorialIcon";
+        public const string TitleName = "Title";
+        public const string VideoControlName = "VideoControl";
+        public const string IconPlayName = "IconPlay";
+        public const string IconPauseName = "IconPause";
+        public const string ReproductionButtonName = "ReproductionButton";
         #endregion
 
         /// <summary>
