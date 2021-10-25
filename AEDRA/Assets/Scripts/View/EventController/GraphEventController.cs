@@ -83,16 +83,19 @@ namespace View.EventController
         /// </summary>
         public void OnTouchAddNode()
         {
-            List<ProjectedObject> objs = _selectionController.GetSelectedObjects();
-            string value = FindObjectOfType<InputField>().text;
-            List<int> neighbors = new List<int>();
-            GraphNodeDTO nodeDTO = new GraphNodeDTO(0, value, neighbors);
-            if (objs.Count == 1 && objs[0].GetType() == typeof(ProjectedNode))
-            {
-                nodeDTO.ElementToConnectID = objs[0].Dto.Id;
+            if(ValidateUserInput()){
+                List<ProjectedObject> objs = _selectionController.GetSelectedObjects();
+                string value = FindObjectOfType<InputField>().text;
+                base.ChangeToMenu(MenuEnum.MainMenu);
+                List<int> neighbors = new List<int>();
+                GraphNodeDTO nodeDTO = new GraphNodeDTO(0, value, neighbors);
+                if (objs.Count == 1 && objs[0].GetType() == typeof(ProjectedNode))
+                {
+                    nodeDTO.ElementToConnectID = objs[0].Dto.Id;
+                }
+                AddElementCommand addCommand = new AddElementCommand(nodeDTO);
+                CommandController.GetInstance().Invoke(addCommand);
             }
-            AddElementCommand addCommand = new AddElementCommand(nodeDTO);
-            CommandController.GetInstance().Invoke(addCommand);
         }
 
         /// <summary>
@@ -101,12 +104,17 @@ namespace View.EventController
         public void OnTouchDeleteNode()
         {
             List<ProjectedObject> objs = new List<ProjectedObject>(_selectionController.GetSelectedObjects());
-            foreach(ProjectedObject selectedObject in objs){
-                if(selectedObject.GetType() == typeof(ProjectedNode)){
-                    GraphNodeDTO nodeDTO = (GraphNodeDTO)selectedObject.Dto;
-                    DeleteElementCommand deleteCommand = new DeleteElementCommand(nodeDTO);
-                    CommandController.GetInstance().Invoke(deleteCommand);
+            if(objs.Count > 0){
+                foreach(ProjectedObject selectedObject in objs){
+                    if(selectedObject.GetType() == typeof(ProjectedNode)){
+                        GraphNodeDTO nodeDTO = (GraphNodeDTO)selectedObject.Dto;
+                        DeleteElementCommand deleteCommand = new DeleteElementCommand(nodeDTO);
+                        CommandController.GetInstance().Invoke(deleteCommand);
+                    }
                 }
+            }
+            else{
+                base.ShowNotification("Debes seleccionar al menos 1 nodo para eliminar");
             }
         }
 
@@ -128,8 +136,7 @@ namespace View.EventController
             }
             else
             {
-                //TODO: delete this
-                Debug.Log("Numero de nodos seleccionados inválido");
+                base.ShowNotification("Debes seleccionar 2 o mas nodos para conectar");
             }
         }
 
@@ -148,8 +155,7 @@ namespace View.EventController
             }
             else
             {
-                //TODO: delete this
-                Debug.Log("Numero de nodos seleccionados inválido");
+                base.ShowNotification("Debes seleccionar un nodo");
             }
         }
 
@@ -168,8 +174,7 @@ namespace View.EventController
             }
             else
             {
-                //TODO: delete this
-                Debug.Log("Numero de nodos seleccionados inválido");
+                base.ShowNotification("Debes seleccionar un nodo");
             }
         }
 
@@ -184,8 +189,20 @@ namespace View.EventController
             }
             else
             {
-                Debug.Log("Numero de nodos seleccionados inválido");
+                base.ShowNotification("Debes seleccionar 2 nodos");
             }
+        }
+
+        private bool ValidateUserInput(){
+            bool isValid = false;
+            string input = FindObjectOfType<InputField>().text;
+            if(!input.Equals("")){
+                isValid = true;
+            }
+            else{
+                base.ShowNotification("La entrada no puede estar vacia");
+            }
+            return isValid;
         }
     }
 }

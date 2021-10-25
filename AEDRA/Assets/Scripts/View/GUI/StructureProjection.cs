@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using SideCar.DTOs;
 using UnityEngine;
+using UnityEngine.UI;
 using Utils;
 using Utils.Enums;
 using View.Animations;
 using View.Animations.Algorithms;
 using View.GUI.ProjectedObjects;
+using DG.Tweening;
 
 namespace View.GUI
 {
@@ -44,6 +46,8 @@ namespace View.GUI
         /// </summary>
         private Transform _referencePoint;
 
+        private GameObject _notification;
+
         public void Awake()
         {
             DTOs = new List<ElementDTO>();
@@ -59,6 +63,7 @@ namespace View.GUI
                 { OperationEnum.Algorithm, new AlgorithmAnimation()}
             };
             _referencePoint = GameObject.Find(Constants.ReferencePointName).transform;
+            _notification = GameObject.Find(Constants.NotificationName).gameObject;
         }
 
         /// <summary>
@@ -115,6 +120,15 @@ namespace View.GUI
             }
             ProjectedObjects.Add(createdObject);
             return createdObject;
+        }
+
+        public void ShowNotification(string notificationText)
+        {
+            _notification.GetComponentInChildren<Text>().text = notificationText;
+            Sequence sequence = DOTween.Sequence();
+            sequence.Append(_notification.transform.DOScale(1f, 1));
+            sequence.AppendInterval(1);
+            sequence.Append(_notification.transform.DOScale(0f, 1));
         }
 
         /// <summary>

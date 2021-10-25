@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Controller;
 using UnityEngine;
@@ -50,7 +51,11 @@ namespace View.EventController
 
         public bool IsAnimationControlEnable;
 
+        public static event Action<string> NotifyNotification;
 
+        public void ShowNotification(string notification){
+            NotifyNotification?.Invoke(notification);
+        }
 
         /// <summary>
         /// Method that executes when a target is detected by the camera

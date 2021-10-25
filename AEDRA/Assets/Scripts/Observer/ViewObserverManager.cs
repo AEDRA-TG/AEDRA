@@ -24,6 +24,7 @@ namespace Observer
             Command.OperationCompleted += SaveDataStructure;
             Command.OperationCompleted += CleanUserSelection;
             DataStructureRepository.CleanStructure += CleanDataStructure;
+            AppEventController.NotifyNotification += ShowNotification;
         }
 
         /// <summary>
@@ -35,6 +36,7 @@ namespace Observer
             Command.OperationCompleted -= SaveDataStructure;
             Command.OperationCompleted -= CleanUserSelection;
             DataStructureRepository.CleanStructure -= CleanDataStructure;
+            AppEventController.NotifyNotification -= ShowNotification;
         }
 
         /// <summary>
@@ -96,9 +98,9 @@ namespace Observer
         /// Method to show a text when is required
         /// </summary>
         /// <param name="notificationText"></param>
-        private void CreateNotification(string notificationText){
-            //StructureProjection projection = GameObject.FindObjectOfType<StructureProjection>();
-            //projection.ShowNotification(notificationText);
+        private void ShowNotification(string notificationText){
+            StructureProjection projection = GameObject.FindObjectOfType<StructureProjection>();
+            projection.ShowNotification(notificationText);
         }
     }
 }

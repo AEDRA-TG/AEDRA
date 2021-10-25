@@ -59,24 +59,28 @@ namespace View.EventController
         /// Method to detect when the user taps on add node button
         /// </summary>
         public void OnTouchAddNode(){
-            //!!TODO: this should accept other types of values
-            int value = Int32.Parse(FindObjectOfType<InputField>().text);
-            BinarySearchNodeDTO nodeDTO = new BinarySearchNodeDTO(0, value, null, true, null, null);
-            AddElementCommand addCommand = new AddElementCommand(nodeDTO);
-            CommandController.GetInstance().Invoke(addCommand);
-            base.ChangeToMenu(MenuEnum.MainMenu);
+            if(ValidateUserInput()){
+                //!!TODO: this should accept other types of values
+                int value = Int32.Parse(FindObjectOfType<InputField>().text);
+                BinarySearchNodeDTO nodeDTO = new BinarySearchNodeDTO(0, value, null, true, null, null);
+                AddElementCommand addCommand = new AddElementCommand(nodeDTO);
+                CommandController.GetInstance().Invoke(addCommand);
+                base.ChangeToMenu(MenuEnum.MainMenu);
+            }
         }
 
         /// <summary>
         /// Method to detect when the user taps on delete node button
         /// </summary>
         public void OnTouchDeleteNode(){
-            //!!TODO: this should accept other types of values
-            int value = Int32.Parse(FindObjectOfType<InputField>().text);
-            BinarySearchNodeDTO nodeDTO = new BinarySearchNodeDTO(0, value, null, true, null, null);
-            DeleteElementCommand deleteCommand = new DeleteElementCommand(nodeDTO);
-            CommandController.GetInstance().Invoke(deleteCommand);
-            base.ChangeToMenu(MenuEnum.MainMenu);
+            if(ValidateUserInput()){
+                //!!TODO: this should accept other types of values
+                int value = Int32.Parse(FindObjectOfType<InputField>().text);
+                BinarySearchNodeDTO nodeDTO = new BinarySearchNodeDTO(0, value, null, true, null, null);
+                DeleteElementCommand deleteCommand = new DeleteElementCommand(nodeDTO);
+                CommandController.GetInstance().Invoke(deleteCommand);
+                base.ChangeToMenu(MenuEnum.MainMenu);
+            }
         }
 
         /// <summary>
@@ -110,12 +114,26 @@ namespace View.EventController
         /// Method to detect when the user taps on search value
         /// </summary>
         public void OnTouchSearchValue(){
-            //!!TODO: this should accept other types of values
-            int value = Int32.Parse(FindObjectOfType<InputField>().text);
-            base.ChangeToMenu(MenuEnum.AnimationControlMenu);
-            ElementDTO elementToSearch = new BinarySearchNodeDTO(0, value, null, true, null, null);
-            DoAlgorithmCommand algorithmCommand = new DoAlgorithmCommand(AlgorithmEnum.BinarySearch,new List<ElementDTO>(){elementToSearch});
-            CommandController.GetInstance().Invoke(algorithmCommand);
+            if(ValidateUserInput()){
+                //!!TODO: this should accept other types of values
+                int value = Int32.Parse(FindObjectOfType<InputField>().text);
+                base.ChangeToMenu(MenuEnum.AnimationControlMenu);
+                ElementDTO elementToSearch = new BinarySearchNodeDTO(0, value, null, true, null, null);
+                DoAlgorithmCommand algorithmCommand = new DoAlgorithmCommand(AlgorithmEnum.BinarySearch,new List<ElementDTO>(){elementToSearch});
+                CommandController.GetInstance().Invoke(algorithmCommand);
+            }
+        }
+
+        private bool ValidateUserInput(){
+            bool isValid = false;
+            string input = FindObjectOfType<InputField>().text;
+            if(!input.Equals("")){
+                isValid = true;
+            }
+            else{
+                base.ShowNotification("La entrada no puede estar vacia");
+            }
+            return isValid;
         }
     }
 }
