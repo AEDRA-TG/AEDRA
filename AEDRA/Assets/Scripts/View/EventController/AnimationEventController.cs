@@ -67,15 +67,8 @@ namespace View.EventController
 
         public void OnTouchPreviousAnimation(){
             if((int)this._actualSequence.id > 0){
-                if(_actualSequence.Elapsed()%2 == 0){
-                    _actualSequence.id =  (int)_actualSequence.id-_animationDuration;
-                    _actualSequence.Goto((int)_actualSequence.id*_animationDuration);
-                }
-                else{
-                    _actualSequence.Goto((int)_actualSequence.id*_animationDuration);
-                    _actualSequence.id =  (int)_actualSequence.id-_animationDuration;
-                }
-
+                _actualSequence.id =  (int)_actualSequence.id-_animationDuration;
+                _actualSequence.Goto((int)_actualSequence.id*_animationDuration);
             }
         }
 

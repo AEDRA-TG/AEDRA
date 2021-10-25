@@ -25,6 +25,12 @@ namespace View.Animations
                 actualTween.id = animationId;
                 actualTween.OnComplete(()=> animationList.id = (int)actualTween.id);
                 animationList.Append(actualTween);
+                if(animationId == structureProjection.DTOs.Count){
+                    Tween finalTween = projectedObject.Animations[dto.Operation]();
+                    finalTween.id = animationId;
+                    finalTween.OnComplete(()=> animationList.id = (int)finalTween.id);
+                    animationList.Append(finalTween);
+                }
                 animationId++;
             }
             UpdateSecuenceEvent.Invoke(animationList);

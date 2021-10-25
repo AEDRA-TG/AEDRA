@@ -109,7 +109,6 @@ namespace View.GUI.ProjectedObjects
                 tween.Join(_info.transform.DOScale(0.02f, base.AnimationTime).OnStart(()=> _info.text = Dto.Info) );
             }
             if(base.Dto.Step != null){
-                Debug.Log("Prueba");
                 TextMesh stepText = GameObject.Find("StepText")?.GetComponent<TextMesh>();
                 if(stepText != null){
                     stepText.transform.position = GameObject.Find("StructureProjection").transform.position;
