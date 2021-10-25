@@ -20,7 +20,6 @@ namespace View.Animations.Algorithms
                 ProjectedObject projectedObject = GameObject.Find(dto.GetUnityId()).GetComponent<ProjectedObject>();
                 projectedObject.Dto.Info = dto.Info;
                 projectedObject.Dto.Step = dto.Step;
-
                 Tween actualTween = projectedObject.Animations[dto.Operation]();
                 if( actualTween != null){
                     actualTween.id = animationId;

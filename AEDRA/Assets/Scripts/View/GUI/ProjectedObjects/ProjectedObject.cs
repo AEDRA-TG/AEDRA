@@ -161,6 +161,8 @@ namespace View.GUI.ProjectedObjects
                     break;
                 case AnimationEnum.KeepPaintAnimation: colorToUse = Constants.VisitedObjectColor;
                     break;
+                case AnimationEnum.UpdateAnimation: colorToUse = Constants.VisitedObjectColor;
+                    break;
                 default: colorToUse = Constants.BaseObjectColor;
                     break;
             }
