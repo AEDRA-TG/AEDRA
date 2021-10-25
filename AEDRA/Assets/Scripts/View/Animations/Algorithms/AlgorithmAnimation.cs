@@ -18,7 +18,6 @@ namespace View.Animations.Algorithms
             StructureProjection structureProjection = GameObject.FindObjectOfType<StructureProjection>();
             foreach (ElementDTO dto in structureProjection.DTOs){
                 ProjectedObject projectedObject = GameObject.Find(dto.GetUnityId()).GetComponent<ProjectedObject>();
-                //projectedObject.AnimationTime = 1;
                 projectedObject.Dto.Color = dto.Color;
                 projectedObject.Dto.Info = dto.Info;
                 projectedObject.Dto.Step = dto.Step;
@@ -37,11 +36,6 @@ namespace View.Animations.Algorithms
                     }
                 }
             }
-            /*foreach (ElementDTO dto in structureProjection.DTOs){
-                ProjectedObject projectedObject = GameObject.Find(dto.GetUnityId()).GetComponent<ProjectedObject>();
-                projectedObject.AnimationTime = 0;
-                animationList.Append(projectedObject.UnPaintAnimation());
-            }*/
 
             UpdateSecuenceEvent.Invoke(animationList);
         }

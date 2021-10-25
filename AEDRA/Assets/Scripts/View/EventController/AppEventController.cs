@@ -119,7 +119,7 @@ namespace View.EventController
         /// <param name="menu">Id of the new menu</param>
         public void ChangeToMenu(MenuEnum menu){
             if(!IsAnimationControlEnable){
-                MenuEnumParameter menuEnumParameter = new MenuEnumParameter();
+                MenuEnumParameter menuEnumParameter = gameObject.GetComponent<MenuEnumParameter>();
                 menuEnumParameter.SetMenu(menu);
                 ChangeToMenu(menuEnumParameter);
             }

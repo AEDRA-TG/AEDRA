@@ -5,6 +5,7 @@ using Controller;
 using Utils.Enums;
 using UnityEngine.UI;
 using System;
+using Utils.Parameters;
 
 namespace View.EventController
 {
@@ -25,6 +26,7 @@ namespace View.EventController
                 { MenuEnum.AnimationControlMenu, gameObject.transform.Find("AnimationControlMenu").gameObject}
             };
             base._activeSubMenu = MenuEnum.MainMenu;
+            base.gameObject.AddComponent<MenuEnumParameter>();
             base.ChangeToMenu(MenuEnum.MainMenu);
         }
 
