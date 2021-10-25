@@ -29,9 +29,9 @@ namespace Model.GraphModel.Algorithms.ShortestPath
                     if(graph.AdjacentMtx[previous].ContainsKey(current)){
                         graph.NotifyEdge(previous,current,AnimationEnum.KeepPaintAnimation);
                     }
-                    graph.NotifyNode(current,AnimationEnum.KeepPaintAnimation, Constants.CyanColor);
+                    graph.NotifyNode(current,AnimationEnum.KeepPaintAnimation);
                     //TODO: Andresito esto es una cochinada pero se va a quedar así hasta que arreglemos los problemas de concurrencia para el texto
-                    graph.NotifyNode(current,AnimationEnum.UpdateAnimation, default, "C = "+ cost , "Visito el nodo " + graph.Nodes[current].Value );
+                    graph.NotifyNode(current,AnimationEnum.UpdateAnimation, "C = "+ cost , "Visito el nodo " + graph.Nodes[current].Value );
 
                     foreach (int key in graph.AdjacentMtx[current].Keys)
                     {

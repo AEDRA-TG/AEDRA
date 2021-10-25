@@ -39,8 +39,6 @@ namespace SideCar.DTOs
         /// </summary>
         public AnimationEnum Operation {get; set;}
 
-        public Color Color {get; set;}
-
         public string Info {get;  set;}
 
         public string Step {get; set;}

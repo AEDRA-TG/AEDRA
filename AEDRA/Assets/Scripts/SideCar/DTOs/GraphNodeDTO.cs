@@ -32,9 +32,7 @@ namespace SideCar.DTOs
             if(DTO.Info != default){
                 base.Info = updatedDTO.Info;
             }
-            if(DTO.Color != default){
-                base.Color = updatedDTO.Color;
-            }
+            base.Operation = DTO.Operation;
         }
     }
 }

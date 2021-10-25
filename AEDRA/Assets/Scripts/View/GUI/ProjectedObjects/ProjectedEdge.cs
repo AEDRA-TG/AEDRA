@@ -80,16 +80,16 @@ namespace View.GUI.ProjectedObjects
 
         public override Tween PaintAnimation(){
             MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
-            return mesh.material.DOColor(Color.cyan,base.AnimationTime).OnComplete( () => mesh.material.DOColor(Color.white, base.AnimationTime) );
+            return mesh.material.DOColor(Constants.VisitedObjectColor,base.AnimationTime).OnComplete( () => mesh.material.DOColor(Color.white, base.AnimationTime) );
         }
         public override Tween KeepPaintAnimation(){
             MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
-            return mesh.material.DOColor(Color.cyan,base.AnimationTime);
+            return mesh.material.DOColor(Constants.VisitedObjectColor,base.AnimationTime);
         }
 
         public override Tween UnPaintAnimation(){
             MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
-            return mesh.material.DOColor(Color.white,base.AnimationTime);
+            return mesh.material.DOColor(Constants.VisitedObjectColor,base.AnimationTime);
         }
 
         public override void Move(Vector3 coordinates){

@@ -63,7 +63,8 @@ namespace View.GUI.ProjectedObjects
                 {AnimationEnum.KeepPaintAnimation,KeepPaintAnimation},
                 {AnimationEnum.UnPaintAnimation, UnPaintAnimation},
                 {AnimationEnum.PaintAnimation, PaintAnimation},
-                {AnimationEnum.UpdateAnimation, UpdateAnimation}
+                {AnimationEnum.UpdateAnimation, UpdateAnimation},
+                {AnimationEnum.PaintValueFoundAnimation, KeepPaintAnimation}
             };
         }
 

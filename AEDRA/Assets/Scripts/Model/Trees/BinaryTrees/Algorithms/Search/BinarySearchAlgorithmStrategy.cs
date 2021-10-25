@@ -37,11 +37,8 @@ namespace Model.TreeModel.BinaryTree.Algorithms.Search
                 BinarySearch(value, node.RightChild, node);
             }
             else{
-                node.NotifyNode(parent, node, AnimationEnum.KeepPaintAnimation);
+                node.NotifyNode(parent, node, AnimationEnum.PaintValueFoundAnimation);
                 return;
-            }
-            if(parent != null){
-                node.NotifyNode(parent, node, AnimationEnum.UnPaintAnimation);
             }
         }
     }

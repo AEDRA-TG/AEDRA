@@ -8,6 +8,7 @@ using Utils.Enums;
 using SideCar.DTOs;
 using View.Animations;
 using Utils;
+using View.GUI;
 
 namespace View.EventController
 {
@@ -52,7 +53,8 @@ namespace View.EventController
             }
             else
             {
-                Debug.Log("Numero de nodos seleccionados inválido");
+                StructureProjection structureProjection = FindObjectOfType<StructureProjection>(); 
+                structureProjection.ShowNotification("Debes seleccionar 2 nodos para ver el algoritmo");
             }
         }
 

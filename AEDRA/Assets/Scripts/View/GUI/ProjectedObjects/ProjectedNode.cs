@@ -3,6 +3,7 @@ using DG.Tweening;
 using Utils;
 using SideCar.DTOs;
 using Controller;
+using Utils.Enums;
 
 namespace View.GUI.ProjectedObjects
 {
@@ -75,18 +76,32 @@ namespace View.GUI.ProjectedObjects
 
         public override Tween PaintAnimation(){
             MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
-            return mesh.material.DOColor(Color.cyan,base.AnimationTime).OnComplete( () => mesh.material.DOColor(Color.white, base.AnimationTime) );
+            return mesh.material.DOColor(GetColorToUse(),base.AnimationTime).OnComplete( () => mesh.material.DOColor(Color.white, base.AnimationTime) );
         }
 
         public override Tween KeepPaintAnimation(){
             MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
-            return mesh.material.DOColor(base.Dto.Color,base.AnimationTime);
+            return mesh.material.DOColor(GetColorToUse(),base.AnimationTime);
         }
         public override Tween UnPaintAnimation(){
             MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
-            return mesh.material.DOColor(Color.white,0);
+            return mesh.material.DOColor(GetColorToUse(),0);
         }
 
+        private Color GetColorToUse(){
+            Color colorToUse;
+            switch(base.Dto.Operation){
+                case AnimationEnum.PaintValueFoundAnimation: colorToUse = Constants.ValueFoundColor;
+                    break;
+                case AnimationEnum.PaintAnimation: colorToUse = Constants.VisitedObjectColor;
+                    break;
+                case AnimationEnum.KeepPaintAnimation: colorToUse = Constants.VisitedObjectColor;
+                    break;
+                default: colorToUse = Constants.BaseObjectColor;
+                    break;
+            }
+            return colorToUse;
+        }
         public override void Move(Vector3 coordinates){
             gameObject.transform.localPosition = coordinates;
         }

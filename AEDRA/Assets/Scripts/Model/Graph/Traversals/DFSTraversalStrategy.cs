@@ -33,7 +33,7 @@ namespace Model.GraphModel.Traversals
         /// <param name="currentNode">Current node that is being visited</param>
         public void DFS(int currentNode){
             visited[currentNode] = true;
-            graph.NotifyNode(currentNode, AnimationEnum.KeepPaintAnimation, Constants.CyanColor);
+            graph.NotifyNode(currentNode, AnimationEnum.KeepPaintAnimation);
             //Traverse all neighbors of a node
             foreach (int neighboor in DFSTraversalStrategy.graph.AdjacentMtx[currentNode].Keys)
             {

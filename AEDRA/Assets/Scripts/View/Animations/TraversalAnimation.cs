@@ -27,11 +27,6 @@ namespace View.Animations
                 animationList.Append(actualTween);
                 animationId++;
             }
-            foreach (ElementDTO dto in structureProjection.DTOs){
-                ProjectedObject projectedObject = GameObject.Find(dto.GetUnityId()).GetComponent<ProjectedObject>();
-                projectedObject.AnimationTime = 0;
-                animationList.Append(projectedObject.UnPaintAnimation());
-            }
             UpdateSecuenceEvent.Invoke(animationList);
         }
     }

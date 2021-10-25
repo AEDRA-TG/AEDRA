@@ -85,7 +85,7 @@ namespace Observer
             if(projection != null){
                 Transform target = projection.transform.parent;
                 Destroy(projection);
-
+                CleanUserSelection(OperationEnum.CreateDataStructure);
                 projection = new GameObject(Constants.ObjectsParentName, typeof(StructureProjection));
                 projection.transform.parent = target;
                 projection.transform.localScale = Vector3.one;
