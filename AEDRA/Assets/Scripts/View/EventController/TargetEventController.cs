@@ -20,6 +20,8 @@ namespace View.EventController
         private GameObject _popupMenu;
         [SerializeField]
         private GameObject closePopupMenu;
+        [SerializeField]
+        private GameObject doubleConfirmation;
 
         public void Awake(){
             _targets = Utilities.DeserializeJSON<List<Target>>(Constants.TargetsFilePath);
@@ -92,9 +94,18 @@ namespace View.EventController
             closePopupMenu.SetActive(true);
         }
         public void OnTouchDownloadAll(){
+            this.doubleConfirmation.SetActive(true);
+        }
+
+        public void OnTouchConfirmDownload(){
+            this.doubleConfirmation.SetActive(false);
             foreach(Target target in this._targets){
                 OnTouchDownloadActualTarget(target);
             }
+        }
+
+        public void OnTouchCancelDownload(){
+            this.doubleConfirmation.SetActive(false);
         }
 
         public void OnTouchClosePopupMenu(){
