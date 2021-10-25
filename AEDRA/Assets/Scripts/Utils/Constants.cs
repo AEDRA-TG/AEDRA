@@ -20,6 +20,7 @@ namespace Utils
         public static string TargetsStreamingFilePath = Application.streamingAssetsPath + "/ConfigFiles/Targets.json";
         public static string TargetsFilePath = Application.persistentDataPath + "/Targets.json";
         public static string TutorialsFilePath = Application.persistentDataPath + "/Tutorials.json";
+        public static string TutorialsStreamingFilePath = Application.streamingAssetsPath + "/ConfigFiles/Tutorials.json";
         public const string PrefabPath = "Prefabs/ProjectedObjects/";
         //TODO: delete this
         public static string DijkstraFilePath = Application.persistentDataPath + "/Dijkstra.json";

@@ -110,6 +110,7 @@ namespace View.EventController
         public void OnTouchSearchValue(){
             //!!TODO: this should accept other types of values
             int value = Int32.Parse(FindObjectOfType<InputField>().text);
+            base.ChangeToMenu(MenuEnum.AnimationControlMenu);
             ElementDTO elementToSearch = new BinarySearchNodeDTO(0, value, null, true, null, null);
             DoAlgorithmCommand algorithmCommand = new DoAlgorithmCommand(AlgorithmEnum.BinarySearch,new List<ElementDTO>(){elementToSearch});
             CommandController.GetInstance().Invoke(algorithmCommand);

@@ -127,7 +127,7 @@ namespace Model.TreeModel
         /// <param name="node">Node</param>
         /// <param name="operation">Operation applied to edge</param>
         public void NotifyEdge(BinarySearchTreeNode parent, BinarySearchTreeNode node, AnimationEnum operation){
-            EdgeDTO dto = new EdgeDTO(0, node.Value, parent.Id, node.Id)
+            EdgeDTO dto = new EdgeDTO(0, "", parent.Id, node.Id)
             {
                 Operation = operation
             };
