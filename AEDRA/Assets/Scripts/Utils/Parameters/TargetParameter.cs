@@ -29,11 +29,7 @@ namespace Utils.Parameters
 
         [SerializeField] private TargetTypeEnum _targetType;
 
-        public TargetParameter(StructureEnum structure, GameObject prefabMenu, string dataFilePath){
-            this._structure = structure;
-            this._prefabMenu = prefabMenu;
-            this._dataFilePath = dataFilePath;
-        }
+        [SerializeField] private GameObject _targetProjectionInformation;
 
         public void SetStructure(StructureEnum structure){
             _structure = structure;
@@ -72,6 +68,14 @@ namespace Utils.Parameters
 
         public TargetTypeEnum GetTargetType(){
             return _targetType;
+        }
+
+        public GameObject GetTargetProjectionInformation(){
+            return _targetProjectionInformation;
+        }
+
+        public void SetTargetProjectionInformation(GameObject targetProjectionInformation){
+            _targetProjectionInformation = targetProjectionInformation;
         }
     }
 }

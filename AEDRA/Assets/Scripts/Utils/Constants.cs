@@ -58,7 +58,8 @@ namespace Utils
         public const string ChooserName = "Chooser";
         public const string ProjectionLayoutName = "ProjectionLayout";
         public const string NotificationName = "Notification";
-        
+        public const string TargetInformationName = "TargetInformation"; 
+
         #endregion
 
         /// <summary>

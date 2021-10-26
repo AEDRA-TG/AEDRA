@@ -53,6 +53,8 @@ namespace View.EventController
 
         public static event Action<string> NotifyNotification;
 
+        private GameObject _targetProjectionInformation;
+
         public void ShowNotification(string notification){
             NotifyNotification?.Invoke(notification);
         }
@@ -78,6 +80,7 @@ namespace View.EventController
                 CommandController.GetInstance().Invoke(command);
                 //Change to respective menu
                 LoadStructureMenu( targetParameter.GetPrefabMenu() );
+                AppEventController otherInstance = FindObjectOfType<AppEventController>();
             }
             _hasProjectedStructure = true;
             _activeMenu?.SetActive(true);
@@ -115,6 +118,9 @@ namespace View.EventController
                 backButtonMenu.SetActive(false);
                 GameObject hamburger = GameObject.Find(Constants.HamburgerButtonName).gameObject;
                 hamburger.SetActive(false);
+                _targetProjectionInformation?.SetActive(true);
+            }else{
+                _targetProjectionInformation?.SetActive(false);
             }
         }
 

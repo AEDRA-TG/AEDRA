@@ -16,16 +16,17 @@ namespace View.EventController
     {
         private Sequence _actualSequence;
         private int _animationDuration;
-
         private Command _command;
         public void OnEnable() {
             AlgorithmAnimation.UpdateSecuenceEvent += UpdateSequence;
             TraversalAnimation.UpdateSecuenceEvent += UpdateSequence;
+
         }
 
         public void OnDisable() {
             AlgorithmAnimation.UpdateSecuenceEvent -= UpdateSequence;
             TraversalAnimation.UpdateSecuenceEvent -= UpdateSequence;
+
         }
 
         public void OnTouchTogglePlayAnimation(){
