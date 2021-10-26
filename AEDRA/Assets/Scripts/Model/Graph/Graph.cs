@@ -120,8 +120,7 @@ namespace Model.GraphModel
                 NotifyEdge(edgeDTO.IdStartNode,edgeDTO.IdEndNode,AnimationEnum.CreateAnimation);
             }
             else{
-                //TODO: delete this
-                Debug.Log("Ya existe la arista");
+                ShowNotification("Ya existe la arista");
             }
         }
 

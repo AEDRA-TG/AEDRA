@@ -77,6 +77,7 @@ namespace View.EventController
                 AddElementCommand addCommand = new AddElementCommand(nodeDTO);
                 CommandController.GetInstance().Invoke(addCommand);
                 _appEventController.ChangeToMenu(MenuEnum.MainMenu);
+                _appEventController.ShowNotification("Agregando nodo");
             }
         }
 
@@ -91,6 +92,7 @@ namespace View.EventController
                 DeleteElementCommand deleteCommand = new DeleteElementCommand(nodeDTO);
                 CommandController.GetInstance().Invoke(deleteCommand);
                 _appEventController.ChangeToMenu(MenuEnum.MainMenu);
+                _appEventController.ShowNotification("Eliminando nodo");
             }
         }
 
@@ -132,6 +134,7 @@ namespace View.EventController
                 ElementDTO elementToSearch = new BinarySearchNodeDTO(0, value, null, true, null, null);
                 DoAlgorithmCommand algorithmCommand = new DoAlgorithmCommand(AlgorithmEnum.BinarySearch,new List<ElementDTO>(){elementToSearch});
                 CommandController.GetInstance().Invoke(algorithmCommand);
+                _appEventController.ShowNotification("Buscando valor");
             }
         }
 

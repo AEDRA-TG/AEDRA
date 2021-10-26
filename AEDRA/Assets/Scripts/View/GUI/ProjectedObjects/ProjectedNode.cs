@@ -118,10 +118,8 @@ namespace View.GUI.ProjectedObjects
         {
             Tween tweenStep = default;
             if(base.Dto.Step != -1){
-                Debug.Log("ASDASD");
                 GameObject targetInformation = GameObject.Find(Constants.TargetInformationName);
                 if(targetInformation != null){
-                    Debug.Log("NOT NULL");
                     Transform information = targetInformation.transform.Find("Information");
                     TextMeshPro stepText = information.GetComponent<TextMeshPro>();
                     AlgorithmSteps algorithmSteps = targetInformation.GetComponent<AlgorithmSteps>();

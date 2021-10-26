@@ -31,7 +31,6 @@ namespace Model.Common
                         break;
                 }
             }
-            Debug.Log("ASDASD");
             return descriptionWithValues;
         }
     }

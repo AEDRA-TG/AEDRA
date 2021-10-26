@@ -84,7 +84,6 @@ namespace View.EventController
                 CommandController.GetInstance().Invoke(command);
                 //Change to respective menu
                 LoadStructureMenu( targetParameter.GetPrefabMenu() );
-                AppEventController otherInstance = FindObjectOfType<AppEventController>();
             }
             _hasProjectedStructure = true;
             _activeMenu?.SetActive(true);

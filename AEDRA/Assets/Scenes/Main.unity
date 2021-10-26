@@ -503,6 +503,7 @@ GameObject:
   - component: {fileID: 393816733}
   - component: {fileID: 393816735}
   - component: {fileID: 393816734}
+  - component: {fileID: 393816736}
   m_Layer: 5
   m_Name: AEDRALogo
   m_TagString: Untagged
@@ -542,7 +543,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.6313726}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -567,6 +568,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 393816732}
   m_CullTransparentMesh: 1
+--- !u!114 &393816736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 393816732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9f03327365e6d6469900d35afbe8d0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &429175673
 GameObject:
   m_ObjectHideFlags: 0
