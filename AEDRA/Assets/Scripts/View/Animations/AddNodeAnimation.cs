@@ -24,7 +24,10 @@ namespace View.Animations
                 }else{
                     projectedObject = GameObject.Find(dto.GetUnityId()).GetComponent<ProjectedObject>();
                 }
-                animationList.Append(projectedObject.Animations[dto.Operation]());
+                Tween actualTween = projectedObject.Animations[dto.Operation]();
+                if(actualTween != null){
+                    animationList.Append(actualTween);
+                }
             }
         }
     }

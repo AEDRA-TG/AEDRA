@@ -24,14 +24,18 @@ namespace View.Animations
                 if(dto.Operation == AnimationEnum.DeleteAnimation){
                     objectsToBeDeleted.Add(projectedObject);
                 }
-                if(projectedObject as ProjectedEdge && dto.Operation == AnimationEnum.DeleteAnimation)
-                {
-                    projectedObject.IsCreated = false;
-                    animationList.Join(projectedObject.Animations[dto.Operation]());
+                Tween actualTween = projectedObject.Animations[dto.Operation]();
+                if(actualTween != null){
+                    if(projectedObject as ProjectedEdge && dto.Operation == AnimationEnum.DeleteAnimation)
+                    {
+                        projectedObject.IsCreated = false;
+                        animationList.Join(actualTween);
+                    }
+                    else{
+                        animationList.Append(actualTween);
+                    }
                 }
-                else{
-                    animationList.Append(projectedObject.Animations[dto.Operation]());
-                }
+                
             }
             animationList.OnComplete(() => structureProjection.DeleteObject(objectsToBeDeleted));
         }

@@ -55,6 +55,8 @@ namespace View.EventController
 
         private GameObject _targetProjectionInformation;
 
+        private TargetTypeEnum _actualTargetType;
+
         public void ShowNotification(string notification){
             NotifyNotification?.Invoke(notification);
         }
@@ -77,6 +79,7 @@ namespace View.EventController
                 LoadDataStructure(targetParameter.GetReferencePoint().transform);
                 //Load target
                 _activeStructure = targetParameter.GetStructure();
+                _actualTargetType = targetParameter.GetTargetType();
                 Command command = new LoadCommand(_activeStructure, targetParameter.GetDataFilePath());
                 CommandController.GetInstance().Invoke(command);
                 //Change to respective menu
@@ -170,8 +173,14 @@ namespace View.EventController
         /// Method to detect when the user taps on clean structure button
         /// </summary>
         public void OnTouchCleanStructure(){
-            Command command = new CleanStructureCommand();
-            CommandController.GetInstance().Invoke(command);
+            if(_actualTargetType != TargetTypeEnum.Algorithm){
+                Command command = new CleanStructureCommand();
+                CommandController.GetInstance().Invoke(command);
+            }else{
+                GameObject BackOptionsMenu = GameObject.Find("BackOptionsMenu");
+                BackOptionsMenu?.SetActive(false);
+                ShowNotification("No se puede eliminar la estructura de un algoritmo");
+            }
         }
 
         /// <summary>
@@ -216,6 +225,7 @@ namespace View.EventController
 
         public void OnAlgorithmTargetDetected(TargetParameter targetParameter){
             OnTargetDetected(targetParameter);
+            GameObject.Find("CancelButton")?.SetActive(false);
             _targetProjectionInformation?.SetActive(true);
         }
 

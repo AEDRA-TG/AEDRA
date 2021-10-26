@@ -1250,7 +1250,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 668012fa7fe203141a3b039bcf511991, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsAnimationControlEnable: 0
 --- !u!114 &1581568725337879638
 MonoBehaviour:
   m_ObjectHideFlags: 0

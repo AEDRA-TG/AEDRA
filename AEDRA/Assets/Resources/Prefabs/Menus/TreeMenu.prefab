@@ -1260,7 +1260,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef222be7e6ca99c44bab0e96b55d8192, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsAnimationControlEnable: 0
 --- !u!1 &3983688006499288558
 GameObject:
   m_ObjectHideFlags: 0

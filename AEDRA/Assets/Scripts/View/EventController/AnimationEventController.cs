@@ -58,17 +58,22 @@ namespace View.EventController
         }
 
         public void OnTouchNextAnimation(){
-            if((int)this._actualSequence.id < this._actualSequence.Duration()){
-                _actualSequence.id =  (int)_actualSequence.id+_animationDuration;
-                _actualSequence.Goto((int)_actualSequence.id*_animationDuration);
+            if(this._actualSequence != null){
+                if((int)this._actualSequence.id < this._actualSequence.Duration()){
+                    _actualSequence.id =  (int)_actualSequence.id+_animationDuration;
+                    _actualSequence.Goto((int)_actualSequence.id*_animationDuration);
+                }
             }
         }
 
         public void OnTouchPreviousAnimation(){
-            if((int)this._actualSequence.id > 0){
-                _actualSequence.id =  (int)_actualSequence.id-_animationDuration;
-                _actualSequence.Goto((int)_actualSequence.id*_animationDuration);
+            if(this._actualSequence != null){
+                if((int)this._actualSequence.id > 0){
+                    _actualSequence.id =  (int)_actualSequence.id-_animationDuration;
+                    _actualSequence.Goto((int)_actualSequence.id*_animationDuration);
+                }
             }
+            
         }
 
         public void UpdateSequence(Sequence newSequence){
