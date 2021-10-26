@@ -13,11 +13,15 @@ namespace View.EventController
     /// Events controller that recives all the OnClick methods of the tree options
     /// </summary>
 
-    public class TreeEventController : AppEventController
+    public class TreeEventController : MonoBehaviour
     {
+        private AppEventController _appEventController;
 
+        private void Awake() {
+            _appEventController = FindObjectOfType<AppEventController>();
+        }
         public void Start(){
-            base._menus = new Dictionary<MenuEnum, GameObject>{
+            _appEventController._menus = new Dictionary<MenuEnum, GameObject>{
                 {MenuEnum.MainMenu, gameObject.transform.Find("MainMenu").gameObject},
                 {MenuEnum.TraversalMenu, gameObject.transform.Find("TraversalMenu").gameObject},
                 {MenuEnum.AddElementInputMenu, gameObject.transform.Find("AddElementInputMenu").gameObject},
@@ -25,9 +29,8 @@ namespace View.EventController
                 {MenuEnum.SearchElementInputMenu, gameObject.transform.Find("SearchElementInputMenu").gameObject},
                 { MenuEnum.AnimationControlMenu, gameObject.transform.Find("AnimationControlMenu").gameObject}
             };
-            base._activeSubMenu = MenuEnum.MainMenu;
-            base.gameObject.AddComponent<MenuEnumParameter>();
-            base.ChangeToMenu(MenuEnum.MainMenu);
+            _appEventController._activeSubMenu = MenuEnum.MainMenu;
+            _appEventController.ChangeToMenu(MenuEnum.MainMenu);
         }
 
         /// <summary>
@@ -44,13 +47,21 @@ namespace View.EventController
             SelectionController.OnEmptyTouch -= OnEmptyTouch;
         }
 
+        public void ChangeToMenu(MenuEnumParameter menu){
+            _appEventController.ChangeToMenu(menu);
+        }
+
+        public void OnTouchBackToPreviousMenu(){
+            _appEventController.OnTouchBackToPreviousMenu();
+        }
+
         /// <summary>
         /// Hide menus when touching empty space
         /// </summary>
         public void OnEmptyTouch(){
             GameObject BackOptionsMenu = GameObject.Find("BackOptionsMenu");
-            if(_activeSubMenu.ToString().Contains("Input")){
-                ChangeToMenu(MenuEnum.MainMenu);
+            if(_appEventController._activeSubMenu.ToString().Contains("Input")){
+                _appEventController.ChangeToMenu(MenuEnum.MainMenu);
             }
             BackOptionsMenu?.SetActive(false);
         }
@@ -65,7 +76,8 @@ namespace View.EventController
                 BinarySearchNodeDTO nodeDTO = new BinarySearchNodeDTO(0, value, null, true, null, null);
                 AddElementCommand addCommand = new AddElementCommand(nodeDTO);
                 CommandController.GetInstance().Invoke(addCommand);
-                base.ChangeToMenu(MenuEnum.MainMenu);
+                _appEventController.ChangeToMenu(MenuEnum.MainMenu);
+                _appEventController.ShowNotification("Agregando nodo");
             }
         }
 
@@ -79,7 +91,8 @@ namespace View.EventController
                 BinarySearchNodeDTO nodeDTO = new BinarySearchNodeDTO(0, value, null, true, null, null);
                 DeleteElementCommand deleteCommand = new DeleteElementCommand(nodeDTO);
                 CommandController.GetInstance().Invoke(deleteCommand);
-                base.ChangeToMenu(MenuEnum.MainMenu);
+                _appEventController.ChangeToMenu(MenuEnum.MainMenu);
+                _appEventController.ShowNotification("Eliminando nodo");
             }
         }
 
@@ -87,7 +100,7 @@ namespace View.EventController
         /// Method to detect when the user taps on pre order traversal button
         /// </summary>
         public void OnTouchPreOrderTraversal(){
-            base.IsAnimationControlEnable = true;
+            _appEventController.IsAnimationControlEnable = true;
             DoTraversalCommand traversalCommand = new DoTraversalCommand(TraversalEnum.TreePreOrder,null);
             CommandController.GetInstance().Invoke(traversalCommand);
         }
@@ -96,7 +109,7 @@ namespace View.EventController
         /// Method to detect when the user taps on in order traversal button
         /// </summary>
         public void OnTouchInOrderTraversal(){
-            base.IsAnimationControlEnable = true;
+            _appEventController.IsAnimationControlEnable = true;
             DoTraversalCommand traversalCommand = new DoTraversalCommand(TraversalEnum.TreeInOrder,null);
             CommandController.GetInstance().Invoke(traversalCommand);
         }
@@ -105,7 +118,7 @@ namespace View.EventController
         /// Method to detect when the user taps on post traversal button
         /// </summary>
         public void OnTouchPostOrderTraversal(){
-            base.IsAnimationControlEnable = true;
+            _appEventController.IsAnimationControlEnable = true;
             DoTraversalCommand traversalCommand = new DoTraversalCommand(TraversalEnum.TreePostOrder,null);
             CommandController.GetInstance().Invoke(traversalCommand);
         }
@@ -117,10 +130,11 @@ namespace View.EventController
             if(ValidateUserInput()){
                 //!!TODO: this should accept other types of values
                 int value = Int32.Parse(FindObjectOfType<InputField>().text);
-                base.ChangeToMenu(MenuEnum.AnimationControlMenu);
+                _appEventController.ChangeToMenu(MenuEnum.AnimationControlMenu);
                 ElementDTO elementToSearch = new BinarySearchNodeDTO(0, value, null, true, null, null);
                 DoAlgorithmCommand algorithmCommand = new DoAlgorithmCommand(AlgorithmEnum.BinarySearch,new List<ElementDTO>(){elementToSearch});
                 CommandController.GetInstance().Invoke(algorithmCommand);
+                _appEventController.ShowNotification("Buscando valor");
             }
         }
 
@@ -131,7 +145,7 @@ namespace View.EventController
                 isValid = true;
             }
             else{
-                base.ShowNotification("La entrada no puede estar vacia");
+                _appEventController.ShowNotification("La entrada no puede estar vacia");
             }
             return isValid;
         }

@@ -20,12 +20,12 @@ namespace View.EventController
         /// <summary>
         /// Dictionary that contains the actual data structure menus
         /// </summary>
-        protected Dictionary<MenuEnum, GameObject> _menus;
+        public Dictionary<MenuEnum, GameObject> _menus {get; set;}
 
         /// <summary>
         /// Id of the actual sub menu that is visible to user
         /// </summary>
-        protected MenuEnum _activeSubMenu;
+        public MenuEnum _activeSubMenu {get; set;}
 
         /// <summary>
         /// Id of the previous sub menu that was visible to user
@@ -55,6 +55,8 @@ namespace View.EventController
 
         private GameObject _targetProjectionInformation;
 
+        private TargetTypeEnum _actualTargetType;
+
         public void ShowNotification(string notification){
             NotifyNotification?.Invoke(notification);
         }
@@ -63,6 +65,7 @@ namespace View.EventController
         /// Method that executes when a target is detected by the camera
         /// </summary>
         public void OnTargetDetected(TargetParameter targetParameter){
+            _targetProjectionInformation = targetParameter.GetTargetProjectionInformation();
             //1. First time detecting a target
             if(_activeStructure != targetParameter.GetStructure()){
                 //_activeStructure is 'None' by default
@@ -76,11 +79,11 @@ namespace View.EventController
                 LoadDataStructure(targetParameter.GetReferencePoint().transform);
                 //Load target
                 _activeStructure = targetParameter.GetStructure();
+                _actualTargetType = targetParameter.GetTargetType();
                 Command command = new LoadCommand(_activeStructure, targetParameter.GetDataFilePath());
                 CommandController.GetInstance().Invoke(command);
                 //Change to respective menu
                 LoadStructureMenu( targetParameter.GetPrefabMenu() );
-                AppEventController otherInstance = FindObjectOfType<AppEventController>();
             }
             _hasProjectedStructure = true;
             _activeMenu?.SetActive(true);
@@ -169,8 +172,14 @@ namespace View.EventController
         /// Method to detect when the user taps on clean structure button
         /// </summary>
         public void OnTouchCleanStructure(){
-            Command command = new CleanStructureCommand();
-            CommandController.GetInstance().Invoke(command);
+            if(_actualTargetType != TargetTypeEnum.Algorithm){
+                Command command = new CleanStructureCommand();
+                CommandController.GetInstance().Invoke(command);
+            }else{
+                GameObject BackOptionsMenu = GameObject.Find("BackOptionsMenu");
+                BackOptionsMenu?.SetActive(false);
+                ShowNotification("No se puede eliminar la estructura de un algoritmo");
+            }
         }
 
         /// <summary>
@@ -214,23 +223,14 @@ namespace View.EventController
         }
 
         public void OnAlgorithmTargetDetected(TargetParameter targetParameter){
-            AppEventController otherInstance = FindObjectOfType<AppEventController>();
-            if(otherInstance != this){
-                otherInstance.ChangeToMenu(MenuEnum.AnimationControlMenu);
-                otherInstance.IsAnimationControlEnable = true;
-            }else{
-                OnTargetDetected(targetParameter);
-            }
+            OnTargetDetected(targetParameter);
+            GameObject.Find("CancelButton")?.SetActive(false);
+            _targetProjectionInformation?.SetActive(true);
         }
 
         public void OnAlgorithmTargetLost(){
-            AppEventController otherInstance = FindObjectOfType<AppEventController>();
-            if(otherInstance != this){
-                otherInstance.IsAnimationControlEnable = false;
-                otherInstance.ChangeToMenu(MenuEnum.MainMenu);
-            }else{
-                OnTargetLost();
-            }
+            OnTargetLost();
+            _targetProjectionInformation?.SetActive(false);
         }
     }
 }

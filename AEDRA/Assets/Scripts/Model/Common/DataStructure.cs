@@ -15,6 +15,8 @@ namespace Model.Common
         /// </summary>
         public static event Action<ElementDTO> UpdateElementEvent;
 
+        public static event Action<string> NotifyNotification;
+
         /// <summary>
         /// Method to create the datastructure
         /// </summary>
@@ -58,6 +60,10 @@ namespace Model.Common
         /// <param name="element"> Element that was modified</param>
         public static void Notify(ElementDTO element){
             UpdateElementEvent?.Invoke(element);
+        }
+
+        public static void ShowNotification(string notification){
+            NotifyNotification.Invoke(notification);
         }
     }
 }

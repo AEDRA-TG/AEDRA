@@ -140,20 +140,23 @@ namespace Model.TreeModel
         /// <param name="parent">Node parent</param>
         /// <param name="node">Modified node</param>
         /// <param name="operation">Operation applied to node</param>
-        public void NotifyNode(BinarySearchTreeNode parent, BinarySearchTreeNode node, AnimationEnum operation){
-            int? parentId = null;
-            bool isLeft = false;
-            if(parent != null){
-                parentId = parent.Id;
-                if(parent.LeftChild != null && parent.LeftChild.Value == node.Value){
-                    isLeft = true;
+        public void NotifyNode(BinarySearchTreeNode parent, BinarySearchTreeNode node, AnimationEnum operation, int step = -1){
+            if(node != null){
+                int? parentId = null;
+                bool isLeft = false;
+                if(parent != null){
+                    parentId = parent.Id;
+                    if(parent.LeftChild != null && parent.LeftChild.Value == node.Value){
+                        isLeft = true;
+                    }
                 }
+                BinarySearchNodeDTO dto = new BinarySearchNodeDTO(node.Id, node.Value, parentId, isLeft, node.LeftChild?.Id, node.RightChild?.Id){
+                    Operation = operation,
+                    Coordinates = new Point(this.Coordinates.X, this.Coordinates.Y, this.Coordinates.Z),
+                    Step = step
+                };
+                DataStructure.Notify(dto);
             }
-            BinarySearchNodeDTO dto = new BinarySearchNodeDTO(node.Id, node.Value, parentId, isLeft, node.LeftChild?.Id, node.RightChild?.Id){
-                Operation = operation,
-                Coordinates = new Point(this.Coordinates.X, this.Coordinates.Y, this.Coordinates.Z)
-            };
-            DataStructure.Notify(dto);
         }
     }
 }

@@ -25,6 +25,7 @@ namespace Observer
             Command.OperationCompleted += CleanUserSelection;
             DataStructureRepository.CleanStructure += CleanDataStructure;
             AppEventController.NotifyNotification += ShowNotification;
+            DataStructure.NotifyNotification += ShowNotification;
         }
 
         /// <summary>
@@ -37,6 +38,7 @@ namespace Observer
             Command.OperationCompleted -= CleanUserSelection;
             DataStructureRepository.CleanStructure -= CleanDataStructure;
             AppEventController.NotifyNotification -= ShowNotification;
+            DataStructure.NotifyNotification -= ShowNotification;
         }
 
         /// <summary>

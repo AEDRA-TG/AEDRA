@@ -64,7 +64,9 @@ namespace View.GUI.ProjectedObjects
                 {AnimationEnum.UnPaintAnimation, UnPaintAnimation},
                 {AnimationEnum.PaintAnimation, PaintAnimation},
                 {AnimationEnum.UpdateAnimation, UpdateAnimation},
-                {AnimationEnum.PaintValueFoundAnimation, KeepPaintAnimation}
+                {AnimationEnum.PaintValueFoundAnimation, KeepPaintAnimation},
+                {AnimationEnum.StepInformationJoinAnimation, StepInformationAnimation},
+                {AnimationEnum.StepInformationAppendAnimation, StepInformationAnimation}
             };
         }
 
@@ -137,6 +139,10 @@ namespace View.GUI.ProjectedObjects
         {
         }
 
+        virtual public Tween StepInformationAnimation(){
+            return default;
+        }
+
         virtual public void SetDTO(ElementDTO dto)
         {
             if(Dto != null){
@@ -162,6 +168,10 @@ namespace View.GUI.ProjectedObjects
                 case AnimationEnum.KeepPaintAnimation: colorToUse = Constants.VisitedObjectColor;
                     break;
                 case AnimationEnum.UpdateAnimation: colorToUse = Constants.VisitedObjectColor;
+                    break;
+                case AnimationEnum.StepInformationJoinAnimation: colorToUse = Constants.VisitedObjectColor;
+                    break;
+                case AnimationEnum.StepInformationAppendAnimation: colorToUse = Constants.VisitedObjectColor;
                     break;
                 default: colorToUse = Constants.BaseObjectColor;
                     break;

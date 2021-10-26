@@ -13,16 +13,21 @@ namespace View.EventController
     /// <summary>
     /// Class to manage events received from an action executed on a graph by the user
     /// </summary>
-    public class GraphEventController : AppEventController
+    public class GraphEventController : MonoBehaviour
     {
         /// <summary>
         /// Instance of the application selection controller
         /// </summary>
         private SelectionController _selectionController;
 
+        private AppEventController _appEventController;
+
+        private void Awake() {
+            _appEventController = FindObjectOfType<AppEventController>();
+        }
         public void Start(){
             _selectionController = FindObjectOfType<SelectionController>();
-            base._menus = new Dictionary<MenuEnum, GameObject>
+            _appEventController._menus = new Dictionary<MenuEnum, GameObject>
             {
                 { MenuEnum.MainMenu, gameObject.transform.Find("MainMenu").gameObject },
                 { MenuEnum.TraversalMenu, gameObject.transform.Find("TraversalMenu").gameObject },
@@ -31,9 +36,8 @@ namespace View.EventController
                 { MenuEnum.AddElementInputMenu, gameObject.transform.Find("AddElementInputMenu").gameObject },
                 { MenuEnum.AnimationControlMenu, gameObject.transform.Find("AnimationControlMenu").gameObject}
             };
-            base._activeSubMenu = MenuEnum.MainMenu;
-            base.gameObject.AddComponent<MenuEnumParameter>();
-            base.ChangeToMenu(MenuEnum.MainMenu);
+            _appEventController._activeSubMenu = MenuEnum.MainMenu;
+            _appEventController.ChangeToMenu(MenuEnum.MainMenu);
         }
 
         /// <summary>
@@ -52,13 +56,21 @@ namespace View.EventController
             SelectionController.OnEmptyTouch -= OnEmptyTouch;
         }
 
+        public void ChangeToMenu(MenuEnumParameter menu){
+            _appEventController.ChangeToMenu(menu);
+        }
+
+        public void OnTouchBackToPreviousMenu(){
+            _appEventController.OnTouchBackToPreviousMenu();
+        }
+
         /// <summary>
         /// Hide menus when touching empty space
         /// </summary>
         public void OnEmptyTouch(){
             GameObject BackOptionsMenu = GameObject.Find("BackOptionsMenu");
-            if(_activeSubMenu.ToString().Contains("Input")){
-                ChangeToMenu(MenuEnum.MainMenu);
+            if(_appEventController._activeSubMenu.ToString().Contains("Input")){
+                _appEventController.ChangeToMenu(MenuEnum.MainMenu);
             }
             BackOptionsMenu?.SetActive(false);
         }
@@ -69,11 +81,11 @@ namespace View.EventController
         /// <param name="selectedObjects">List of the user selected objects</param>
         private void UpdateMenuOnSelection(List<ProjectedObject> selectedObjects){
             switch(selectedObjects.Count){
-                case 0: base.ChangeToMenu(MenuEnum.MainMenu);
+                case 0: _appEventController.ChangeToMenu(MenuEnum.MainMenu);
                 break;
-                case 1: base.ChangeToMenu(MenuEnum.NodeSelectionMenu);
+                case 1: _appEventController.ChangeToMenu(MenuEnum.NodeSelectionMenu);
                 break;
-                default: base.ChangeToMenu(MenuEnum.NodeMultiSelectionMenu);
+                default: _appEventController.ChangeToMenu(MenuEnum.NodeMultiSelectionMenu);
                 break;
             }
         }
@@ -86,7 +98,7 @@ namespace View.EventController
             if(ValidateUserInput()){
                 List<ProjectedObject> objs = _selectionController.GetSelectedObjects();
                 string value = FindObjectOfType<InputField>().text;
-                base.ChangeToMenu(MenuEnum.MainMenu);
+                _appEventController.ChangeToMenu(MenuEnum.MainMenu);
                 List<int> neighbors = new List<int>();
                 GraphNodeDTO nodeDTO = new GraphNodeDTO(0, value, neighbors);
                 if (objs.Count == 1 && objs[0].GetType() == typeof(ProjectedNode))
@@ -114,7 +126,7 @@ namespace View.EventController
                 }
             }
             else{
-                base.ShowNotification("Debes seleccionar al menos 1 nodo para eliminar");
+                _appEventController.ShowNotification("Debes seleccionar al menos 1 nodo para eliminar");
             }
         }
 
@@ -136,7 +148,7 @@ namespace View.EventController
             }
             else
             {
-                base.ShowNotification("Debes seleccionar 2 o mas nodos para conectar");
+                _appEventController.ShowNotification("Debes seleccionar 2 o mas nodos para conectar");
             }
         }
 
@@ -144,7 +156,7 @@ namespace View.EventController
         /// Method to detect when the user taps on BFS traversal button
         /// </summary>
         public void OnTouchBFSTraversal(){
-            base.IsAnimationControlEnable = true;
+            _appEventController.IsAnimationControlEnable = true;
             List<ProjectedObject> objs = _selectionController.GetSelectedObjects();
             if (objs.Count == 1 && objs[0].GetType() == typeof(ProjectedNode))
             {
@@ -155,7 +167,7 @@ namespace View.EventController
             }
             else
             {
-                base.ShowNotification("Debes seleccionar un nodo");
+                _appEventController.ShowNotification("Debes seleccionar un nodo");
             }
         }
 
@@ -163,7 +175,7 @@ namespace View.EventController
         /// Method to detect when the user taps on DFS traversal button
         /// </summary>
         public void OnTouchDFSTraversal(){
-            base.IsAnimationControlEnable = true;
+            _appEventController.IsAnimationControlEnable = true;
             List<ProjectedObject> objs = _selectionController.GetSelectedObjects();
             if (objs.Count == 1 && objs[0].GetType() == typeof(ProjectedNode))
             {
@@ -174,7 +186,7 @@ namespace View.EventController
             }
             else
             {
-                base.ShowNotification("Debes seleccionar un nodo");
+                _appEventController.ShowNotification("Debes seleccionar un nodo");
             }
         }
 
@@ -189,7 +201,7 @@ namespace View.EventController
             }
             else
             {
-                base.ShowNotification("Debes seleccionar 2 nodos");
+                _appEventController.ShowNotification("Debes seleccionar 2 nodos");
             }
         }
 
@@ -200,7 +212,7 @@ namespace View.EventController
                 isValid = true;
             }
             else{
-                base.ShowNotification("La entrada no puede estar vacia");
+                _appEventController.ShowNotification("La entrada no puede estar vacia");
             }
             return isValid;
         }

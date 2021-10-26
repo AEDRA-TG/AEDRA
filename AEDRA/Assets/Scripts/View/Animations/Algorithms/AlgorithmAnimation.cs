@@ -23,8 +23,7 @@ namespace View.Animations.Algorithms
                 Tween actualTween = projectedObject.Animations[dto.Operation]();
                 if( actualTween != null){
                     actualTween.id = animationId;
-
-                    if(dto.Operation == AnimationEnum.UpdateAnimation){
+                    if(dto.Operation == AnimationEnum.UpdateAnimation || dto.Operation == AnimationEnum.StepInformationJoinAnimation){
                         animationList.Join(actualTween);
                     }
                     else{

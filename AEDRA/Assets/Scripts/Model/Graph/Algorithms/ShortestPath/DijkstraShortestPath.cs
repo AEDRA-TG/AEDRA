@@ -30,21 +30,18 @@ namespace Model.GraphModel.Algorithms.ShortestPath
                         graph.NotifyEdge(previous,current,AnimationEnum.KeepPaintAnimation);
                     }
                     graph.NotifyNode(current,AnimationEnum.KeepPaintAnimation);
-                    //TODO: Andresito esto es una cochinada pero se va a quedar así hasta que arreglemos los problemas de concurrencia para el texto
-                    graph.NotifyNode(current,AnimationEnum.UpdateAnimation, "C = "+ cost , "Visito el nodo " + graph.Nodes[current].Value );
-
+                    graph.NotifyNode(current,AnimationEnum.UpdateAnimation, "C = "+ cost);
+                    graph.NotifyNode(current,AnimationEnum.StepInformationJoinAnimation, "C = "+ cost, 1 );
                     foreach (int key in graph.AdjacentMtx[current].Keys)
                     {
                         GraphNode neighboorNode = graph.Nodes[key];
                         if(!visitedMap[neighboorNode.Id]){
                             double noVisitedCost = (double)graph.AdjacentMtx[current][neighboorNode.Id];
-                            //graph.NotifyNode(neighboorNode.Id, AnimationEnum.UpdateAnimation, default, "C = " + cost + "+" + noVisitedCost);
+                            graph.NotifyNode(neighboorNode.Id, AnimationEnum.StepInformationAppendAnimation, "", 2);
+                            graph.NotifyNode(neighboorNode.Id, AnimationEnum.UpdateAnimation, "C = " + cost + " + " + noVisitedCost);
                             heap.Add(new Tuple<double, int, int>(cost + noVisitedCost, current, neighboorNode.Id));
                         }
                     }
-                }
-                if(visitedMap[previous]){
-                    //graph.NotifyNode(previous, AnimationEnum.KeepPaintAnimation, Constants.VisitedObjectColor, "C = " + cost);
                 }
             }
         }

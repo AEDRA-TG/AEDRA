@@ -41,7 +41,7 @@ namespace SideCar.DTOs
 
         public string Info {get;  set;}
 
-        public string Step {get; set;}
+        public int Step {get; set;}
 
 
         public ElementDTO(int id, object value){

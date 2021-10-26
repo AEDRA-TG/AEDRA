@@ -4,6 +4,8 @@ using Utils;
 using SideCar.DTOs;
 using Controller;
 using Utils.Enums;
+using TMPro;
+using Model.Common;
 
 namespace View.GUI.ProjectedObjects
 {
@@ -104,18 +106,29 @@ namespace View.GUI.ProjectedObjects
 
         public override Tween UpdateAnimation()
         {
-            Sequence tween = DOTween.Sequence();
+            Tween tween = default;
             if(base.Dto.Info != null){
-                tween.Join(_info.transform.DOScale(0.02f, base.AnimationTime).OnStart(()=> _info.text = Dto.Info) );
-            }
-            if(base.Dto.Step != null){
-                TextMesh stepText = GameObject.Find("StepText")?.GetComponent<TextMesh>();
-                if(stepText != null){
-                    stepText.transform.position = GameObject.Find("StructureProjection").transform.position;
-                    tween.Join ( stepText.transform.DOScale(0.02f, base.AnimationTime).OnStart(()=> stepText.text = Dto.Step) );
-                }
+                string infoText = Dto.Info;
+                tween = _info.transform.DOScale(0.02f, base.AnimationTime).OnStart(()=> _info.text = infoText);
             }
             return tween;
+        }
+
+        public override Tween StepInformationAnimation()
+        {
+            Tween tweenStep = default;
+            if(base.Dto.Step != -1){
+                GameObject targetInformation = GameObject.Find(Constants.TargetInformationName);
+                if(targetInformation != null){
+                    Transform information = targetInformation.transform.Find("Information");
+                    TextMeshPro stepText = information.GetComponent<TextMeshPro>();
+                    AlgorithmSteps algorithmSteps = targetInformation.GetComponent<AlgorithmSteps>();
+                    tweenStep = information.DOScale(0.01245f, base.AnimationTime);
+                    string stepDescription = algorithmSteps.GetStepDescription(Dto.Step, Dto);
+                    tweenStep.OnUpdate(()=>stepText.text = stepDescription);
+                }
+            }
+            return tweenStep;
         }
     }
 }
