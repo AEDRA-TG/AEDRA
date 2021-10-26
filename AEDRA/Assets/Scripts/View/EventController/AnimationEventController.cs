@@ -20,13 +20,11 @@ namespace View.EventController
         public void OnEnable() {
             AlgorithmAnimation.UpdateSecuenceEvent += UpdateSequence;
             TraversalAnimation.UpdateSecuenceEvent += UpdateSequence;
-
         }
 
         public void OnDisable() {
             AlgorithmAnimation.UpdateSecuenceEvent -= UpdateSequence;
             TraversalAnimation.UpdateSecuenceEvent -= UpdateSequence;
-
         }
 
         public void OnTouchTogglePlayAnimation(){

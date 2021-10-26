@@ -20,12 +20,12 @@ namespace View.EventController
         /// <summary>
         /// Dictionary that contains the actual data structure menus
         /// </summary>
-        protected Dictionary<MenuEnum, GameObject> _menus;
+        public Dictionary<MenuEnum, GameObject> _menus {get; set;}
 
         /// <summary>
         /// Id of the actual sub menu that is visible to user
         /// </summary>
-        protected MenuEnum _activeSubMenu;
+        public MenuEnum _activeSubMenu {get; set;}
 
         /// <summary>
         /// Id of the previous sub menu that was visible to user
@@ -63,6 +63,7 @@ namespace View.EventController
         /// Method that executes when a target is detected by the camera
         /// </summary>
         public void OnTargetDetected(TargetParameter targetParameter){
+            _targetProjectionInformation = targetParameter.GetTargetProjectionInformation();
             //1. First time detecting a target
             if(_activeStructure != targetParameter.GetStructure()){
                 //_activeStructure is 'None' by default
