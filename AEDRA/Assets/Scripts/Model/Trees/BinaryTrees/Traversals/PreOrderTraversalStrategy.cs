@@ -28,9 +28,13 @@ namespace Model.TreeModel.BinaryTree.Traversals
             if(parent!=null)
             {
                 node.NotifyEdge(parent, node, AnimationEnum.KeepPaintAnimation);
+            }else{
+                node.NotifyNode(parent, node, AnimationEnum.StepInformationJoinAnimation, 0);
             }
             node.NotifyNode(parent, node, AnimationEnum.KeepPaintAnimation);
+            node.NotifyNode(node, node.LeftChild, AnimationEnum.StepInformationJoinAnimation, 1);
             PreOrder(node.LeftChild, node);
+            node.NotifyNode(node, node.RightChild, AnimationEnum.StepInformationJoinAnimation, 2);
             PreOrder(node.RightChild, node);
         }
     }
