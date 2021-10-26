@@ -4,6 +4,7 @@ using Utils;
 using SideCar.DTOs;
 using Controller;
 using Utils.Enums;
+using TMPro;
 
 namespace View.GUI.ProjectedObjects
 {
@@ -109,10 +110,13 @@ namespace View.GUI.ProjectedObjects
                 tween.Join(_info.transform.DOScale(0.02f, base.AnimationTime).OnStart(()=> _info.text = Dto.Info) );
             }
             if(base.Dto.Step != null){
-                TextMesh stepText = GameObject.Find("StepText")?.GetComponent<TextMesh>();
-                if(stepText != null){
-                    stepText.transform.position = GameObject.Find("StructureProjection").transform.position;
-                    tween.Join ( stepText.transform.DOScale(0.02f, base.AnimationTime).OnStart(()=> stepText.text = Dto.Step) );
+                GameObject targetInformation = GameObject.Find(Constants.TargetInformationName);
+                if(targetInformation != null){
+                    Transform information = targetInformation.transform.Find("Information");
+                    TextMeshPro stepText = information.GetComponent<TextMeshPro>();
+                    Tween tweenStep = information.DOScale(0.01245f, base.AnimationTime);
+                    tween.OnUpdate(()=>stepText.text = Dto.Step);
+                    tween.Join(tweenStep);
                 }
             }
             return tween;

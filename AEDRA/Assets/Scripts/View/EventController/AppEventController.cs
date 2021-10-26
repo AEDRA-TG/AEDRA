@@ -215,23 +215,13 @@ namespace View.EventController
         }
 
         public void OnAlgorithmTargetDetected(TargetParameter targetParameter){
-            AppEventController otherInstance = FindObjectOfType<AppEventController>();
-            if(otherInstance != this){
-                otherInstance.ChangeToMenu(MenuEnum.AnimationControlMenu);
-                otherInstance.IsAnimationControlEnable = true;
-            }else{
-                OnTargetDetected(targetParameter);
-            }
+            OnTargetDetected(targetParameter);
+            _targetProjectionInformation?.SetActive(true);
         }
 
         public void OnAlgorithmTargetLost(){
-            AppEventController otherInstance = FindObjectOfType<AppEventController>();
-            if(otherInstance != this){
-                otherInstance.IsAnimationControlEnable = false;
-                otherInstance.ChangeToMenu(MenuEnum.MainMenu);
-            }else{
-                OnTargetLost();
-            }
+            OnTargetLost();
+            _targetProjectionInformation?.SetActive(false);
         }
     }
 }
