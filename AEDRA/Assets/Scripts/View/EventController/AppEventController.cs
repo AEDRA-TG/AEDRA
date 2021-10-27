@@ -57,6 +57,13 @@ namespace View.EventController
 
         private TargetTypeEnum _actualTargetType;
 
+        private GameObject _lastStructureMenu;
+
+        private void Awake(){
+            _actualTargetType = TargetTypeEnum.None;
+            _hasProjectedStructure = false;
+        }
+
         public void ShowNotification(string notification){
             NotifyNotification?.Invoke(notification);
         }
@@ -65,28 +72,53 @@ namespace View.EventController
         /// Method that executes when a target is detected by the camera
         /// </summary>
         public void OnTargetDetected(TargetParameter targetParameter){
-            _targetProjectionInformation = targetParameter.GetTargetProjectionInformation();
-            //1. First time detecting a target
-            if(_activeStructure != targetParameter.GetStructure()){
-                //_activeStructure is 'None' by default
-                if(_structureProjection != null ){
-                    //2. We are changing target - If there is an existing structure we destroy it
-                    _structureProjection.SetActive(false);
-                    Destroy(_structureProjection);
-                    _structureProjection = null;
+            Debug.Log("AEDRA: 1. " + _hasProjectedStructure);
+            if(!_hasProjectedStructure){
+                Debug.Log("AEDRA: 2.");
+                if(_activeStructure != targetParameter.GetStructure()){
+                        Debug.Log("AEDRA: 3.");
+                    LoadTarget(targetParameter);
+                }else if(_actualTargetType != targetParameter.GetTargetType()){
+                    Debug.Log("AEDRA: 4.");
+                    LoadTarget(targetParameter);
+                }else{
+                    Debug.Log("AEDRA: 5.");
+                    _hasProjectedStructure = true;
+                    _activeMenu?.SetActive(true);
                 }
-                //If the is no structure we create a new
-                LoadDataStructure(targetParameter.GetReferencePoint().transform);
-                //Load target
-                _activeStructure = targetParameter.GetStructure();
-                _actualTargetType = targetParameter.GetTargetType();
-                Command command = new LoadCommand(_activeStructure, targetParameter.GetDataFilePath());
-                CommandController.GetInstance().Invoke(command);
-                //Change to respective menu
-                LoadStructureMenu( targetParameter.GetPrefabMenu() );
             }
-            _hasProjectedStructure = true;
-            _activeMenu?.SetActive(true);
+            else{
+                if(_activeStructure != targetParameter.GetStructure()){
+                    ShowNotification("AEDRA solo permite un marcador de estructura a la vez");
+                }else if(_actualTargetType == TargetTypeEnum.DataStructure
+                && targetParameter.GetTargetType() == TargetTypeEnum.Algorithm){
+                    _lastStructureMenu = _activeMenu;
+                    LoadStructureMenu(targetParameter.GetPrefabMenu());
+                }else if(_actualTargetType == TargetTypeEnum.Algorithm
+                && targetParameter.GetTargetType() == TargetTypeEnum.DataStructure){
+                    ShowNotification("Primero proyecta la estructura y despues agrega el algoritmo");
+                }
+            }
+        }
+
+        private void LoadTarget(TargetParameter targetParameter){
+            _targetProjectionInformation = targetParameter.GetTargetProjectionInformation();
+            //_activeStructure is 'None' by default
+            if(_structureProjection != null ){
+                //2. We are changing target - If there is an existing structure we destroy it
+                _structureProjection.SetActive(false);
+                Destroy(_structureProjection);
+                _structureProjection = null;
+            }
+            //If the is no structure we create a new
+            LoadDataStructure(targetParameter.GetReferencePoint().transform);
+            //Load target
+            _activeStructure = targetParameter.GetStructure();
+            _actualTargetType = targetParameter.GetTargetType();
+            Command command = new LoadCommand(_activeStructure, targetParameter.GetDataFilePath());
+            CommandController.GetInstance().Invoke(command);
+            //Change to respective menu
+            LoadStructureMenu( targetParameter.GetPrefabMenu() );
         }
 
         /// <summary>
@@ -95,10 +127,10 @@ namespace View.EventController
         public void OnTargetLost(){
             GameObject structureProjection = GameObject.Find(Constants.ObjectsParentName);
             _activeMenu?.SetActive(false);
-            if(structureProjection != null){
+            /*if(structureProjection != null){
                 Command command = new SaveCommand();
                 CommandController.GetInstance().Invoke(command);
-            }
+            }*/
             _hasProjectedStructure = false;
         }
 
@@ -189,10 +221,10 @@ namespace View.EventController
         public void ChangeScene(int nextPage)
         {
             GameObject structureProjection = GameObject.Find(Constants.ObjectsParentName);
-            if(structureProjection != null){
+            /*if(structureProjection != null){
                 Command command = new SaveCommand();
                 CommandController.GetInstance().Invoke(command);
-            }
+            }*/
             SceneManager.LoadScene(nextPage);
         }
 
@@ -218,8 +250,8 @@ namespace View.EventController
             _structureProjection = Instantiate(prefab);
             _structureProjection.name = Constants.ObjectsParentName;
             _structureProjection.transform.parent = unityParent;
-            _structureProjection.transform.localPosition = Vector3.zero;
-            _structureProjection.transform.localRotation = Quaternion.Euler(Vector3.zero);
+            _structureProjection.transform.localPosition = new Vector3(0,10,0);
+            _structureProjection.transform.localRotation = Quaternion.Euler(-50,0,0);
         }
 
         public void OnAlgorithmTargetDetected(TargetParameter targetParameter){
@@ -231,6 +263,10 @@ namespace View.EventController
         public void OnAlgorithmTargetLost(){
             OnTargetLost();
             _targetProjectionInformation?.SetActive(false);
+            if(_lastStructureMenu != null){
+                LoadStructureMenu(_lastStructureMenu);
+                _lastStructureMenu = null;
+            }
         }
     }
 }
