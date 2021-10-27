@@ -17,6 +17,8 @@ namespace Utils.Configuration
             CopyFile(Constants.TargetsFilePath, Constants.TargetsStreamingFilePath);
             CopyFile(Constants.DijkstraFilePath, Constants.DijkstraStreamingFilePath);
             CopyFile(Constants.TutorialsFilePath, Constants.TutorialsStreamingFilePath);
+            CopyFile(Constants.DijkstraStepsFilePath, Constants.DijkstraStepsStreamingFilePath);
+            CopyFile(Constants.TraversalTreeStepsFilePath, Constants.TraversalTreeStepsStreamingFilePath);
             Constants.GlobalColor = Utilities.LoadGlobalColor();
         }
 

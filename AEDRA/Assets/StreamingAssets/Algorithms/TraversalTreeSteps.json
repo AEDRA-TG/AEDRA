@@ -1,0 +1,22 @@
+[
+    {
+      "Id":"0",
+      "Description":"El recorrido empieza en la raiz",
+      "Parameters":[]
+    },
+    {
+      "Id":"1",
+      "Description":"Visito nodo izquierdo",
+      "Parameters":[]
+    },
+    {
+      "Id":"2",
+      "Description":"Visito nodo derecho",
+      "Parameters":[]
+    },
+    {
+      "Id":"3",
+      "Description":"Visito nodo padre",
+      "Parameters":[]
+    }
+]

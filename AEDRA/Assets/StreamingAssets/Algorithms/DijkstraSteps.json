@@ -1,0 +1,16 @@
+[
+    {
+      "Id":1,
+      "Description":"Visitar nodo <Node_Value>",
+      "Parameters":[
+        "<Node_Value>"
+      ]
+    },
+    {
+      "Id":2,
+      "Description":"Sumar mi costo mas el de mi vecino <Node_Value>",
+      "Parameters":[
+        "<Node_Value>"
+      ]
+    }
+]
