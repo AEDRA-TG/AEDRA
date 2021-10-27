@@ -72,17 +72,12 @@ namespace View.EventController
         /// Method that executes when a target is detected by the camera
         /// </summary>
         public void OnTargetDetected(TargetParameter targetParameter){
-            Debug.Log("AEDRA: 1. " + _hasProjectedStructure);
             if(!_hasProjectedStructure){
-                Debug.Log("AEDRA: 2.");
                 if(_activeStructure != targetParameter.GetStructure()){
-                        Debug.Log("AEDRA: 3.");
                     LoadTarget(targetParameter);
                 }else if(_actualTargetType != targetParameter.GetTargetType()){
-                    Debug.Log("AEDRA: 4.");
                     LoadTarget(targetParameter);
                 }else{
-                    Debug.Log("AEDRA: 5.");
                     _hasProjectedStructure = true;
                     _activeMenu?.SetActive(true);
                 }
