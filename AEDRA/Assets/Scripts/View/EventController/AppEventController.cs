@@ -57,7 +57,9 @@ namespace View.EventController
 
         private TargetTypeEnum _actualTargetType;
 
-        private GameObject _lastStructureMenu;
+        private bool _isAlgorithmProjected;
+        private bool _isStructureProjected;
+        private GameObject _algorithmMenu;
 
         private void Awake(){
             _actualTargetType = TargetTypeEnum.None;
@@ -83,20 +85,17 @@ namespace View.EventController
                 }
             }
             else{
-                if(_activeStructure != targetParameter.GetStructure()){
-                    ShowNotification("AEDRA solo permite un marcador de estructura a la vez");
-                }else if(_actualTargetType == TargetTypeEnum.DataStructure
-                && targetParameter.GetTargetType() == TargetTypeEnum.Algorithm){
-                    _lastStructureMenu = _activeMenu;
-                    LoadStructureMenu(targetParameter.GetPrefabMenu());
-                }else if(_actualTargetType == TargetTypeEnum.Algorithm
-                && targetParameter.GetTargetType() == TargetTypeEnum.DataStructure){
-                    ShowNotification("Primero proyecta la estructura y despues agrega el algoritmo");
-                }
+                
             }
         }
 
         private void LoadTarget(TargetParameter targetParameter){
+            if(targetParameter.GetTargetType() == TargetTypeEnum.DataStructure){
+                _isStructureProjected = true;
+            }
+            else{
+                _isAlgorithmProjected = true;
+            }
             _targetProjectionInformation = targetParameter.GetTargetProjectionInformation();
             //_activeStructure is 'None' by default
             if(_structureProjection != null ){
@@ -119,14 +118,13 @@ namespace View.EventController
         /// <summary>
         /// Method that executes when a target is lost by the camera
         /// </summary>
-        public void OnTargetLost(){
-            GameObject structureProjection = GameObject.Find(Constants.ObjectsParentName);
-            _activeMenu?.SetActive(false);
-            /*if(structureProjection != null){
-                Command command = new SaveCommand();
-                CommandController.GetInstance().Invoke(command);
-            }*/
-            _hasProjectedStructure = false;
+        public void OnTargetLost(TargetParameter targetParameter){
+            if(_activeStructure == targetParameter.GetStructure()){
+                GameObject structureProjection = GameObject.Find(Constants.ObjectsParentName);
+                _activeMenu?.SetActive(false);
+                _hasProjectedStructure = false;
+                _isStructureProjected = false;
+            }
         }
 
         /// <summary>
@@ -204,7 +202,7 @@ namespace View.EventController
                 CommandController.GetInstance().Invoke(command);
             }else{
                 GameObject BackOptionsMenu = GameObject.Find("BackOptionsMenu");
-                BackOptionsMenu?.SetActive(false);
+                //BackOptionsMenu?.SetActive(false);
                 ShowNotification("No se puede eliminar la estructura de un algoritmo");
             }
         }
@@ -250,17 +248,38 @@ namespace View.EventController
         }
 
         public void OnAlgorithmTargetDetected(TargetParameter targetParameter){
-            OnTargetDetected(targetParameter);
-            GameObject.Find("CancelButton")?.SetActive(false);
-            _targetProjectionInformation?.SetActive(true);
+            if(_isStructureProjected){
+                if(_activeStructure == targetParameter.GetStructure()){
+                    Debug.Log("ASDASD");
+                    _activeMenu.SetActive(false);
+                    _targetProjectionInformation = targetParameter.GetTargetProjectionInformation();
+                    _targetProjectionInformation.SetActive(true);
+                    _algorithmMenu = Instantiate(targetParameter.GetPrefabMenu(), new Vector3(0,0,0), Quaternion.identity, GameObject.Find(Constants.MenusParentName).transform);
+                    _algorithmMenu.name = targetParameter.GetPrefabMenu().name;
+                    _algorithmMenu.transform.localPosition = Vector3.zero;
+                    GameObject.Find("CancelButton")?.SetActive(false);
+                }
+                else{
+                    ShowNotification("Este algoritmo no se puede aplicar a esta estructura");
+                }
+            }else{
+                OnTargetDetected(targetParameter);
+                GameObject.Find("CancelButton")?.SetActive(false);
+                _targetProjectionInformation?.SetActive(true);
+            }
         }
 
-        public void OnAlgorithmTargetLost(){
-            OnTargetLost();
-            _targetProjectionInformation?.SetActive(false);
-            if(_lastStructureMenu != null){
-                LoadStructureMenu(_lastStructureMenu);
-                _lastStructureMenu = null;
+        public void OnAlgorithmTargetLost(TargetParameter targetParameter){
+            if(!_isStructureProjected){
+                OnTargetLost(targetParameter);
+                _targetProjectionInformation?.SetActive(false);
+            }
+            else{
+                if(_activeStructure == targetParameter.GetStructure()){
+                    GameObject.Find("CancelButton")?.SetActive(true);
+                    Destroy(_algorithmMenu);
+                    _activeMenu.SetActive(true);
+                }
             }
         }
     }
