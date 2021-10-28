@@ -71,13 +71,14 @@ namespace View.EventController
         /// </summary>
         public void OnTouchAddNode(){
             if(ValidateUserInput()){
+                _appEventController.ShowNotification("Agregando nodo");
                 //!!TODO: this should accept other types of values
                 int value = Int32.Parse(FindObjectOfType<InputField>().text);
                 BinarySearchNodeDTO nodeDTO = new BinarySearchNodeDTO(0, value, null, true, null, null);
                 AddElementCommand addCommand = new AddElementCommand(nodeDTO);
                 CommandController.GetInstance().Invoke(addCommand);
                 _appEventController.ChangeToMenu(MenuEnum.MainMenu);
-                _appEventController.ShowNotification("Agregando nodo");
+                
             }
         }
 

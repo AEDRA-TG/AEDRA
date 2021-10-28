@@ -84,7 +84,12 @@ namespace Utils
         public const string FaceDetailsName = "FaceName";
         public const string FaceDetailsDescription ="FaceDescription";
         public const string FaceDetailsImage ="FaceImage";
-        public const int maxTreeLevel = 6;
+        public const int MaxTreeLevel = 6;
+        public const float MaxGraphHeightPositive = 0f;
+        public const float MaxGraphHeightNegative = -10f;
+        public const float MaxGraphWidthPositive = 5f;
+        public const float MaxGraphWidthNevative = -5f;
+
 
         #endregion
 

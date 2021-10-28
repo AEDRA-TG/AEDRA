@@ -28,7 +28,15 @@ namespace View.GUI.ObjectsPhysics
             {
                 if (closeCollider != null && closeCollider != _gameObject.GetComponent<Collider>())
                 {
-                    Vector3 forceDirection = new Vector3(closeCollider.gameObject.transform.localPosition.x- _gameObject.transform.localPosition.x,0, closeCollider.gameObject.transform.localPosition.z-_gameObject.transform.localPosition.z);
+                    float x = closeCollider.gameObject.transform.localPosition.x- _gameObject.transform.localPosition.x;
+                    float z = closeCollider.gameObject.transform.localPosition.z-_gameObject.transform.localPosition.z;
+                    if(_gameObject.transform.localPosition.z>Constants.MaxGraphHeightPositive||_gameObject.transform.localPosition.z<Constants.MaxGraphHeightNegative){
+                        z=0;
+                    }
+                    if(_gameObject.transform.localPosition.x>Constants.MaxGraphWidthPositive||_gameObject.transform.localPosition.x<Constants.MaxGraphWidthNevative){
+                        x=0;
+                    }
+                    Vector3 forceDirection = new Vector3(x, 0, z);
                     AddForce(closeCollider.gameObject, forceDirection);
                 }
             }
@@ -67,7 +75,6 @@ namespace View.GUI.ObjectsPhysics
                 BinarySearchNodeDTO parentDTO = parent.GetComponent<ProjectedObject>()?.Dto as BinarySearchNodeDTO;
                 Vector3 distanceToParent = _gameObject.transform.localPosition- parent.transform.localPosition;
                 if(Mathf.Abs(distanceToParent.x) < Constants.HorizontalChildToParentDistance){
-                    Debug.Log("Distance to parent:" + distanceToParent);
                     Vector3 forceParentDirection;
                     Vector3 forceDirection;
                     if(dto.IsLeft){
@@ -133,11 +140,9 @@ namespace View.GUI.ObjectsPhysics
         private void AddForce(GameObject objectToMove, Vector3 forceDirection){
             Vector3 deltaMove = new Vector3(0.00f,0.00f,00f);
             if(forceDirection.x < 0){
-                Debug.Log("Forceeee 1111");
                 deltaMove.x = -0.01f;
             }
             else if(forceDirection.x > 0){
-                Debug.Log("Forceeee 2222");
                 deltaMove.x = 0.01f;
             }
             if(forceDirection.z < 0){

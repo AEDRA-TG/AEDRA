@@ -188,7 +188,7 @@ namespace View.GUI
                 }
             }
             else{
-                objectPosition = new Vector3(Random.Range(-5, 5),_referencePoint.localPosition.y,Random.Range(0, -(_referencePoint.transform.localPosition.z*2)));
+                objectPosition = new Vector3(Random.Range(Constants.MaxGraphWidthNevative, Constants.MaxGraphWidthPositive),_referencePoint.localPosition.y,Random.Range(Constants.MaxGraphHeightNegative, Constants.MaxGraphHeightPositive));
             }
             return objectPosition;
         }

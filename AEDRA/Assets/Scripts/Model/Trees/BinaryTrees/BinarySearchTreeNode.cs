@@ -2,6 +2,7 @@ using Utils.Enums;
 using SideCar.DTOs;
 using Model.Common;
 using Utils;
+using UnityEngine;// REMOVEEEEEEEEEEEEEEEEEEEEEEEEE
 
 namespace Model.TreeModel
 {
@@ -69,10 +70,16 @@ namespace Model.TreeModel
                     this.RightChild.AddElement(id,value, point);
                 }
                 else{
-                    this.RightChild = new BinarySearchTreeNode(id, value, point, this.Level++);
-                    NotifyNode(null, this, AnimationEnum.UpdateAnimation);
-                    NotifyNode(this,this.RightChild, AnimationEnum.CreateAnimation);
-                    NotifyEdge(this, this.RightChild, AnimationEnum.CreateAnimation);
+                    if(this.Level < Constants.MaxTreeLevel){
+                        this.RightChild = new BinarySearchTreeNode(id, value, point, this.Level+1);
+                        NotifyNode(null, this, AnimationEnum.UpdateAnimation);
+                        NotifyNode(this,this.RightChild, AnimationEnum.CreateAnimation);
+                        NotifyEdge(this, this.RightChild, AnimationEnum.CreateAnimation);
+                    }
+                    else{
+                        DataStructure.ShowNotification("El nodo supera el nivel máximo permitido");
+                    }
+                    
                 }
             }
             else if(value < this.Value){
@@ -82,10 +89,15 @@ namespace Model.TreeModel
                     this.LeftChild.AddElement(id,value, point);
                 }
                 else{
-                    this.LeftChild = new BinarySearchTreeNode(id, value, point, this.Level++);
-                    NotifyNode(null, this, AnimationEnum.UpdateAnimation);
-                    NotifyNode(this,this.LeftChild, AnimationEnum.CreateAnimation);
-                    NotifyEdge(this, this.LeftChild, AnimationEnum.CreateAnimation);
+                    if(this.Level < Constants.MaxTreeLevel){
+                        this.LeftChild = new BinarySearchTreeNode(id, value, point, this.Level+1);
+                        NotifyNode(null, this, AnimationEnum.UpdateAnimation);
+                        NotifyNode(this,this.LeftChild, AnimationEnum.CreateAnimation);
+                        NotifyEdge(this, this.LeftChild, AnimationEnum.CreateAnimation);
+                    }
+                    else{
+                        DataStructure.ShowNotification("El nodo supera el nivel máximo permitido");
+                    }
                 }
             }
         }

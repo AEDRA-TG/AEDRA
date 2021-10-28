@@ -175,7 +175,7 @@ namespace Model.GraphModel
                     bool existsEndToStart = AdjacentMtx[nodeId].Remove(key);
                     if(existsStartToEnd || existsEndToStart){
                        //TODO: Revisar el warning de andres cuando se eliminan nodos
-                       NotifyEdge(key,nodeId,AnimationEnum.DeleteAnimation);
+                        NotifyEdge(key,nodeId,AnimationEnum.DeleteAnimation);
                     }
                 }
             }
