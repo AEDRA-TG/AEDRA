@@ -1339,7 +1339,7 @@ MonoBehaviour:
   _dataFilePath: 
   _referencePoint: {fileID: 0}
   _targetType: 3
-  _targetProjectionInformation: {fileID: 578994444}
+  _targetProjectionInformation: {fileID: 0}
 --- !u!1 &604757532
 GameObject:
   m_ObjectHideFlags: 0
@@ -1655,7 +1655,7 @@ MonoBehaviour:
   _dataFilePath: 
   _referencePoint: {fileID: 0}
   _targetType: 3
-  _targetProjectionInformation: {fileID: 697280068}
+  _targetProjectionInformation: {fileID: 0}
 --- !u!1001 &697874774
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2292,7 +2292,7 @@ GameObject:
   m_Component:
   - component: {fileID: 939451351}
   m_Layer: 0
-  m_Name: RefMenu
+  m_Name: Menu_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4101,12 +4101,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1924173087}
   m_Layer: 0
-  m_Name: InfoMenu
+  m_Name: Menu_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1924173087
 Transform:
   m_ObjectHideFlags: 0
@@ -4934,4 +4934,4 @@ MonoBehaviour:
   _dataFilePath: 
   _referencePoint: {fileID: 0}
   _targetType: 3
-  _targetProjectionInformation: {fileID: 2133120287}
+  _targetProjectionInformation: {fileID: 0}

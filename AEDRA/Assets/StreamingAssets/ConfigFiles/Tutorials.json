@@ -23,5 +23,10 @@
         "Name":"¿Cómo puedo controlar una animación?",
         "ResourceIconName":"IconVideo",
         "VideoURL":""
+    },
+    {
+        "Name":"¿Cómo ver la informaicón de un marcador?",
+        "ResourceIconName":"IconVideo",
+        "VideoURL":""
     }
 ]
