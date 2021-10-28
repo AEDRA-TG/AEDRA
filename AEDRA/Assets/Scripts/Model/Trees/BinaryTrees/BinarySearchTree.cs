@@ -89,7 +89,7 @@ namespace Model.TreeModel
             }
             else if(this.Root == null){
                 _nodesCoordinates.Add(this.IdSequence, point);
-                this.Root = new BinarySearchTreeNode(this.IdSequence, (int)element.Value, point);
+                this.Root = new BinarySearchTreeNode(this.IdSequence, (int)element.Value, point, 0);
                 this.Root.NotifyNode(null, this.Root, AnimationEnum.CreateAnimation);
                 this.IdSequence++;
             }

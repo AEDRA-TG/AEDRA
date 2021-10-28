@@ -40,7 +40,7 @@ namespace View.GUI.ObjectsPhysics
         public void ApplyBinaryTreePhysics(){
             this.RepulseHorizontal();
             this.CheckHorizontalToParentDistance();
-            this.CheckHorizontalChildsDistance();
+            //this.CheckHorizontalChildsDistance();
         }
 
         /// <summary>
@@ -67,6 +67,7 @@ namespace View.GUI.ObjectsPhysics
                 BinarySearchNodeDTO parentDTO = parent.GetComponent<ProjectedObject>()?.Dto as BinarySearchNodeDTO;
                 Vector3 distanceToParent = _gameObject.transform.localPosition- parent.transform.localPosition;
                 if(Mathf.Abs(distanceToParent.x) < Constants.HorizontalChildToParentDistance){
+                    Debug.Log("Distance to parent:" + distanceToParent);
                     Vector3 forceParentDirection;
                     Vector3 forceDirection;
                     if(dto.IsLeft){
@@ -132,9 +133,11 @@ namespace View.GUI.ObjectsPhysics
         private void AddForce(GameObject objectToMove, Vector3 forceDirection){
             Vector3 deltaMove = new Vector3(0.00f,0.00f,00f);
             if(forceDirection.x < 0){
+                Debug.Log("Forceeee 1111");
                 deltaMove.x = -0.01f;
             }
             else if(forceDirection.x > 0){
+                Debug.Log("Forceeee 2222");
                 deltaMove.x = 0.01f;
             }
             if(forceDirection.z < 0){

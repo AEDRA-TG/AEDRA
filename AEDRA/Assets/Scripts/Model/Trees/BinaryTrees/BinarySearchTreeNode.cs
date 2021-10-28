@@ -35,10 +35,17 @@ namespace Model.TreeModel
         /// <value></value>
         public Point Coordinates {get; set;}
 
-        public BinarySearchTreeNode(int id, int value, Point point){
+        /// <summary>
+        /// Node coordinates on view
+        /// </summary>
+        /// <value></value>
+        public int Level {get; set;}
+
+        public BinarySearchTreeNode(int id, int value, Point point, int Level){
             this.Id = id;
             this.Value = value;
             this.Coordinates = point;
+            this.Level = Level;
         }
 
         /// <summary>
@@ -62,7 +69,7 @@ namespace Model.TreeModel
                     this.RightChild.AddElement(id,value, point);
                 }
                 else{
-                    this.RightChild = new BinarySearchTreeNode(id, value, point);
+                    this.RightChild = new BinarySearchTreeNode(id, value, point, this.Level++);
                     NotifyNode(null, this, AnimationEnum.UpdateAnimation);
                     NotifyNode(this,this.RightChild, AnimationEnum.CreateAnimation);
                     NotifyEdge(this, this.RightChild, AnimationEnum.CreateAnimation);
@@ -75,7 +82,7 @@ namespace Model.TreeModel
                     this.LeftChild.AddElement(id,value, point);
                 }
                 else{
-                    this.LeftChild = new BinarySearchTreeNode(id, value, point);
+                    this.LeftChild = new BinarySearchTreeNode(id, value, point, this.Level++);
                     NotifyNode(null, this, AnimationEnum.UpdateAnimation);
                     NotifyNode(this,this.LeftChild, AnimationEnum.CreateAnimation);
                     NotifyEdge(this, this.LeftChild, AnimationEnum.CreateAnimation);

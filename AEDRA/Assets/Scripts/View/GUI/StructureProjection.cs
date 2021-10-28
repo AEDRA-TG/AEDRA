@@ -171,7 +171,20 @@ namespace View.GUI
                 }
                 else{
                     GameObject parentNode = GameObject.Find(Constants.NodeName + binaryDTO.ParentId);
-                    objectPosition = new Vector3(parentNode.transform.localPosition.x, parentNode.transform.localPosition.y - Constants.VerticalNodeTreeDistance, parentNode.transform.localPosition.z);
+                    BinarySearchNodeDTO parentBinaryDTO = (BinarySearchNodeDTO) parentNode.GetComponent<ProjectedObject>().Dto;
+                    GameObject brother = null;
+                    if(binaryDTO.IsLeft){
+                        brother = GameObject.Find(Constants.NodeName + parentBinaryDTO.RightChild);
+                    }
+                    else{
+                        brother = GameObject.Find(Constants.NodeName + parentBinaryDTO.LeftChild);
+                    }
+                    if(brother!=null){
+                        objectPosition = new Vector3(brother.transform.localPosition.x, parentNode.transform.localPosition.y - Constants.VerticalNodeTreeDistance, parentNode.transform.localPosition.z);
+                    }
+                    else{
+                        objectPosition = new Vector3(parentNode.transform.localPosition.x, parentNode.transform.localPosition.y - Constants.VerticalNodeTreeDistance, parentNode.transform.localPosition.z);
+                    }
                 }
             }
             else{
