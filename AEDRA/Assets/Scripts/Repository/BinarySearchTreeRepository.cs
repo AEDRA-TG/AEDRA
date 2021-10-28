@@ -67,7 +67,7 @@ namespace Repository
 
         public override void CleanInstance()
         {
-            throw new System.NotImplementedException();
+            _tree = null;
         }
     }
 }

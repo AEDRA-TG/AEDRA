@@ -287,6 +287,13 @@ namespace View.EventController
             _hasProjectedAlgorithm = false;
         }
 
+        public void OnIformativeTargetDetected(TargetParameter targetParameter){
+            
+        }
+
+        public void OnInformativeTargetLost(TargetParameter targetParameter){
+            
+        }
         public bool IsAlgorithmProjected(){
             if(_actualTargetType == TargetTypeEnum.Algorithm){
                 return true;

@@ -12,7 +12,7 @@
             },
             {
                 "Name":"Cara Trasera",
-                "ARMarker":"Arbol",
+                "ARMarker":"InformacionGrafo",
                 "Description":"Esta cara se usa para mostrar información de la estructura en realidad aumentada."
             }
         ]
@@ -25,12 +25,30 @@
         "Faces": [
             {
                 "Name":"Cara Frontal",
-                "ARMarker":"Grafo",
+                "ARMarker":"Arbol",
                 "Description":"Esta cara se usa para detectar la estructura."
             },
             {
                 "Name":"Cara Trasera",
-                "ARMarker":"Arbol",
+                "ARMarker":"InformacionArbol",
+                "Description":"Esta cara se usa para mostrar información de la estructura en realidad aumentada."
+            }
+        ]
+    },
+    {
+        "Name":"Algoritmo Dijkstra",
+        "ARMarker":"Dijkstra",
+        "Description":"Estructura",
+        "ResourceIconName":"IconMiniAlgorithm",
+        "Faces": [
+            {
+                "Name":"Cara Frontal",
+                "ARMarker":"Dijkstra",
+                "Description":"Esta cara se usa para detectar la estructura."
+            },
+            {
+                "Name":"Cara Trasera",
+                "ARMarker":"InformacionDijkstra",
                 "Description":"Esta cara se usa para mostrar información de la estructura en realidad aumentada."
             }
         ]
