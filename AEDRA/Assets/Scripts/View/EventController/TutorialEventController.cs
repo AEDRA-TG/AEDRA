@@ -43,7 +43,7 @@ namespace View.EventController
             GameObject title = GameObject.Find(Constants.TitleName);
             title.GetComponent<Text>().text = tutorial.Name;
             GameObject videoControl = GameObject.Find(Constants.VideoControlName);
-            //videoControl.GetComponent<UnityEngine.Video.VideoPlayer>().url = tutorial.VideoURL;
+            videoControl.GetComponent<UnityEngine.Video.VideoPlayer>().url = tutorial.VideoURL;
         }
 
         private void ToggleTutorialView(bool state){

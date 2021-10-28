@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Video;
 using Utils;
 
 namespace View.EventController
@@ -9,8 +10,9 @@ namespace View.EventController
         private GameObject _actualSubMenu;
         private int _actualMenu;
 
-        public void SetInformationParent(string informationParent){
-            _informationParent = GameObject.Find(informationParent);
+        public void SetInformationParent(GameObject informationParent){
+            Debug.Log("Is Here: " + informationParent.name);
+            _informationParent = informationParent;
             _actualMenu = 1;
             _actualSubMenu = _informationParent.transform.Find(Constants.MenuName+_actualMenu).gameObject;
             _actualSubMenu.gameObject.SetActive(true);
@@ -29,6 +31,8 @@ namespace View.EventController
         }
 
         public void DesactiveActualMenu(){
+            VideoPlayer videoPlayer = _actualSubMenu.GetComponentInChildren<VideoPlayer>();
+            videoPlayer?.Stop();
             _actualSubMenu.SetActive(false);
         }
     }

@@ -290,14 +290,10 @@ namespace View.EventController
 
         public void OnIformativeTargetDetected(TargetParameter targetParameter){
             if(!_hasProjectedAlgorithm && !_hasProjectedStructure){
-                if(_informativeMenu == null){
-                    _informativeMenu = Instantiate(targetParameter.GetPrefabMenu(), new Vector3(0,0,0), Quaternion.identity, GameObject.Find(Constants.MenusParentName).transform);
-                    _informativeMenu.name = targetParameter.GetPrefabMenu().name;
-                    _informativeMenu.transform.localPosition = Vector3.zero;
-                }else{
-                    _informativeMenu.SetActive(true);
-                }
-                _informativeMenu.GetComponent<InformativeTargetController>().SetInformationParent(targetParameter.gameObject.name);
+                _informativeMenu = Instantiate(targetParameter.GetPrefabMenu(), new Vector3(0,0,0), Quaternion.identity, GameObject.Find(Constants.MenusParentName).transform);
+                _informativeMenu.name = targetParameter.GetPrefabMenu().name;
+                _informativeMenu.transform.localPosition = Vector3.zero;
+                _informativeMenu.GetComponent<InformativeTargetController>().SetInformationParent(targetParameter.gameObject);
             }
         }
 
