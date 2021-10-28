@@ -46,7 +46,6 @@ namespace View.EventController
                 //It will update target gameobject's current postion.
                 target.transform.position = currentPosition;
             }
-
         }
     }
 }

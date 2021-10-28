@@ -28,7 +28,15 @@ namespace View.GUI.ObjectsPhysics
             {
                 if (closeCollider != null && closeCollider != _gameObject.GetComponent<Collider>())
                 {
-                    Vector3 forceDirection = new Vector3(closeCollider.gameObject.transform.localPosition.x- _gameObject.transform.localPosition.x,0, closeCollider.gameObject.transform.localPosition.z-_gameObject.transform.localPosition.z);
+                    float x = closeCollider.gameObject.transform.localPosition.x- _gameObject.transform.localPosition.x;
+                    float z = closeCollider.gameObject.transform.localPosition.z-_gameObject.transform.localPosition.z;
+                    if(_gameObject.transform.localPosition.z>Constants.MaxGraphHeightPositive||_gameObject.transform.localPosition.z<Constants.MaxGraphHeightNegative){
+                        z=0;
+                    }
+                    if(_gameObject.transform.localPosition.x>Constants.MaxGraphWidthPositive||_gameObject.transform.localPosition.x<Constants.MaxGraphWidthNevative){
+                        x=0;
+                    }
+                    Vector3 forceDirection = new Vector3(x, 0, z);
                     AddForce(closeCollider.gameObject, forceDirection);
                 }
             }
@@ -40,7 +48,7 @@ namespace View.GUI.ObjectsPhysics
         public void ApplyBinaryTreePhysics(){
             this.RepulseHorizontal();
             this.CheckHorizontalToParentDistance();
-            this.CheckHorizontalChildsDistance();
+            //this.CheckHorizontalChildsDistance();
         }
 
         /// <summary>

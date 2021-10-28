@@ -84,6 +84,12 @@ namespace Utils
         public const string FaceDetailsName = "FaceName";
         public const string FaceDetailsDescription ="FaceDescription";
         public const string FaceDetailsImage ="FaceImage";
+        public const int MaxTreeLevel = 6;
+        public const float MaxGraphHeightPositive = 0f;
+        public const float MaxGraphHeightNegative = -10f;
+        public const float MaxGraphWidthPositive = 5f;
+        public const float MaxGraphWidthNevative = -5f;
+
 
         #endregion
 
@@ -124,10 +130,10 @@ namespace Utils
         #region PHYSICS
 
         public const float VerticalNodeTreeDistance = 2f;
-        public const float HorizontalChildToParentDistance = 1.5f;
+        public const float HorizontalChildToParentDistance = 0.1f;
         public const float HorizontalForce = 5f;
         public const float MinimalHorizontalForce = 2f;
-        public const float MinimalNodeDistance = 2f;
+        public const float MinimalNodeDistance = 1f;
 
         #endregion
 

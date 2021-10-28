@@ -69,6 +69,10 @@ namespace Model.TreeModel
             if(parent!=null)
             {
                 node.NotifyEdge(parent, node, AnimationEnum.CreateAnimation);
+                node.Level = parent.Level+1;
+            }
+            else{
+                node.Level = 1;
             }
             CreateTree(node.LeftChild, node);
             CreateTree(node.RightChild, node);
@@ -89,7 +93,7 @@ namespace Model.TreeModel
             }
             else if(this.Root == null){
                 _nodesCoordinates.Add(this.IdSequence, point);
-                this.Root = new BinarySearchTreeNode(this.IdSequence, (int)element.Value, point);
+                this.Root = new BinarySearchTreeNode(this.IdSequence, (int)element.Value, point, 1);
                 this.Root.NotifyNode(null, this.Root, AnimationEnum.CreateAnimation);
                 this.IdSequence++;
             }
