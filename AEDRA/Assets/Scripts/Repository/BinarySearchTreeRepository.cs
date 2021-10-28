@@ -64,5 +64,10 @@ namespace Repository
                 base.Notify();
             }
         }
+
+        public override void CleanInstance()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

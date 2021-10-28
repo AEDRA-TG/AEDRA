@@ -286,5 +286,12 @@ namespace View.EventController
             }
             _hasProjectedAlgorithm = false;
         }
+
+        public bool IsAlgorithmProjected(){
+            if(_actualTargetType == TargetTypeEnum.Algorithm){
+                return true;
+            }
+            return false;
+        }
     }
 }

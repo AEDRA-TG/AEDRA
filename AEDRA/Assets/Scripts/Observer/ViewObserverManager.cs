@@ -64,8 +64,13 @@ namespace Observer
         /// </summary>
         /// <param name="operation"></param>
         private void SaveDataStructure(OperationEnum operation){
-            Command command = new SaveCommand();
-            CommandController.GetInstance().Invoke(command);
+            AppEventController appEventController = FindObjectOfType<AppEventController>();
+            if(!appEventController.IsAlgorithmProjected()){
+                if(operation != OperationEnum.CreateDataStructure){
+                    Command command = new SaveCommand();
+                    CommandController.GetInstance().Invoke(command);
+                }
+            }
         }
 
         /// <summary>
