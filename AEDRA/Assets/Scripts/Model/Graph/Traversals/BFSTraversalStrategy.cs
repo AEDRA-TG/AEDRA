@@ -29,6 +29,7 @@ namespace Model.GraphModel.Traversals
                     if(graph.AdjacentMtx[previous].ContainsKey(current)){
                         graph.NotifyEdge(previous,current,AnimationEnum.KeepPaintAnimation);
                     }
+                    graph.NotifyNode(current,AnimationEnum.StepInformationJoinAnimation,"", 1 );
                     graph.NotifyNode(current,AnimationEnum.KeepPaintAnimation);
 
                     foreach (int key in graph.AdjacentMtx[current].Keys)

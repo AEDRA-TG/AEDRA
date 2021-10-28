@@ -22,13 +22,14 @@ namespace Utils
         public static string TutorialsFilePath = Application.persistentDataPath + "/Tutorials.json";
         public static string TutorialsStreamingFilePath = Application.streamingAssetsPath + "/ConfigFiles/Tutorials.json";
         public const string PrefabPath = "Prefabs/ProjectedObjects/";
-        //TODO: delete this
         public static string DijkstraFilePath = Application.persistentDataPath + "/Dijkstra.json";
         public static string DijkstraStepsFilePath = Application.persistentDataPath + "/DijkstraSteps.json";
         public static string TraversalTreeStepsFilePath = Application.persistentDataPath + "/TraversalTreeSteps.json";
+        public static string TraversalGraphStepsFilePath = Application.persistentDataPath + "/TraversalGraphSteps.json";
         public static string DijkstraStreamingFilePath = Application.streamingAssetsPath + "/Algorithms/Dijkstra.json";
         public static string DijkstraStepsStreamingFilePath = Application.streamingAssetsPath + "/Algorithms/DijkstraSteps.json";
         public static string TraversalTreeStepsStreamingFilePath = Application.streamingAssetsPath + "/Algorithms/TraversalTreeSteps.json";
+        public static string TraversalGraphStepsStreamingFilePath = Application.streamingAssetsPath + "/Algorithms/TraversalGraphSteps.json";
         public static string IconTargetResourcePath = "Icon/Targets/";
         public static string ImageTargetResourcePath = "Image/Targets/";
         public static string DownloadTargetFolder = "Marcadores_AEDRA";
