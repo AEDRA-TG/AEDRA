@@ -56,14 +56,13 @@ namespace View.EventController
         private GameObject _targetProjectionInformation;
 
         private TargetTypeEnum _actualTargetType;
-
-        private bool _isAlgorithmProjected;
-        private bool _isStructureProjected;
         private GameObject _algorithmMenu;
+        private bool _hasProjectedAlgorithm;
 
         private void Awake(){
             _actualTargetType = TargetTypeEnum.None;
             _hasProjectedStructure = false;
+            _hasProjectedAlgorithm = false;
         }
 
         public void ShowNotification(string notification){
@@ -76,26 +75,33 @@ namespace View.EventController
         public void OnTargetDetected(TargetParameter targetParameter){
             if(!_hasProjectedStructure){
                 if(_activeStructure != targetParameter.GetStructure()){
-                    LoadTarget(targetParameter);
+                    if(_hasProjectedAlgorithm){
+                        ShowNotification("Primero debes enfocar la estructura y despues el algoritmo");
+                    }else{
+                        LoadTarget(targetParameter);
+                    }
                 }else if(_actualTargetType != targetParameter.GetTargetType()){
-                    LoadTarget(targetParameter);
+                    if(_hasProjectedAlgorithm){
+                        ShowNotification("Primero debes enfocar la estructura y despues el algoritmo");
+                    }else{
+                        LoadTarget(targetParameter);
+                    }
                 }else{
-                    _hasProjectedStructure = true;
+                    if(targetParameter.GetTargetType() == TargetTypeEnum.DataStructure){
+                        _hasProjectedStructure = true;
+                    }
+                    else if(targetParameter.GetTargetType() == TargetTypeEnum.Algorithm){
+                        _hasProjectedAlgorithm = true;
+                    }
                     _activeMenu?.SetActive(true);
                 }
             }
             else{
-                
+                ShowNotification("No puedes tener 2 marcadores de estructura al mismo tiempo");
             }
         }
 
         private void LoadTarget(TargetParameter targetParameter){
-            if(targetParameter.GetTargetType() == TargetTypeEnum.DataStructure){
-                _isStructureProjected = true;
-            }
-            else{
-                _isAlgorithmProjected = true;
-            }
             _targetProjectionInformation = targetParameter.GetTargetProjectionInformation();
             //_activeStructure is 'None' by default
             if(_structureProjection != null ){
@@ -113,17 +119,20 @@ namespace View.EventController
             CommandController.GetInstance().Invoke(command);
             //Change to respective menu
             LoadStructureMenu( targetParameter.GetPrefabMenu() );
+            if(targetParameter.GetTargetType() == TargetTypeEnum.DataStructure){
+                _hasProjectedStructure = true;
+            }else if(targetParameter.GetTargetType() == TargetTypeEnum.Algorithm){
+                _hasProjectedAlgorithm = true;
+            }
         }
 
         /// <summary>
         /// Method that executes when a target is lost by the camera
         /// </summary>
         public void OnTargetLost(TargetParameter targetParameter){
-            if(_activeStructure == targetParameter.GetStructure()){
-                GameObject structureProjection = GameObject.Find(Constants.ObjectsParentName);
+            if(_activeStructure == targetParameter.GetStructure() && !_hasProjectedAlgorithm){
                 _activeMenu?.SetActive(false);
                 _hasProjectedStructure = false;
-                _isStructureProjected = false;
             }
         }
 
@@ -202,7 +211,6 @@ namespace View.EventController
                 CommandController.GetInstance().Invoke(command);
             }else{
                 GameObject BackOptionsMenu = GameObject.Find("BackOptionsMenu");
-                //BackOptionsMenu?.SetActive(false);
                 ShowNotification("No se puede eliminar la estructura de un algoritmo");
             }
         }
@@ -214,10 +222,6 @@ namespace View.EventController
         public void ChangeScene(int nextPage)
         {
             GameObject structureProjection = GameObject.Find(Constants.ObjectsParentName);
-            /*if(structureProjection != null){
-                Command command = new SaveCommand();
-                CommandController.GetInstance().Invoke(command);
-            }*/
             SceneManager.LoadScene(nextPage);
         }
 
@@ -248,9 +252,8 @@ namespace View.EventController
         }
 
         public void OnAlgorithmTargetDetected(TargetParameter targetParameter){
-            if(_isStructureProjected){
+            if(_hasProjectedStructure){
                 if(_activeStructure == targetParameter.GetStructure()){
-                    Debug.Log("ASDASD");
                     _activeMenu.SetActive(false);
                     _targetProjectionInformation = targetParameter.GetTargetProjectionInformation();
                     _targetProjectionInformation.SetActive(true);
@@ -270,8 +273,8 @@ namespace View.EventController
         }
 
         public void OnAlgorithmTargetLost(TargetParameter targetParameter){
-            if(!_isStructureProjected){
-                OnTargetLost(targetParameter);
+            if(!_hasProjectedStructure){
+                _activeMenu?.SetActive(false);
                 _targetProjectionInformation?.SetActive(false);
             }
             else{
@@ -281,6 +284,7 @@ namespace View.EventController
                     _activeMenu.SetActive(true);
                 }
             }
+            _hasProjectedAlgorithm = false;
         }
     }
 }
