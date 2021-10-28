@@ -52,6 +52,7 @@ namespace Utils
         public const string ObjectsParentName = "StructureProjection";
         public const string NodeName = "Node_";
         public const string EdgeName = "Edge_";
+        public const string MenuName = "Menu_";
         public const string HamburgerButtonName = "HamburgerMenu";
         public const string InfoButtonName = "InfoButton";
         public const string HelpButtonMenuName = "HelpButtonMenu";

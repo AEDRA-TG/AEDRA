@@ -57,6 +57,7 @@ namespace View.EventController
 
         private TargetTypeEnum _actualTargetType;
         private GameObject _algorithmMenu;
+        private GameObject _informativeMenu;
         private bool _hasProjectedAlgorithm;
 
         private void Awake(){
@@ -288,11 +289,25 @@ namespace View.EventController
         }
 
         public void OnIformativeTargetDetected(TargetParameter targetParameter){
-            
+            if(!_hasProjectedAlgorithm && !_hasProjectedStructure){
+                if(_informativeMenu == null){
+                    _informativeMenu = Instantiate(targetParameter.GetPrefabMenu(), new Vector3(0,0,0), Quaternion.identity, GameObject.Find(Constants.MenusParentName).transform);
+                    _informativeMenu.name = targetParameter.GetPrefabMenu().name;
+                    _informativeMenu.transform.localPosition = Vector3.zero;
+                }else{
+                    _informativeMenu.SetActive(true);
+                }
+                _informativeMenu.GetComponent<InformativeTargetController>().SetInformationParent(targetParameter.gameObject.name);
+            }
         }
 
         public void OnInformativeTargetLost(TargetParameter targetParameter){
-            
+            if(!_hasProjectedAlgorithm && !_hasProjectedStructure){
+                if(_informativeMenu != null){
+                    _informativeMenu.GetComponent<InformativeTargetController>().DesactiveActualMenu();
+                    _informativeMenu.SetActive(false);
+                }
+            }
         }
         public bool IsAlgorithmProjected(){
             if(_actualTargetType == TargetTypeEnum.Algorithm){
