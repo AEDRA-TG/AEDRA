@@ -237,10 +237,15 @@ namespace View.EventController
             if(_activeMenu != null){
                 Destroy(_activeMenu); //could be failing
             }
-            _activeMenu = Instantiate(menu, new Vector3(0,0,0), Quaternion.identity, GameObject.Find(Constants.MenusParentName).transform);
-            _activeMenu.name = menu.name;
-            _activeMenu.transform.localPosition = Vector3.zero;
-            _activeMenu.transform.SetAsFirstSibling();
+            _activeMenu = InstaciateMenu(menu);
+        }
+
+        private GameObject InstaciateMenu(GameObject menuToInstanciate){
+            GameObject menuToSave = Instantiate(menuToInstanciate, new Vector3(0,0,0), Quaternion.identity, GameObject.Find(Constants.MenusParentName).transform);
+            menuToSave.name = menuToInstanciate.name;
+            menuToSave.transform.localPosition = Vector3.zero;
+            menuToSave.transform.SetAsFirstSibling();
+            return menuToSave;
         }
 
         private void LoadDataStructure(Transform unityParent){
@@ -258,9 +263,7 @@ namespace View.EventController
                     _activeMenu.SetActive(false);
                     _targetProjectionInformation = targetParameter.GetTargetProjectionInformation();
                     _targetProjectionInformation.SetActive(true);
-                    _algorithmMenu = Instantiate(targetParameter.GetPrefabMenu(), new Vector3(0,0,0), Quaternion.identity, GameObject.Find(Constants.MenusParentName).transform);
-                    _algorithmMenu.name = targetParameter.GetPrefabMenu().name;
-                    _algorithmMenu.transform.localPosition = Vector3.zero;
+                    _algorithmMenu = InstaciateMenu(targetParameter.GetPrefabMenu());
                     GameObject.Find("CancelButton")?.SetActive(false);
                 }
                 else{
@@ -290,9 +293,7 @@ namespace View.EventController
 
         public void OnIformativeTargetDetected(TargetParameter targetParameter){
             if(!_hasProjectedAlgorithm && !_hasProjectedStructure){
-                _informativeMenu = Instantiate(targetParameter.GetPrefabMenu(), new Vector3(0,0,0), Quaternion.identity, GameObject.Find(Constants.MenusParentName).transform);
-                _informativeMenu.name = targetParameter.GetPrefabMenu().name;
-                _informativeMenu.transform.localPosition = Vector3.zero;
+                _informativeMenu = InstaciateMenu(targetParameter.GetPrefabMenu());
                 _informativeMenu.GetComponent<InformativeTargetController>().SetInformationParent(targetParameter.gameObject);
             }
         }
@@ -301,7 +302,7 @@ namespace View.EventController
             if(!_hasProjectedAlgorithm && !_hasProjectedStructure){
                 if(_informativeMenu != null){
                     _informativeMenu.GetComponent<InformativeTargetController>().DesactiveActualMenu();
-                    _informativeMenu.SetActive(false);
+                    Destroy(_informativeMenu);
                 }
             }
         }
