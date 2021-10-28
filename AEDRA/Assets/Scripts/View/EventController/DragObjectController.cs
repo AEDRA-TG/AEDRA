@@ -43,11 +43,9 @@ namespace View.EventController
 
                 //convert screen position to world position with offset changes.
                 Vector3 currentPosition = Camera.main.ScreenToWorldPoint(currentScreenSpace) + offset;
-                currentPosition.y = GameObject.Find(Utils.Constants.ReferencePointName).transform.position.y;
                 //It will update target gameobject's current postion.
                 target.transform.position = currentPosition;
             }
-
         }
     }
 }
