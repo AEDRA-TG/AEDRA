@@ -23,8 +23,10 @@ namespace Model.GraphModel.Algorithms.ShortestPath
                 double cost = nodes.Item1;
                 int previous = nodes.Item2;
                 int current = nodes.Item3;
-
+                graph.NotifyNode(current, AnimationEnum.StepInformationAppendAnimation, "", 3);
+                graph.NotifyNode(current, AnimationEnum.StepInformationAppendAnimation, "", 4);
                 if(!visitedMap[current]){
+                    graph.NotifyNode(current, AnimationEnum.StepInformationAppendAnimation, "", 5);
                     visitedMap[current] = true;
                     if(graph.AdjacentMtx[previous].ContainsKey(current)){
                         graph.NotifyEdge(previous,current,AnimationEnum.KeepPaintAnimation);
@@ -42,6 +44,9 @@ namespace Model.GraphModel.Algorithms.ShortestPath
                             heap.Add(new Tuple<double, int, int>(cost + noVisitedCost, current, neighboorNode.Id));
                         }
                     }
+                }
+                else{
+                    graph.NotifyNode(current, AnimationEnum.StepInformationAppendAnimation, "", 6);
                 }
             }
         }
