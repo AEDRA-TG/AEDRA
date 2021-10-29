@@ -1,32 +1,12 @@
 [
     {
-        "Name":"¿Cómo usar la aplicación?",
+        "Name":"¿Cómo usar la aplicación 1?",
         "ResourceIconName":"IconVideo",
-        "VideoURL":""
+        "VideoURL":"https://firebasestorage.googleapis.com/v0/b/aedra-acbc4.appspot.com/o/Tutorial_Introducci%C3%B3n.mp4?alt=media&token=7a083d52-5221-4510-9fdb-8a41cd5ee054"
     },
     {
-        "Name":"¿Cómo proyectar un marcador?",
+        "Name":"¿Cómo usar la aplicación 2?",
         "ResourceIconName":"IconVideo",
-        "VideoURL":""
-    },
-    {
-        "Name":"¿Cómo realizar una operación sobre una estructura?",
-        "ResourceIconName":"IconVideo",
-        "VideoURL":""
-    },
-    {
-        "Name":"¿Cómo aplicar un algoritmo?",
-        "ResourceIconName":"IconVideo",
-        "VideoURL":""
-    },
-    {
-        "Name":"¿Cómo puedo controlar una animación?",
-        "ResourceIconName":"IconVideo",
-        "VideoURL":""
-    },
-    {
-        "Name":"¿Cómo ver la información de un marcador?",
-        "ResourceIconName":"IconVideo",
-        "VideoURL":""
+        "VideoURL":"https://firebasestorage.googleapis.com/v0/b/aedra-acbc4.appspot.com/o/Tutorial_Introduccion_2.mp4?alt=media&token=d4efc7e6-cd41-4e3a-9a84-9049cd008c3d"
     }
 ]
