@@ -24,7 +24,9 @@ namespace Model.GraphModel.Traversals
                 Tuple<int, int> nodes = q.Dequeue();
                 int previous = nodes.Item1;
                 int current = nodes.Item2;
+                graph.NotifyNode(current, AnimationEnum.StepInformationAppendAnimation, "", 5);
                 if(!visitedMap[current]){
+                    graph.NotifyNode(current, AnimationEnum.StepInformationAppendAnimation, "", 6);
                     visitedMap[current] = true;
                     if(graph.AdjacentMtx[previous].ContainsKey(current)){
                         graph.NotifyEdge(previous,current,AnimationEnum.KeepPaintAnimation);
@@ -41,6 +43,8 @@ namespace Model.GraphModel.Traversals
                             q.Enqueue(new Tuple<int, int>(current, neighboorNode.Id));
                         }
                     }
+                }else{
+                    graph.NotifyNode(current, AnimationEnum.StepInformationAppendAnimation, "", 6);
                 }
             }
         }
