@@ -33,7 +33,7 @@
     },
     {
       "Id":"6",
-      "Description":"Entonces busco el valor en el hijo izquierdo",
+      "Description":"Si, entonces busco el valor en el hijo izquierdo",
       "Parameters":[]
     },
     {
@@ -45,12 +45,12 @@
     },
     {
       "Id":"8",
-      "Description":"Entonces busco el valor en el hijo derecho",
+      "Description":"No, es mayor, entonces busco el valor en el hijo derecho",
       "Parameters":[]
     },
     {
       "Id":"9",
-      "Description":"El valor <Node_Value> es igual al buscado",
+      "Description":"No, es igual, entonces se encontro el valor",
       "Parameters":[
         "<Node_Value>"
       ]
