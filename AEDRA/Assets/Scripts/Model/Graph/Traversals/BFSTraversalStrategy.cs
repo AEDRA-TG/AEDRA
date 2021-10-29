@@ -29,13 +29,15 @@ namespace Model.GraphModel.Traversals
                     if(graph.AdjacentMtx[previous].ContainsKey(current)){
                         graph.NotifyEdge(previous,current,AnimationEnum.KeepPaintAnimation);
                     }
-                    graph.NotifyNode(current,AnimationEnum.StepInformationJoinAnimation,"", 1 );
+                    graph.NotifyNode(current,AnimationEnum.StepInformationAppendAnimation,"", 1 );
                     graph.NotifyNode(current,AnimationEnum.KeepPaintAnimation);
 
                     foreach (int key in graph.AdjacentMtx[current].Keys)
                     {
                         GraphNode neighboorNode = graph.Nodes[key];
+                        graph.NotifyNode(neighboorNode.Id, AnimationEnum.StepInformationAppendAnimation, "", 2);
                         if(!visitedMap[neighboorNode.Id]){
+                            graph.NotifyNode(neighboorNode.Id, AnimationEnum.StepInformationAppendAnimation, "", 4);
                             q.Enqueue(new Tuple<int, int>(current, neighboorNode.Id));
                         }
                     }

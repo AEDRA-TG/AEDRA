@@ -5,5 +5,22 @@
     "Parameters":[
       "<Node_Value>"
     ]
+  },
+  {
+    "Id":2,
+    "Description":"¿Ya se visito al vecino <Node_Value>?",
+    "Parameters":[
+      "<Node_Value>"
+    ]
+  },
+  {
+    "Id":3,
+    "Description":"No, entonces se visito",
+    "Parameters":[]
+  },
+  {
+    "Id":4,
+    "Description":"No, entonces se agrega a la cola",
+    "Parameters":[]
   }
 ]

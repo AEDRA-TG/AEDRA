@@ -38,8 +38,10 @@ namespace Model.GraphModel.Traversals
             //Traverse all neighbors of a node
             foreach (int neighboor in DFSTraversalStrategy.graph.AdjacentMtx[currentNode].Keys)
             {
+                graph.NotifyNode(neighboor, AnimationEnum.StepInformationAppendAnimation, "", 2);
                 if(!visited[neighboor]){
                     graph.NotifyEdge(currentNode, neighboor, AnimationEnum.KeepPaintAnimation);
+                    graph.NotifyNode(neighboor, AnimationEnum.StepInformationJoinAnimation, "", 3);
                     DFS(neighboor);
                 }
             }
