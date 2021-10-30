@@ -6,22 +6,22 @@
     },
     {
       "Id":"1",
-      "Description":"Visito nodo izquierdo",
+      "Description":"Se visita el nodo izquierdo",
       "Parameters":[]
     },
     {
       "Id":"2",
-      "Description":"Visito nodo derecho",
+      "Description":"Se visita el nodo derecho",
       "Parameters":[]
     },
     {
       "Id":"3",
-      "Description":"Visito nodo padre",
+      "Description":"Se visita el nodo padre",
       "Parameters":[]
     },
     {
       "Id":"4",
-      "Description":"Visito nodo padre",
+      "Description":"Se visita el nodo padre",
       "Parameters":[]
     },
     {
@@ -33,7 +33,7 @@
     },
     {
       "Id":"6",
-      "Description":"Si, entonces busco el valor en el hijo izquierdo",
+      "Description":"Si, entonces se busca el valor en el hijo izquierdo",
       "Parameters":[]
     },
     {
@@ -45,19 +45,19 @@
     },
     {
       "Id":"8",
-      "Description":"No, es mayor, entonces busco el valor en el hijo derecho",
+      "Description":"No, es mayor, entonces se busca el valor en el hijo derecho",
       "Parameters":[]
     },
     {
       "Id":"9",
-      "Description":"No, es igual, entonces se encontro el valor",
+      "Description":"No, es igual, entonces el valor fue encontrado",
       "Parameters":[
         "<Node_Value>"
       ]
     },
     {
       "Id":"10",
-      "Description":"El valor buscado no se encuentra en el grafo",
+      "Description":"No quedan más nodos por recorrer, el valor no fue encontrado",
       "Parameters":[]
     }
 ]

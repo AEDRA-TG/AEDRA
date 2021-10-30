@@ -8,12 +8,12 @@
             {
                 "Name":"Cara Frontal",
                 "ARMarker":"Grafo",
-                "Description":"Esta cara se usa para detectar la estructura."
+                "Description":"Esta cara se usa para detectar el grafo."
             },
             {
                 "Name":"Cara Trasera",
                 "ARMarker":"InformacionGrafo",
-                "Description":"Esta cara se usa para mostrar información de la estructura en realidad aumentada."
+                "Description":"Esta cara se usa para proyectar información de la estructura en realidad aumentada."
             }
         ]
     },
@@ -26,12 +26,12 @@
             {
                 "Name":"Cara Frontal",
                 "ARMarker":"Arbol",
-                "Description":"Esta cara se usa para detectar la estructura."
+                "Description":"Esta cara se usa para detectar el árbol."
             },
             {
                 "Name":"Cara Trasera",
                 "ARMarker":"InformacionArbol",
-                "Description":"Esta cara se usa para mostrar información de la estructura en realidad aumentada."
+                "Description":"Esta cara se usa para proyectar información de la estructura en realidad aumentada."
             }
         ]
     },
@@ -44,12 +44,12 @@
             {
                 "Name":"Cara Frontal",
                 "ARMarker":"Dijkstra",
-                "Description":"Esta cara se usa para detectar la estructura."
+                "Description":"Esta cara se usa para detectar el algoritmo."
             },
             {
                 "Name":"Cara Trasera",
                 "ARMarker":"InformacionDijkstra",
-                "Description":"Esta cara se usa para mostrar información de la estructura en realidad aumentada."
+                "Description":"Esta cara se usa para proyectar información del algoritmo en realidad aumentada."
             }
         ]
     }
