@@ -13,30 +13,30 @@ namespace Utils.Configuration
         }
         public void ConfigureFiles()
         {
-            if (!File.Exists(Constants.ConstantsFilePath))
+            CopyFile(Constants.ConstantsFilePath, Constants.ConstantsStreamingFilePath);
+            CopyFile(Constants.TargetsFilePath, Constants.TargetsStreamingFilePath);
+            CopyFile(Constants.DijkstraFilePath, Constants.DijkstraStreamingFilePath);
+            CopyFile(Constants.TutorialsFilePath, Constants.TutorialsStreamingFilePath);
+            CopyFile(Constants.DijkstraStepsFilePath, Constants.DijkstraStepsStreamingFilePath);
+            CopyFile(Constants.TraversalTreeStepsFilePath, Constants.TraversalTreeStepsStreamingFilePath);
+            CopyFile(Constants.TraversalGraphStepsFilePath, Constants.TraversalGraphStepsStreamingFilePath);
+            Constants.GlobalColor = Utilities.LoadGlobalColor();
+        }
+
+        private void CopyFile(string persistentDataPath, string streamingAssetsFilePath){
+            if (!File.Exists(persistentDataPath))
             {
                 #if UNITY_EDITOR
-                string pathFile = "file://" + Constants.ConstantsStreamingFilePath;
+                string pathFile = "file://" + streamingAssetsFilePath;
                 #elif UNITY_ANDROID
-                string pathFile = Constants.ConstantsStreamingFilePath;
+                string pathFile = streamingAssetsFilePath;
                 #endif
+
                 UnityWebRequest fileRequest = UnityWebRequest.Get(pathFile);
                 fileRequest.SendWebRequest();
                 while(!fileRequest.isDone){}
-                File.WriteAllBytes(Constants.ConstantsFilePath, fileRequest.downloadHandler.data);
+                File.WriteAllBytes(persistentDataPath, fileRequest.downloadHandler.data);
             }
-            if(!File.Exists(Constants.TargetsFilePath)){
-                #if UNITY_EDITOR
-                string pathFile = "file://" + Constants.TargetsStreamingFilePath;
-                #elif UNITY_ANDROID
-                string pathFile = Constants.TargetsStreamingFilePath;
-                #endif
-                UnityWebRequest fileRequest = UnityWebRequest.Get(pathFile);
-                fileRequest.SendWebRequest();
-                while(!fileRequest.isDone){}
-                File.WriteAllBytes(Constants.TargetsFilePath, fileRequest.downloadHandler.data);
-            }
-            Constants.GlobalColor = Utilities.LoadGlobalColor();
         }
     }
 }

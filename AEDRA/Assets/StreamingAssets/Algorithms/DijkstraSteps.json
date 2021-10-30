@@ -1,0 +1,40 @@
+[
+    {
+      "Id":1,
+      "Description":"Visitar nodo <Node_Value>",
+      "Parameters":[
+        "<Node_Value>"
+      ]
+    },
+    {
+      "Id":2,
+      "Description":"Sumar mi costo mas el de mi vecino <Node_Value>",
+      "Parameters":[
+        "<Node_Value>"
+      ]
+    },
+    {
+      "Id":3,
+      "Description":"El nodo <Node_Value> tiene el costo menor",
+      "Parameters":[
+        "<Node_Value>"
+      ]
+    },
+    {
+      "Id":4,
+      "Description":"¿Ya se visito el nodo <Node_Value>?",
+      "Parameters":[
+        "<Node_Value>"
+      ]
+    },
+    {
+      "Id":5,
+      "Description":"No, entonces se visita",
+      "Parameters":[]
+    },
+    {
+      "Id":6,
+      "Description":"Si, entonces reviso el siguiente menor en la cola",
+      "Parameters":[]
+    }
+]

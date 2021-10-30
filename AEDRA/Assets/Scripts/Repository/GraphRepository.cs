@@ -1,5 +1,6 @@
 using Model.Common;
 using Model.GraphModel;
+using UnityEngine;
 using Utils;
 using Utils.Enums;
 
@@ -20,8 +21,8 @@ namespace Repository
         /// </summary>
         private string _filePath;
 
-        public GraphRepository(StructureEnum structureName){
-            this._filePath = Constants.DataPath + structureName.ToString() + ".json";
+        public GraphRepository(string dataFile){
+            this._filePath = Constants.DataPath + dataFile;
         }
 
         /// <summary>
@@ -32,6 +33,7 @@ namespace Repository
         {
             if (_graph == null)
             {
+                Debug.Log("Load: " + _filePath);
                 _graph = Utilities.DeserializeJSON<Graph>(_filePath);
                 _graph ??= new Graph();
             }
@@ -52,6 +54,7 @@ namespace Repository
         /// </summary>
         public override void Save()
         {
+            Debug.Log("Save: " + _filePath);
             Utilities.SerializeJSON<Graph>(_filePath,_graph);
         }
 
@@ -63,6 +66,11 @@ namespace Repository
                 _graph = new Graph();
                 base.Notify();
             }
+        }
+
+        public override void CleanInstance()
+        {
+            _graph = null;
         }
     }
 }

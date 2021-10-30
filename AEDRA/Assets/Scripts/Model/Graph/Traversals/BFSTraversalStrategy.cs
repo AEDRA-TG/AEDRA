@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using SideCar.DTOs;
+using UnityEngine;
+using Utils;
 using Utils.Enums;
 
 namespace Model.GraphModel.Traversals
@@ -22,20 +24,27 @@ namespace Model.GraphModel.Traversals
                 Tuple<int, int> nodes = q.Dequeue();
                 int previous = nodes.Item1;
                 int current = nodes.Item2;
+                graph.NotifyNode(current, AnimationEnum.StepInformationAppendAnimation, "", 5);
                 if(!visitedMap[current]){
+                    graph.NotifyNode(current, AnimationEnum.StepInformationAppendAnimation, "", 6);
                     visitedMap[current] = true;
                     if(graph.AdjacentMtx[previous].ContainsKey(current)){
                         graph.NotifyEdge(previous,current,AnimationEnum.KeepPaintAnimation);
                     }
+                    graph.NotifyNode(current,AnimationEnum.StepInformationAppendAnimation,"", 1 );
                     graph.NotifyNode(current,AnimationEnum.KeepPaintAnimation);
 
                     foreach (int key in graph.AdjacentMtx[current].Keys)
                     {
                         GraphNode neighboorNode = graph.Nodes[key];
+                        graph.NotifyNode(neighboorNode.Id, AnimationEnum.StepInformationAppendAnimation, "", 2);
                         if(!visitedMap[neighboorNode.Id]){
+                            graph.NotifyNode(neighboorNode.Id, AnimationEnum.StepInformationAppendAnimation, "", 4);
                             q.Enqueue(new Tuple<int, int>(current, neighboorNode.Id));
                         }
                     }
+                }else{
+                    graph.NotifyNode(current, AnimationEnum.StepInformationAppendAnimation, "", 6);
                 }
             }
         }

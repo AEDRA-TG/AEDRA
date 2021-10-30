@@ -47,6 +47,7 @@ namespace SideCar.DTOs
             if(newProperties.Value != default){
                 this.Value = newProperties.Value;
             }
+            base.UpdateProperties(DTO);
         }
     }
 }

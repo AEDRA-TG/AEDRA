@@ -1,0 +1,43 @@
+[
+  {
+    "Id":1,
+    "Description":"Visitar nodo <Node_Value>",
+    "Parameters":[
+      "<Node_Value>"
+    ]
+  },
+  {
+    "Id":2,
+    "Description":"¿Ya se visito al vecino <Node_Value>?",
+    "Parameters":[
+      "<Node_Value>"
+    ]
+  },
+  {
+    "Id":3,
+    "Description":"No, entonces se visita",
+    "Parameters":[]
+  },
+  {
+    "Id":4,
+    "Description":"No, entonces se agrega a la cola",
+    "Parameters":[]
+  },
+  {
+    "Id":5,
+    "Description":"¿Ya se visito el nodo <Node_Value>?",
+    "Parameters":[
+      "<Node_Value>"
+    ]
+  },
+  {
+    "Id":6,
+    "Description":"No, entonces se visita",
+    "Parameters":[]
+  },
+  {
+    "Id":7,
+    "Description":"Si, entonces se pasa al siguiente en la cola",
+    "Parameters":[]
+  }
+]

@@ -111,6 +111,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _selectable: 0
+  text: {fileID: 3197279758950597426}
+  _info: {fileID: 34390476977988529}
+  _step: {fileID: 0}
 --- !u!1 &6182677539137779551
 GameObject:
   m_ObjectHideFlags: 0
@@ -192,14 +195,14 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6182677539137779551}
-  m_Text: 
+  m_Text: dsa
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
   m_Anchor: 4
   m_Alignment: 1
   m_TabSize: 4
-  m_FontSize: 500
+  m_FontSize: 200
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}

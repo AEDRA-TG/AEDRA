@@ -2,6 +2,7 @@ using UnityEngine;
 using DG.Tweening;
 using Utils;
 using SideCar.DTOs;
+using Utils.Enums;
 
 namespace View.GUI.ProjectedObjects
 {
@@ -10,6 +11,8 @@ namespace View.GUI.ProjectedObjects
     /// </summary>
     public class ProjectedEdge : ProjectedObject
     {
+        private Vector3? _startPosition;
+        private Vector3? _endPosition;
         public void Start()
         {
 
@@ -25,7 +28,7 @@ namespace View.GUI.ProjectedObjects
 
         public override Tween CreateAnimation(){
             //TODO: make name of IsCreated more explitic (e.g: OnCreatedAnimationCompleted)
-            return gameObject.transform.DOScale(UpdateEdge(),base.AnimationTime).OnComplete(()=> base.IsCreated = true);
+            return gameObject.transform.DOScale(UpdateEdge(),base.AnimationTime).OnComplete(() => base.IsCreated = true);
         }
 
         /// <summary>
@@ -42,13 +45,23 @@ namespace View.GUI.ProjectedObjects
         /// <returns>Actualized edge scale</returns>
         private Vector3 UpdateEdge(){
             EdgeDTO edgeDTO = (EdgeDTO) base.Dto;
-            Vector3 startPosition = GetNodeCoordinates(edgeDTO.IdStartNode);
-            Vector3 endPosition = GetNodeCoordinates(edgeDTO.IdEndNode);
+            Transform startPosition = GetNodeCoordinates(edgeDTO.IdStartNode);
+            Transform endPosition = GetNodeCoordinates(edgeDTO.IdEndNode);
             const float width = 0.2f;
-            Vector3 offset = endPosition - startPosition;
+            Vector3 offset = endPosition.position - startPosition.position;
             Vector3 scale = new Vector3(width, offset.magnitude / 2.0f, width);
-            gameObject.transform.position = startPosition + (offset / 2.0f);
+            gameObject.transform.position = startPosition.position + (offset / 2.0f);
             gameObject.transform.up = offset;
+
+            if(_startPosition == null){
+                base.text.transform.position = this.transform.position;
+            } else if ( Vector2.Distance(startPosition.localPosition, (Vector3)_startPosition) != 0
+                || Vector3.Distance(endPosition.localPosition, (Vector3)_endPosition) != 0 ){
+                    base.text.transform.position = this.transform.position;
+            }
+            _startPosition = startPosition.localPosition;
+            _endPosition = endPosition.localPosition;
+
             return scale;
         }
 
@@ -57,9 +70,9 @@ namespace View.GUI.ProjectedObjects
         /// </summary>
         /// <param name="id">Id to identify the node</param>
         /// <returns>The coordinates of the found node</returns>
-        private Vector3 GetNodeCoordinates(int id){
+        private Transform GetNodeCoordinates(int id){
             GameObject nodeFound = GameObject.Find(Constants.NodeName+ id);
-            return nodeFound.transform.position;
+            return nodeFound.transform;
         }
 
         public override Tween DeleteAnimation(){
@@ -68,16 +81,16 @@ namespace View.GUI.ProjectedObjects
 
         public override Tween PaintAnimation(){
             MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
-            return mesh.material.DOColor(Color.cyan,base.AnimationTime).OnComplete( () => mesh.material.DOColor(Color.white, base.AnimationTime) );
+            return mesh.material.DOColor(GetColorToUse(),base.AnimationTime).OnComplete( () => mesh.material.DOColor(Color.white, base.AnimationTime) );
         }
         public override Tween KeepPaintAnimation(){
             MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
-            return mesh.material.DOColor(Color.cyan,base.AnimationTime);
+            return mesh.material.DOColor(GetColorToUse(),base.AnimationTime);
         }
 
         public override Tween UnPaintAnimation(){
             MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
-            return mesh.material.DOColor(Color.white,base.AnimationTime);
+            return mesh.material.DOColor(GetColorToUse(),base.AnimationTime);
         }
 
         public override void Move(Vector3 coordinates){

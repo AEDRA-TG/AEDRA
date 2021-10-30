@@ -39,9 +39,9 @@ namespace SideCar.DTOs
         /// </summary>
         public AnimationEnum Operation {get; set;}
 
-        public Color Color {get; set;}
-
         public string Info {get;  set;}
+
+        public int Step {get; set;}
 
 
         public ElementDTO(int id, object value){
@@ -59,6 +59,7 @@ namespace SideCar.DTOs
         }
 
         public virtual void UpdateProperties(ElementDTO DTO){
+            Operation = DTO.Operation;
         }
     }
 }

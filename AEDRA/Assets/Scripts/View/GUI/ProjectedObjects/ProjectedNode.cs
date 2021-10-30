@@ -3,6 +3,9 @@ using DG.Tweening;
 using Utils;
 using SideCar.DTOs;
 using Controller;
+using Utils.Enums;
+using TMPro;
+using Model.Common;
 
 namespace View.GUI.ProjectedObjects
 {
@@ -15,6 +18,8 @@ namespace View.GUI.ProjectedObjects
         private bool _isMoving;
         private bool _isSaved;
         private float _timer;
+        [SerializeField]
+        private TextMesh _info;
 
         public void Start()
         {
@@ -73,18 +78,17 @@ namespace View.GUI.ProjectedObjects
 
         public override Tween PaintAnimation(){
             MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
-            return mesh.material.DOColor(Color.cyan,base.AnimationTime).OnComplete( () => mesh.material.DOColor(Color.white, base.AnimationTime) );
+            return mesh.material.DOColor(GetColorToUse(),base.AnimationTime).OnComplete( () => mesh.material.DOColor(Color.white, base.AnimationTime) );
         }
 
         public override Tween KeepPaintAnimation(){
             MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
-            return mesh.material.DOColor(base.Dto.Color,base.AnimationTime);
+            return mesh.material.DOColor(GetColorToUse(),base.AnimationTime);
         }
         public override Tween UnPaintAnimation(){
             MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
-            return mesh.material.DOColor(Color.white,0);
+            return mesh.material.DOColor(GetColorToUse(),0);
         }
-
         public override void Move(Vector3 coordinates){
             gameObject.transform.localPosition = coordinates;
         }
@@ -103,13 +107,28 @@ namespace View.GUI.ProjectedObjects
         public override Tween UpdateAnimation()
         {
             Tween tween = default;
-            if(base.Dto.Info != default){
-                Transform infoGameObject = gameObject.transform.Find("Info");
-                
-                
-                tween = infoGameObject.DOScale(0.02f, 1);
+            if(base.Dto.Info != null){
+                string infoText = Dto.Info;
+                tween = _info.transform.DOScale(0.02f, base.AnimationTime).OnStart(()=> _info.text = infoText);
             }
             return tween;
+        }
+
+        public override Tween StepInformationAnimation()
+        {
+            Tween tweenStep = default;
+            if(base.Dto.Step != -1){
+                GameObject targetInformation = GameObject.Find(Constants.TargetInformationName);
+                if(targetInformation != null){
+                    Transform information = targetInformation.transform.Find("Information");
+                    TextMeshPro stepText = information.GetComponent<TextMeshPro>();
+                    AlgorithmSteps algorithmSteps = targetInformation.GetComponent<AlgorithmSteps>();
+                    tweenStep = information.DOScale(0.01245f, base.AnimationTime);
+                    string stepDescription = algorithmSteps.GetStepDescription(Dto.Step, Dto);
+                    tweenStep.OnUpdate(()=>stepText.text = stepDescription);
+                }
+            }
+            return tweenStep;
         }
     }
 }

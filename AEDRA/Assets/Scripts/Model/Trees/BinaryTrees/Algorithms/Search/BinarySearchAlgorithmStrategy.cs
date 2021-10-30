@@ -28,20 +28,21 @@ namespace Model.TreeModel.BinaryTree.Algorithms.Search
             if(parent != null){
                 node.NotifyEdge(parent, node, AnimationEnum.KeepPaintAnimation);
             }
+            node.NotifyNode(parent, node, AnimationEnum.StepInformationAppendAnimation, 5);
             if(value < node.Value){
                 node.NotifyNode(parent, node, AnimationEnum.KeepPaintAnimation);
+                node.NotifyNode(parent, node, AnimationEnum.StepInformationJoinAnimation, 6);
                 BinarySearch(value, node.LeftChild, node);
             }
             else if(value > node.Value){
                 node.NotifyNode(parent, node, AnimationEnum.KeepPaintAnimation);
+                node.NotifyNode(parent, node, AnimationEnum.StepInformationJoinAnimation, 8);
                 BinarySearch(value, node.RightChild, node);
             }
             else{
-                node.NotifyNode(parent, node, AnimationEnum.KeepPaintAnimation);
+                node.NotifyNode(parent, node, AnimationEnum.PaintValueFoundAnimation);
+                node.NotifyNode(parent, node, AnimationEnum.StepInformationJoinAnimation, 9);
                 return;
-            }
-            if(parent != null){
-                node.NotifyNode(parent, node, AnimationEnum.UnPaintAnimation);
             }
         }
     }

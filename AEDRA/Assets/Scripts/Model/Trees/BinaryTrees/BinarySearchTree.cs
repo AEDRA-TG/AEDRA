@@ -29,11 +29,6 @@ namespace Model.TreeModel
         /// </summary>
         private Dictionary<TraversalEnum, ITraversalTreeStrategy> _traversals;
 
-        /// <summary>
-        /// Dictionary to save all the algorithms implementations
-        /// </summary>
-        private Dictionary<AlgorithmEnum, IBinaryTreeSearchStrategy> _algorithms;
-
         private Dictionary<int, Point> _nodesCoordinates;
 
         public BinarySearchTree(){
@@ -44,10 +39,6 @@ namespace Model.TreeModel
                 {TraversalEnum.TreePreOrder, new PreOrderTraversalStrategy()},
                 {TraversalEnum.TreeInOrder, new InOrderTraversalStrategy()},
                 {TraversalEnum.TreePostOrder, new PostOrderTraversalStrategy()}
-            };
-
-            this._algorithms = new Dictionary<AlgorithmEnum, IBinaryTreeSearchStrategy>(){
-                {AlgorithmEnum.BinarySearch, new BinarySearchAlgorithmStrategy()}
             };
         }
 
@@ -78,6 +69,10 @@ namespace Model.TreeModel
             if(parent!=null)
             {
                 node.NotifyEdge(parent, node, AnimationEnum.CreateAnimation);
+                node.Level = parent.Level+1;
+            }
+            else{
+                node.Level = 1;
             }
             CreateTree(node.LeftChild, node);
             CreateTree(node.RightChild, node);
@@ -98,7 +93,7 @@ namespace Model.TreeModel
             }
             else if(this.Root == null){
                 _nodesCoordinates.Add(this.IdSequence, point);
-                this.Root = new BinarySearchTreeNode(this.IdSequence, (int)element.Value, point);
+                this.Root = new BinarySearchTreeNode(this.IdSequence, (int)element.Value, point, 1);
                 this.Root.NotifyNode(null, this.Root, AnimationEnum.CreateAnimation);
                 this.IdSequence++;
             }
@@ -156,7 +151,10 @@ namespace Model.TreeModel
         /// <param name="data">Optional information to required by the algorithm</param>
         public override void DoAlgorithm(AlgorithmEnum algorithmName, List<ElementDTO> data = null)
         {
-            //this._algorithms[algorithmName].DoAlgorithm(this, data);
+            switch(algorithmName){
+                case AlgorithmEnum.BinarySearch: new BinarySearchAlgorithmStrategy().DoAlgorithm(this, data[0]);
+                break;
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using SideCar.DTOs;
+using Utils;
 using Utils.Enums;
 
 namespace Model.GraphModel.Traversals
@@ -32,12 +33,15 @@ namespace Model.GraphModel.Traversals
         /// <param name="currentNode">Current node that is being visited</param>
         public void DFS(int currentNode){
             visited[currentNode] = true;
+            graph.NotifyNode(currentNode, AnimationEnum.StepInformationJoinAnimation, "", 1);
             graph.NotifyNode(currentNode, AnimationEnum.KeepPaintAnimation);
             //Traverse all neighbors of a node
             foreach (int neighboor in DFSTraversalStrategy.graph.AdjacentMtx[currentNode].Keys)
             {
+                graph.NotifyNode(neighboor, AnimationEnum.StepInformationAppendAnimation, "", 2);
                 if(!visited[neighboor]){
                     graph.NotifyEdge(currentNode, neighboor, AnimationEnum.KeepPaintAnimation);
+                    graph.NotifyNode(neighboor, AnimationEnum.StepInformationJoinAnimation, "", 3);
                     DFS(neighboor);
                 }
             }

@@ -5,6 +5,7 @@ using SideCar.DTOs;
 using C5;
 using Utils.Enums;
 using UnityEngine;
+using Utils;
 
 namespace Model.GraphModel.Algorithms.ShortestPath
 {
@@ -22,23 +23,30 @@ namespace Model.GraphModel.Algorithms.ShortestPath
                 double cost = nodes.Item1;
                 int previous = nodes.Item2;
                 int current = nodes.Item3;
-
+                graph.NotifyNode(current, AnimationEnum.StepInformationAppendAnimation, "", 3);
+                graph.NotifyNode(current, AnimationEnum.StepInformationAppendAnimation, "", 4);
                 if(!visitedMap[current]){
+                    graph.NotifyNode(current, AnimationEnum.StepInformationAppendAnimation, "", 5);
                     visitedMap[current] = true;
                     if(graph.AdjacentMtx[previous].ContainsKey(current)){
                         graph.NotifyEdge(previous,current,AnimationEnum.KeepPaintAnimation);
                     }
-                    graph.NotifyNode(current,AnimationEnum.KeepPaintAnimation, Color.green, "C = "+ cost );
-
+                    graph.NotifyNode(current,AnimationEnum.KeepPaintAnimation);
+                    graph.NotifyNode(current,AnimationEnum.UpdateAnimation, "C = "+ cost);
+                    graph.NotifyNode(current,AnimationEnum.StepInformationJoinAnimation, "C = "+ cost, 1 );
                     foreach (int key in graph.AdjacentMtx[current].Keys)
                     {
                         GraphNode neighboorNode = graph.Nodes[key];
                         if(!visitedMap[neighboorNode.Id]){
                             double noVisitedCost = (double)graph.AdjacentMtx[current][neighboorNode.Id];
-                            graph.NotifyNode(neighboorNode.Id, AnimationEnum.UpdateAnimation, default, "C = " + cost + "+" + noVisitedCost);
+                            graph.NotifyNode(neighboorNode.Id, AnimationEnum.StepInformationAppendAnimation, "", 2);
+                            graph.NotifyNode(neighboorNode.Id, AnimationEnum.UpdateAnimation, "C = " + cost + " + " + noVisitedCost);
                             heap.Add(new Tuple<double, int, int>(cost + noVisitedCost, current, neighboorNode.Id));
                         }
                     }
+                }
+                else{
+                    graph.NotifyNode(current, AnimationEnum.StepInformationAppendAnimation, "", 6);
                 }
             }
         }

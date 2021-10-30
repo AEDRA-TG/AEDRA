@@ -23,17 +23,13 @@ namespace Utils.Parameters
         /// Target name
         /// </summary>
         /// <returns></returns>
-        [SerializeField] private string _targetName;
+        [SerializeField] private string _dataFilePath;
 
         [SerializeField] private GameObject _referencePoint;
 
         [SerializeField] private TargetTypeEnum _targetType;
 
-        public TargetParameter(StructureEnum structure, GameObject prefabMenu, string targetName){
-            this._structure = structure;
-            this._prefabMenu = prefabMenu;
-            this._targetName = targetName;
-        }
+        [SerializeField] private GameObject _targetProjectionInformation;
 
         public void SetStructure(StructureEnum structure){
             _structure = structure;
@@ -50,12 +46,12 @@ namespace Utils.Parameters
         public GameObject GetPrefabMenu(){
             return _prefabMenu;
         }
-        public void SetTargetName(string targetName){
-            _targetName = targetName;
+        public void SetDataFilePath(string dataFilePath){
+            _dataFilePath = dataFilePath;
         }
 
-        public string GetTargetName(){
-            return _targetName;
+        public string GetDataFilePath(){
+            return _dataFilePath;
         }
 
         public void SetReferencePoint(GameObject referencePoint){
@@ -72,6 +68,14 @@ namespace Utils.Parameters
 
         public TargetTypeEnum GetTargetType(){
             return _targetType;
+        }
+
+        public GameObject GetTargetProjectionInformation(){
+            return _targetProjectionInformation;
+        }
+
+        public void SetTargetProjectionInformation(GameObject targetProjectionInformation){
+            _targetProjectionInformation = targetProjectionInformation;
         }
     }
 }

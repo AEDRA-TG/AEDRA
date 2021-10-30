@@ -29,6 +29,8 @@ namespace Repository
         /// </summary>
         public abstract void Clean();
 
+        public abstract void CleanInstance();
+
         /// <summary>
         /// Method that notifies view when the data structure was cleaned
         /// </summary>

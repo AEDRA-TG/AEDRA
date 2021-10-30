@@ -49,6 +49,8 @@ namespace View.GUI.ProjectedObjects
         /// Intance of the class physics for the projected object
         /// </summary>
         protected ObjectPhysics _objectPhysics;
+        [SerializeField]
+        protected TextMesh text;
 
         virtual public void Awake()
         {
@@ -61,7 +63,10 @@ namespace View.GUI.ProjectedObjects
                 {AnimationEnum.KeepPaintAnimation,KeepPaintAnimation},
                 {AnimationEnum.UnPaintAnimation, UnPaintAnimation},
                 {AnimationEnum.PaintAnimation, PaintAnimation},
-                {AnimationEnum.UpdateAnimation, UpdateAnimation}
+                {AnimationEnum.UpdateAnimation, UpdateAnimation},
+                {AnimationEnum.PaintValueFoundAnimation, KeepPaintAnimation},
+                {AnimationEnum.StepInformationJoinAnimation, StepInformationAnimation},
+                {AnimationEnum.StepInformationAppendAnimation, StepInformationAnimation}
             };
         }
 
@@ -134,6 +139,10 @@ namespace View.GUI.ProjectedObjects
         {
         }
 
+        virtual public Tween StepInformationAnimation(){
+            return default;
+        }
+
         virtual public void SetDTO(ElementDTO dto)
         {
             if(Dto != null){
@@ -142,15 +151,32 @@ namespace View.GUI.ProjectedObjects
             else{
                 Dto = dto;
             }
-            TextMesh text = gameObject.GetComponentInChildren<TextMesh>();
             if(text != null){
-                text.text = dto.Value.ToString();
+                if(dto.Value != null){
+                    text.text = dto.Value.ToString();
+                }
             }
-            Transform infoGameObject = gameObject.transform.Find("Info");
-            TextMesh info =  infoGameObject?.GetComponent<TextMesh>();
-            if(info != null){
-                info.text = dto.Info;
+        }
+
+        public Color GetColorToUse(){
+            Color colorToUse;
+            switch(Dto.Operation){
+                case AnimationEnum.PaintValueFoundAnimation: colorToUse = Constants.ValueFoundColor;
+                    break;
+                case AnimationEnum.PaintAnimation: colorToUse = Constants.VisitedObjectColor;
+                    break;
+                case AnimationEnum.KeepPaintAnimation: colorToUse = Constants.VisitedObjectColor;
+                    break;
+                case AnimationEnum.UpdateAnimation: colorToUse = Constants.VisitedObjectColor;
+                    break;
+                case AnimationEnum.StepInformationJoinAnimation: colorToUse = Constants.VisitedObjectColor;
+                    break;
+                case AnimationEnum.StepInformationAppendAnimation: colorToUse = Constants.VisitedObjectColor;
+                    break;
+                default: colorToUse = Constants.BaseObjectColor;
+                    break;
             }
+            return colorToUse;
         }
 
         public override bool Equals(object other)
@@ -198,11 +224,11 @@ namespace View.GUI.ProjectedObjects
             MeshRenderer mesh = gameObject.GetComponent<MeshRenderer>();
             if (_selected)
             {
-                mesh.material.DOColor(Color.red, 0);
+                mesh.material.DOColor(Constants.SelectionColor, 0);
             }
             else
             {
-                mesh.material.DOColor(Color.white, 0);
+                mesh.material.DOColor(Constants.BaseObjectColor, 0);
             }
         }
     }

@@ -10,6 +10,9 @@ namespace Utils.Enums
         PaintAnimation,
         KeepPaintAnimation,
         UnPaintAnimation,
-        UpdateAnimation
+        UpdateAnimation,
+        PaintValueFoundAnimation,
+        StepInformationJoinAnimation,
+        StepInformationAppendAnimation
     }
 }

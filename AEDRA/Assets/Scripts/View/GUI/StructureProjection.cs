@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using SideCar.DTOs;
 using UnityEngine;
+using UnityEngine.UI;
 using Utils;
 using Utils.Enums;
 using View.Animations;
 using View.Animations.Algorithms;
 using View.GUI.ProjectedObjects;
+using DG.Tweening;
 
 namespace View.GUI
 {
@@ -44,6 +46,8 @@ namespace View.GUI
         /// </summary>
         private Transform _referencePoint;
 
+        private GameObject _notification;
+
         public void Awake()
         {
             DTOs = new List<ElementDTO>();
@@ -59,6 +63,7 @@ namespace View.GUI
                 { OperationEnum.Algorithm, new AlgorithmAnimation()}
             };
             _referencePoint = GameObject.Find(Constants.ReferencePointName).transform;
+            _notification = GameObject.Find(Constants.NotificationName).gameObject;
         }
 
         /// <summary>
@@ -99,10 +104,13 @@ namespace View.GUI
             prefab = Instantiate(prefab,this.transform);
             prefab.transform.localPosition = position;
             prefab.transform.localRotation = Quaternion.Euler(90,0,0);
+            prefab.name = Constants.EdgeName;
+            if(dto.Name == "Edge"){
+                prefab = prefab.transform.Find("Cylinder").gameObject;
+            }
             prefab.name = dto.GetUnityId();
             ProjectedObject createdObject = prefab.GetComponent<ProjectedObject>();
             createdObject.SetDTO(dto);
-
             // Activate selectable object if is Graph element
             if(dto is GraphNodeDTO){
                 createdObject.SetSelectable(true);
@@ -112,6 +120,15 @@ namespace View.GUI
             }
             ProjectedObjects.Add(createdObject);
             return createdObject;
+        }
+
+        public void ShowNotification(string notificationText)
+        {
+            _notification.GetComponentInChildren<Text>().text = notificationText;
+            Sequence sequence = DOTween.Sequence();
+            sequence.Append(_notification.transform.DOScale(1f, 1));
+            sequence.AppendInterval(1);
+            sequence.Append(_notification.transform.DOScale(0f, 1));
         }
 
         /// <summary>
@@ -131,7 +148,13 @@ namespace View.GUI
         /// <param name="objectToBeDeleted"></param>
         public void DeleteObject(ProjectedObject objectToBeDeleted){
             this.ProjectedObjects.Remove(objectToBeDeleted);
-            Destroy(objectToBeDeleted.gameObject);
+            if(objectToBeDeleted is ProjectedEdge){
+                Destroy(objectToBeDeleted.gameObject.transform.parent.gameObject);
+            }
+            else{
+                Destroy(objectToBeDeleted.gameObject);
+            }
+            
         }
 
         /// <summary>
@@ -148,11 +171,24 @@ namespace View.GUI
                 }
                 else{
                     GameObject parentNode = GameObject.Find(Constants.NodeName + binaryDTO.ParentId);
-                    objectPosition = new Vector3(parentNode.transform.localPosition.x, parentNode.transform.localPosition.y - Constants.VerticalNodeTreeDistance, parentNode.transform.localPosition.z);
+                    BinarySearchNodeDTO parentBinaryDTO = (BinarySearchNodeDTO) parentNode.GetComponent<ProjectedObject>().Dto;
+                    GameObject brother = null;
+                    if(binaryDTO.IsLeft){
+                        brother = GameObject.Find(Constants.NodeName + parentBinaryDTO.RightChild);
+                    }
+                    else{
+                        brother = GameObject.Find(Constants.NodeName + parentBinaryDTO.LeftChild);
+                    }
+                    if(brother!=null){
+                        objectPosition = new Vector3(brother.transform.localPosition.x, parentNode.transform.localPosition.y - Constants.VerticalNodeTreeDistance, parentNode.transform.localPosition.z);
+                    }
+                    else{
+                        objectPosition = new Vector3(parentNode.transform.localPosition.x, parentNode.transform.localPosition.y - Constants.VerticalNodeTreeDistance, parentNode.transform.localPosition.z);
+                    }
                 }
             }
             else{
-                objectPosition = new Vector3(Random.Range(-5, 5),_referencePoint.localPosition.y,Random.Range(0, -(_referencePoint.transform.localPosition.z*2)));
+                objectPosition = new Vector3(Random.Range(Constants.MaxGraphWidthNevative, Constants.MaxGraphWidthPositive),_referencePoint.localPosition.y,Random.Range(Constants.MaxGraphHeightNegative, Constants.MaxGraphHeightPositive));
             }
             return objectPosition;
         }

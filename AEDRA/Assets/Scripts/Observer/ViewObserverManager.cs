@@ -24,6 +24,8 @@ namespace Observer
             Command.OperationCompleted += SaveDataStructure;
             Command.OperationCompleted += CleanUserSelection;
             DataStructureRepository.CleanStructure += CleanDataStructure;
+            AppEventController.NotifyNotification += ShowNotification;
+            DataStructure.NotifyNotification += ShowNotification;
         }
 
         /// <summary>
@@ -35,6 +37,8 @@ namespace Observer
             Command.OperationCompleted -= SaveDataStructure;
             Command.OperationCompleted -= CleanUserSelection;
             DataStructureRepository.CleanStructure -= CleanDataStructure;
+            AppEventController.NotifyNotification -= ShowNotification;
+            DataStructure.NotifyNotification -= ShowNotification;
         }
 
         /// <summary>
@@ -60,8 +64,13 @@ namespace Observer
         /// </summary>
         /// <param name="operation"></param>
         private void SaveDataStructure(OperationEnum operation){
-            Command command = new SaveCommand();
-            CommandController.GetInstance().Invoke(command);
+            AppEventController appEventController = FindObjectOfType<AppEventController>();
+            if(!appEventController.IsAlgorithmProjected()){
+                if(operation != OperationEnum.CreateDataStructure){
+                    Command command = new SaveCommand();
+                    CommandController.GetInstance().Invoke(command);
+                }
+            }
         }
 
         /// <summary>
@@ -83,12 +92,12 @@ namespace Observer
             if(projection != null){
                 Transform target = projection.transform.parent;
                 Destroy(projection);
-
+                CleanUserSelection(OperationEnum.CreateDataStructure);
                 projection = new GameObject(Constants.ObjectsParentName, typeof(StructureProjection));
                 projection.transform.parent = target;
                 projection.transform.localScale = Vector3.one;
-                projection.transform.localRotation = Quaternion.Euler(0,0,0);
-                projection.transform.localPosition = Vector3.zero;
+                projection.transform.localRotation = Quaternion.Euler(-50,90,0);
+                projection.transform.localPosition = new Vector3(5,10,-6.375f);
             }
         }
 
@@ -96,9 +105,9 @@ namespace Observer
         /// Method to show a text when is required
         /// </summary>
         /// <param name="notificationText"></param>
-        private void CreateNotification(string notificationText){
-            //StructureProjection projection = GameObject.FindObjectOfType<StructureProjection>();
-            //projection.ShowNotification(notificationText);
+        private void ShowNotification(string notificationText){
+            StructureProjection projection = GameObject.FindObjectOfType<StructureProjection>();
+            projection.ShowNotification(notificationText);
         }
     }
 }

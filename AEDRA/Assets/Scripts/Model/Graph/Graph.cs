@@ -120,8 +120,7 @@ namespace Model.GraphModel
                 NotifyEdge(edgeDTO.IdStartNode,edgeDTO.IdEndNode,AnimationEnum.CreateAnimation);
             }
             else{
-                //TODO: delete this
-                Debug.Log("Ya existe la arista");
+                ShowNotification("Ya existe la arista");
             }
         }
 
@@ -176,7 +175,7 @@ namespace Model.GraphModel
                     bool existsEndToStart = AdjacentMtx[nodeId].Remove(key);
                     if(existsStartToEnd || existsEndToStart){
                        //TODO: Revisar el warning de andres cuando se eliminan nodos
-                       NotifyEdge(key,nodeId,AnimationEnum.DeleteAnimation);
+                        NotifyEdge(key,nodeId,AnimationEnum.DeleteAnimation);
                     }
                 }
             }
@@ -189,12 +188,12 @@ namespace Model.GraphModel
         /// </summary>
         /// <param name="id">Id of the modified node</param>
         /// <param name="operation">Operation that was applied to node</param>
-        public void NotifyNode(int id, AnimationEnum operation, Color color = default, string info = default){
+        public void NotifyNode(int id, AnimationEnum operation, string info = null, int step = -1){
             GraphNode node = this.Nodes[id];
             GraphNodeDTO dto = _nodeConverter.ToDto(node);
             dto.Operation = operation;
-            dto.Color = color;
             dto.Info = info;
+            dto.Step = step;
             Notify(dto);
         }
 
