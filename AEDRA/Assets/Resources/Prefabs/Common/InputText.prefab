@@ -122,6 +122,7 @@ GameObject:
   - component: {fileID: 3509357227067588478}
   - component: {fileID: 3845802759072646929}
   - component: {fileID: 8020514416705011206}
+  - component: {fileID: 6457892090041456359}
   m_Layer: 0
   m_Name: InputField
   m_TagString: Untagged
@@ -231,17 +232,29 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3845802759072646929}
   m_TextComponent: {fileID: 4727833991808409082}
   m_Placeholder: {fileID: 216280267027192274}
-  m_ContentType: 0
+  m_ContentType: 2
   m_InputType: 0
   m_AsteriskChar: 42
-  m_KeyboardType: 0
+  m_KeyboardType: 4
   m_LineType: 0
   m_HideMobileInput: 0
-  m_CharacterValidation: 0
+  m_CharacterValidation: 1
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6457892090041456359}
+        m_TargetAssemblyTypeName: InputFieldController, Assembly-CSharp
+        m_MethodName: OnEndEdit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -253,6 +266,18 @@ MonoBehaviour:
   m_CaretWidth: 1
   m_ReadOnly: 0
   m_ShouldActivateOnSelect: 1
+--- !u!114 &6457892090041456359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5508894448362115599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cc84a171c92a304da56359d0fc23105, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6792056746089523657
 GameObject:
   m_ObjectHideFlags: 0
