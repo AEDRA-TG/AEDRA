@@ -172,8 +172,8 @@ namespace View.GUI
                 else{
                     GameObject parentNode = GameObject.Find(Constants.NodeName + binaryDTO.ParentId);
                     BinarySearchNodeDTO parentBinaryDTO = (BinarySearchNodeDTO) parentNode.GetComponent<ProjectedObject>().Dto;
-                    GameObject brother = null;
-                    if(binaryDTO.IsLeft){
+                    GameObject brother;
+                    if (binaryDTO.IsLeft){
                         brother = GameObject.Find(Constants.NodeName + parentBinaryDTO.RightChild);
                     }
                     else{
