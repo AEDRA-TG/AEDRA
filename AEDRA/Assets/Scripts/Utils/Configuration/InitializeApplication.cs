@@ -9,7 +9,9 @@ namespace Utils.Configuration
     {
         public void Awake()
         {
+            Application.targetFrameRate = 30;
             ConfigureFiles();
+            Constants.GlobalColor = Utilities.LoadGlobalColor();
         }
         public void ConfigureFiles()
         {
@@ -20,7 +22,6 @@ namespace Utils.Configuration
             CopyFile(Constants.DijkstraStepsFilePath, Constants.DijkstraStepsStreamingFilePath);
             CopyFile(Constants.TraversalTreeStepsFilePath, Constants.TraversalTreeStepsStreamingFilePath);
             CopyFile(Constants.TraversalGraphStepsFilePath, Constants.TraversalGraphStepsStreamingFilePath);
-            Constants.GlobalColor = Utilities.LoadGlobalColor();
         }
 
         private void CopyFile(string persistentDataPath, string streamingAssetsFilePath){
