@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7518295671763518384}
   - component: {fileID: 2968927367857849872}
   - component: {fileID: 3689380917983417705}
+  - component: {fileID: 2098532825246464125}
   m_Layer: 0
   m_Name: Node
   m_TagString: Untagged
@@ -113,7 +114,19 @@ MonoBehaviour:
   _selectable: 0
   text: {fileID: 3197279758950597426}
   _info: {fileID: 34390476977988529}
-  _step: {fileID: 0}
+--- !u!114 &2098532825246464125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1704822012148044764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c11c028961e44f54cb912be264053083, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projObj: {fileID: 3689380917983417705}
 --- !u!1 &6182677539137779551
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,7 +313,7 @@ TextMesh:
   m_FontSize: 500
   m_FontStyle: 1
   m_RichText: 1
-  m_Font: {fileID: 0}
+  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Color:
     serializedVersion: 2
     rgba: 4278190080

@@ -9,7 +9,7 @@ namespace View.EventController
 #if UNITY_ANDROID
             VuforiaBehaviour.Instance.CameraDevice.SetFocusMode(FocusMode.FOCUS_MODE_CONTINUOUSAUTO);
 #endif
-            Application.targetFrameRate = 30;
+            
         }
     }
 }

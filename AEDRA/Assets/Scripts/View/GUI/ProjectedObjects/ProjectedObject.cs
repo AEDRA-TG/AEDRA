@@ -52,6 +52,8 @@ namespace View.GUI.ProjectedObjects
         [SerializeField]
         protected TextMesh text;
 
+        public GameObject Parent {get; set;}
+
         virtual public void Awake()
         {
             _objectPhysics = new ObjectPhysics(this.gameObject);
