@@ -253,8 +253,8 @@ namespace View.EventController
             _structureProjection = Instantiate(prefab);
             _structureProjection.name = Constants.ObjectsParentName;
             _structureProjection.transform.parent = unityParent;
-            _structureProjection.transform.localPosition = new Vector3(5,10,-6.375f);
-            _structureProjection.transform.localRotation = Quaternion.Euler(-50,90,0);
+            _structureProjection.transform.localPosition = new Vector3(0,1,0);
+            _structureProjection.transform.localRotation = Quaternion.Euler(Vector3.zero);
         }
 
         public void OnAlgorithmTargetDetected(TargetParameter targetParameter){
