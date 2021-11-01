@@ -74,7 +74,7 @@ namespace View.GUI
         {
             DTOs.Add(dto);
             GameObject obj = GameObject.Find(dto.GetUnityId());
-            obj?.GetComponent<ProjectedObject>().SetDTO(dto);
+            obj?.GetComponent<ProjectedObject>()?.SetDTO(dto);
         }
 
         /// <summary>

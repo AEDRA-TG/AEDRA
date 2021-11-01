@@ -59,11 +59,13 @@ namespace View.EventController
         private GameObject _algorithmMenu;
         private GameObject _informativeMenu;
         private bool _hasProjectedAlgorithm;
+        GameObject _backButtonMenu;
 
         private void Awake(){
             _actualTargetType = TargetTypeEnum.None;
             _hasProjectedStructure = false;
             _hasProjectedAlgorithm = false;
+            _backButtonMenu = GameObject.Find(Constants.BackOptionsMenuParent).gameObject;
         }
 
         public void ShowNotification(string notification){
@@ -99,6 +101,9 @@ namespace View.EventController
             }
             else{
                 ShowNotification("No puedes tener 2 marcadores de estructura al mismo tiempo");
+            }
+            if( (GameObject.FindGameObjectsWithTag("Menu").Length > 1) || (!_backButtonMenu.activeSelf && GameObject.Find("CancelButton")==null)){
+                ChangeScene(1);
             }
         }
 
@@ -152,8 +157,7 @@ namespace View.EventController
                 ClearInputTextField();
             }
             if(menu.GetMenu() == MenuEnum.AnimationControlMenu){
-                GameObject backButtonMenu = GameObject.Find(Constants.BackOptionsMenuParent).gameObject;
-                backButtonMenu.SetActive(false);
+                _backButtonMenu.SetActive(false);
                 GameObject hamburger = GameObject.Find(Constants.HamburgerButtonName).gameObject;
                 hamburger.SetActive(false);
                 _targetProjectionInformation?.SetActive(true);
@@ -274,6 +278,9 @@ namespace View.EventController
                 GameObject.Find("CancelButton")?.SetActive(false);
                 _targetProjectionInformation?.SetActive(true);
             }
+            if( (GameObject.FindGameObjectsWithTag("Menu").Length > 1) || (!_backButtonMenu.activeSelf && GameObject.Find("CancelButton")==null)){
+                ChangeScene(1);
+            }
         }
 
         public void OnAlgorithmTargetLost(TargetParameter targetParameter){
@@ -295,6 +302,9 @@ namespace View.EventController
             if(!_hasProjectedAlgorithm && !_hasProjectedStructure){
                 _informativeMenu = InstaciateMenu(targetParameter.GetPrefabMenu());
                 _informativeMenu.GetComponent<InformativeTargetController>().SetInformationParent(targetParameter.gameObject);
+            }
+            if( (GameObject.FindGameObjectsWithTag("Menu").Length > 1) || (!_backButtonMenu.activeSelf && GameObject.Find("CancelButton")==null)){
+                ChangeScene(1);
             }
         }
 
