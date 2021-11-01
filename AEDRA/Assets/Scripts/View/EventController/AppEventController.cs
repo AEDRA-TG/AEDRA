@@ -59,7 +59,7 @@ namespace View.EventController
         private GameObject _algorithmMenu;
         private GameObject _informativeMenu;
         private bool _hasProjectedAlgorithm;
-        GameObject _backButtonMenu;
+        private GameObject _backButtonMenu;
 
         private void Awake(){
             _actualTargetType = TargetTypeEnum.None;
