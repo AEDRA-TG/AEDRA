@@ -257,7 +257,7 @@ namespace View.EventController
             _structureProjection = Instantiate(prefab);
             _structureProjection.name = Constants.ObjectsParentName;
             _structureProjection.transform.parent = unityParent;
-            _structureProjection.transform.localPosition = new Vector3(0,1,0);
+            _structureProjection.transform.localPosition = new Vector3(0,3,0);
             _structureProjection.transform.localRotation = Quaternion.Euler(Vector3.zero);
         }
 

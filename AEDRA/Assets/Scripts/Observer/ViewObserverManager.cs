@@ -97,7 +97,7 @@ namespace Observer
                 projection.transform.parent = target;
                 projection.transform.localScale = Vector3.one;
                 projection.transform.localRotation = Quaternion.Euler(Vector3.zero);
-                projection.transform.localPosition = new Vector3(0,1,0);
+                projection.transform.localPosition = new Vector3(0,3,0);
             }
         }
 
