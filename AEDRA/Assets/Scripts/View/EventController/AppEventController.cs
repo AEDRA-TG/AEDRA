@@ -194,8 +194,7 @@ namespace View.EventController
         /// </summary>
         public void OnTouchBackToPreviousMenu(){
             if(_activeSubMenu == MenuEnum.AnimationControlMenu){
-                GameObject backButtonMenu = GameObject.Find(Constants.MenusParentName).transform.Find(Constants.BackOptionsMenuParent).gameObject;
-                backButtonMenu.SetActive(true);
+                _backButtonMenu.SetActive(true);
                 GameObject hamburger = GameObject.Find(_menus[_activeSubMenu].transform.parent.name).transform.Find(Constants.HamburgerButtonName).gameObject;
                 hamburger.SetActive(true);
                 IsAnimationControlEnable = false;
@@ -215,7 +214,6 @@ namespace View.EventController
                 Command command = new CleanStructureCommand();
                 CommandController.GetInstance().Invoke(command);
             }else{
-                GameObject BackOptionsMenu = GameObject.Find("BackOptionsMenu");
                 ShowNotification("No se puede eliminar la estructura de un algoritmo");
             }
         }
@@ -226,7 +224,6 @@ namespace View.EventController
         /// <param name="nextPage">Id of the next scene</param>
         public void ChangeScene(int nextPage)
         {
-            GameObject structureProjection = GameObject.Find(Constants.ObjectsParentName);
             SceneManager.LoadScene(nextPage);
         }
 
