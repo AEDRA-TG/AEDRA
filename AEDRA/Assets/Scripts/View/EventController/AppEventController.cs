@@ -59,11 +59,13 @@ namespace View.EventController
         private GameObject _algorithmMenu;
         private GameObject _informativeMenu;
         private bool _hasProjectedAlgorithm;
+        private GameObject _backButtonMenu;
 
         private void Awake(){
             _actualTargetType = TargetTypeEnum.None;
             _hasProjectedStructure = false;
             _hasProjectedAlgorithm = false;
+            _backButtonMenu = GameObject.Find(Constants.BackOptionsMenuParent).gameObject;
         }
 
         public void ShowNotification(string notification){
@@ -99,6 +101,9 @@ namespace View.EventController
             }
             else{
                 ShowNotification("No puedes tener 2 marcadores de estructura al mismo tiempo");
+            }
+            if( (GameObject.FindGameObjectsWithTag("Menu").Length > 1) || (!_backButtonMenu.activeSelf && GameObject.Find("CancelButton")==null)){
+                ChangeScene(1);
             }
         }
 
@@ -152,8 +157,7 @@ namespace View.EventController
                 ClearInputTextField();
             }
             if(menu.GetMenu() == MenuEnum.AnimationControlMenu){
-                GameObject backButtonMenu = GameObject.Find(Constants.BackOptionsMenuParent).gameObject;
-                backButtonMenu.SetActive(false);
+                _backButtonMenu.SetActive(false);
                 GameObject hamburger = GameObject.Find(Constants.HamburgerButtonName).gameObject;
                 hamburger.SetActive(false);
                 _targetProjectionInformation?.SetActive(true);
@@ -253,8 +257,8 @@ namespace View.EventController
             _structureProjection = Instantiate(prefab);
             _structureProjection.name = Constants.ObjectsParentName;
             _structureProjection.transform.parent = unityParent;
-            _structureProjection.transform.localPosition = new Vector3(5,10,-6.375f);
-            _structureProjection.transform.localRotation = Quaternion.Euler(-50,90,0);
+            _structureProjection.transform.localPosition = new Vector3(0,1,0);
+            _structureProjection.transform.localRotation = Quaternion.Euler(Vector3.zero);
         }
 
         public void OnAlgorithmTargetDetected(TargetParameter targetParameter){
@@ -273,6 +277,9 @@ namespace View.EventController
                 OnTargetDetected(targetParameter);
                 GameObject.Find("CancelButton")?.SetActive(false);
                 _targetProjectionInformation?.SetActive(true);
+            }
+            if( (GameObject.FindGameObjectsWithTag("Menu").Length > 1) || (!_backButtonMenu.activeSelf && GameObject.Find("CancelButton")==null)){
+                ChangeScene(1);
             }
         }
 
@@ -295,6 +302,9 @@ namespace View.EventController
             if(!_hasProjectedAlgorithm && !_hasProjectedStructure){
                 _informativeMenu = InstaciateMenu(targetParameter.GetPrefabMenu());
                 _informativeMenu.GetComponent<InformativeTargetController>().SetInformationParent(targetParameter.gameObject);
+            }
+            if( (GameObject.FindGameObjectsWithTag("Menu").Length > 1) || (!_backButtonMenu.activeSelf && GameObject.Find("CancelButton")==null)){
+                ChangeScene(1);
             }
         }
 

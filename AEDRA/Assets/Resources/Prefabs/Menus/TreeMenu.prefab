@@ -1207,7 +1207,7 @@ GameObject:
   - component: {fileID: 2488445756708909659}
   m_Layer: 0
   m_Name: TreeMenu
-  m_TagString: Untagged
+  m_TagString: Menu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
