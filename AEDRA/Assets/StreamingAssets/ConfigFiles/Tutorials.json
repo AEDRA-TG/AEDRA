@@ -1,0 +1,12 @@
+[
+    {
+        "Name":"¿Cómo usar la aplicación 1?",
+        "ResourceIconName":"IconVideo",
+        "VideoURL":"https://firebasestorage.googleapis.com/v0/b/aedra-acbc4.appspot.com/o/Tutorial_Introduccion.mp4?alt=media&token=9d7ee3ee-3986-4d5b-9904-b9134d3ff865"
+    },
+    {
+        "Name":"¿Cómo usar la aplicación 2?",
+        "ResourceIconName":"IconVideo",
+        "VideoURL":"https://firebasestorage.googleapis.com/v0/b/aedra-acbc4.appspot.com/o/Tutorial_Introduccion_2.mp4?alt=media&token=d4efc7e6-cd41-4e3a-9a84-9049cd008c3d"
+    }
+]

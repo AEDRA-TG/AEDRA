@@ -1,0 +1,56 @@
+[
+    {
+        "Name":"Grafo",
+        "ARMarker":"Grafo",
+        "Description":"Estructura",
+        "ResourceIconName":"IconMiniGraph",
+        "Faces": [
+            {
+                "Name":"Cara Frontal",
+                "ARMarker":"Grafo",
+                "Description":"Esta cara se usa para detectar el grafo."
+            },
+            {
+                "Name":"Cara Trasera",
+                "ARMarker":"InformacionGrafo",
+                "Description":"Esta cara se usa para proyectar información de la estructura en realidad aumentada."
+            }
+        ]
+    },
+    {
+        "Name":"Arbol",
+        "ARMarker":"Arbol",
+        "Description":"Estructura",
+        "ResourceIconName":"IconMiniTree",
+        "Faces": [
+            {
+                "Name":"Cara Frontal",
+                "ARMarker":"Arbol",
+                "Description":"Esta cara se usa para detectar el árbol."
+            },
+            {
+                "Name":"Cara Trasera",
+                "ARMarker":"InformacionArbol",
+                "Description":"Esta cara se usa para proyectar información de la estructura en realidad aumentada."
+            }
+        ]
+    },
+    {
+        "Name":"Algoritmo Dijkstra",
+        "ARMarker":"Dijkstra",
+        "Description":"Estructura",
+        "ResourceIconName":"IconMiniAlgorithm",
+        "Faces": [
+            {
+                "Name":"Cara Frontal",
+                "ARMarker":"Dijkstra",
+                "Description":"Esta cara se usa para detectar el algoritmo."
+            },
+            {
+                "Name":"Cara Trasera",
+                "ARMarker":"InformacionDijkstra",
+                "Description":"Esta cara se usa para proyectar información del algoritmo en realidad aumentada."
+            }
+        ]
+    }
+]

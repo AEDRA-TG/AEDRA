@@ -1,0 +1,21 @@
+# Rules configuration
+# none, warning, error, info, silent
+[*.cs]
+# This rule is to add encapsulation in methods
+dotnet_diagnostic.RCS1018.severity = warning
+# This rules are for SerializeField
+dotnet_diagnostic.RCS1169.severity = none
+dotnet_diagnostic.IDE0044.severity = none
+# This rule is for empty new line
+dotnet_diagnostic.RCS1036.severity = none
+# This rule is for action event
+dotnet_diagnostic.RCS1158.severity = none
+# This rule is for Singleton pattern
+dotnet_diagnostic.RCS1171.severity = none
+# This rule is for new constructor abbrevation
+dotnet_diagnostic.IDE0090.severity = none
+# Prevent analyzers from running in these directories
+[Assets/Plugins/**.cs]
+generated_code = true
+[Assets/Editor/**.cs]
+generated_code = true

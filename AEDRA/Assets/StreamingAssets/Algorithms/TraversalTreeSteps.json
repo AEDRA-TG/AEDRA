@@ -1,0 +1,63 @@
+[
+    {
+      "Id":"0",
+      "Description":"El recorrido empieza en la raiz",
+      "Parameters":[]
+    },
+    {
+      "Id":"1",
+      "Description":"Se visita el nodo izquierdo",
+      "Parameters":[]
+    },
+    {
+      "Id":"2",
+      "Description":"Se visita el nodo derecho",
+      "Parameters":[]
+    },
+    {
+      "Id":"3",
+      "Description":"Se visita el nodo padre",
+      "Parameters":[]
+    },
+    {
+      "Id":"4",
+      "Description":"Se visita el nodo padre",
+      "Parameters":[]
+    },
+    {
+      "Id":"5",
+      "Description":"¿El valor buscado es menor a <Node_Value>?",
+      "Parameters":[
+        "<Node_Value>"
+      ]
+    },
+    {
+      "Id":"6",
+      "Description":"Si, entonces se busca el valor en el hijo izquierdo",
+      "Parameters":[]
+    },
+    {
+      "Id":"7",
+      "Description":"¿El valor buscado es mayor a <Node_Value>?",
+      "Parameters":[
+        "<Node_Value>"
+      ]
+    },
+    {
+      "Id":"8",
+      "Description":"No, es mayor, entonces se busca el valor en el hijo derecho",
+      "Parameters":[]
+    },
+    {
+      "Id":"9",
+      "Description":"No, es igual, entonces el valor fue encontrado",
+      "Parameters":[
+        "<Node_Value>"
+      ]
+    },
+    {
+      "Id":"10",
+      "Description":"No quedan más nodos por recorrer, el valor no fue encontrado",
+      "Parameters":[]
+    }
+]
