@@ -8,6 +8,7 @@ TagManager:
   - SubMenu
   - Input
   - BackSubMenu
+  - Menu
   layers:
   - Default
   - TransparentFX
